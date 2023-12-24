@@ -48,8 +48,8 @@ public class DatabaseAdapter {
         url = "jdbc:mysql://localhost:3306";                // your database connection
         // TODO: Bu kısmı kendi bilgisayarınıza göre değiştirin
         // TODO: BUnu sonra duzeltmek gerekecek ama otomatik almasi icin
-        user = "mehmet";                               // your username
-        pass = "Mk12345678";                              // your password
+        user = "aliyigittas";                               // your username
+        pass = "Ali123ali123";                              // your password
         try {
             connection = DriverManager.getConnection(url, user, pass);
         } catch (Exception ex) {
