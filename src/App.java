@@ -21,7 +21,7 @@ public class App extends Application {
             databaseAdapter = new DatabaseAdapter(); // database kurulumu
 
             // Load FXML files
-            Parent root1 = FXMLLoader.load(getClass().getResource("fxml/login.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("fxml/Login2.fxml"));
             Parent root2 = FXMLLoader.load(getClass().getResource("fxml/homePage.fxml"));
 
             // Create scenes
@@ -31,7 +31,7 @@ public class App extends Application {
             // Get the components from Scene 1
             TextField usernameField = (TextField) root1.lookup("#usernameField");
             PasswordField passwordField = (PasswordField) root1.lookup("#passwordField");
-            Button submitButton = (Button) root1.lookup("#submitButton");
+            Button submitButton = (Button) root1.lookup("#loginButton");
 
             // Get the label from Scene 2
             Label userInfoLabel = (Label) root2.lookup("#userInfoLabel");
