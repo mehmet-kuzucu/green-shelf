@@ -29,17 +29,24 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
          <children>
-            <PasswordField fx:id="registerPasswordField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="password" />
+            <PasswordField fx:id="registerPasswordField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Password" />
             <PasswordField fx:id="registerPasswordField1" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Confirm Password" />
          </children>
          <padding>
             <Insets left="80.0" right="80.0" />
          </padding>
       </HBox>
-      <TextField fx:id="registerUsernameField" maxWidth="450.0" prefHeight="48.0" prefWidth="538.0" promptText="username" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <TextField fx:id="registerUsernameField" alignment="CENTER" maxWidth="450.0" prefHeight="48.0" prefWidth="538.0" promptText="Username" />
+         </children>
+      </HBox>
       <VBox alignment="CENTER" prefHeight="98.0" prefWidth="940.0" spacing="5.0">
          <children>
-            <Hyperlink alignment="CENTER" text="Do you have an existing account?" textFill="WHITE" />
+            <Hyperlink alignment="CENTER" text="Do you have an existing account?" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></Hyperlink>
             <Button fx:id="registerButton" defaultButton="true" mnemonicParsing="false" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" text="Register" textFill="WHITE">
                <font>
                   <Font size="20.0" />

@@ -19,7 +19,7 @@
       </ImageView>
       <TextField fx:id="usernameField" maxWidth="450.0" prefHeight="48.0" prefWidth="538.0" promptText="username / phone" />
       <PasswordField fx:id="passwordField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="password" />
-      <Hyperlink alignment="CENTER" text="or Create new profile" textFill="WHITE" />
+      <Hyperlink fx:id="register" alignment="CENTER" text="or Create new profile" textFill="WHITE" />
       <Button fx:id="loginButton" stylesheets='@Style.css' defaultButton="true" mnemonicParsing="false" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" text="Login" textFill="WHITE">
          <font>
             <Font size="20.0" />
