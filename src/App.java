@@ -63,6 +63,7 @@ public class App extends Application {
                 String username = usernameField.getText();
                 String password = passwordField.getText();
                 
+                /* Burda userdan direkt class olusturmayacak aslinda once username ve passwordu databasete kontrol edecek sonra typeina gore admin, customer veya carier clasi olusturacak */
                 currentUser = new User(username, password);
                 userInfoLabel.setText("HOSGELDIN " + currentUser.getUsername() + "!\nGiris bilgilerin:\nname: " + currentUser.getUsername() + ", password: " + currentUser.getPassword());
                 databaseAdapter.registerUserSql(currentUser.getUsername(), currentUser.getPassword());
