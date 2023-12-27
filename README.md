@@ -1,15 +1,15 @@
 ## Yapilacaklar Listesi
-- [] LOGIN page
-- [] REGISTER page
-- [] CUSTOMER MAIN page
-- [] CARRIER MAIN page
-- [] ADMIN MAIN page
-- [] PROFILE INFORMATION page , EDIT
-- [] SHOPPING CART page
-- [] ORDER SUMMARY page
-- [] MY ORDERS page
-- [] ADMIN ADD PRODUCT page
-- [] ADMIN ADD/SEE CARRIER page
-- [] ADMIN VIEW ORDERS page
-- [] ADMIN REPORTS page
-- [] CARRIER SEE ORDERS page
+- [ ] LOGIN page
+- [ ] REGISTER page
+- [ ] CUSTOMER MAIN page
+- [ ] CARRIER MAIN page
+- [ ] ADMIN MAIN page
+- [ ] PROFILE INFORMATION page , EDIT
+- [ ] SHOPPING CART page
+- [ ] ORDER SUMMARY page
+- [ ] MY ORDERS page
+- [ ] ADMIN ADD PRODUCT page
+- [ ] ADMIN ADD/SEE CARRIER page
+- [ ] ADMIN VIEW ORDERS page
+- [ ] ADMIN REPORTS page
+- [ ] CARRIER SEE ORDERS page
