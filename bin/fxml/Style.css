@@ -112,6 +112,25 @@
 
 }
 
+#buyButton {
+    -fx-background-image: url("buyButton.png");
+    -fx-background-size: 65% 65%;
+    
+    -fx-background-radius: 50%;
+    /* size */
+    -fx-min-width: 80px;
+    -fx-min-height: 80px;
+    -fx-pref-width: 80px;
+    -fx-pref-height: 80px;
+    -fx-max-width: 80px;
+    -fx-max-height: 80px;
+    
+    -fx-background-repeat: no-repeat;
+    /* center the image */
+    -fx-background-position: center;
+
+}
+
 
 #addToCartButton {
     -fx-background-image: url("addToCart.png");
