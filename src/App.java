@@ -8,13 +8,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+
 
 
 public class App extends Application {
 
-    private Scene scene1, scene2, scene3, scene4;
+    private Scene scene1, scene2, scene3, scene4, scene5;
     private User currentUser;
     private DatabaseAdapter databaseAdapter;
+    
+    
+
+    
 
     @Override
     public void start(Stage primaryStage) {
@@ -26,12 +33,14 @@ public class App extends Application {
             Parent root2 = FXMLLoader.load(getClass().getResource("fxml/homePage.fxml"));
             Parent root3 = FXMLLoader.load(getClass().getResource("fxml/register_deneme.fxml"));
             Parent root4 = FXMLLoader.load(getClass().getResource("fxml/register2_deneme.fxml"));
+            Parent root5 = FXMLLoader.load(getClass().getResource("fxml/customerHome.fxml"));
 
             // Create scenes
             scene1 = new Scene(root1);
             scene2 = new Scene(root2);
             scene3 = new Scene(root3);
             scene4 = new Scene(root4);
+            scene5 = new Scene(root5);
 
             // Get the components from Scene 1
             TextField usernameField = (TextField) root1.lookup("#usernameField");
@@ -50,6 +59,9 @@ public class App extends Application {
 
             // Get the components from Scene 4
             Hyperlink existedAccount2 = (Hyperlink) root4.lookup("#existedaccount");
+
+            // Get the components from Scene 5
+            Button registerButton = (Button) root4.lookup("#registerButton");
 
             // when hyperlink (or Create new profile) is clicked
             registerLink.setOnAction(e -> {
@@ -70,6 +82,15 @@ public class App extends Application {
                 primaryStage.setScene(scene1);
             });
 
+            // when register button is clicked
+            registerButton.setOnAction(e -> {
+                primaryStage.setScene(scene5);
+            });
+
+            // spinner
+            //Spinner<Integer> spinner = (Spinner<Integer>) root5.lookup("#spinner");
+            //SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
+            //spinner.setValueFactory(valueFactory);
 
             
             
@@ -107,5 +128,6 @@ public class App extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }
 
