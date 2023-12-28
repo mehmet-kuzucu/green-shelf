@@ -67,6 +67,13 @@
     -fx-border: none;
     -fx-cursor: hand;
     -fx-transition: all 0.3s;
+    -fx-min-width: 10;
+    -fx-max-width: 500;
+    -fx-pref-width: 150;
+    -fx-pref-height: 150;
+    -fx-min-height: 10;
+    -fx-max-height: 500;
+    
 }
 
 #registerButton:hover {
@@ -125,6 +132,25 @@
 
 }
 
+#addToCartButton3 {
+    -fx-background-image: url("removeFromCart.png");
+    -fx-background-size: 65% 65%;
+    
+    -fx-background-radius: 50%;
+    /* size */
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-pref-width: 50px;
+    -fx-pref-height: 50px;
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
+    
+    -fx-background-repeat: no-repeat;
+    /* center the image */
+    -fx-background-position: center;
+
+}
+
 #productInfo {
     /*make it circular */
     -fx-background-radius: 10%;
@@ -135,10 +161,21 @@
 #profilePhoto {
     /*make it circular */
     -fx-background-image: url("defaultProfilePicture.png");
+    -fx-background-repeat: no-repeat;
     -fx-background-size: 100% 100%;
     -fx-background-radius: 50%;
     -fx-border-width: 5px;
     -fx-border-radius: 50%;
     -fx-radius: 50%;
 
+}
+
+#saveProfileButton {
+    -fx-background-image: url("saveProfile.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 75% 75%;
+    /* center the image */
+    -fx-background-position: center;
+    -fx-background-color:  #2A6D72;
+    
 }

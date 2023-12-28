@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #2e344b;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <BorderPane prefHeight="63.0" prefWidth="960.0" style="-fx-background-color: #2A6D72;" stylesheets="@Style.css" BorderPane.alignment="CENTER">
+         <left>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Merhaba, Şafak" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="15.0" top="15.0" />
+               </BorderPane.margin>
+            </Text>
+         </left>
+         <padding>
+            <Insets left="25.0" right="25.0" />
+         </padding>
+         <center>
+            <ImageView fitHeight="75.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@logo-modified.png" />
+               </image>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </BorderPane.margin>
+            </ImageView>
+         </center>
+         <right>
+            <Button fx:id="profilePhoto" mnemonicParsing="false" stylesheets="@Style.css" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+   </top>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" style="-fx-border-color: #000000;" BorderPane.alignment="CENTER">
+         <content>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" style="-fx-background-color: #2A6D72;">
+               <children>
+                  <Group>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="900.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
+                           <children>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                 <left>
+                                    <HBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@domates.jpeg" />
+                                             </image>
+                                          </ImageView>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Domates">
+                                             <font>
+                                                <Font size="31.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                 </left>
+                                 <center>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Amount X Price">
+                                             <font>
+                                                <Font size="31.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="134.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price">
+                                             <font>
+                                                <Font size="31.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                       <padding>
+                                          <Insets left="10.0" right="10.0" />
+                                       </padding>
+                                    </HBox>
+                                 </center>
+                              </BorderPane>
+                              <Button fx:id="addToCartButton" mnemonicParsing="false" stylesheets="@Style.css" />
+                              <Button fx:id="addToCartButton2" layoutX="645.0" layoutY="100.0" mnemonicParsing="false" stylesheets="@Style.css" />
+                              <Button fx:id="addToCartButton3" layoutX="705.0" layoutY="110.0" mnemonicParsing="false" stylesheets="@Style.css" />
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </Group>
+                  <Group>
+                     <children>
+                        <HBox alignment="CENTER" prefWidth="700.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
+                           <children>
+                              <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@domates.jpeg" />
+                                 </image>
+                              </ImageView>
+                              <VBox alignment="CENTER" spacing="5.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Domates" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="25,00₺" />
+                                 </children>
+                              </VBox>
+                              <Spinner fx:id="spinner71" editable="false" max="10" min="1" />
+                              <Button fx:id="addToCartButton1" mnemonicParsing="false" stylesheets="@Style.css" />
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </Group>
+                  <Group layoutX="138.0" layoutY="180.0">
+                     <children>
+                        <HBox alignment="CENTER" prefWidth="700.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
+                           <children>
+                              <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@domates.jpeg" />
+                                 </image>
+                              </ImageView>
+                              <VBox alignment="CENTER" spacing="5.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Domates" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="25,00₺" />
+                                 </children>
+                              </VBox>
+                              <Spinner fx:id="spinner711" editable="false" max="10" min="1" />
+                              <Button fx:id="addToCartButton11" mnemonicParsing="false" stylesheets="@Style.css" />
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </Group>
+                  <Group layoutX="133.0" layoutY="330.0">
+                     <children>
+                        <HBox alignment="CENTER" prefWidth="700.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
+                           <children>
+                              <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@domates.jpeg" />
+                                 </image>
+                              </ImageView>
+                              <VBox alignment="CENTER" spacing="5.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Domates" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="25,00₺" />
+                                 </children>
+                              </VBox>
+                              <Spinner fx:id="spinner7111" editable="false" max="10" min="1" />
+                              <Button fx:id="addToCartButton111" mnemonicParsing="false" stylesheets="@Style.css" />
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </Group>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+   <bottom>
+      <BorderPane BorderPane.alignment="CENTER">
+         <left>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total price: 19.99₺" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="31.0" />
+               </font>
+            </Text>
+         </left>
+         <right>
+            <Button fx:id="shoppingCartButton" mnemonicParsing="false" stylesheets="@Style.css" BorderPane.alignment="CENTER" />
+         </right>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </BorderPane>
+   </bottom>
+</BorderPane>

@@ -20,7 +20,7 @@
       </ImageView>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
          <children>
-            <TextField fx:id="registerUsernameField1" maxWidth="450.0" prefHeight="48.0" prefWidth="538.0" promptText="Name" />
+            <TextField fx:id="registerUsernameField1" maxWidth="450.0" minHeight="0.0" minWidth="0.0" prefHeight="49.0" prefWidth="281.0" promptText="Name" stylesheets="@Style.css" />
             <TextField fx:id="registerUsernameField2" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Surname" />
          </children>
          <padding>
@@ -47,12 +47,18 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets></Hyperlink>
-            <Button fx:id="registerButton" defaultButton="true" mnemonicParsing="false" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" text="Register" textFill="WHITE">
+            <Button fx:id="registerButton" defaultButton="true" mnemonicParsing="false" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" stylesheets="@Style.css" text="Register" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
+               <padding>
+                  <Insets left="150.0" right="150.0" />
+               </padding>
             </Button>
          </children>
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </VBox.margin>
       </VBox>
    </children>
    <padding>
