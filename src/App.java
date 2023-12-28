@@ -38,6 +38,7 @@ public class App extends Application {
             PasswordField passwordField = (PasswordField) root1.lookup("#passwordField");
             Button submitButton = (Button) root1.lookup("#loginButton");
             Hyperlink registerLink = (Hyperlink) root1.lookup("#register");
+            
 
             // Get the label from Scene 2
             Label userInfoLabel = (Label) root2.lookup("#userInfoLabel");
@@ -45,6 +46,10 @@ public class App extends Application {
 
             // Get the components from Scene 3
             Button nextStepButton = (Button) root3.lookup("#nextStepButton");
+            Hyperlink existedAccount = (Hyperlink) root3.lookup("#existedaccount");
+
+            // Get the components from Scene 4
+            Hyperlink existedAccount2 = (Hyperlink) root4.lookup("#existedaccount");
 
             // when hyperlink (or Create new profile) is clicked
             registerLink.setOnAction(e -> {
@@ -55,6 +60,17 @@ public class App extends Application {
             nextStepButton.setOnAction(e -> {
                 primaryStage.setScene(scene4);
             });
+
+            // when existedaccount hyperlink is clicked
+            existedAccount.setOnAction(e -> {
+                primaryStage.setScene(scene1);
+            });
+
+            existedAccount2.setOnAction(e -> {
+                primaryStage.setScene(scene1);
+            });
+
+
             
             
 

@@ -38,7 +38,7 @@
       </HBox>
       <VBox alignment="CENTER" prefHeight="98.0" prefWidth="940.0" spacing="5.0">
          <children>
-            <Hyperlink alignment="CENTER" text="Do you have an existing account?" textFill="WHITE">
+            <Hyperlink fx:id="existedaccount" alignment="CENTER" text="Do you have an existing account?" textFill="WHITE">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets></Hyperlink>
