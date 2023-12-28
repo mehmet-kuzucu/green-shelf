@@ -38,11 +38,11 @@
       </HBox>
       <VBox alignment="CENTER" prefHeight="98.0" prefWidth="940.0" spacing="5.0">
          <children>
-            <Hyperlink fx:id="existedaccount" alignment="CENTER" text="Do you have an existing account?" textFill="WHITE">
+            <Hyperlink fx:id="existedAccount2" alignment="CENTER" text="Do you have an existing account?" textFill="WHITE">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets></Hyperlink>
-            <Button fx:id="registerButton" stylesheets='@Style.css' defaultButton="true" mnemonicParsing="false" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" text="Register" textFill="WHITE">
+            <Button fx:id="registerButton" defaultButton="true" mnemonicParsing="false" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" stylesheets="@Style.css" text="Register" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
