@@ -3,6 +3,7 @@
 lib/
 .DS_Store
 bin/out
+bin/output
 bin/Admin.class
 bin/Customer.class
 bin/DatabaseAdapter.class
