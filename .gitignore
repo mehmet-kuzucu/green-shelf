@@ -3,7 +3,6 @@
 lib/
 .DS_Store
 bin/Admin.class
-bin/App.class
 bin/Customer.class
 bin/DatabaseAdapter.class
 bin/newfile.class
@@ -11,3 +10,4 @@ bin/User.class
 src/DatabaseAdapter.java
 bin/DatabaseAdapter.class
 src/DatabaseAdapter.java
+bin/App.class
