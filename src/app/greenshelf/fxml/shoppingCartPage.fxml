@@ -12,9 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #2e344b;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #2e344b;" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <BorderPane prefHeight="63.0" prefWidth="960.0" style="-fx-background-color: #2A6D72;" stylesheets="@Style.css" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="63.0" prefWidth="960.0" style="-fx-background-color: #2A6D72;" BorderPane.alignment="CENTER">
          <left>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Merhaba, Şafak" BorderPane.alignment="CENTER">
                <font>
@@ -31,7 +31,7 @@
          <center>
             <ImageView fitHeight="75.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@logo-modified.png" />
+                  <Image url="@../images/logo-modified.png" />
                </image>
                <BorderPane.margin>
                   <Insets bottom="10.0" top="10.0" />
@@ -39,7 +39,7 @@
             </ImageView>
          </center>
          <right>
-            <Button fx:id="profilePhoto" mnemonicParsing="false" stylesheets="@Style.css" BorderPane.alignment="CENTER" />
+            <Button fx:id="profilePhoto" mnemonicParsing="false" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
    </top>
@@ -58,7 +58,7 @@
                                        <children>
                                           <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@domates.jpeg" />
+                                                <Image url="@../images/domates.jpeg" />
                                              </image>
                                           </ImageView>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Domates">
@@ -91,8 +91,8 @@
                                  <right>
                                     <HBox alignment="CENTER_RIGHT" spacing="20.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Button fx:id="addToCartButton" mnemonicParsing="false" stylesheets="@Style.css" />
-                                          <Button fx:id="addToCartButton3" mnemonicParsing="false" stylesheets="@Style.css" />
+                                          <Button fx:id="addToCartButton" mnemonicParsing="false" />
+                                          <Button fx:id="addToCartButton3" mnemonicParsing="false" />
                                        </children>
                                        <padding>
                                           <Insets left="20.0" />
@@ -107,12 +107,9 @@
                         </HBox>
                      </children>
                   </Group>
-                  <Group>
+                  <Group layoutX="30.0" layoutY="30.0">
                      <children>
                         <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="900.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
-                           <padding>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                           </padding>
                            <children>
                               <BorderPane prefHeight="200.0" prefWidth="871.0">
                                  <left>
@@ -120,7 +117,7 @@
                                        <children>
                                           <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@domates.jpeg" />
+                                                <Image url="@../images/domates.jpeg" />
                                              </image>
                                           </ImageView>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Domates">
@@ -153,8 +150,8 @@
                                  <right>
                                     <HBox alignment="CENTER_RIGHT" spacing="20.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Button fx:id="addToCartButton1" mnemonicParsing="false" stylesheets="@Style.css" />
-                                          <Button fx:id="addToCartButton31" mnemonicParsing="false" stylesheets="@Style.css" />
+                                          <Button fx:id="addToCartButton1" mnemonicParsing="false" />
+                                          <Button fx:id="addToCartButton31" mnemonicParsing="false" />
                                        </children>
                                        <padding>
                                           <Insets left="20.0" />
@@ -163,15 +160,15 @@
                                  </right>
                               </BorderPane>
                            </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
                         </HBox>
                      </children>
                   </Group>
-                  <Group>
+                  <Group layoutX="30.0" layoutY="280.0">
                      <children>
                         <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="900.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
-                           <padding>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                           </padding>
                            <children>
                               <BorderPane prefHeight="200.0" prefWidth="871.0">
                                  <left>
@@ -179,7 +176,7 @@
                                        <children>
                                           <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@domates.jpeg" />
+                                                <Image url="@../images/domates.jpeg" />
                                              </image>
                                           </ImageView>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Domates">
@@ -212,8 +209,8 @@
                                  <right>
                                     <HBox alignment="CENTER_RIGHT" spacing="20.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Button fx:id="addToCartButton3" mnemonicParsing="false" stylesheets="@Style.css" />
-                                          <Button fx:id="addToCartButton33" mnemonicParsing="false" stylesheets="@Style.css" />
+                                          <Button fx:id="addToCartButton11" mnemonicParsing="false" />
+                                          <Button fx:id="addToCartButton311" mnemonicParsing="false" />
                                        </children>
                                        <padding>
                                           <Insets left="20.0" />
@@ -222,6 +219,9 @@
                                  </right>
                               </BorderPane>
                            </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
                         </HBox>
                      </children>
                   </Group>
@@ -243,7 +243,7 @@
             </Text>
          </left>
          <right>
-            <Button fx:id="buyButton" mnemonicParsing="false" stylesheets="@Style.css" BorderPane.alignment="CENTER" />
+            <Button fx:id="buyButton" mnemonicParsing="false" BorderPane.alignment="CENTER" />
          </right>
          <padding>
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />

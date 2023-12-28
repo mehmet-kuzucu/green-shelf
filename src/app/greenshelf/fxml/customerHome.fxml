@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #2e344b;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #2e344b;" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <BorderPane prefHeight="63.0" prefWidth="960.0" style="-fx-background-color: #2A6D72;" stylesheets="@Style.css" BorderPane.alignment="CENTER">
          <left>
@@ -55,7 +55,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@domates.jpeg" />
+                                    <Image url="@../images/domates.jpeg" />
                                  </image>
                               </ImageView>
                               <VBox alignment="CENTER" spacing="5.0">
@@ -76,7 +76,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@domates.jpeg" />
+                                    <Image url="@../images/domates.jpeg" />
                                  </image>
                               </ImageView>
                               <VBox alignment="CENTER" spacing="5.0">
@@ -96,7 +96,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@domates.jpeg" />
+                                    <Image url="@../images/domates.jpeg" />
                                  </image>
                               </ImageView>
                               <VBox alignment="CENTER" spacing="5.0">
@@ -116,7 +116,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@domates.jpeg" />
+                                    <Image url="@../images/domates.jpeg" />
                                  </image>
                               </ImageView>
                               <VBox alignment="CENTER" spacing="5.0">
