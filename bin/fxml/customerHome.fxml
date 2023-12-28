@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.Avatar?>
+<?import com.gluonhq.charm.glisten.control.Icon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #2e344b;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <BorderPane prefHeight="63.0" prefWidth="960.0" style="-fx-background-color: #2A6D72;" BorderPane.alignment="CENTER">
+         <right>
+            <Avatar radius="30.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="15.0" top="15.0" />
+               </BorderPane.margin></Avatar>
+         </right>
+         <left>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Merhaba, Şafak" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="15.0" top="15.0" />
+               </BorderPane.margin>
+            </Text>
+         </left>
+         <padding>
+            <Insets left="25.0" right="25.0" />
+         </padding>
+         <center>
+            <ImageView fitHeight="75.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@logo-modified.png" />
+               </image>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </BorderPane.margin>
+            </ImageView>
+         </center>
+      </BorderPane>
+   </top>
+   <bottom>
+      <BorderPane prefHeight="117.0" prefWidth="960.0" BorderPane.alignment="CENTER">
+         <right>
+            <Button fx:id="shoppingCartButton" mnemonicParsing="false" stylesheets="@Style.css" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="15.0" />
+               </BorderPane.margin>
+            </Button>
+         </right>
+      </BorderPane>
+   </bottom>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+         <content>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #2e344b;">
+               <children>
+                  <VBox alignment="CENTER" maxHeight="250.0" maxWidth="200.0" minHeight="250.0" minWidth="200.0" spacing="15.0" style="-fx-background-color: #BEFFBC;">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@domates.jpeg" />
+                           </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Domates" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="25,00₺" />
+                        <Spinner editable="true" />
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Icon content="ADD_CIRCLE" />
+                              <Icon content="DEVICE_HUB" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
