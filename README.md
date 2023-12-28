@@ -1,7 +1,7 @@
 ## Yapilacaklar Listesi
 - [x] LOGIN page
 - [x] REGISTER page
-- [] CUSTOMER MAIN page
+- [x] CUSTOMER MAIN page
 - [] CARRIER MAIN page
 - [] ADMIN MAIN page
 - [] PROFILE INFORMATION page , EDIT
