@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #2c344b;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #2c344b;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.greenshelf.registerPageController">
    <children>
       <ImageView fitHeight="120.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -20,8 +20,8 @@
       </ImageView>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
          <children>
-            <TextField fx:id="registerUsernameField1" maxWidth="450.0" prefHeight="48.0" prefWidth="538.0" promptText="Name" />
-            <TextField fx:id="registerUsernameField2" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Surname" />
+            <TextField fx:id="registerNameField" maxWidth="450.0" prefHeight="48.0" prefWidth="538.0" promptText="Name" />
+            <TextField fx:id="registerSurnameField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Surname" />
          </children>
          <padding>
             <Insets left="80.0" right="80.0" />
@@ -30,7 +30,7 @@
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
          <children>
             <PasswordField fx:id="registerPasswordField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Password" />
-            <PasswordField fx:id="registerPasswordField1" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Confirm Password" />
+            <PasswordField fx:id="registerPasswordConfirmField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Confirm Password" />
          </children>
          <padding>
             <Insets left="80.0" right="80.0" />
@@ -43,11 +43,11 @@
       </HBox>
       <VBox alignment="CENTER" prefHeight="98.0" prefWidth="940.0" spacing="5.0">
          <children>
-            <Hyperlink fx:id="existedaccount" alignment="CENTER" text="Do you have an existing account?" textFill="WHITE">
+            <Hyperlink fx:id="existedAccount" alignment="CENTER" onMouseClicked="#existedAccountOnMouseClicked" text="Do you have an existing account?" textFill="WHITE">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets></Hyperlink>
-            <Button fx:id="nextStepButton" defaultButton="true" mnemonicParsing="false" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" stylesheets="@Style.css" text="Next Step" textFill="WHITE">
+            <Button fx:id="nextStepButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#nextStepButtonOnMouseClicked" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" stylesheets="@Style.css" text="Next Step" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
