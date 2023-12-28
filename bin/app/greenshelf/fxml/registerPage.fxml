@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #2c344b;" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.greenshelf.registerPageController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #2c344b;" stylesheets="@../css/registerPage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.greenshelf.registerPageController">
    <children>
       <ImageView fitHeight="120.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -47,7 +47,7 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets></Hyperlink>
-            <Button fx:id="nextStepButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#nextStepButtonOnMouseClicked" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" stylesheets="@Style.css" text="Next Step" textFill="WHITE">
+            <Button fx:id="nextStepButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#nextStepButtonOnMouseClicked" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" text="Next Step" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>

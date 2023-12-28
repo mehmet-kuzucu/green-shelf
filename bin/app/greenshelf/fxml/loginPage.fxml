@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" spacing="25.0" style="-fx-background-color: #2c344b;" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.greenshelf.loginPageController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" spacing="25.0" style="-fx-background-color: #2c344b;" stylesheets="@../css/loginPageStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.greenshelf.loginPageController">
    <children>
       <ImageView fitHeight="149.0" fitWidth="161.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -20,7 +20,7 @@
       <TextField fx:id="usernameField" maxWidth="450.0" prefHeight="48.0" prefWidth="538.0" promptText="username / phone" />
       <PasswordField fx:id="passwordField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="password" />
       <Hyperlink fx:id="registerLink" alignment="CENTER" onMouseClicked="#registerLinkOnMouseClicked" text="or Create new profile" textFill="WHITE" />
-      <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#loginButtonOnMouseClicked" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" stylesheets="@Style.css" text="Login" textFill="WHITE">
+      <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#loginButtonOnMouseClicked" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" text="Login" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font></Button>
