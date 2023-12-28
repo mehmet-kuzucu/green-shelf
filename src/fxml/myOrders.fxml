@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #2e344b;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <BorderPane prefHeight="63.0" prefWidth="960.0" style="-fx-background-color: #2A6D72;" stylesheets="@Style.css" BorderPane.alignment="CENTER">
+         <left>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="My Orders" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="15.0" top="15.0" />
+               </BorderPane.margin>
+            </Text>
+         </left>
+         <padding>
+            <Insets left="25.0" right="25.0" />
+         </padding>
+         <center>
+            <ImageView fitHeight="75.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@logo-modified.png" />
+               </image>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </BorderPane.margin>
+            </ImageView>
+         </center>
+         <right>
+            <Button fx:id="profilePhoto" minWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" stylesheets="@Style.css" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+   </top>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" style="-fx-border-color: #000000;" BorderPane.alignment="CENTER">
+         <content>
+            <VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: #2c344b;">
+               <children>
+                  <Group>
+                     <children>
+                        <VBox alignment="CENTER" maxHeight="400.0" maxWidth="200.0" minHeight="150.0" minWidth="900.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
+                           <children>
+                              <BorderPane>
+                                 <center>
+                                    <Group BorderPane.alignment="CENTER">
+                                       <children>
+                                          <VBox alignment="CENTER" layoutX="-100.5" layoutY="-12.369791030883789" spacing="10.0">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sipariş tarihi" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Toplam fiyat" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status" />
+                                                <Line endX="100.0" startX="-100.0" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Product1, Product2..." />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </Group>
+                                 </center>
+                                 <left>
+                                    <Text rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12334567" wrappingWidth="100.88150787353516" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Text>
+                                 </left>
+                                 <right>
+                                    <Button fx:id="removeOrder" mnemonicParsing="false" prefHeight="62.0" prefWidth="62.0" stylesheets="@Style.css" BorderPane.alignment="CENTER" />
+                                 </right>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </BorderPane>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </Group>
+                  <Group>
+                     <children>
+                        <VBox alignment="CENTER" maxHeight="400.0" maxWidth="200.0" minHeight="150.0" minWidth="900.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
+                           <children>
+                              <BorderPane>
+                                 <center>
+                                    <Group BorderPane.alignment="CENTER">
+                                       <children>
+                                          <VBox alignment="CENTER" layoutX="-100.5" layoutY="-12.369791030883789" spacing="10.0">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sipariş tarihi" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Toplam fiyat" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status" />
+                                                <Line endX="100.0" startX="-100.0" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Product1, Product2..." />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </Group>
+                                 </center>
+                                 <left>
+                                    <Text rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12334567" wrappingWidth="100.88150787353516" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Text>
+                                 </left>
+                                 <right>
+                                    <Button fx:id="removeOrder1" mnemonicParsing="false" prefHeight="52.0" prefWidth="54.0" stylesheets="@Style.css" BorderPane.alignment="CENTER" />
+                                 </right>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </BorderPane>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </Group>
+                  <Group>
+                     <children>
+                        <VBox alignment="CENTER" maxHeight="400.0" maxWidth="200.0" minHeight="150.0" minWidth="900.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
+                           <children>
+                              <BorderPane>
+                                 <center>
+                                    <Group BorderPane.alignment="CENTER">
+                                       <children>
+                                          <VBox alignment="CENTER" layoutX="-100.5" layoutY="-12.369791030883789" spacing="10.0">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sipariş tarihi" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Toplam fiyat" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status" />
+                                                <Line endX="100.0" startX="-100.0" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Product1, Product2..." />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </Group>
+                                 </center>
+                                 <left>
+                                    <Text rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12334567" wrappingWidth="100.88150787353516" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Text>
+                                 </left>
+                                 <right>
+                                    <Button fx:id="removeOrder2" mnemonicParsing="false" prefHeight="52.0" prefWidth="54.0" stylesheets="@Style.css" BorderPane.alignment="CENTER" />
+                                 </right>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </BorderPane>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </Group>
+                  <Group>
+                     <children>
+                        <VBox alignment="CENTER" maxHeight="400.0" maxWidth="200.0" minHeight="150.0" minWidth="900.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
+                           <children>
+                              <BorderPane>
+                                 <center>
+                                    <Group BorderPane.alignment="CENTER">
+                                       <children>
+                                          <VBox alignment="CENTER" layoutX="-100.5" layoutY="-12.369791030883789" spacing="10.0">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sipariş tarihi" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Toplam fiyat" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status" />
+                                                <Line endX="100.0" startX="-100.0" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Product1, Product2..." />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </Group>
+                                 </center>
+                                 <left>
+                                    <Text rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12334567" wrappingWidth="100.88150787353516" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Text>
+                                 </left>
+                                 <right>
+                                    <Button fx:id="removeOrder3" mnemonicParsing="false" prefHeight="52.0" prefWidth="54.0" stylesheets="@Style.css" BorderPane.alignment="CENTER" />
+                                 </right>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </BorderPane>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </Group>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+   <bottom>
+      <BorderPane BorderPane.alignment="CENTER">
+         <left>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total price: 19.99₺" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="31.0" />
+               </font>
+            </Text>
+         </left>
+         <right>
+            <Button fx:id="shoppingCartButton" mnemonicParsing="false" stylesheets="@Style.css" BorderPane.alignment="CENTER" />
+         </right>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </BorderPane>
+   </bottom>
+</BorderPane>

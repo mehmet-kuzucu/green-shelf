@@ -199,3 +199,12 @@
     
 }
 
+#removeOrder {
+    -fx-background-image: url("removeOrder.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 75% 75%;
+    /* center the image */
+    -fx-background-position: center;
+    -fx-background-color:  transparent;
+}
+

@@ -7,7 +7,7 @@
 - [x] PROFILE INFORMATION page , EDIT
 - [x] SHOPPING CART page
 - [x] ORDER SUMMARY page
-- [ ] MY ORDERS page
+- [x] MY ORDERS page
 - [ ] ADMIN ADD PRODUCT page
 - [ ] ADMIN ADD/SEE CARRIER page
 - [ ] ADMIN VIEW ORDERS page
