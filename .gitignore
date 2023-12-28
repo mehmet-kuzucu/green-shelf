@@ -2,6 +2,7 @@
 .vscode/
 lib/
 .DS_Store
+bin/out
 bin/Admin.class
 bin/Customer.class
 bin/DatabaseAdapter.class
