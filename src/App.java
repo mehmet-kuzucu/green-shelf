@@ -13,6 +13,7 @@ import javafx.scene.control.SpinnerValueFactory;
 
 
 
+
 public class App extends Application {
 
     private Scene scene1, scene2, scene3, scene4, scene5;
@@ -63,6 +64,8 @@ public class App extends Application {
             // Get the components from Scene 5
             Button registerButton = (Button) root4.lookup("#registerButton");
 
+            
+
             // when hyperlink (or Create new profile) is clicked
             registerLink.setOnAction(e -> {
                 primaryStage.setScene(scene3);
@@ -88,9 +91,7 @@ public class App extends Application {
             });
 
             // spinner
-            //Spinner<Integer> spinner = (Spinner<Integer>) root5.lookup("#spinner");
-            //SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
-            //spinner.setValueFactory(valueFactory);
+            
 
             
             
