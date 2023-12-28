@@ -20,8 +20,14 @@
       </ImageView>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
          <children>
-            <TextField fx:id="registerUsernameField1" maxWidth="450.0" minHeight="0.0" minWidth="0.0" prefHeight="49.0" prefWidth="281.0" promptText="Name" stylesheets="@Style.css" />
-            <TextField fx:id="registerUsernameField2" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Surname" />
+            <TextField fx:id="registerUsernameField1" maxHeight="50.0" maxWidth="750.0" minHeight="25.0" minWidth="100.0" prefHeight="50.0" prefWidth="350.0" promptText="Name" stylesheets="@Style.css">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin></TextField>
+            <TextField fx:id="registerUsernameField2" maxHeight="50.0" maxWidth="750.0" minHeight="25.0" minWidth="100.0" prefHeight="50.0" prefWidth="350.0" promptText="Surname">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin></TextField>
          </children>
          <padding>
             <Insets left="80.0" right="80.0" />
@@ -29,25 +35,34 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
          <children>
-            <PasswordField fx:id="registerPasswordField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Password" />
-            <PasswordField fx:id="registerPasswordField1" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Confirm Password" />
+            <PasswordField fx:id="registerPasswordField" maxHeight="50.0" maxWidth="750.0" minHeight="25.0" minWidth="100.0" prefHeight="50.0" prefWidth="350.0" promptText="Password">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin></PasswordField>
+            <PasswordField fx:id="registerPasswordField1" maxHeight="50.0" maxWidth="750.0" minHeight="25.0" minWidth="100.0" prefHeight="50.0" prefWidth="350.0" promptText="Confirm Password">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin></PasswordField>
          </children>
          <padding>
             <Insets left="80.0" right="80.0" />
          </padding>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="50.0" minWidth="150.0" prefHeight="100.0" prefWidth="350.0">
          <children>
-            <TextField fx:id="registerUsernameField" alignment="CENTER" maxWidth="450.0" prefHeight="48.0" prefWidth="538.0" promptText="Username" />
+            <TextField fx:id="registerUsernameField" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="25.0" minWidth="100.0" prefHeight="50.0" prefWidth="350.0" promptText="Username">
+               <HBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </HBox.margin></TextField>
          </children>
       </HBox>
-      <VBox alignment="CENTER" prefHeight="98.0" prefWidth="940.0" spacing="5.0">
+      <VBox alignment="CENTER" minHeight="100.0" minWidth="250.0" prefHeight="98.0" prefWidth="940.0" spacing="5.0">
          <children>
             <Hyperlink alignment="CENTER" text="Do you have an existing account?" textFill="WHITE">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets></Hyperlink>
-            <Button fx:id="registerButton" defaultButton="true" mnemonicParsing="false" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" stylesheets="@Style.css" text="Register" textFill="WHITE">
+            <Button fx:id="registerButton" defaultButton="true" maxHeight="50.0" maxWidth="750.0" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #4AAB3B;" stylesheets="@Style.css" text="Register" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
