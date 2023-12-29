@@ -2,7 +2,7 @@
 - [x] LOGIN page
 - [x] REGISTER page
 - [x] CUSTOMER MAIN page
-- [ ] CARRIER MAIN page
+- [x] CARRIER MAIN page
 - [ ] ADMIN MAIN page
 - [x] PROFILE INFORMATION page , EDIT
 - [x] SHOPPING CART page
@@ -12,4 +12,4 @@
 - [ ] ADMIN ADD/SEE CARRIER page
 - [ ] ADMIN VIEW ORDERS page
 - [ ] ADMIN REPORTS page
-- [ ] CARRIER SEE ORDERS page
+- [x] CARRIER SEE ORDERS page
