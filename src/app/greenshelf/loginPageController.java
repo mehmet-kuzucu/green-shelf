@@ -38,7 +38,7 @@ public class loginPageController {
     void registerLinkOnMouseClicked(MouseEvent event) {
         System.out.println("Register link clicked!");
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("fxml/carrierHomePage.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("fxml/registerPage.fxml"));
             stage = (Stage) registerLink.getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

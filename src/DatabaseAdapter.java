@@ -37,9 +37,20 @@ public class DatabaseAdapter {
         }
     }
 
-    void registerUserSql(String username, String password) {
+    void registerUserSql(Customer customer) {
         try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("INSERT INTO user (name, password) VALUES ('" + username + "', '" + password + "');");
+            String query = "INSERT INTO user (userid, username, email, phone, address, name, surname, password, profilePicture, userType) VALUES ('" +
+                            customer.getUserID() + "', '" +
+                            customer.getUsername() + "', '" +
+                            customer.getEmail() + "', '" +
+                            customer.getPhone() + "', '" +
+                            customer.getAddress() + "', '" +
+                            customer.getName() + "', '" +
+                            customer.getSurname() + "', '" +
+                            customer.getPassword() + "', '" +
+                            customer.getProfilePicture() + "', '" +
+                            customer.getUserType() + "');";
+            statement.executeUpdate(query);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

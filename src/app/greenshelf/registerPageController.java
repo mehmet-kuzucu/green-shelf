@@ -13,6 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+//import from parent directory
+
+
+
 public class registerPageController {
     @FXML
     private TextField registerNameField;
@@ -53,6 +57,12 @@ public class registerPageController {
     @FXML
     void nextStepButtonOnMouseClicked(MouseEvent event) {
         System.out.println("Next step clicked!");
+        Customer newCustomer = new Customer(registerNameField.getText(), registerSurnameField.getText(), registerPasswordField.getText(), "email", "phone", registerUsernameField.getText(), "customer");
+
+
+
+
+
         try {
             Parent root = FXMLLoader.load(getClass().getResource("fxml/registerPage2.fxml"));
             Stage stage = (Stage) existedAccount.getScene().getWindow();
@@ -64,6 +74,7 @@ public class registerPageController {
             e.printStackTrace();
         }
     }
+
 
 
 

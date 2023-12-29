@@ -8,11 +8,12 @@ public class User {
     private String email;
     private String phone;
     private String username;
+    private String userType;
 
 
 
     // Constructor
-    public User(String name, String surname, String password, String email, String phone, String username) {
+    public User(String name, String surname, String password, String email, String phone, String username, String userType) {
         setName(name);
         setSurname(surname);
         setPassword(password);
@@ -20,6 +21,7 @@ public class User {
         setPhone(phone);
         setUsername(username);
         setUserID();
+        setUserType(userType);
     }
 
     /* bu olmayacak, simdilik program calissin diye var */
@@ -70,6 +72,9 @@ public class User {
     public void setUsername(String username) {
         this.username= username;
     }
+    public void setUserType(String userType) {
+        this.userType= userType;
+    }
     // Getters
     public String getUserID() {
         return this.UserID;
@@ -91,6 +96,9 @@ public class User {
     }
     public String getUsername() {
         return this.username;
+    }
+    public String getUserType() {
+        return this.userType;
     }
 
 }
