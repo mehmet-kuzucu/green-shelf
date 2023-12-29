@@ -17,10 +17,10 @@
             <Image url="@../images/logo-modified.png" />
          </image>
       </ImageView>
-      <TextField fx:id="usernameField" maxWidth="450.0" prefHeight="48.0" prefWidth="538.0" promptText="username / phone" />
-      <PasswordField fx:id="passwordField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="password" />
+      <TextField fx:id="usernameField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="username / phone" />
+      <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="password" />
       <Hyperlink fx:id="registerLink" alignment="CENTER" onMouseClicked="#registerLinkOnMouseClicked" text="or Create new profile" textFill="WHITE" />
-      <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#loginButtonOnMouseClicked" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" text="Login" textFill="WHITE">
+      <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#loginButtonOnMouseClicked" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #4AAB3B;" text="Login" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font></Button>

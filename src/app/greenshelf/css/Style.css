@@ -80,7 +80,9 @@
     /*make it circular */
     -fx-background-radius: 10%;
     -fx-border-width: 5px;
+    -fx-border-color: #d5dfe3;
     -fx-border-radius: 10%;
+    -fx-background-color: #20373b;
 }
 
 #profilePhoto {
@@ -94,6 +96,7 @@
     -fx-radius: 50%;
 
 }
+
 
 #saveProfileButton {
     -fx-background-image: url("../images/saveProfile.png");
