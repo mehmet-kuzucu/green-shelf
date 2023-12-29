@@ -1,11 +1,12 @@
-package app.greenshelf;
-
+package app.greenshelf.controllers;
+import app.greenshelf.Customer;
+import app.greenshelf.DatabaseAdapter;
 import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
@@ -18,14 +19,14 @@ import javafx.stage.Stage;
 
 
 public class registerPageController {
+
+    private DatabaseAdapter databaseAdapter;
+
     @FXML
     private TextField registerNameField;
 
     @FXML
     private TextField registerSurnameField;
-
-    @FXML
-    private TextField registerUsernameField;
 
     @FXML
     private PasswordField registerPasswordField;
@@ -34,16 +35,29 @@ public class registerPageController {
     private PasswordField registerConfirmPasswordField;
 
     @FXML
+    private TextField registerEmailField;
+
+    @FXML
+    private TextField registerPhoneField;
+
+    @FXML
+    private TextField registerAddressField;
+
+    @FXML
+    private TextField registerUsernameField;
+
+    @FXML
     private Hyperlink existedAccount;
 
     @FXML
     private Button nextStepButton;
 
+
     @FXML
     void existedAccountOnMouseClicked(MouseEvent event) {
         System.out.println("Existed account clicked!");
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("fxml/loginPage.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../fxml/loginPage.fxml"));
             Stage stage = (Stage) existedAccount.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -57,8 +71,11 @@ public class registerPageController {
     @FXML
     void nextStepButtonOnMouseClicked(MouseEvent event) {
         System.out.println("Next step clicked!");
-        Customer newCustomer = new Customer(registerNameField.getText(), registerSurnameField.getText(), registerPasswordField.getText(), "email", "phone", registerUsernameField.getText(), "customer");
-
+        //password check
+        Customer newCustomer = new Customer(registerNameField.getText(), registerSurnameField.getText(), registerPasswordField.getText(), registerEmailField.getText(), registerPhoneField.getText(), registerUsernameField.getText(),  registerAddressField.getText(),null);
+        DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+        databaseAdapter.registerUserSql(newCustomer);
+        databaseAdapter.closeConnection();
 
 
 

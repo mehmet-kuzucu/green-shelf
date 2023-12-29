@@ -1,3 +1,4 @@
+package app.greenshelf;
 import java.security.SecureRandom;
 
 public class User {
@@ -26,6 +27,13 @@ public class User {
 
     /* bu olmayacak, simdilik program calissin diye var */
     public User(String username, String password){
+        setUsername(username);
+        setPassword(password);
+    }
+
+    public User(String name, String surname, String username, String password){
+        setName(name);
+        setSurname(surname);
         setUsername(username);
         setPassword(password);
     }

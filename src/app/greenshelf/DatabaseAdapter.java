@@ -1,3 +1,4 @@
+package app.greenshelf;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;
@@ -9,7 +10,7 @@ public class DatabaseAdapter {
     private String pass;
     private Connection connection;
 
-    void generateSqlDatabase() {
+    public void generateSqlDatabase() {
         try (Statement statement = connection.createStatement()) {
             // Create the database
             statement.executeUpdate("CREATE DATABASE IF NOT EXISTS javafxdb;");
@@ -37,8 +38,9 @@ public class DatabaseAdapter {
         }
     }
 
-    void registerUserSql(Customer customer) {
+    public void registerUserSql(Customer customer) {
         try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("USE javafxdb;");
             String query = "INSERT INTO user (userid, username, email, phone, address, name, surname, password, profilePicture, userType) VALUES ('" +
                             customer.getUserID() + "', '" +
                             customer.getUsername() + "', '" +
@@ -71,7 +73,7 @@ public class DatabaseAdapter {
         }
     }
 
-    DatabaseAdapter() {
+    public DatabaseAdapter() {
         url = "jdbc:mysql://localhost:3306";                // your database connection
 
         zorunlu user = new zorunlu();

@@ -1,7 +1,6 @@
-package app.greenshelf;
+package app.greenshelf.controllers;
 
 import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -36,8 +35,11 @@ public class registerPage2Controller {
     @FXML
     void registerButtonOnMouseClicked(MouseEvent event) {
         System.out.println("Register clicked!");
+
+
+
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("fxml/customerHome.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../fxml/customerHome.fxml"));
             Stage stage = (Stage) existedAccount.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

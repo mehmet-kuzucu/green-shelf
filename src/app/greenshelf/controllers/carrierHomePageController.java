@@ -1,4 +1,4 @@
-package app.greenshelf;
+package app.greenshelf.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
