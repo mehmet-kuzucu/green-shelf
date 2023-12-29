@@ -50,9 +50,9 @@
                <children>
                   <Group>
                      <children>
-                        <VBox alignment="CENTER" maxHeight="400.0" maxWidth="200.0" minHeight="150.0" minWidth="900.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
+                        <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #BEFFBC;">
                            <children>
-                              <BorderPane>
+                              <BorderPane VBox.vgrow="NEVER">
                                  <center>
                                     <Group BorderPane.alignment="CENTER">
                                        <children>
@@ -91,9 +91,9 @@
                   </Group>
                   <Group layoutX="38.0" layoutY="15.0">
                      <children>
-                        <VBox alignment="CENTER" maxHeight="400.0" maxWidth="200.0" minHeight="150.0" minWidth="900.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
+                        <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #BEFFBC;">
                            <children>
-                              <BorderPane>
+                              <BorderPane VBox.vgrow="ALWAYS">
                                  <center>
                                     <Group BorderPane.alignment="CENTER">
                                        <children>
@@ -132,9 +132,9 @@
                   </Group>
                   <Group layoutX="38.0" layoutY="185.0">
                      <children>
-                        <VBox alignment="CENTER" maxHeight="400.0" maxWidth="200.0" minHeight="150.0" minWidth="900.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
+                        <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #BEFFBC;">
                            <children>
-                              <BorderPane>
+                              <BorderPane VBox.vgrow="ALWAYS">
                                  <center>
                                     <Group BorderPane.alignment="CENTER">
                                        <children>
