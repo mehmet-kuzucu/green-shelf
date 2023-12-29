@@ -1,6 +1,5 @@
 package app.greenshelf;
 import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +15,6 @@ public class loginPageController {
 
     private Stage stage;
     private Scene scene;
-    private Parent root;
 
     @FXML
     private TextField usernameField;
@@ -47,15 +45,7 @@ public class loginPageController {
             stage.show();
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
-        }
-        
-
-        
+        } 
     }
-    
-
-
-
 }
