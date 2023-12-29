@@ -62,12 +62,12 @@ public class DatabaseAdapter {
 
     DatabaseAdapter() {
         url = "jdbc:mysql://localhost:3306";                // your database connection
-        // TODO: Bu kısmı kendi bilgisayarınıza göre değiştirin
-        // TODO: BUnu sonra duzeltmek gerekecek ama otomatik almasi icin
-        user = "aliyigittas";                               // your username
-        pass = "Ali123ali123";                              // your password
+
+        zorunlu user = new zorunlu();
+
+        
         try {
-            connection = DriverManager.getConnection(url, user, pass);
+            connection = DriverManager.getConnection(url, user.name, user.pass);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

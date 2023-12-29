@@ -1,6 +1,7 @@
 # .gitignore
 .vscode/
 lib/
+src/zorunlu.java
 .DS_Store
 bin/out
 bin/output
