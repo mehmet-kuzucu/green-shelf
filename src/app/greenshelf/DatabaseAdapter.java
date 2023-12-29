@@ -25,7 +25,7 @@ public class DatabaseAdapter {
                                                                         "name VARCHAR(50)," + 
                                                                         "surname VARCHAR(50), " +
                                                                         "password VARCHAR(50), " +
-                                                                        "profilePicture TEXT, " +
+                                                                        "profilePicture BLOB, " +
                                                                         "userType VARCHAR(50), " +
                                                                         "UNIQUE(userid), " +
                                                                         "UNIQUE(username), " +

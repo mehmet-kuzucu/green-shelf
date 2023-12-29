@@ -52,6 +52,12 @@
          <children>
             <TextField fx:id="registerAddressField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Address" />
             <TextField fx:id="registerUsernameField" maxWidth="450.0" prefHeight="48.0" prefWidth="538.0" promptText="Username" />
+            <ImageView fx:id="profilePhotoImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Downloads/228330193-f6fe2f7f-d58c-4c59-9902-68bd79a69223.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="chooseProfilePhotoButton" mnemonicParsing="false" onMouseClicked="#chooseProfilePhotoButtonOnMouseClicked" text="profile Photo" />
          </children>
       </HBox>
       <VBox alignment="CENTER" prefHeight="98.0" prefWidth="940.0" spacing="5.0">

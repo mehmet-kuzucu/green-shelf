@@ -28,7 +28,7 @@ public class App extends Application {
                 String username = usernameField.getText();
                 String password = passwordField.getText();
                 FileChooser fileChooser = new FileChooser();
-                File selectedFile = fileChooser.showOpenDialog(primaryStage);
+                
 
                 //Burda userdan direkt class olusturmayacak aslinda once username ve passwordu databasete kontrol edecek sonra typeina gore admin, customer veya carier clasi olusturacak
                 currentUser = new User(username, password);
