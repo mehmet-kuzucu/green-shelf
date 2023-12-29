@@ -15,7 +15,23 @@ public class DatabaseAdapter {
             statement.executeUpdate("CREATE DATABASE IF NOT EXISTS javafxdb;");
             statement.executeUpdate("USE javafxdb;");
             // Create a table in the database
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS user (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(50), password VARCHAR(50));");
+            String query = "CREATE TABLE IF NOT EXISTS user (id INT PRIMARY KEY AUTO_INCREMENT, " +
+                                                                        "userid VARCHAR(16), " +
+                                                                        "username VARCHAR(50), " +
+                                                                        "email VARCHAR(50), " +
+                                                                        "phone VARCHAR(50), " +
+                                                                        "address VARCHAR(50), " +
+                                                                        "name VARCHAR(50)," + 
+                                                                        "surname VARCHAR(50), " +
+                                                                        "password VARCHAR(50), " +
+                                                                        "profilePicture VARCHAR, " +
+                                                                        "userType VARCHAR(50), " +
+                                                                        "UNIQUE(userid), " +
+                                                                        "UNIQUE(username), " +
+                                                                        "UNIQUE(email), " +
+                                                                        "UNIQUE(phone)" + 
+                                                                        ");";
+            statement.executeUpdate(query);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

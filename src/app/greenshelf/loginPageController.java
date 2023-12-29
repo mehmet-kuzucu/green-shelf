@@ -31,7 +31,7 @@ public class loginPageController {
     @FXML
     void loginButtonOnMouseClicked(MouseEvent event) {
         System.out.println("Login button clicked!");
-        loginButton.setText("Clicked!");
+        
     }
 
     @FXML
