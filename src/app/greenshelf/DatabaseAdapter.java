@@ -2,7 +2,11 @@ package app.greenshelf;
 import app.greenshelf.Customer;
 import java.sql.Connection;
 import java.sql.Statement;
+
+import javax.naming.spi.DirStateFactory.Result;
+
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 
 
 public class DatabaseAdapter {
@@ -57,6 +61,18 @@ public class DatabaseAdapter {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public String loginUserSql(String username){
+        ResultSet result;
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("USE javafxdb;");
+            String query = "SELECT password FROM user WHERE username '" + username + "';";
+            result = statement.executeQuery(query);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result.getString("password");
     }
 
     Connection getConnection() {
