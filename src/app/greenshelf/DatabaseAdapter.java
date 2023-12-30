@@ -64,15 +64,16 @@ public class DatabaseAdapter {
     }
 
     public String loginUserSql(String username){
-        ResultSet result;
+        
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate("USE javafxdb;");
             String query = "SELECT password FROM user WHERE username '" + username + "';";
-            result = statement.executeQuery(query);
+            ResultSet result = statement.executeQuery(query);
+            return result.getString("password");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return result.getString("password");
+        return null;
     }
 
     Connection getConnection() {
