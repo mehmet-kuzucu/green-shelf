@@ -73,18 +73,33 @@ public class DatabaseAdapter {
             if (connection == null) {
                 throw new SQLException("Connection not established.");
             }
-
+    
             // Select the database
             try (PreparedStatement useStatement = connection.prepareStatement("USE javafxdb;")) {
                 useStatement.execute();
             }
-
+    
+            // Check if the username exists
+            String queryUsernameExists = "SELECT COUNT(*) FROM user WHERE username = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(queryUsernameExists)) {
+                preparedStatement.setString(1, username);
+                ResultSet resultSet2 = preparedStatement.executeQuery();
+    
+                // Check if there is a result
+                if (resultSet2.next()) {
+                    if (resultSet2.getInt(1) == 0) {
+                        System.out.println("Username does not exist!");
+                        return null;
+                    }
+                }
+            }
+    
             // Your main query to retrieve the password and userType
             String query = "SELECT password, userType FROM user WHERE username = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
                 ResultSet resultSet = preparedStatement.executeQuery();
-
+    
                 // Check if there is a result
                 if (resultSet.next()) {
                     Map<String, String> userInformation = new HashMap<>();
@@ -98,6 +113,7 @@ public class DatabaseAdapter {
         }
         return null;
     }
+    
 
 
 

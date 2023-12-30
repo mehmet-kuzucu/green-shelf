@@ -37,52 +37,42 @@ public class loginPageController {
     void loginButtonOnMouseClicked(MouseEvent event) {
         System.out.println("Login button clicked!");
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
-
+    
         Map<String, String> userInformation = databaseAdapter.loginUserSql(usernameField.getText());
-
-
-
-        if (userInformation.get("userType").equals("customer") && userInformation.get("password").equals(passwordField.getText())) {
-            System.out.println("customer login successful!");
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("../fxml/customerHome.fxml"));
-                stage = (Stage) loginButton.getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } 
-        } 
-        if(userInformation.get("userType").equals("admin") && userInformation.get("password").equals(passwordField.getText())){
-            System.out.println("admin login successful!");
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("../fxml/adminHomePage.fxml"));
-                stage = (Stage) loginButton.getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } 
+    
+        if (userInformation != null) {
+            String userType = userInformation.get("userType");
+            String password = userInformation.get("password");
+    
+            if ("customer".equals(userType) && password.equals(passwordField.getText())) {
+                System.out.println("Customer login successful!");
+                loadScene("../fxml/customerHome.fxml");
+            } else if ("admin".equals(userType) && password.equals(passwordField.getText())) {
+                System.out.println("Admin login successful!");
+                loadScene("../fxml/adminHomePage.fxml");
+            } else if ("carrier".equals(userType) && password.equals(passwordField.getText())) {
+                System.out.println("Carrier login successful!");
+                loadScene("../fxml/carrierHomePage.fxml");
+            } else {
+                System.out.println("Invalid username, password, or user type.");
+            }
+        } else {
+            System.out.println("Username not found in the database.");
         }
-        if(userInformation.get("userType").equals("carrier") && userInformation.get("password").equals(passwordField.getText())){
-            System.out.println("carrier login successful!");
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("../fxml/carrierHomePage.fxml"));
-                stage = (Stage) loginButton.getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } 
-        }
-        
     }
+    
+    private void loadScene(String fxmlPath) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            stage = (Stage) loginButton.getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 
     
 
