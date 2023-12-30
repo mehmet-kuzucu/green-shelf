@@ -1,5 +1,4 @@
 import app.greenshelf.DatabaseAdapter;
-import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

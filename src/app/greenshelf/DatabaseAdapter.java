@@ -1,4 +1,5 @@
 package app.greenshelf;
+import app.greenshelf.Customer;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;

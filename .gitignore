@@ -2,7 +2,6 @@
 .vscode/
 lib/
 src/zorunlu.java
-src/app/greenshelf/zorunlu.java
 .DS_Store
 bin/out
 bin/output
@@ -15,3 +14,4 @@ src/DatabaseAdapter.java
 bin/DatabaseAdapter.class
 src/DatabaseAdapter.java
 bin/App.class
+src/app/greenshelf/zorunlu.java
