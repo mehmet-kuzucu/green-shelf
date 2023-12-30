@@ -2,6 +2,7 @@
 .vscode/
 lib/
 src/zorunlu.java
+src/app/greenshelf/zorunlu.java
 .DS_Store
 bin/out
 bin/output
