@@ -85,7 +85,7 @@
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="25,00₺" />
                                  </children>
                               </VBox>
-                              <Spinner fx:id="spinner" editable="false" max="10" min="1" />
+                              <Spinner fx:id="spinner" editable="false" max="20.0" amountToStepBy="0.1" min="1.0" />
                               <Button fx:id="addToCartButton" mnemonicParsing="false" />
                            </children>
                         </VBox>

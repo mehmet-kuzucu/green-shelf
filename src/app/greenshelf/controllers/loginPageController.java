@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import app.greenshelf.DatabaseAdapter;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,6 +21,7 @@ public class loginPageController {
 
     private Stage stage;
     private Scene scene;
+    
 
     @FXML
     private TextField usernameField;
@@ -35,6 +37,8 @@ public class loginPageController {
 
     @FXML
     void loginButtonOnMouseClicked(MouseEvent event) {
+        usernameField.setStyle("-fx-border-color: transparent;");
+        passwordField.setStyle("-fx-border-color: transparent;");
         System.out.println("Login button clicked!");
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
     
@@ -55,29 +59,14 @@ public class loginPageController {
                 loadScene("../fxml/carrierHomePage.fxml");
             } else {
                 System.out.println("Invalid username, password, or user type.");
+                passwordField.setStyle("-fx-border-color: red;");
             }
         } else {
             System.out.println("Username not found in the database.");
+            usernameField.setStyle("-fx-border-color: red;");
         }
     }
     
-    private void loadScene(String fxmlPath) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-            stage = (Stage) loginButton.getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
-
-    
-
-
-
     @FXML
     void registerLinkOnMouseClicked(MouseEvent event) {
         System.out.println("Register link clicked!");
@@ -91,5 +80,17 @@ public class loginPageController {
         } catch (IOException e) {
             e.printStackTrace();
         } 
+    }
+
+    private void loadScene(String fxmlPath) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            stage = new Stage();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

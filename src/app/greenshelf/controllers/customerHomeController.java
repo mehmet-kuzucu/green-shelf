@@ -1,7 +1,9 @@
+package app.greenshelf.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
+import javafx.scene.input.MouseEvent;
 
 public class customerHomeController {
 
@@ -20,4 +22,9 @@ public class customerHomeController {
     @FXML
     private Spinner<?> spinner;
 
+    @FXML
+    void addToCartButtonOnMouseClicked(MouseEvent event) {
+
+    }
+    
 }

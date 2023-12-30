@@ -1,5 +1,12 @@
 package app.greenshelf;
 import app.greenshelf.Customer;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.HashMap;
@@ -18,7 +25,7 @@ public class DatabaseAdapter {
     private String user;
     private String pass;
     private Connection connection;
-
+    
     public void generateSqlDatabase() {
         try (Statement statement = connection.createStatement()) {
             // Create the database
@@ -145,6 +152,6 @@ public class DatabaseAdapter {
             ex.printStackTrace();
         }
     }
-
+    
     
 }
