@@ -39,7 +39,7 @@
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
          <children>
             <TextField fx:id="registerEmailField" maxWidth="450.0" prefHeight="48.0" prefWidth="538.0" promptText="E-mail" />
-            <TextField fx:id="registerPhoneField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Phone Number" />
+            <TextField fx:id="registerPhoneField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Phone Number 5xxxxxxxxx" />
          </children>
          <padding>
             <Insets left="80.0" right="80.0" />
