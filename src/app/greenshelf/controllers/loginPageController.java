@@ -15,6 +15,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class loginPageController {
@@ -36,9 +37,13 @@ public class loginPageController {
     private Button loginButton;
 
     @FXML
+    private Text errorText;
+
+    @FXML
     void loginButtonOnMouseClicked(MouseEvent event) {
         usernameField.setStyle("-fx-border-color: transparent;");
         passwordField.setStyle("-fx-border-color: transparent;");
+        errorText.setText("");
         System.out.println("Login button clicked!");
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
     
@@ -60,10 +65,12 @@ public class loginPageController {
             } else {
                 System.out.println("Invalid username, password, or user type.");
                 passwordField.setStyle("-fx-border-color: red;");
+                errorText.setText("Invalid password");
             }
         } else {
             System.out.println("Username not found in the database.");
             usernameField.setStyle("-fx-border-color: red;");
+            errorText.setText("Username not found in the database.");
         }
     }
     
@@ -85,7 +92,7 @@ public class loginPageController {
     private void loadScene(String fxmlPath) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-            stage = new Stage();
+            stage = (Stage) loginButton.getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
