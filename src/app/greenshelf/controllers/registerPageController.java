@@ -23,6 +23,7 @@ import java.util.Base64;
 import java.io.FileInputStream;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.util.regex.Pattern;
 
 //import from parent directory
 
@@ -98,7 +99,7 @@ public class registerPageController {
         if (!checkPassword(registerPasswordField, registerConfirmPasswordField)) {
            System.out.println("Passwords do not match!");
         }
-        else if (!checkUsername(registerUsernameField)) {
+        else if (checkUsername(registerUsernameField)) {
             System.out.println("Username already exists!");
         }
         else if (!checkEmailisValid(registerEmailField)) {
@@ -138,8 +139,10 @@ public class registerPageController {
         */
     }
 
-
+    @FXML
     private Boolean checkPassword(PasswordField registerPasswordField, PasswordField registerConfirmPasswordField) {
+        System.out.println(registerPasswordField.getText());
+        System.out.println(registerConfirmPasswordField.getText());
         if (registerPasswordField.getText().equals(registerConfirmPasswordField.getText())) {
             return true;
         } else {
@@ -148,7 +151,7 @@ public class registerPageController {
     }
 
 
-    /* TODO: create checkusernameSql */
+    @FXML
     private Boolean checkUsername(TextField registerUsernameField) {
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
         if (databaseAdapter.checkUsernameSql(registerUsernameField.getText())) {
@@ -157,12 +160,21 @@ public class registerPageController {
             return false;
         }
     }
-
+    @FXML
     private Boolean checkEmailisValid(TextField registerEmailField) {
-        /*aliden gelecek */
+        String email= registerEmailField.getText();
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+                            "[a-zA-Z0-9_+&*-]+)*@" + 
+                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
+                            "A-Z]{2,7}$"; 
+                              
+        Pattern pat = Pattern.compile(emailRegex); 
+        if (email == null) 
+            return false; 
+        return pat.matcher(email).matches(); 
     }
 
-    /* TODO: create checkEmailSql */
+    @FXML
     private Boolean checkEmail(TextField registerEmailField) {
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
         if (databaseAdapter.checkEmailSql(registerEmailField.getText())) {
@@ -173,7 +185,7 @@ public class registerPageController {
     }
 
 
-    /* TODO: create checkPhoneSql */
+    @FXML
     private Boolean checkPhone(TextField registerPhoneField) {
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
         if (databaseAdapter.checkPhoneSql(registerPhoneField.getText())) {

@@ -30,7 +30,7 @@
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
          <children>
             <PasswordField fx:id="registerPasswordField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Password" />
-            <PasswordField fx:id="registerPasswordConfirmField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Confirm Password" />
+            <PasswordField fx:id="registerConfirmPasswordField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Confirm Password" />
          </children>
          <padding>
             <Insets left="80.0" right="80.0" />
