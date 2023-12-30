@@ -2,6 +2,8 @@ package app.greenshelf;
 import app.greenshelf.Customer;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.naming.spi.DirStateFactory.Result;
 
@@ -65,7 +67,7 @@ public class DatabaseAdapter {
         }
     }
 
-    public String loginUserSql(String username) {
+    public Map<String, String> loginUserSql(String username) {
         try {
             // Ensure that the connection is not null
             if (connection == null) {
@@ -77,15 +79,18 @@ public class DatabaseAdapter {
                 useStatement.execute();
             }
 
-            // Your main query to retrieve the password
-            String query = "SELECT password FROM user WHERE username = ?";
+            // Your main query to retrieve the password and userType
+            String query = "SELECT password, userType FROM user WHERE username = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
                 ResultSet resultSet = preparedStatement.executeQuery();
 
                 // Check if there is a result
                 if (resultSet.next()) {
-                    return resultSet.getString("password");
+                    Map<String, String> userInformation = new HashMap<>();
+                    userInformation.put("password", resultSet.getString("password"));
+                    userInformation.put("userType", resultSet.getString("userType"));
+                    return userInformation;
                 }
             }
         } catch (SQLException ex) {
@@ -93,6 +98,7 @@ public class DatabaseAdapter {
         }
         return null;
     }
+
 
 
 
