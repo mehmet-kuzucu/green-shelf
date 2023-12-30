@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -73,6 +74,9 @@ public class registerPageController {
     @FXML
     private ImageView profilePhotoImage;
 
+    @FXML
+    private Text errorTextRegister;
+
 
     @FXML
     void existedAccountOnMouseClicked(MouseEvent event) {
@@ -92,32 +96,55 @@ public class registerPageController {
     @FXML
     void nextStepButtonOnMouseClicked(MouseEvent event) {
         System.out.println("Next step clicked!");
+        errorTextRegister.setText("");
+        registerPasswordField.setStyle("-fx-border-color: transparent;");
+        registerConfirmPasswordField.setStyle("-fx-border-color: transparent;");
+        registerUsernameField.setStyle("-fx-border-color: transparent;");
+        registerEmailField.setStyle("-fx-border-color: transparent;");
+        registerPhoneField.setStyle("-fx-border-color: transparent;");
+        
 
 
         /* DO THE CHECKERS */
-
+        if (areFieldsEmpty())
+        {
+            return;
+        }
         if (!checkPassword(registerPasswordField, registerConfirmPasswordField)) {
-           System.out.println("Passwords do not match!");
-           return;
+            System.out.println("Passwords do not match!");
+            errorTextRegister.setText("Passwords do not match!");
+            registerPasswordField.setStyle("-fx-border-color: red;");
+            registerConfirmPasswordField.setStyle("-fx-border-color: red;");
+            return;
         }
         else if (checkUsername(registerUsernameField)) {
             System.out.println("Username already exists!");
+            errorTextRegister.setText("Username already exists!");
+            registerUsernameField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (!checkEmailisValid(registerEmailField)) {
             System.out.println("Email is not valid!");
+            errorTextRegister.setText("Email is not valid!");
+            registerEmailField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (checkEmail(registerEmailField)) {
             System.out.println("Email already exists!");
+            errorTextRegister.setText("Email already exists!");
+            registerEmailField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (checkPhone(registerPhoneField)) {
             System.out.println("Phone already exists!");
+            errorTextRegister.setText("Phone already exists!");
+            registerPhoneField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (!checkPhoneisValid(registerPhoneField)) {
             System.out.println("Phone is not valid!");
+            errorTextRegister.setText("Phone is not valid!");
+            registerPhoneField.setStyle("-fx-border-color: red;");
             return;
         }
         else {
@@ -125,34 +152,26 @@ public class registerPageController {
             
         }
 
-
-
         //password check
         Customer newCustomer = new Customer(registerNameField.getText(), registerSurnameField.getText(), registerPasswordField.getText(), registerEmailField.getText(), registerPhoneField.getText(), registerUsernameField.getText(),  registerAddressField.getText(), encodedImage);
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
         databaseAdapter.registerUserSql(newCustomer);
         databaseAdapter.closeConnection();
 
-
-        /* 
-
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("fxml/registerPage2.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../fxml/loginPage.fxml"));
             Stage stage = (Stage) existedAccount.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        */
+        
     }
 
     @FXML
     private Boolean checkPassword(PasswordField registerPasswordField, PasswordField registerConfirmPasswordField) {
-        System.out.println(registerPasswordField.getText());
-        System.out.println(registerConfirmPasswordField.getText());
         if (registerPasswordField.getText().equals(registerConfirmPasswordField.getText())) {
             return true;
         } else {
@@ -215,6 +234,68 @@ public class registerPageController {
             return false; 
         return pat.matcher(phone).matches(); 
     }
+
+    @FXML
+    private boolean areFieldsEmpty() {
+        boolean isEmpty = false;
+        registerNameField.setStyle("-fx-border-color: transparent;");
+        registerSurnameField.setStyle("-fx-border-color: transparent;");
+        registerPasswordField.setStyle("-fx-border-color: transparent;");
+        registerConfirmPasswordField.setStyle("-fx-border-color: transparent;");
+        registerEmailField.setStyle("-fx-border-color: transparent;");
+        registerPhoneField.setStyle("-fx-border-color: transparent;");
+        registerAddressField.setStyle("-fx-border-color: transparent;");
+        registerUsernameField.setStyle("-fx-border-color: transparent;");
+
+        if (registerNameField.getText().isEmpty())
+        {
+            registerNameField.setStyle("-fx-border-color: red;");
+            isEmpty = true;
+        }
+        if (registerSurnameField.getText().isEmpty())
+        {
+            registerSurnameField.setStyle("-fx-border-color: red;");
+            isEmpty = true;
+        }
+        if (registerPasswordField.getText().isEmpty())
+        {
+            registerPasswordField.setStyle("-fx-border-color: red;");
+            isEmpty = true;
+        }
+        if (registerConfirmPasswordField.getText().isEmpty())
+        {
+            registerConfirmPasswordField.setStyle("-fx-border-color: red;");
+            isEmpty = true;
+        }
+        if (registerEmailField.getText().isEmpty())
+        {
+            registerEmailField.setStyle("-fx-border-color: red;");
+            isEmpty = true;
+        }
+        if (registerPhoneField.getText().isEmpty())
+        {
+            registerPhoneField.setStyle("-fx-border-color: red;");
+            isEmpty = true;
+        }
+        if (registerAddressField.getText().isEmpty())
+        {
+            registerAddressField.setStyle("-fx-border-color: red;");
+            isEmpty = true;
+        }
+        if (registerUsernameField.getText().isEmpty())
+        {
+            registerUsernameField.setStyle("-fx-border-color: red;");
+            isEmpty = true;
+        }
+        if (isEmpty)
+        {
+            errorTextRegister.setText("Please fill the required fields!");
+        }
+        return isEmpty;
+        
+    }
+
+
 
     @FXML
     private void chooseProfilePhotoButtonOnMouseClicked(MouseEvent event) {
