@@ -91,6 +91,31 @@ public class registerPageController {
     @FXML
     void nextStepButtonOnMouseClicked(MouseEvent event) {
         System.out.println("Next step clicked!");
+
+
+        /* DO THE CHECKERS */
+
+        if (!checkPassword(registerPasswordField, registerConfirmPasswordField)) {
+           System.out.println("Passwords do not match!");
+        }
+        else if (!checkUsername(registerUsernameField)) {
+            System.out.println("Username already exists!");
+        }
+        else if (!checkEmailisValid(registerEmailField)) {
+            System.out.println("Email is not valid!");
+        }
+        else if (!checkEmail(registerEmailField)) {
+            System.out.println("Email already exists!");
+        }
+        else if (!checkPhone(registerPhoneField)) {
+            System.out.println("Phone already exists!");
+        }
+        else {
+            System.out.println("Everything is okay!");
+        }
+
+
+
         //password check
         Customer newCustomer = new Customer(registerNameField.getText(), registerSurnameField.getText(), registerPasswordField.getText(), registerEmailField.getText(), registerPhoneField.getText(), registerUsernameField.getText(),  registerAddressField.getText(), encodedImage);
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
@@ -112,6 +137,54 @@ public class registerPageController {
         }
         */
     }
+
+
+    private Boolean checkPassword(PasswordField registerPasswordField, PasswordField registerConfirmPasswordField) {
+        if (registerPasswordField.getText().equals(registerConfirmPasswordField.getText())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    /* TODO: create checkusernameSql */
+    private Boolean checkUsername(TextField registerUsernameField) {
+        DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+        if (databaseAdapter.checkUsernameSql(registerUsernameField.getText())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private Boolean checkEmailisValid(TextField registerEmailField) {
+        /*aliden gelecek */
+    }
+
+    /* TODO: create checkEmailSql */
+    private Boolean checkEmail(TextField registerEmailField) {
+        DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+        if (databaseAdapter.checkEmailSql(registerEmailField.getText())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    /* TODO: create checkPhoneSql */
+    private Boolean checkPhone(TextField registerPhoneField) {
+        DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+        if (databaseAdapter.checkPhoneSql(registerPhoneField.getText())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
 
 
     @FXML
