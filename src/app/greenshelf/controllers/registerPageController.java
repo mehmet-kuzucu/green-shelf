@@ -98,21 +98,31 @@ public class registerPageController {
 
         if (!checkPassword(registerPasswordField, registerConfirmPasswordField)) {
            System.out.println("Passwords do not match!");
+           return;
         }
         else if (checkUsername(registerUsernameField)) {
             System.out.println("Username already exists!");
+            return;
         }
         else if (!checkEmailisValid(registerEmailField)) {
             System.out.println("Email is not valid!");
+            return;
         }
-        else if (!checkEmail(registerEmailField)) {
+        else if (checkEmail(registerEmailField)) {
             System.out.println("Email already exists!");
+            return;
         }
-        else if (!checkPhone(registerPhoneField)) {
+        else if (checkPhone(registerPhoneField)) {
             System.out.println("Phone already exists!");
+            return;
+        }
+        else if (!checkPhoneisValid(registerPhoneField)) {
+            System.out.println("Phone is not valid!");
+            return;
         }
         else {
             System.out.println("Everything is okay!");
+            
         }
 
 
@@ -195,9 +205,16 @@ public class registerPageController {
         }
     }
 
-
-
-
+    /* check valid phone number */
+    private Boolean checkPhoneisValid(TextField registerPhoneField) {
+        String phone= registerPhoneField.getText();
+        String phoneRegex = "^[0-9]{10}$"; 
+                              
+        Pattern pat = Pattern.compile(phoneRegex); 
+        if (phone == null) 
+            return false; 
+        return pat.matcher(phone).matches(); 
+    }
 
     @FXML
     private void chooseProfilePhotoButtonOnMouseClicked(MouseEvent event) {
