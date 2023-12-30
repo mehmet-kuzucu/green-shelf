@@ -1,5 +1,7 @@
 package app.greenshelf.controllers;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import app.greenshelf.DatabaseAdapter;
 import javafx.fxml.FXML;
@@ -34,24 +36,19 @@ public class loginPageController {
     void loginButtonOnMouseClicked(MouseEvent event) {
         System.out.println("Login button clicked!");
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+        
         String passwordFromDatabase = databaseAdapter.loginUserSql(usernameField.getText());
-        if (passwordFromDatabase.equals(passwordField.getText())) {
+        System.out.println("passwordFromDatabase: " + passwordFromDatabase);
+        
+        if (passwordFromDatabase != null && passwordFromDatabase.equals(passwordField.getText())) {
             System.out.println("Login successful!");
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("../fxml/mainPage.fxml"));
-                stage = (Stage) loginButton.getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } 
         } else {
-            System.out.println("Login failed!");
+            System.out.println("Login failed! Incorrect username or password.");
         }
-
     }
+    
+
+
 
     @FXML
     void registerLinkOnMouseClicked(MouseEvent event) {

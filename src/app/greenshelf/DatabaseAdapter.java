@@ -6,7 +6,9 @@ import java.sql.Statement;
 import javax.naming.spi.DirStateFactory.Result;
 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class DatabaseAdapter {
@@ -63,18 +65,36 @@ public class DatabaseAdapter {
         }
     }
 
-    public String loginUserSql(String username){
-        
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("USE javafxdb;");
-            String query = "SELECT password FROM user WHERE username= '" + username + "';";
-            ResultSet result = statement.executeQuery(query);
-            return result.getString("password");
-        } catch (Exception ex) {
+    public String loginUserSql(String username) {
+        try {
+            // Ensure that the connection is not null
+            if (connection == null) {
+                throw new SQLException("Connection not established.");
+            }
+
+            // Select the database
+            try (PreparedStatement useStatement = connection.prepareStatement("USE javafxdb;")) {
+                useStatement.execute();
+            }
+
+            // Your main query to retrieve the password
+            String query = "SELECT password FROM user WHERE username = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, username);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                // Check if there is a result
+                if (resultSet.next()) {
+                    return resultSet.getString("password");
+                }
+            }
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
     }
+
+
 
     Connection getConnection() {
         return connection;
