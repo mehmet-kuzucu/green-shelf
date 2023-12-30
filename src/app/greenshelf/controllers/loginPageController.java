@@ -57,6 +57,29 @@ public class loginPageController {
         } 
         if(userInformation.get("userType").equals("admin") && userInformation.get("password").equals(passwordField.getText())){
             System.out.println("admin login successful!");
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("../fxml/adminHomePage.fxml"));
+                stage = (Stage) loginButton.getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } 
+        }
+        if(userInformation.get("userType").equals("carrier") && userInformation.get("password").equals(passwordField.getText())){
+            System.out.println("carrier login successful!");
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("../fxml/carrierHomePage.fxml"));
+                stage = (Stage) loginButton.getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } 
         }
         
     }
