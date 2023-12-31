@@ -1,7 +1,17 @@
 package app.greenshelf;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialBlob;
+
+import com.mysql.cj.jdbc.Blob;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -289,15 +299,17 @@ public class DatabaseAdapter {
             ex.printStackTrace();
         }
     }
+    
 
-    public void updateInfo(String password, String email, String address, String phone, String username)
+    public void updateInfo(String password, String email, String address, String phone, String profilePhoto, String username)
     {
         String url = "jdbc:mysql://localhost:3306/javafxdb";
         zorunlu user = new zorunlu();
-
+        
         try (Connection connection = DriverManager.getConnection(url, user.name, user.pass)) 
         {
-            String updateQuery = "UPDATE user SET password = ?, email = ?, address = ?, phone = ? WHERE username = ?";
+            String updateQuery = "UPDATE user SET password = ?, email = ?, address = ?, phone = ?, profilePicture = ? WHERE username = ?";
+            //String updateQuery = "UPDATE user SET password = ?, email = ?, address = ?, phone = ? WHERE username = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) 
         {
@@ -305,7 +317,8 @@ public class DatabaseAdapter {
             preparedStatement.setString(2, email);
             preparedStatement.setString(3, address);
             preparedStatement.setString(4, phone);
-            preparedStatement.setString(5, username);
+            preparedStatement.setBytes(5, profilePhoto.getBytes()); 
+            preparedStatement.setString(6, username);
             preparedStatement.executeUpdate();
         }
             System.out.println("Data updated successfully!");
@@ -315,6 +328,9 @@ public class DatabaseAdapter {
         }
 
     }
+    
+
+
     
     
 }

@@ -13,7 +13,6 @@ public class App extends Application {
     private User currentUser;
     private DatabaseAdapter databaseAdapter;
     
-    
     @Override
     public void start(Stage primaryStage) {
         try {

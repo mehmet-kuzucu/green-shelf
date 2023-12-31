@@ -1,5 +1,7 @@
 package app.greenshelf.controllers;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.ScopedValue.Carrier;
 import java.util.Base64;
@@ -15,6 +17,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import app.greenshelf.*;
 
@@ -53,6 +57,11 @@ public class profileInfoPageController {
 
     private Customer currentUser;
 
+    @FXML
+    private Button changeProfilePhotoButton;
+
+    String encodedImage;
+
 
     public void initData(Customer user) {
         this.currentUser = user;
@@ -63,6 +72,8 @@ public class profileInfoPageController {
         changeAddressField.setText(currentUser.getAddress());
         changePhoneField.setText(currentUser.getPhone());
         changePasswordField.setText(currentUser.getPassword());
+        encodedImage = currentUser.getProfilePicture();
+
     }
 
     @FXML
@@ -93,6 +104,47 @@ public class profileInfoPageController {
         }
     }
 
+    public String encodeImageToBase64()
+    {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Change Profile Photo");
+        fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+        stage = (Stage) changeProfilePhotoButton.getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+        try (FileInputStream imageInFile = new FileInputStream(file)) {
+            byte[] imageData = new byte[(int) file.length()];
+            imageInFile.read(imageData);
+            return Base64.getEncoder().encodeToString(imageData);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @FXML
+    public void decodeBase64ToImage(String encodedImage) {
+        byte[] decodedBytes = Base64.getDecoder().decode(encodedImage);
+        Image image = new Image(new ByteArrayInputStream(decodedBytes));
+        if (profilePhotoImage == null) {
+            profilePhotoImage = new ImageView(image);
+            profilePhotoImage.setImage(image);
+            //profilePhotoImage.getImage();
+            
+        } else {
+            profilePhotoImage.setImage(image);
+        }
+    }
+
+    @FXML
+    void changeProfilePhotoButtonOnMouseClicked(MouseEvent event)
+    {
+        System.out.println("changeProfilePhotoButtonOnMouseClicked");
+
+        encodedImage = encodeImageToBase64();
+        decodeBase64ToImage(encodedImage);
+    }
+
+
     @FXML
     void saveButtonOnMouseClicked(MouseEvent event)
     {
@@ -118,6 +170,6 @@ public class profileInfoPageController {
             changePhoneField.setStyle("-fx-border-color: red");
             return;
         }
-        databaseAdapter.updateInfo(new_password, new_email, new_address, new_phone, currentUser.getUsername());
+        databaseAdapter.updateInfo(new_password, new_email, new_address, new_phone, encodedImage, currentUser.getUsername());
     }
 }

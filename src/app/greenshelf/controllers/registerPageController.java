@@ -304,7 +304,7 @@ public class registerPageController {
 
 
     @FXML
-    private void chooseProfilePhotoButtonOnMouseClicked(MouseEvent event) {
+    public void chooseProfilePhotoButtonOnMouseClicked(MouseEvent event) {
         System.out.println("Choose profile photo clicked!");
         encodedImage = encodeImageToBase64();
         decodeBase64ToImage(encodedImage);

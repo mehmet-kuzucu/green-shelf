@@ -50,11 +50,12 @@
                   <Font size="25.0" />
                </font>
             </Text>
+            <Button fx:id="changeProfilePhotoButton" mnemonicParsing="false" onMouseClicked="#changeProfilePhotoButtonOnMouseClicked" prefHeight="26.0" prefWidth="146.0" text="Change Profile Photo" />
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                <center>
                   <HBox alignment="CENTER" BorderPane.alignment="CENTER">
                      <children>
-                        <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER" prefWidth="447.0" HBox.hgrow="ALWAYS">
                            <children>
                               <VBox alignment="CENTER">
                                  <children>
