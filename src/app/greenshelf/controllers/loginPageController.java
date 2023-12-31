@@ -26,7 +26,7 @@ public class loginPageController {
 
     private Stage stage;
     private Scene scene;
-    private String style = "-fx-background-radius: 20; -fx-border-radius: 20;-fx-padding: 8;-fx-font-size: 14px; -fx-border-color: linear-gradient(to right, #00fff2, #1900ff)-fx-background-color: linear-gradient(to right, #e6e6e6, #ffffff);";
+    private String style = "-fx-background-radius: 20; -fx-border-radius: 20;-fx-padding: 8;-fx-font-size: 14px; -fx-border-color: linear-gradient(to right, #00fff2, #1900ff); -fx-background-color: linear-gradient(to right, #e6e6e6, #ffffff);";
 
 
     @FXML
@@ -128,7 +128,6 @@ public class loginPageController {
             
             if (fxmlPath.equals("../fxml/customerHome.fxml")) {
                 customerHomeController controller = loader.getController();
-                //System.out.println("öncesi: " + user.getUsername());
                 controller.initData(user); // Pass the User object to the controller
             }
             

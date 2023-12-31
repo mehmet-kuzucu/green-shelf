@@ -18,12 +18,12 @@
    <top>
       <BorderPane style="-fx-background-color: #2A6D72;" BorderPane.alignment="TOP_LEFT">
          <left>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Merhaba, Şafak" wrappingWidth="96.15967559814453" BorderPane.alignment="CENTER">
+            <Text fx:id="welcomeText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Merhaba, Şafak" BorderPane.alignment="CENTER_LEFT">
                <font>
                   <Font size="23.0" />
                </font>
                <BorderPane.margin>
-                  <Insets bottom="15.0" top="15.0" />
+                  <Insets />
                </BorderPane.margin>
             </Text>
          </left>
