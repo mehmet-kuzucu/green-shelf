@@ -1,11 +1,15 @@
 package app.greenshelf.controllers;
 import java.io.IOException;
+import java.lang.ScopedValue.Carrier;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
+import app.greenshelf.Admin;
+import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
-
+import app.greenshelf.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -41,28 +45,34 @@ public class loginPageController {
     private Text errorText;
 
     @FXML
-    void loginButtonOnMouseClicked(MouseEvent event) {
+    void loginButtonOnMouseClicked(MouseEvent event) throws SQLException {
         usernameField.setStyle(style);
         passwordField.setStyle(style);
         errorText.setText("");
         System.out.println("Login button clicked!");
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
     
-        Map<String, String> userInformation = databaseAdapter.loginUserSql(usernameField.getText());
+        List<String> userInformation = databaseAdapter.loginUserSql(usernameField.getText());
     
         if (userInformation != null) {
-            String userType = userInformation.get("userType");
-            String password = userInformation.get("password");
+            String userType = userInformation.get(9);
+            String password = userInformation.get(7);
     
             if ("customer".equals(userType) && password.equals(passwordField.getText())) {
                 System.out.println("Customer login successful!");
-                loadScene("../fxml/customerHome.fxml");
+                //promote user to customer
+                Customer c = createCustomer(userInformation);
+                loadScene("../fxml/customerHome.fxml",c);
             } else if ("admin".equals(userType) && password.equals(passwordField.getText())) {
                 System.out.println("Admin login successful!");
-                loadScene("../fxml/adminHomePage.fxml");
+                //promote user to admin
+                Admin a = createAdmin(userInformation);
+                loadScene("../fxml/adminHomePage.fxml",null);
             } else if ("carrier".equals(userType) && password.equals(passwordField.getText())) {
                 System.out.println("Carrier login successful!");
-                loadScene("../fxml/carrierHomePage.fxml");
+                //promote user to carrier
+                //Carrier c = createCarrier(userInformation);
+                loadScene("../fxml/carrierHomePage.fxml",null);
             } else {
                 System.out.println("Invalid username, password, or user type.");
                 passwordField.setStyle("-fx-border-color: red;");
@@ -73,6 +83,27 @@ public class loginPageController {
             usernameField.setStyle("-fx-border-color: red;");
             errorText.setText("Username not found in the database.");
         }
+    }
+
+    //create customer object
+    Customer createCustomer(List<String> list) throws SQLException
+    {
+        Customer c = new Customer(list.get(6), list.get(7), list.get(8), list.get(3), list.get(4), list.get(2), list.get(5), list.get(9));
+        return c;
+    }
+
+    //create admin object
+    Admin createAdmin(List<String> list) throws SQLException
+    {
+        Admin a = new Admin(list.get(6), list.get(7), list.get(8), list.get(3), list.get(4), list.get(2));
+        return a;
+    }
+
+    //TODO: carrier classı oluşturulduğunda bu fonksiyonu da yaz
+    Carrier createCarrier(List<String> list) throws SQLException
+    {
+        //Carrier c = new Carrier(r.getString("name"), r.getString("surname"), r.getString("password"), r.getString("email"), r.getString("phone"), r.getString("username"), r.getString("userType"), r.getString("userID"));
+        return null;
     }
     
     @FXML
@@ -90,9 +121,16 @@ public class loginPageController {
         } 
     }
 
-    private void loadScene(String fxmlPath) {
+    private void loadScene(String fxmlPath, Customer user) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            
+            if (fxmlPath.equals("../fxml/customerHome.fxml")) {
+                customerHomeController controller = loader.getController();
+                controller.initData(user); // Pass the User object to the controller
+            }
+            
             stage = (Stage) loginButton.getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -101,4 +139,5 @@ public class loginPageController {
             e.printStackTrace();
         }
     }
+    
 }

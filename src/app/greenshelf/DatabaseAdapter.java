@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.naming.spi.DirStateFactory.Result;
@@ -86,7 +87,7 @@ public class DatabaseAdapter {
         }
     }
 
-    public Map<String, String> loginUserSql(String username) {
+    public List<String> loginUserSql(String username) {
         try {
             // Ensure that the connection is not null
             if (connection == null) {
@@ -114,17 +115,18 @@ public class DatabaseAdapter {
             }
     
             // Your main query to retrieve the password and userType
-            String query = "SELECT password, userType FROM user WHERE username = ?";
+            String query = "SELECT * FROM user WHERE username = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
                 ResultSet resultSet = preparedStatement.executeQuery();
     
                 // Check if there is a result
                 if (resultSet.next()) {
-                    Map<String, String> userInformation = new HashMap<>();
-                    userInformation.put("password", resultSet.getString("password"));
-                    userInformation.put("userType", resultSet.getString("userType"));
-                    return userInformation;
+                    List<String> list = List.of(resultSet.getString("userid"), resultSet.getString("username"), resultSet.getString("email"), resultSet.getString("phone"), resultSet.getString("address"), resultSet.getString("name"), resultSet.getString("surname"), resultSet.getString("password"), resultSet.getString("profilePicture"), resultSet.getString("userType"));
+                    for (String s : list) {
+                        System.out.println(s);
+                    }
+                    return list;
                 }
             }
         } catch (SQLException ex) {

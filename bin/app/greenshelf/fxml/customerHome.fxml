@@ -44,7 +44,11 @@
             </ImageView>
          </center>
          <right>
-            <Button fx:id="profilePhoto" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
+            <ImageView fx:id="profilePhotoImage" fitHeight="100.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../images/defaultProfilePicture.png" />
+               </image>
+            </ImageView>
          </right>
       </BorderPane>
    </top>
@@ -85,7 +89,7 @@
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="25,00₺" />
                                  </children>
                               </VBox>
-                              <Spinner fx:id="spinner" editable="false" max="20.0" amountToStepBy="0.1" min="1.0" />
+                              <Spinner fx:id="spinner" amountToStepBy="0.1" editable="false" max="20.0" min="1.0" />
                               <Button fx:id="addToCartButton" mnemonicParsing="false" />
                            </children>
                         </VBox>
