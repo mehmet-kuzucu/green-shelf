@@ -49,6 +49,18 @@ public class DatabaseAdapter {
                                                                         "UNIQUE(phone)" + 
                                                                         ");";
             statement.executeUpdate(query);
+
+            String queryProducts = "CREATE TABLE IF NOT EXISTS products (id INT PRIMARY KEY AUTO_INCREMENT, " +
+                                                                        "name VARCHAR(50), " +
+                                                                        "stock DOUBLE, " +
+                                                                        "image LONGBLOB, " +
+                                                                        "price DOUBLE, " +
+                                                                        "threshold DOUBLE, " +
+                                                                        "type VARCHAR(50), " +
+                                                                        ");";
+            statement.executeUpdate(queryProducts);
+
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
