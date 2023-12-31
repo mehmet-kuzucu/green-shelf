@@ -154,7 +154,8 @@ public class registerPageController {
         }
 
         if (encodedImage == null) {
-            encodedImage = encodeImageToBase64("/images/defaultProfilePicture.png");
+            String currentDirectory = System.getProperty("user.dir");
+            encodedImage = encodeImageToBase64(currentDirectory + "/src/app/greenshelf/images/defaultProfilePicture.png");
         }
 
         //password check

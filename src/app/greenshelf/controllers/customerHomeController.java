@@ -43,7 +43,12 @@ public class customerHomeController {
     public void initData(Customer user) {
         System.out.println("customerHomeController: initData called");
         this.currentUser = user;
-        profilePhotoImage.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(currentUser.getProfilePicture()))));
+        System.out.println(currentUser.getProfilePicture());
+        if (currentUser.getProfilePicture() != null)
+        {
+            profilePhotoImage.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(currentUser.getProfilePicture()))));
+        }
+        
         welcomeText.setText("Welcome, " + currentUser.getName() + "!");
     }
     
