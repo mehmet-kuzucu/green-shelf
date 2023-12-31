@@ -153,6 +153,10 @@ public class registerPageController {
             
         }
 
+        if (encodedImage == null) {
+            encodedImage = encodeImageToBase64("/images/defaultProfilePicture.png");
+        }
+
         //password check
         Customer newCustomer = new Customer(registerNameField.getText(), registerSurnameField.getText(), registerPasswordField.getText(), registerEmailField.getText(), registerPhoneField.getText(), registerUsernameField.getText(),  registerAddressField.getText(), encodedImage);
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
@@ -325,6 +329,20 @@ public class registerPageController {
             return null;
         }
     }
+
+    @FXML
+    public String encodeImageToBase64(String path) {
+        File file = new File(path);
+        try (FileInputStream imageInFile = new FileInputStream(file)) {
+            byte[] imageData = new byte[(int) file.length()];
+            imageInFile.read(imageData);
+            return Base64.getEncoder().encodeToString(imageData);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     //bunu test etmedim
     @FXML
