@@ -1,20 +1,7 @@
 package app.greenshelf;
-import app.greenshelf.Customer;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Statement;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.naming.spi.DirStateFactory.Result;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,8 +10,6 @@ import java.sql.SQLException;
 
 public class DatabaseAdapter {
     private String url;
-    private String user;
-    private String pass;
     private Connection connection;
     
     public void generateSqlDatabase() {
@@ -239,6 +224,38 @@ public class DatabaseAdapter {
         return true;
     }
 
+    public boolean checkProductName(String productName){
+        try {
+            // Ensure that the connection is not null
+            if (connection == null) {
+                throw new SQLException("Connection not established.");
+            }
+    
+            // Select the database
+            try (PreparedStatement useStatement = connection.prepareStatement("USE javafxdb;")) {
+                useStatement.execute();
+            }
+    
+            // Check if the username exists
+            String queryUsernameExists = "SELECT COUNT(*) FROM product WHERE name = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(queryUsernameExists)) {
+                preparedStatement.setString(1, productName);
+                ResultSet resultSet2 = preparedStatement.executeQuery();
+    
+                // Check if there is a result
+                if (resultSet2.next()) {
+                    if (resultSet2.getInt(1) == 0) {
+                        /*phone doesn't exists */
+                        return false;
+                    }
+                }
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return true;
+    }
 
 
 
