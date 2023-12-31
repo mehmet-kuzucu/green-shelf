@@ -42,6 +42,7 @@ public class customerHomeController {
 
     @FXML
     public void initialize() {
+        System.out.println("customerHomeController: initialize called");
         if (currentUser != null) {
             // Use currentUser here as needed
             // For example:
