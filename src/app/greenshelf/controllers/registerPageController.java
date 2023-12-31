@@ -77,6 +77,7 @@ public class registerPageController {
     @FXML
     private Text errorTextRegister;
 
+    private String style = "-fx-background-radius: 20; -fx-border-radius: 20;-fx-padding: 8;-fx-font-size: 14px; -fx-border-color: linear-gradient(to right, #00fff2, #1900ff)-fx-background-color: linear-gradient(to right, #e6e6e6, #ffffff);";
 
     @FXML
     void existedAccountOnMouseClicked(MouseEvent event) {
@@ -238,14 +239,14 @@ public class registerPageController {
     @FXML
     private boolean areFieldsEmpty() {
         boolean isEmpty = false;
-        registerNameField.setStyle("-fx-border-color: transparent;");
-        registerSurnameField.setStyle("-fx-border-color: transparent;");
-        registerPasswordField.setStyle("-fx-border-color: transparent;");
-        registerConfirmPasswordField.setStyle("-fx-border-color: transparent;");
-        registerEmailField.setStyle("-fx-border-color: transparent;");
-        registerPhoneField.setStyle("-fx-border-color: transparent;");
-        registerAddressField.setStyle("-fx-border-color: transparent;");
-        registerUsernameField.setStyle("-fx-border-color: transparent;");
+        registerNameField.setStyle(style);
+        registerSurnameField.setStyle(style);
+        registerPasswordField.setStyle(style);
+        registerConfirmPasswordField.setStyle(style);
+        registerEmailField.setStyle(style);
+        registerPhoneField.setStyle(style);
+        registerAddressField.setStyle(style);
+        registerUsernameField.setStyle(style);
 
         if (registerNameField.getText().isEmpty())
         {

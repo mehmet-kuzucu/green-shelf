@@ -14,51 +14,54 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #2c344b;" stylesheets="@../css/registerPage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.greenshelf.controllers.registerPageController">
    <children>
-      <ImageView fitHeight="120.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="114.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/logo-modified.png" />
          </image>
       </ImageView>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
+      <HBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="31.0">
          <children>
-            <TextField fx:id="registerNameField" maxWidth="450.0" prefHeight="48.0" prefWidth="538.0" promptText="Name" />
-            <TextField fx:id="registerSurnameField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Surname" />
+            <TextField id="textFields" fx:id="registerNameField" maxWidth="450.0" prefHeight="50.0" prefWidth="538.0" promptText="Name" stylesheets="@../css/registerPage.css" />
+            <TextField id="textFields" fx:id="registerSurnameField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Surname" stylesheets="@../css/registerPage.css" />
          </children>
          <padding>
             <Insets left="80.0" right="80.0" />
          </padding>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
+      <HBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="31.0">
          <children>
-            <PasswordField fx:id="registerPasswordField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Password" />
-            <PasswordField fx:id="registerConfirmPasswordField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Confirm Password" />
+            <PasswordField id="textFields" fx:id="registerPasswordField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Password" stylesheets="@../css/registerPage.css" />
+            <PasswordField id="textFields" fx:id="registerConfirmPasswordField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Confirm Password" stylesheets="@../css/registerPage.css">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></PasswordField>
          </children>
          <padding>
-            <Insets left="80.0" right="80.0" />
+            <Insets left="80.0" right="80.0" top="10.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="31.0">
+         <children>
+            <TextField id="textFields" fx:id="registerEmailField" maxWidth="450.0" prefHeight="48.0" prefWidth="538.0" promptText="E-mail" stylesheets="@../css/registerPage.css" />
+            <TextField id="textFields" fx:id="registerPhoneField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Phone Number 5xxxxxxxxx" stylesheets="@../css/registerPage.css" />
+         </children>
+         <padding>
+            <Insets left="80.0" right="80.0" top="10.0" />
          </padding>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
-         <children>
-            <TextField fx:id="registerEmailField" maxWidth="450.0" prefHeight="48.0" prefWidth="538.0" promptText="E-mail" />
-            <TextField fx:id="registerPhoneField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Phone Number 5xxxxxxxxx" />
-         </children>
-         <padding>
-            <Insets left="80.0" right="80.0" />
-         </padding>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
          <padding>
             <Insets left="80.0" right="80.0" />
          </padding>
          <children>
-            <TextField fx:id="registerAddressField" maxWidth="450.0" prefHeight="48.0" prefWidth="777.0" promptText="Address" />
-            <TextField fx:id="registerUsernameField" maxWidth="450.0" prefHeight="48.0" prefWidth="538.0" promptText="Username" />
+            <TextField id="textFields" fx:id="registerAddressField" prefHeight="50.0" prefWidth="450.0" promptText="Address" stylesheets="@../css/registerPage.css" />
+            <TextField id="textFields" fx:id="registerUsernameField" prefHeight="50.0" prefWidth="450.0" promptText="Username" stylesheets="@../css/registerPage.css" />
             <ImageView fx:id="profilePhotoImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../Downloads/228330193-f6fe2f7f-d58c-4c59-9902-68bd79a69223.png" />
                </image>
             </ImageView>
-            <Button fx:id="chooseProfilePhotoButton" mnemonicParsing="false" onMouseClicked="#chooseProfilePhotoButtonOnMouseClicked" text="profile Photo" />
+            <Button fx:id="chooseProfilePhotoButton" mnemonicParsing="false" onMouseClicked="#chooseProfilePhotoButtonOnMouseClicked" prefHeight="26.0" prefWidth="27.0" text="profile Photo" />
          </children>
       </HBox>
       <VBox alignment="CENTER" prefHeight="98.0" prefWidth="940.0" spacing="5.0">
@@ -68,7 +71,7 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets></Hyperlink>
-            <Button fx:id="nextStepButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#nextStepButtonOnMouseClicked" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" text="Next Step" textFill="WHITE">
+            <Button fx:id="nextStepButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#nextStepButtonOnMouseClicked" prefHeight="61.0" prefWidth="235.0" style="-fx-background-color: #4AAB3B;" text="Register" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
