@@ -117,3 +117,57 @@
     -fx-background-color:  transparent;
 }
 
+#addProductButton {
+    -fx-background-image: url("../images/shoppingCart.png");
+    -fx-background-size: 65% 65%;
+    
+    -fx-background-radius: 50%;
+    /* size */
+    -fx-min-width: 40;
+    -fx-min-height: 40;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
+    -fx-max-width: 40;
+    -fx-max-height: 40;
+    
+    -fx-background-repeat: no-repeat;
+    /* center the image */
+    -fx-background-position: center;
+}
+
+#addProductButton:hover {
+    -fx-background-color:#9ba4a6;
+}
+
+#textFields{
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-padding: 8;
+    -fx-font-size: 14px;
+    -fx-border-color: linear-gradient(to right, #00fff2, #1900ff);
+    -fx-background-color: linear-gradient(to right, #e6e6e6, #ffffff);
+}
+
+#comboBox {
+    -fx-background-radius:30;
+    -fx-background-color: #f0f0f0;
+    -fx-border-radius: 10;
+    -fx-border-width: 3;
+    -fx-border-color: #ccc;
+    -fx-border-color: linear-gradient(to right, #00fff2, #1900ff);
+}
+
+/* styles.css */
+
+
+#comboBox.arrow-button {
+    -fx-background-color: #ddd;
+    -fx-shape: "M 0 0 L 5 5 L 10 0 Z";
+}
+
+#button {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: linear-gradient(to right, #00fff2, #1900ff);
+    -fx-background-color: linear-gradient(to right, #e6e6e6, #ffffff);
+}
