@@ -56,7 +56,7 @@ public class DatabaseAdapter {
                                                                         "image LONGBLOB, " +
                                                                         "price DOUBLE, " +
                                                                         "threshold DOUBLE, " +
-                                                                        "type VARCHAR(50), " +
+                                                                        "type VARCHAR(50) " +
                                                                         ");";
             statement.executeUpdate(queryProducts);
 
