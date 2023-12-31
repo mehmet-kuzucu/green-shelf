@@ -65,7 +65,7 @@
                                                 <Font size="25.0" />
                                              </font>
                                           </Text>
-                                          <PasswordField minWidth="250.0" prefWidth="400.0" promptText="dscsdss" />
+                                          <PasswordField fx:id="changePasswordField" minWidth="250.0" prefWidth="400.0" promptText="dscsdss" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
@@ -75,7 +75,7 @@
                                                 <Font size="25.0" />
                                              </font>
                                           </Text>
-                                          <TextField minWidth="250.0" />
+                                          <TextField fx:id="changeAddressField" minWidth="250.0" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -91,7 +91,7 @@
                                           <Font size="25.0" />
                                        </font>
                                     </Text>
-                                    <TextField minWidth="250.0" promptText="sscscscsc" />
+                                    <TextField fx:id="changeEmailField" minWidth="250.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
@@ -101,7 +101,7 @@
                                           <Font size="25.0" />
                                        </font>
                                     </Text>
-                                    <TextField minWidth="250.0" />
+                                    <TextField fx:id="changePhoneField" minWidth="250.0" />
                                  </children>
                               </HBox>
                            </children>
