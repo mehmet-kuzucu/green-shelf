@@ -77,7 +77,7 @@ public class registerPageController {
     @FXML
     private Text errorTextRegister;
 
-    private String style = "-fx-background-radius: 20; -fx-border-radius: 20;-fx-padding: 8;-fx-font-size: 14px; -fx-border-color: linear-gradient(to right, #00fff2, #1900ff) -fx-background-color: linear-gradient(to right, #e6e6e6, #ffffff);";
+    private String style = "-fx-background-radius: 20; -fx-border-radius: 20;-fx-padding: 8;-fx-font-size: 14px; -fx-border-color: linear-gradient(to right, #00fff2, #1900ff); -fx-background-color: linear-gradient(to right, #e6e6e6, #ffffff);";
 
     @FXML
     void existedAccountOnMouseClicked(MouseEvent event) {

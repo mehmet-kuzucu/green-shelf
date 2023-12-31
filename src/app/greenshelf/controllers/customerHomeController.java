@@ -30,6 +30,7 @@ public class customerHomeController {
     @FXML
     void shoppingCartButtonButtonOnMouseClicked(MouseEvent event) {
         System.out.println(currentUser.getPhone() + " added to cart!");
+        
     }
 
     
