@@ -98,11 +98,11 @@ public class registerPageController {
     void nextStepButtonOnMouseClicked(MouseEvent event) {
         System.out.println("Next step clicked!");
         errorTextRegister.setText("");
-        registerPasswordField.setStyle("-fx-border-color: transparent;");
-        registerConfirmPasswordField.setStyle("-fx-border-color: transparent;");
-        registerUsernameField.setStyle("-fx-border-color: transparent;");
-        registerEmailField.setStyle("-fx-border-color: transparent;");
-        registerPhoneField.setStyle("-fx-border-color: transparent;");
+        registerPasswordField.setStyle(style);
+        registerConfirmPasswordField.setStyle(style);
+        registerUsernameField.setStyle(style);
+        registerEmailField.setStyle(style);
+        registerPhoneField.setStyle(style);
         
 
 

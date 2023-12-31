@@ -26,3 +26,12 @@
     -fx-scale-x: 0.95; 
     -fx-scale-y: 0.95;
 }
+
+#textFields {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-padding: 8;
+    -fx-font-size: 14px;
+    -fx-border-color: linear-gradient(to right, #00fff2, #1900ff);
+    -fx-background-color: linear-gradient(to right, #e6e6e6, #ffffff);
+}

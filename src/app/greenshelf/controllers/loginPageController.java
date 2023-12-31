@@ -22,7 +22,8 @@ public class loginPageController {
 
     private Stage stage;
     private Scene scene;
-    
+    private String style = "-fx-background-radius: 20; -fx-border-radius: 20;-fx-padding: 8;-fx-font-size: 14px; -fx-border-color: linear-gradient(to right, #00fff2, #1900ff)-fx-background-color: linear-gradient(to right, #e6e6e6, #ffffff);";
+
 
     @FXML
     private TextField usernameField;
@@ -41,8 +42,8 @@ public class loginPageController {
 
     @FXML
     void loginButtonOnMouseClicked(MouseEvent event) {
-        usernameField.setStyle("-fx-border-color: transparent;");
-        passwordField.setStyle("-fx-border-color: transparent;");
+        usernameField.setStyle(style);
+        passwordField.setStyle(style);
         errorText.setText("");
         System.out.println("Login button clicked!");
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();

@@ -19,8 +19,8 @@
          </image>
       </ImageView>
       <Text fx:id="errorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <TextField fx:id="usernameField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="username / phone" />
-      <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="password" />
+      <TextField id="textFields" fx:id="usernameField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="username / phone" stylesheets="@../css/loginPageStyle.css" />
+      <PasswordField id="textFields" fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="password" stylesheets="@../css/loginPageStyle.css" />
       <Hyperlink fx:id="registerLink" alignment="CENTER" onMouseClicked="#registerLinkOnMouseClicked" text="or Create new profile" textFill="WHITE" />
       <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#loginButtonOnMouseClicked" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #4AAB3B;" text="Login" textFill="WHITE">
          <font>
