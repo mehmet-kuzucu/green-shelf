@@ -44,7 +44,7 @@
             </ImageView>
          </center>
          <right>
-            <ImageView fx:id="profilePhotoImage" fitHeight="100.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <ImageView fx:id="profilePhotoImage" fitHeight="100.0" fitWidth="50.0" onMouseClicked="#profilePhotoImageOnMouseClicked" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../images/defaultProfilePicture.png" />
                </image>

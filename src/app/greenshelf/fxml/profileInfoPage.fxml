@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #2e344b;" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #2e344b;" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.greenshelf.controllers.profileInfoPageController">
    <top>
       <BorderPane prefHeight="63.0" prefWidth="960.0" style="-fx-background-color: #2A6D72;" BorderPane.alignment="CENTER">
          <left>
@@ -40,12 +40,12 @@
    <center>
       <VBox alignment="CENTER">
          <children>
-            <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="profilePhotoImage" fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/defaultProfilePicture.png" />
                </image>
             </ImageView>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Name &quot;username&quot; Surname">
+            <Text fx:id="nameDescription" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Name &quot;username&quot; Surname">
                <font>
                   <Font size="25.0" />
                </font>

@@ -307,10 +307,7 @@ public class registerPageController {
     private void chooseProfilePhotoButtonOnMouseClicked(MouseEvent event) {
         System.out.println("Choose profile photo clicked!");
         encodedImage = encodeImageToBase64();
-        System.out.println(encodedImage);
         decodeBase64ToImage(encodedImage);
-        
-        System.out.println("buraya kadar calisti");
     }
     
     //calisiyor
