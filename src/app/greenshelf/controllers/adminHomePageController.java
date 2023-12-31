@@ -45,7 +45,7 @@ public class adminHomePageController {
         // when button clicked, make the button unvisible
         /* open a new stage which new product will be added */
         Stage stage = new Stage();
-        FXMLLoader scene = new FXMLLoader(getClass().getResource("app/greenshelf/fxml/appProductPage.fxml"));
+        FXMLLoader scene = new FXMLLoader(getClass().getResource("../fxml/addProductPage.fxml"));
         try {
             stage.setScene(new Scene(scene.load()));
         } catch (IOException e) {

@@ -238,7 +238,7 @@ public class DatabaseAdapter {
             }
     
             // Check if the username exists
-            String queryUsernameExists = "SELECT COUNT(*) FROM product WHERE name = ?";
+            String queryUsernameExists = "SELECT COUNT(*) FROM products WHERE name = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(queryUsernameExists)) {
                 preparedStatement.setString(1, productName);
                 ResultSet resultSet2 = preparedStatement.executeQuery();
