@@ -51,28 +51,29 @@ public class loginPageController {
         errorText.setText("");
         System.out.println("Login button clicked!");
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
-    
+        
         List<String> userInformation = databaseAdapter.loginUserSql(usernameField.getText());
     
         if (userInformation != null) {
             String userType = userInformation.get(9);
             String password = userInformation.get(7);
+            
     
             if ("customer".equals(userType) && password.equals(passwordField.getText())) {
                 System.out.println("Customer login successful!");
                 //promote user to customer
                 Customer c = createCustomer(userInformation);
-                loadScene("../fxml/customerHome.fxml",c);
+                loadScene("../fxml/customerHome.fxml",c,null,null);
             } else if ("admin".equals(userType) && password.equals(passwordField.getText())) {
                 System.out.println("Admin login successful!");
                 //promote user to admin
                 Admin a = createAdmin(userInformation);
-                loadScene("../fxml/adminHomePage.fxml",null);
+                loadScene("../fxml/adminHomePage.fxml",null,a,null);
             } else if ("carrier".equals(userType) && password.equals(passwordField.getText())) {
                 System.out.println("Carrier login successful!");
                 //promote user to carrier
                 //Carrier c = createCarrier(userInformation);
-                loadScene("../fxml/carrierHomePage.fxml",null);
+                loadScene("../fxml/carrierHomePage.fxml",null,null,null);
             } else {
                 System.out.println("Invalid username, password, or user type.");
                 passwordField.setStyle("-fx-border-color: red;");
@@ -121,7 +122,7 @@ public class loginPageController {
         } 
     }
 
-    private void loadScene(String fxmlPath, Customer user) {
+    private void loadScene(String fxmlPath, Customer user, Admin admin, Carrier carrier) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
@@ -129,6 +130,10 @@ public class loginPageController {
             if (fxmlPath.equals("../fxml/customerHome.fxml")) {
                 customerHomeController controller = loader.getController();
                 controller.initData(user); // Pass the User object to the controller
+            }
+            if (fxmlPath.equals("../fxml/adminHomePage.fxml")) {
+                adminHomePageController controller = loader.getController();
+                controller.initData(admin); // Pass the User object to the controller
             }
             
             stage = (Stage) loginButton.getScene().getWindow();

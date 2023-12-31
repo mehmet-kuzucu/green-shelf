@@ -104,10 +104,11 @@ public class DatabaseAdapter {
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
                 ResultSet resultSet = preparedStatement.executeQuery();
-    
+                System.out.println("ADMIN!");
                 // Check if there is a result
                 if (resultSet.next()) {
                     List<String> list = List.of(resultSet.getString("userid"), resultSet.getString("username"), resultSet.getString("email"), resultSet.getString("phone"), resultSet.getString("address"), resultSet.getString("name"), resultSet.getString("surname"), resultSet.getString("password"), resultSet.getString("profilePicture"), resultSet.getString("userType"));
+                    
                     return list;
                 }
             }

@@ -1,6 +1,8 @@
 package app.greenshelf.controllers;
 import java.io.IOException;
 
+import app.greenshelf.Admin;
+import app.greenshelf.Customer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -28,6 +30,15 @@ public class adminHomePageController {
 
     @FXML
     private Spinner<?> spinner7111;
+
+    private Admin admin;
+
+    public void initData(Admin admin)
+    {
+        this.admin = admin;
+        System.out.println(this.admin.getName());
+        
+    }
 
     @FXML
     void shoppingCartButtonOnMouseClicked(MouseEvent event) {
