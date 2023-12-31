@@ -88,14 +88,14 @@ public class loginPageController {
     //create customer object
     Customer createCustomer(List<String> list) throws SQLException
     {
-        Customer c = new Customer(list.get(6), list.get(7), list.get(8), list.get(3), list.get(4), list.get(2), list.get(5), list.get(9));
+        Customer c = new Customer(list.get(5), list.get(6), list.get(7), list.get(2), list.get(3), list.get(1), list.get(4), list.get(8));
         return c;
     }
 
     //create admin object
     Admin createAdmin(List<String> list) throws SQLException
     {
-        Admin a = new Admin(list.get(6), list.get(7), list.get(8), list.get(3), list.get(4), list.get(2));
+        Admin a = new Admin(list.get(5), list.get(6), list.get(7), list.get(2), list.get(3), list.get(1));
         return a;
     }
 
@@ -128,6 +128,7 @@ public class loginPageController {
             
             if (fxmlPath.equals("../fxml/customerHome.fxml")) {
                 customerHomeController controller = loader.getController();
+                //System.out.println("öncesi: " + user.getUsername());
                 controller.initData(user); // Pass the User object to the controller
             }
             

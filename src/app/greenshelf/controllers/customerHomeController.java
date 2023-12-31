@@ -14,7 +14,7 @@ import javafx.scene.input.MouseEvent;
 public class customerHomeController {
 
     @FXML
-    private Button addToCartButton;
+    private Button shoppingCartButton;
 
     @FXML
     private Group productGroup;
@@ -23,26 +23,25 @@ public class customerHomeController {
     private ImageView profilePhotoImage;
 
     @FXML
-    private Button shoppingCartButton;
-
-    @FXML
     private Spinner<?> spinner;
-
-    @FXML
-    void addToCartButtonOnMouseClicked(MouseEvent event) {
-
-    }
 
     private Customer currentUser;
 
+    @FXML
+    void shoppingCartButtonButtonOnMouseClicked(MouseEvent event) {
+        System.out.println(currentUser.getPhone() + " added to cart!");
+    }
+
+    
+
     // This method receives the User object from the login controller
     public void initData(Customer user) {
+        System.out.println("customerHomeController: initData called");
         this.currentUser = user;
     }
 
     @FXML
-    void initialize() {
-        initData(currentUser);
+    public void initialize() {
         if (currentUser != null) {
             // Use currentUser here as needed
             // For example:
