@@ -59,6 +59,12 @@ public class addProductPageController {
         if(doesNameExist()){
             emptyPlaces.setText("This product name already exists");
         }
+        else if (!checkIfPriceNumber()) {
+            emptyPlaces.setText("Please enter a number for price");
+        }
+        else if (!checkIfStockNumber()) {
+            emptyPlaces.setText("Please enter a number for stock");
+        }
         else {
             /*
             dbAdapter = new DatabaseAdapter();
@@ -83,6 +89,24 @@ public class addProductPageController {
         result = dbAdapter.checkProductName(name.getText());
         dbAdapter.closeConnection();
         return result;
+    }
+
+    private boolean checkIfPriceNumber() {
+        try {
+            Double.parseDouble(price.getText());
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private boolean checkIfStockNumber() {
+        try {
+            Double.parseDouble(stock.getText());
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
     public String encodeImageToBase64() {
         FileChooser fileChooser = new FileChooser();
