@@ -289,6 +289,32 @@ public class DatabaseAdapter {
             ex.printStackTrace();
         }
     }
+
+    public void updateInfo(String password, String email, String address, String phone, String username)
+    {
+        String url = "jdbc:mysql://localhost:3306/javafxdb";
+        zorunlu user = new zorunlu();
+
+        try (Connection connection = DriverManager.getConnection(url, user.name, user.pass)) 
+        {
+            String updateQuery = "UPDATE user SET password = ?, email = ?, address = ?, phone = ? WHERE username = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) 
+        {
+            preparedStatement.setString(1, password);
+            preparedStatement.setString(2, email);
+            preparedStatement.setString(3, address);
+            preparedStatement.setString(4, phone);
+            preparedStatement.setString(5, username);
+            preparedStatement.executeUpdate();
+        }
+            System.out.println("Data updated successfully!");
+        } catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+
+    }
     
     
 }

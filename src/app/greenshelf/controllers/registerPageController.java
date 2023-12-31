@@ -196,7 +196,7 @@ public class registerPageController {
         }
     }
     @FXML
-    private Boolean checkEmailisValid(TextField registerEmailField) {
+    public Boolean checkEmailisValid(TextField registerEmailField) {
         String email= registerEmailField.getText();
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
                             "[a-zA-Z0-9_+&*-]+)*@" + 
@@ -231,7 +231,7 @@ public class registerPageController {
     }
 
     /* check valid phone number */
-    private Boolean checkPhoneisValid(TextField registerPhoneField) {
+    public Boolean checkPhoneisValid(TextField registerPhoneField) {
         String phone= registerPhoneField.getText();
         String phoneRegex = "^[0-9]{10}$"; 
                               
