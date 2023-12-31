@@ -26,7 +26,7 @@
             <Insets left="25.0" right="25.0" />
          </padding>
          <center>
-            <ImageView fitHeight="75.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER_RIGHT">
+            <ImageView fx:id="greenShelfLogo" fitHeight="75.0" fitWidth="81.0" onMouseClicked="#greenShelfLogoOnMouseClicked" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER_RIGHT">
                <image>
                   <Image url="@../images/logo-modified.png" />
                </image>
@@ -113,6 +113,7 @@
                   </HBox>
                </center>
             </BorderPane>
+            <Text fx:id="editErrorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Button fx:id="saveProfileButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#saveButtonOnMouseClicked" prefHeight="50.0" prefWidth="50.0" />
          </children>
       </VBox>
