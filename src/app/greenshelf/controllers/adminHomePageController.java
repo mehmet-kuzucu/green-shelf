@@ -141,16 +141,16 @@ public class adminHomePageController {
         // Create two text fields and a button
         TextField quantityField = new TextField();
         quantityField.setText(Double.valueOf(product.getStock()).toString() + " kg");
-        TextField thresholField = new TextField();
-        thresholField.setText(product.getThreshold() + " kg");
+        TextField thresholdField = new TextField();
+        thresholdField.setText(product.getThreshold() + " kg");
         Button button = new Button("Click Me");
         button.setOnMouseClicked(e -> {
-            if(nameField.getText().isEmpty() || priceField.getText().isEmpty() || quantityField.getText().isEmpty() || thresholField.getText().isEmpty()){
+            if(nameField.getText().isEmpty() || priceField.getText().isEmpty() || quantityField.getText().isEmpty() || thresholdField.getText().isEmpty()){
                 System.out.println("Please fill all the fields");
             }
             else{
                 DatabaseAdapter dbAdapter = new DatabaseAdapter();
-                Product product2 = new Product(nameField.getText(), Double.parseDouble(priceField.getText()), Double.parseDouble(quantityField.getText().split(" ")[0]), Double.parseDouble(thresholField.getText().split(" ")[0]), product.getImage());
+                Product product2 = new Product(nameField.getText(), Double.parseDouble(priceField.getText()), Double.parseDouble(quantityField.getText()), Double.parseDouble(thresholdField.getText()), product.getType());
                 dbAdapter.updateProduct(product2);
                 dbAdapter.closeConnection();
                 try {
@@ -163,7 +163,7 @@ public class adminHomePageController {
         });
         // Create an inner VBox with text fields and button
         VBox innerVBox2 = new VBox();
-        innerVBox2.getChildren().addAll(quantityField, thresholField, button);
+        innerVBox2.getChildren().addAll(quantityField, thresholdField, button);
 
         // Add components to the outer VBox
         outerVBox.getChildren().addAll(imageView, innerVBox1, innerVBox2);

@@ -400,20 +400,26 @@ public class DatabaseAdapter {
     public void updateProduct(Product product){
         /* update product in database */
         try{
-            String url = "jdbc:mysql://localhost:3306";
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
             zorunlu user = new zorunlu();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "UPDATE products SET name = ?, stock = ?, price = ?, threshold = ?, type = ? WHERE name = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, product.getName());
-            preparedStatement.setDouble(2, product.getStock());
-            preparedStatement.setDouble(3, product.getPrice());
-            preparedStatement.setDouble(4, product.getThreshold());
-            preparedStatement.setString(5, product.getType());
-            preparedStatement.setString(6, product.getName());
-            preparedStatement.executeUpdate();
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                System.out.println("hocam önemli");
+                preparedStatement.setString(1, product.getName());
+                preparedStatement.setDouble(2, product.getStock());
+                preparedStatement.setDouble(3, product.getPrice());
+                preparedStatement.setDouble(4, product.getThreshold());
+                preparedStatement.setString(5, product.getType());
+                preparedStatement.setString(6, product.getName());
+                preparedStatement.executeUpdate();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
             System.out.println("Product updated successfully");
         } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

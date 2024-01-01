@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -29,7 +28,7 @@
             <Insets left="25.0" right="25.0" />
          </padding>
          <center>
-            <ImageView fx:id="greenShelfLogo" fitHeight="75.0" fitWidth="81.0" onMouseClicked="#greenShelfLogoOnMouseClicked" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <ImageView fitHeight="75.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../images/logo-modified.png" />
                </image>
@@ -52,183 +51,64 @@
          <content>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" style="-fx-background-color: #2A6D72;">
                <children>
-                  <Group>
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="900.0" prefHeight="170.0" prefWidth="916.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
                      <children>
-                        <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="900.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
-                           <children>
-                              <BorderPane prefHeight="200.0" prefWidth="871.0">
-                                 <left>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../images/domates.jpeg" />
-                                             </image>
-                                          </ImageView>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Domates">
-                                             <font>
-                                                <Font size="31.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </left>
-                                 <center>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Amount X Price">
-                                             <font>
-                                                <Font size="31.0" />
-                                             </font>
-                                          </Text>
-                                          <Text layoutX="134.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price">
-                                             <font>
-                                                <Font size="31.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                    </HBox>
-                                 </center>
-                                 <right>
-                                    <HBox alignment="CENTER_RIGHT" spacing="20.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <Button fx:id="addToCartButton" mnemonicParsing="false" />
-                                          <Button fx:id="addToCartButton3" mnemonicParsing="false" />
-                                       </children>
-                                       <padding>
-                                          <Insets left="20.0" />
-                                       </padding>
-                                    </HBox>
-                                 </right>
-                              </BorderPane>
-                           </children>
+                        <BorderPane prefHeight="200.0" prefWidth="871.0" HBox.hgrow="ALWAYS">
+                           <left>
+                              <HBox alignment="CENTER_LEFT" spacing="10.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/domates.jpeg" />
+                                       </image>
+                                    </ImageView>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Domates">
+                                       <font>
+                                          <Font size="31.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </left>
+                           <center>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Amount X Price">
+                                       <font>
+                                          <Font size="31.0" />
+                                       </font>
+                                    </Text>
+                                    <Text layoutX="134.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price">
+                                       <font>
+                                          <Font size="31.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                              </HBox>
+                           </center>
+                           <right>
+                              <HBox alignment="CENTER_RIGHT" spacing="20.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button fx:id="addToCartButton" mnemonicParsing="false" />
+                                    <Button fx:id="addToCartButton3" mnemonicParsing="false" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </HBox>
+                           </right>
                            <padding>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </padding>
-                        </HBox>
+                        </BorderPane>
                      </children>
-                  </Group>
-                  <Group layoutX="30.0" layoutY="30.0">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="900.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
-                           <children>
-                              <BorderPane prefHeight="200.0" prefWidth="871.0">
-                                 <left>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../images/domates.jpeg" />
-                                             </image>
-                                          </ImageView>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Domates">
-                                             <font>
-                                                <Font size="31.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </left>
-                                 <center>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Amount X Price">
-                                             <font>
-                                                <Font size="31.0" />
-                                             </font>
-                                          </Text>
-                                          <Text layoutX="134.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price">
-                                             <font>
-                                                <Font size="31.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                    </HBox>
-                                 </center>
-                                 <right>
-                                    <HBox alignment="CENTER_RIGHT" spacing="20.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <Button fx:id="addToCartButton1" mnemonicParsing="false" />
-                                          <Button fx:id="addToCartButton31" mnemonicParsing="false" />
-                                       </children>
-                                       <padding>
-                                          <Insets left="20.0" />
-                                       </padding>
-                                    </HBox>
-                                 </right>
-                              </BorderPane>
-                           </children>
-                           <padding>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                           </padding>
-                        </HBox>
-                     </children>
-                  </Group>
-                  <Group layoutX="30.0" layoutY="280.0">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="900.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
-                           <children>
-                              <BorderPane prefHeight="200.0" prefWidth="871.0">
-                                 <left>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../images/domates.jpeg" />
-                                             </image>
-                                          </ImageView>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Domates">
-                                             <font>
-                                                <Font size="31.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </left>
-                                 <center>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Amount X Price">
-                                             <font>
-                                                <Font size="31.0" />
-                                             </font>
-                                          </Text>
-                                          <Text layoutX="134.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price">
-                                             <font>
-                                                <Font size="31.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                       <padding>
-                                          <Insets left="10.0" right="10.0" />
-                                       </padding>
-                                    </HBox>
-                                 </center>
-                                 <right>
-                                    <HBox alignment="CENTER_RIGHT" spacing="20.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <Button fx:id="addToCartButton11" mnemonicParsing="false" />
-                                          <Button fx:id="addToCartButton311" mnemonicParsing="false" />
-                                       </children>
-                                       <padding>
-                                          <Insets left="20.0" />
-                                       </padding>
-                                    </HBox>
-                                 </right>
-                              </BorderPane>
-                           </children>
-                           <padding>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                           </padding>
-                        </HBox>
-                     </children>
-                  </Group>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </HBox>
                </children>
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
