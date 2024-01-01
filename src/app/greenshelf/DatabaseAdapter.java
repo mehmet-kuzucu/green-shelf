@@ -372,7 +372,7 @@ public class DatabaseAdapter {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                Product product = new Product(resultSet.getString("name"), resultSet.getDouble("stock"), resultSet.getString("image"), resultSet.getDouble("price"), resultSet.getDouble("threshold"), resultSet.getString("type"));
+                Product product = new Product(resultSet.getString("name"), resultSet.getDouble("stock"), resultSet.getString("image"), resultSet.getDouble("price"), resultSet.getDouble("threshold"), resultSet.getString("type"), resultSet.getInt("id"));
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -403,7 +403,9 @@ public class DatabaseAdapter {
             String url = "jdbc:mysql://localhost:3306/javafxdb";
             zorunlu user = new zorunlu();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
-            String query = "UPDATE products SET name = ?, stock = ?, price = ?, threshold = ?, type = ? WHERE name = ?";
+            String query = "UPDATE products SET name = ?, stock = ?, price = ?, threshold = ?, type = ? WHERE id = ?";
+            //print the id
+            System.out.println(product.getId());
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 System.out.println("hocam önemli");
                 preparedStatement.setString(1, product.getName());
@@ -411,7 +413,7 @@ public class DatabaseAdapter {
                 preparedStatement.setDouble(3, product.getPrice());
                 preparedStatement.setDouble(4, product.getThreshold());
                 preparedStatement.setString(5, product.getType());
-                preparedStatement.setString(6, product.getName());
+                preparedStatement.setInt(6, product.getId());
                 preparedStatement.executeUpdate();
             }
             catch (Exception e) {

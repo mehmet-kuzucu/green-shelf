@@ -150,7 +150,7 @@ public class adminHomePageController {
             }
             else{
                 DatabaseAdapter dbAdapter = new DatabaseAdapter();
-                Product product2 = new Product(nameField.getText(), Double.parseDouble(priceField.getText()), Double.parseDouble(quantityField.getText()), Double.parseDouble(thresholdField.getText()), product.getType());
+                Product product2 = new Product(nameField.getText(),  Double.parseDouble(quantityField.getText().split(" ")[0]), Double.parseDouble(priceField.getText()), Double.parseDouble(thresholdField.getText().split(" ")[0]), product.getType(), product.getId());
                 dbAdapter.updateProduct(product2);
                 dbAdapter.closeConnection();
                 try {

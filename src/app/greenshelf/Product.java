@@ -8,21 +8,23 @@ public class Product {
     private String type;
     private String image;
 
-    public Product(String name, double stock, String image, double price, double threshold, String type) {
+    public Product(String name, double stock, String image, double price, double threshold, String type, int id) {
         this.name = name;
         this.stock = stock;
         this.price = price;
         this.threshold = threshold;
         this.type = type;
         this.image = image;
+        this.id = id;
     }
 
-    public Product(String name, double stock, double price, double threshold, String type) {
+    public Product(String name, double stock, double price, double threshold, String type, int id) {
         this.name = name;
         this.stock = stock;
         this.price = price;
         this.threshold = threshold;
         this.type = type;
+        this.id = id;
     }
     
 
@@ -50,6 +52,10 @@ public class Product {
         return image;
     }
 
+    public int getId() {
+        return id;
+    }  
+
     public void setStock(double stock) {
         this.stock = stock;
     }
@@ -68,6 +74,10 @@ public class Product {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 

@@ -78,7 +78,7 @@ public class addProductPageController {
         }
         else {
             Product product = new Product(name.getText(), Double.parseDouble(stock.getText()),this.encodedImage,
-                    Double.parseDouble(price.getText()), Double.parseDouble(threshold.getText()), comboBox.getValue());
+                    Double.parseDouble(price.getText()), Double.parseDouble(threshold.getText()), comboBox.getValue(), 0); // niye 0?
             dbAdapter = new DatabaseAdapter();
             dbAdapter.addProductToDb(product);
             dbAdapter.closeConnection();
