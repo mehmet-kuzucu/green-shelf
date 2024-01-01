@@ -1,25 +1,49 @@
 package app.greenshelf;
 
+import java.security.SecureRandom;
+
 public class Order {
-    private int orderID;
+    private String orderID;
     private String userID;
     private int productID;
-    private double quantity;
+    private double amount;
     private String date;
     private String status;
     private double price;
     
-    public Order(int orderID, String userID, int productID, double quantity, String date, String status, double price) {
-        this.orderID = orderID;
+    public Order(String userID, int productID, double amount, String date, String status, double price) {
+        setOrderID();
         this.userID = userID;
         this.productID = productID;
-        this.quantity = quantity;
+        this.amount = amount;
         this.date = date;
         this.status = status;
         this.price = price;
     }
 
-    public int getOrderID() {
+
+    public void setOrderID() {
+        /* bu 16 karakterlik string olusturuyo onu da UserID'ye atiyo */
+
+        if (this.orderID == null){
+            
+            String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            SecureRandom random = new SecureRandom();
+            StringBuilder sb = new StringBuilder(16);
+
+            for (int i = 0; i < 16; i++) {
+                int randomIndex = random.nextInt(CHARACTERS.length());
+                char randomChar = CHARACTERS.charAt(randomIndex);
+                sb.append(randomChar);
+            }
+
+            this.orderID =  sb.toString();
+        } else {
+            System.out.println("Order ID already exists");
+        } 
+    }
+
+    public String getOrderID() {
         return orderID;
     }
 
@@ -31,8 +55,8 @@ public class Order {
         return productID;
     }
 
-    public double getQuantity() {
-        return quantity;
+    public double getAmount() {
+        return amount;
     }
 
     public String getDate() {
@@ -47,9 +71,7 @@ public class Order {
         return price;
     }
 
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
-    }
+
 
     public void setUserID(String userID) {
         this.userID = userID;
@@ -59,8 +81,8 @@ public class Order {
         this.productID = productID;
     }
 
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public void setDate(String date) {

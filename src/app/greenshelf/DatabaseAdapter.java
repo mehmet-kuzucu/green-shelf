@@ -57,6 +57,19 @@ public class DatabaseAdapter {
                                                                         ");";
             statement.executeUpdate(queryProducts);
 
+            String queryOrders = "CREATE TABLE IF NOT EXISTS orders (id INT PRIMARY KEY AUTO_INCREMENT, " +
+                                                                        "orderid VARCHAR(16)," +
+                                                                        "userid VARCHAR(16), " +
+                                                                        "productid INT, " +
+                                                                        "amount DOUBLE, " +
+                                                                        "date VARCHAR(50), " +
+                                                                        "price DOUBLE, " +
+                                                                        "status VARCHAR(50), " +
+                                                                        "FOREIGN KEY (userid) REFERENCES user(userid), " +
+                                                                        "FOREIGN KEY (productid) REFERENCES products(id) " +
+                                                                        ");";
+            statement.executeUpdate(queryOrders);
+
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -368,4 +381,22 @@ public class DatabaseAdapter {
         }
         return products;
     }
+
+    public void addOrdersql(Order order){
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("USE javafxdb;");
+            String query = "INSERT INTO orders (orderid, userid, productid, amount, date, price, status) VALUES ('" +
+                            order.getOrderID() + "', '" +
+                            order.getUserID() + "', '" +
+                            order.getProductID() + "', '" +
+                            order.getAmount() + "', '" +
+                            order.getDate() + "', '" +
+                            order.getPrice() + "', '" +
+                            order.getStatus() + "');";
+            statement.executeUpdate(query);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
