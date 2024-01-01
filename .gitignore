@@ -16,3 +16,5 @@ src/DatabaseAdapter.java
 bin/App.class
 src/app/greenshelf/zorunlu.java
 src/app/greenshelf/zorunlu.java
+bin/zorunlu.class
+bin/app/greenshelf/zorunlu.class
