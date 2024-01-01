@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Base64;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
@@ -88,6 +90,11 @@ public class addProductPageController {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+            /*close the scene */
+            Platform.runLater(() -> {
+                stage = (Stage) price.getScene().getWindow();
+                stage.close();
+            });
             
         }
     }
