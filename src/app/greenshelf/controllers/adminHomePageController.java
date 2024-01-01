@@ -51,6 +51,10 @@ public class adminHomePageController {
 
     @FXML
     private Group group;
+
+    @FXML
+    private Button adminOrdersButton;
+
     @FXML
     private Spinner<?> spinner711;
 
@@ -58,6 +62,7 @@ public class adminHomePageController {
     private Spinner<?> spinner7111;
 
     private Admin admin;
+
 
     public void initData(Admin admin, Parent root, adminHomePageController controller)
     {
@@ -79,6 +84,16 @@ public class adminHomePageController {
         dbAdapter.closeConnection();
         System.out.println("kasldnlkasnd");
     
+    }
+
+    @FXML
+    void adminOrdersButtonOnMouseClicked(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/adminOrdersPage.fxml"));
+        Parent root = loader.load();
+        stage = (Stage) adminOrdersButton.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
