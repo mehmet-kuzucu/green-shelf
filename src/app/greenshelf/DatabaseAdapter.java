@@ -64,7 +64,7 @@ public class DatabaseAdapter {
                                                                         "amount DOUBLE, " +
                                                                         "date VARCHAR(50), " +
                                                                         "price DOUBLE, " +
-                                                                        "status VARCHAR(50), " +
+                                                                        "status VARCHAR(50) " +
                                                                         ");";
             statement.executeUpdate(queryOrders);
 
