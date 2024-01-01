@@ -3,6 +3,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Base64;
 import app.greenshelf.Customer;
+import app.greenshelf.DatabaseAdapter;
+import app.greenshelf.Order;
 import app.greenshelf.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,11 +39,17 @@ public class customerHomeController {
     private Stage stage;
     private Scene scene;
     private Customer currentUser;
+    private DatabaseAdapter databaseAdapter;
 
     @FXML
     void shoppingCartButtonButtonOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/shoppingCartPage.fxml", currentUser);
-
+        /* 
+        databaseAdapter = new DatabaseAdapter();
+        Order order = new Order(currentUser.getUserID(), 1, 1, "2021-05-05", "pending", 1);
+        databaseAdapter.addOrdersql(order);
+        databaseAdapter.closeConnection();
+        */
     }
 
     @FXML
