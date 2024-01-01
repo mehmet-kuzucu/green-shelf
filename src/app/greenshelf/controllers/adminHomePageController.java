@@ -38,7 +38,7 @@ public class adminHomePageController {
     private Button addToCartButton;
 
     @FXML
-    private Button profilePhoto;
+    private ImageView profilePhoto;
 
     @FXML
     private TilePane adminTilePane;
@@ -150,7 +150,10 @@ public class adminHomePageController {
             }
             else{
                 DatabaseAdapter dbAdapter = new DatabaseAdapter();
-                Product product2 = new Product(nameField.getText(),  Double.parseDouble(quantityField.getText().split(" ")[0]), Double.parseDouble(priceField.getText()), Double.parseDouble(thresholdField.getText().split(" ")[0]), product.getType(), product.getId());
+                String quantity = quantityField.getText().substring(0, quantityField.getText().length() - 3);
+                String threshold = thresholdField.getText().substring(0, thresholdField.getText().length() - 3);
+                String price = priceField.getText().substring(0, priceField.getText().length() - 3);
+                Product product2 = new Product(nameField.getText(),  Double.parseDouble(quantity.split(" ")[0]), Double.parseDouble(price), Double.parseDouble(threshold.split(" ")[0]), product.getType(), product.getId());
                 dbAdapter.updateProduct(product2);
                 dbAdapter.closeConnection();
                 try {

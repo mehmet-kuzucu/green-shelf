@@ -44,7 +44,11 @@
             </ImageView>
          </center>
          <right>
-            <Button fx:id="profilePhoto" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
+            <ImageView fx:id="profilePhoto" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../images/defaultProfilePicture.png" />
+               </image>
+            </ImageView>
          </right>
       </BorderPane>
    </top>
