@@ -5,11 +5,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.ScopedValue.Carrier;
 import java.util.Base64;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -171,5 +173,26 @@ public class profileInfoPageController {
             return;
         }
         databaseAdapter.updateInfo(new_password, new_email, new_address, new_phone, encodedImage, currentUser.getUsername());
+        try {
+            this.refreshPage();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void refreshPage() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/profileInfoPage.fxml"));
+        Parent root = loader.load();
+        profileInfoPageController controller = loader.getController();
+        DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+        List<String> list = databaseAdapter.loginUserSql(currentUser.getUsername());
+        currentUser = new Customer(list.get(5), list.get(6), list.get(7), list.get(2), list.get(3), list.get(1), list.get(4), list.get(8));
+        controller.initData(currentUser);
+        stage = (Stage) greenShelfLogo.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
 }
