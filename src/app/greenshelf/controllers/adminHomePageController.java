@@ -105,6 +105,7 @@ public class adminHomePageController {
 
         // Create the VBox with specified properties
         VBox outerVBox = new VBox();
+        
         outerVBox.setStyle("fx-background-color: #f5429b;");
         outerVBox.setPadding(new javafx.geometry.Insets(5));
         outerVBox.setSpacing(15);
@@ -131,7 +132,10 @@ public class adminHomePageController {
         TextField thresholField = new TextField();
         thresholField.setText(product.getThreshold() + " kg");
         Button button = new Button("Click Me");
-
+        button.setOnMouseClicked(e -> {
+            System.out.println("Click me clicked!");
+            System.out.println("Product name: " + nameField.getText());
+        });
         // Create an inner VBox with text fields and button
         VBox innerVBox2 = new VBox();
         innerVBox2.getChildren().addAll(quantityField, thresholField, button);
