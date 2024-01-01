@@ -115,9 +115,6 @@ public class adminHomePageController {
     }
 
     public VBox createVboxGroup(Product product){
-
-        
-
         // Create the VBox with specified properties
         VBox outerVBox = new VBox();
         
@@ -148,8 +145,21 @@ public class adminHomePageController {
         thresholField.setText(product.getThreshold() + " kg");
         Button button = new Button("Click Me");
         button.setOnMouseClicked(e -> {
-            System.out.println("Click me clicked!");
-            System.out.println("Product name: " + nameField.getText());
+            if(nameField.getText().isEmpty() || priceField.getText().isEmpty() || quantityField.getText().isEmpty() || thresholField.getText().isEmpty()){
+                System.out.println("Please fill all the fields");
+            }
+            else{
+                DatabaseAdapter dbAdapter = new DatabaseAdapter();
+                Product product2 = new Product(nameField.getText(), Double.parseDouble(priceField.getText()), Double.parseDouble(quantityField.getText().split(" ")[0]), Double.parseDouble(thresholField.getText().split(" ")[0]), product.getImage());
+                dbAdapter.updateProduct(product2);
+                dbAdapter.closeConnection();
+                try {
+                    refreshPage();
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
         });
         // Create an inner VBox with text fields and button
         VBox innerVBox2 = new VBox();
@@ -158,6 +168,7 @@ public class adminHomePageController {
         // Add components to the outer VBox
         outerVBox.getChildren().addAll(imageView, innerVBox1, innerVBox2);
         return outerVBox;
+        
     }
 
     public void refreshPage() throws IOException{
@@ -170,4 +181,6 @@ public class adminHomePageController {
         stage.setScene(scene);
         stage.show();
     }
+
+    
 }

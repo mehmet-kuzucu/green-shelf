@@ -16,6 +16,14 @@ public class Product {
         this.type = type;
         this.image = image;
     }
+
+    public Product(String name, double stock, double price, double threshold, String type) {
+        this.name = name;
+        this.stock = stock;
+        this.price = price;
+        this.threshold = threshold;
+        this.type = type;
+    }
     
 
     public String getName() {
