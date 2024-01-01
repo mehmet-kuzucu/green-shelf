@@ -40,7 +40,7 @@ public class customerHomeController {
 
     @FXML
     void shoppingCartButtonButtonOnMouseClicked(MouseEvent event) {
-        System.out.println(currentUser.getPhone() + " added to cart!");
+        loadScene("../fxml/shoppingCartPage.fxml", currentUser);
 
     }
 
@@ -60,6 +60,10 @@ public class customerHomeController {
             
             if (fxmlPath.equals("../fxml/profileInfoPage.fxml")) {
                 profileInfoPageController controller = loader.getController();
+                controller.initData(user); // Pass the User object to the controller
+            }
+            else if (fxmlPath.equals("../fxml/shoppingCartPage.fxml")) {
+                shoppingCartPageController controller = loader.getController();
                 controller.initData(user); // Pass the User object to the controller
             }
             
