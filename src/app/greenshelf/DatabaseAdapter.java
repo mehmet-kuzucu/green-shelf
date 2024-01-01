@@ -65,8 +65,6 @@ public class DatabaseAdapter {
                                                                         "date VARCHAR(50), " +
                                                                         "price DOUBLE, " +
                                                                         "status VARCHAR(50), " +
-                                                                        "FOREIGN KEY (userid) REFERENCES user(userid), " +
-                                                                        "FOREIGN KEY (productid) REFERENCES products(id) " +
                                                                         ");";
             statement.executeUpdate(queryOrders);
 
