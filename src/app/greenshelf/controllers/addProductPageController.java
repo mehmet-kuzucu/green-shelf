@@ -61,7 +61,7 @@ public class addProductPageController {
     }
 
     @FXML
-    void shoppingCartButtonOnMouseClicked(MouseEvent event) {
+    void addToCartClicked(MouseEvent event) {
         if (checkIfEmpty()) {
             emptyPlaces.setText("Please fill all the places");
         }

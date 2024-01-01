@@ -142,8 +142,11 @@ public class adminHomePageController {
     }
 
     public void refreshPage() throws IOException{
-        stage = (Stage) addToCartButton.getScene().getWindow();
-        this.initData(admin, root, controller);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/adminHomePage.fxml"));
+        Parent root = loader.load();
+        adminHomePageController controller = loader.getController();
+        controller.initData(admin,root,controller); // Pass the User object to the controller
+        stage = (Stage) profilePhoto.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

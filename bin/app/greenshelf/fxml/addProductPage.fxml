@@ -73,7 +73,7 @@
    <bottom>
       <VBox alignment="CENTER" style="-fx-background-color: #2c344b;" BorderPane.alignment="CENTER">
          <children>
-            <Button id="addProductButton" ellipsisString="" maxHeight="98.0" minHeight="65.0" minWidth="62.0" mnemonicParsing="false" onMouseClicked="#shoppingCartButtonOnMouseClicked" prefHeight="65.0" prefWidth="62.0" stylesheets="@../css/Style.css" textOverrun="LEADING_ELLIPSIS" wrapText="true">
+            <Button id="addProductButton" fx:id="addToCartButton" ellipsisString="" maxHeight="98.0" minHeight="65.0" minWidth="62.0" mnemonicParsing="false" onMouseClicked="#addToCartClicked" prefHeight="65.0" prefWidth="62.0" stylesheets="@../css/Style.css" textOverrun="LEADING_ELLIPSIS" wrapText="true">
                <font>
                   <Font size="10.0" />
                </font>
