@@ -90,6 +90,8 @@ public class adminHomePageController {
     void adminOrdersButtonOnMouseClicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/adminOrdersPage.fxml"));
         Parent root = loader.load();
+        adminOrdersPageController controller = loader.getController();
+        controller.initData(admin);
         stage = (Stage) adminOrdersButton.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

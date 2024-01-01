@@ -280,10 +280,6 @@ public class DatabaseAdapter {
         return true;
     }
 
-
-
-
-
     Connection getConnection() {
         return connection;
     }
@@ -300,11 +296,9 @@ public class DatabaseAdapter {
     }
 
     public DatabaseAdapter() {
-        url = "jdbc:mysql://localhost:3306";                // your database connection
-
+        url = "jdbc:mysql://localhost:3306";
         zorunlu user = new zorunlu();
 
-        
         try {
             connection = DriverManager.getConnection(url, user.name, user.pass);
         } catch (Exception ex) {
@@ -378,6 +372,43 @@ public class DatabaseAdapter {
         } catch (SQLException e) {
         }
         return products;
+    }
+
+    public String getAddress(String userid){
+        String address = "";
+        try{
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "SELECT address FROM user WHERE userid = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, userid);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                address = resultSet.getString("address");
+            }
+        } catch (SQLException e) {
+        }
+        return address;
+    }
+
+    public List<Order> getAllOrders(){
+        List<Order> orders = new ArrayList<>();
+        try{
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "SELECT * FROM orders";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                Order order = new Order(resultSet.getString("userid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"));
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
     }
 
     public void addOrdersql(Order order){

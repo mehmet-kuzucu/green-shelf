@@ -45,42 +45,10 @@
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <center>
-                              <VBox alignment="TOP_CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+                              <VBox fx:id="completedColumn" alignment="TOP_CENTER" spacing="10.0" BorderPane.alignment="CENTER">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
-                                 <children>
-                                    <VBox alignment="CENTER" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #beffbc;">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Order ID" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Product Names, How many product" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Info" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total price" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery date and time" />
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #beffbc;">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Order ID" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Product Names, How many product" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Info" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total price" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery date and time" />
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #beffbc;">
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Order ID" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Product Names, How many product" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Info" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total price" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery date and time" />
-                                       </children>
-                                    </VBox>
-                                 </children>
                               </VBox>
                            </center>
                            <top>
@@ -101,7 +69,7 @@
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <center>
-                              <VBox alignment="TOP_CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+                              <VBox fx:id="waitingColumn" alignment="TOP_CENTER" spacing="10.0" BorderPane.alignment="CENTER">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -158,7 +126,7 @@
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <center>
-                              <VBox alignment="TOP_CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+                              <VBox fx:id="inDeliveryColumn" alignment="TOP_CENTER" spacing="10.0" BorderPane.alignment="CENTER">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
