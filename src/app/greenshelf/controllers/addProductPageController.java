@@ -15,9 +15,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import app.greenshelf.DatabaseAdapter;
+import app.greenshelf.Product;
 
 public class addProductPageController {
 
+    private String encodedImage;
     private Stage stage;
     @FXML
     private ComboBox<String> comboBox;
@@ -47,7 +49,7 @@ public class addProductPageController {
 
     @FXML
     void addImageButtonOnMouseClicked(MouseEvent event) {
-        String encodedImage = encodeImageToBase64();
+        this.encodedImage = encodeImageToBase64();
         decodeBase64ToImage(encodedImage);
     }
 
@@ -66,12 +68,14 @@ public class addProductPageController {
             emptyPlaces.setText("Please enter a number for stock");
         }
         else {
-            /*
+            Product product = new Product(name.getText(), Double.parseDouble(stock.getText()),
+                    Double.parseDouble(price.getText()), Double.parseDouble(threshold.getText()), comboBox.getValue(),
+                    this.encodedImage);
             dbAdapter = new DatabaseAdapter();
-            dbAdapter.addProduct(name.getText(), comboBox.getValue(), price.getText(), stock.getText(),
-                    threshold.getText(), encodeImageToBase64());
+            dbAdapter.addProductToDb(product);
             dbAdapter.closeConnection();
-            emptyPlaces.setText("Product added successfully"); */
+            emptyPlaces.setText("Product added successfully"); 
+            emptyPlaces.setStyle("-fx-fill: green");
         }
     }
 
@@ -110,7 +114,7 @@ public class addProductPageController {
     }
     public String encodeImageToBase64() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Profile Photo");
+        fileChooser.setTitle("Select Product Photo");
         fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
         stage = (Stage) price.getScene().getWindow();
         File file = fileChooser.showOpenDialog(stage);

@@ -16,7 +16,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import app.greenshelf.Product;
 
 public class DatabaseAdapter {
     private String url;
@@ -327,6 +327,27 @@ public class DatabaseAdapter {
             e.printStackTrace();
         }
 
+    }
+
+    public void addProductToDb(Product product){
+        /* add product to database */
+        try{
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "INSERT INTO products (name, stock, image, price, threshold, type) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setDouble(2, product.getStock());
+            preparedStatement.setBytes(3, product.getImage().getBytes());
+            preparedStatement.setDouble(4, product.getPrice());
+            preparedStatement.setDouble(5, product.getThreshold());
+            preparedStatement.setString(6, product.getType());
+            preparedStatement.executeUpdate();
+            System.out.println("Product added successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     
 
