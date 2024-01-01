@@ -399,4 +399,25 @@ public class DatabaseAdapter {
         }
     }
 
+    public void updateProduct(Product product){
+        /* update product in database */
+        try{
+            String url = "jdbc:mysql://localhost:3306";
+            zorunlu user = new zorunlu();
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "UPDATE products SET name = ?, stock = ?, image = ?, price = ?, threshold = ?, type = ? WHERE name = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setDouble(2, product.getStock());
+            preparedStatement.setBytes(3, product.getImage().getBytes());
+            preparedStatement.setDouble(4, product.getPrice());
+            preparedStatement.setDouble(5, product.getThreshold());
+            preparedStatement.setString(6, product.getType());
+            preparedStatement.setString(7, product.getName());
+            preparedStatement.executeUpdate();
+            System.out.println("Product updated successfully");
+        } catch (SQLException e) {
+        }
+    }
+
 }

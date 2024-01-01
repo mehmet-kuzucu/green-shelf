@@ -17,9 +17,6 @@ public class Product {
         this.image = image;
     }
     
-    public int getId() {
-        return id;
-    }
 
     public String getName() {
         return name;
