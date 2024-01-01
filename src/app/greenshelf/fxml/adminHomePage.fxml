@@ -3,10 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Point3D?>
 <?import javafx.geometry.Rectangle2D?>
-<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -86,33 +84,6 @@
       <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" BorderPane.alignment="CENTER">
          <content>
             <TilePane fx:id="adminTilePane" hgap="20.0" style="-fx-background-color: #2c344b;" vgap="20.0">
-               <children>
-                  <Group fx:id="group">
-                     <children>
-                        <VBox id="productInfo" alignment="CENTER" prefHeight="400.0" prefWidth="200.0" spacing="15.0">
-                           <children>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/domates.jpeg" />
-                                 </image>
-                              </ImageView>
-                              <VBox id="deneme" alignment="CENTER" spacing="5.0">
-                                 <children>
-                                    <TextField promptText="Product name" text="Domates" />
-                                    <TextField text="25,00₺" />
-                                 </children>
-                              </VBox>
-                              <TextField text="1000" />
-                              <TextField text="5" />
-                              <Button fx:id="addToCartButton" mnemonicParsing="false" />
-                           </children>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </VBox>
-                     </children>
-                  </Group>
-               </children>
                <padding>
                   <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                </padding>

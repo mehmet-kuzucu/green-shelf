@@ -92,7 +92,7 @@ public class profileInfoPageController {
             }
             if (fxmlPath.equals("../fxml/adminHomePage.fxml")) {
                 adminHomePageController controller = loader.getController();
-                controller.initData(admin,root); // Pass the User object to the controller
+                controller.initData(admin,root,controller); // Pass the User object to the controller
             }
             
             stage = (Stage) greenShelfLogo.getScene().getWindow();

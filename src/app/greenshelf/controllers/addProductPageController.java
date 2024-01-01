@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Base64;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -16,11 +17,13 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Product;
-
+import app.greenshelf.controllers.adminHomePageController;
 public class addProductPageController {
-
+    
     private String encodedImage;
+    private adminHomePageController adminHomePageController;
     private Stage stage;
+    private FXMLLoader loader;
     @FXML
     private ComboBox<String> comboBox;
     @FXML
@@ -44,6 +47,10 @@ public class addProductPageController {
         comboBox.getItems().addAll("Fruit", "Vegetable");
     }
 
+    public void initData(adminHomePageController adminHomePageController) {
+        this.adminHomePageController = adminHomePageController;
+    }
+    
     @FXML
     private ImageView productImage;
 
@@ -75,6 +82,13 @@ public class addProductPageController {
             dbAdapter.closeConnection();
             emptyPlaces.setText("Product added successfully"); 
             emptyPlaces.setStyle("-fx-fill: green");
+            try {
+                this.adminHomePageController.refreshPage();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            
         }
     }
 

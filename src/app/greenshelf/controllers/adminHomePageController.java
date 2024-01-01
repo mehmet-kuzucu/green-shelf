@@ -33,6 +33,7 @@ public class adminHomePageController {
     private Stage stage;
     private Scene scene;
     private DatabaseAdapter dbAdapter;
+    private adminHomePageController controller;
     @FXML
     private Button addToCartButton;
 
@@ -58,11 +59,11 @@ public class adminHomePageController {
 
     private Admin admin;
 
-    public void initData(Admin admin, Parent root)
+    public void initData(Admin admin, Parent root, adminHomePageController controller)
     {
         this.admin = admin;
         this.root = root;
-        
+        this.controller = controller;
         // Get the products from the database
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
         List<Product> products = dbAdapter.getAllProducts();
@@ -76,32 +77,22 @@ public class adminHomePageController {
         // Add the VBox to the ScrollPane
     
         dbAdapter.closeConnection();
-        System.out.println(this.admin.getName());
-
-        /*dbAdapter = new DatabaseAdapter();
-        List<Product> products = dbAdapter.getAllProducts();
-        for (Product product : products) {
-            Group group = createVboxGroup(product);
-            tempRoot.getChildren().get(2).getChildrenUnmodifiable().add(group);
-        }
-
-        dbAdapter.closeConnection();
-        System.out.println(this.admin.getName());
-        */
+        System.out.println("kasldnlkasnd");
+    
     }
 
     @FXML
-    void shoppingCartButtonOnMouseClicked(MouseEvent event) {
+    void shoppingCartButtonOnMouseClicked(MouseEvent event) throws IOException {
         // when button clicked, make the button unvisible
         /* open a new stage which new product will be added */
         Stage stage = new Stage();
         FXMLLoader scene = new FXMLLoader(getClass().getResource("../fxml/addProductPage.fxml"));
-        try {
-            stage.setScene(new Scene(scene.load()));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        Parent root = scene.load();
+        addProductPageController controller2 = scene.getController();
+        controller2.initData(controller); // Pass the User object to the controller
+        
+        stage.setScene(new Scene(root));
+        
         stage.setTitle("User Information Example");
         stage.show();
         // stage.setScene(new Scene(root, 600, 400));
@@ -150,8 +141,9 @@ public class adminHomePageController {
         return outerVBox;
     }
 
-    public void refreshPage(){
+    public void refreshPage() throws IOException{
         stage = (Stage) addToCartButton.getScene().getWindow();
+        this.initData(admin, root, controller);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
