@@ -58,7 +58,7 @@ public class addProductPageController {
         if (checkIfEmpty()) {
             emptyPlaces.setText("Please fill all the places");
         }
-        if(doesNameExist()){
+        else if(doesNameExist()){
             emptyPlaces.setText("This product name already exists");
         }
         else if (!checkIfPriceNumber()) {
@@ -68,9 +68,8 @@ public class addProductPageController {
             emptyPlaces.setText("Please enter a number for stock");
         }
         else {
-            Product product = new Product(name.getText(), Double.parseDouble(stock.getText()),
-                    Double.parseDouble(price.getText()), Double.parseDouble(threshold.getText()), comboBox.getValue(),
-                    this.encodedImage);
+            Product product = new Product(name.getText(), Double.parseDouble(stock.getText()),this.encodedImage,
+                    Double.parseDouble(price.getText()), Double.parseDouble(threshold.getText()), comboBox.getValue());
             dbAdapter = new DatabaseAdapter();
             dbAdapter.addProductToDb(product);
             dbAdapter.closeConnection();
@@ -134,7 +133,6 @@ public class addProductPageController {
         if (productImage == null) {
             productImage = new ImageView(image);
             productImage.setImage(image);
-            //profilePhotoImage.getImage();
             
         } else {
             productImage.setImage(image);
