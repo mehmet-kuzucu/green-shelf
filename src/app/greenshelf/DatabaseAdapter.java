@@ -425,4 +425,25 @@ public class DatabaseAdapter {
         }
     }
 
+    public void removeProduct(int id)
+    {
+        try{
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "DELETE FROM products WHERE id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                System.out.println("Siliniyor...");
+                preparedStatement.setInt(1, id);
+                preparedStatement.executeUpdate();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("Product deleted successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

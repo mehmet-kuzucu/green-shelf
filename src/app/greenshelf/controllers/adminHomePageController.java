@@ -143,8 +143,8 @@ public class adminHomePageController {
         quantityField.setText(Double.valueOf(product.getStock()).toString() + " kg");
         TextField thresholdField = new TextField();
         thresholdField.setText(product.getThreshold() + " kg");
-        Button button = new Button("Click Me");
-        button.setOnMouseClicked(e -> {
+        Button updateButton = new Button("Update");
+        updateButton.setOnMouseClicked(e -> {
             if(nameField.getText().isEmpty() || priceField.getText().isEmpty() || quantityField.getText().isEmpty() || thresholdField.getText().isEmpty()){
                 System.out.println("Please fill all the fields");
             }
@@ -163,7 +163,19 @@ public class adminHomePageController {
         });
         // Create an inner VBox with text fields and button
         VBox innerVBox2 = new VBox();
-        innerVBox2.getChildren().addAll(quantityField, thresholdField, button);
+        Button removeButton = new Button("Remove");
+        removeButton.setOnMouseClicked(e -> {
+            DatabaseAdapter dbAdapter = new DatabaseAdapter();
+            dbAdapter.removeProduct(product.getId());
+            dbAdapter.closeConnection();
+            try {
+                refreshPage();
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        });
+        innerVBox2.getChildren().addAll(quantityField, thresholdField, updateButton, removeButton);
 
         // Add components to the outer VBox
         outerVBox.getChildren().addAll(imageView, innerVBox1, innerVBox2);
