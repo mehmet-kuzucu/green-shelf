@@ -133,7 +133,7 @@ public class loginPageController {
             }
             if (fxmlPath.equals("../fxml/adminHomePage.fxml")) {
                 adminHomePageController controller = loader.getController();
-                controller.initData(admin); // Pass the User object to the controller
+                controller.initData(admin,root); // Pass the User object to the controller
             }
             
             stage = (Stage) loginButton.getScene().getWindow();

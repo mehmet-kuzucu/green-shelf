@@ -6,7 +6,6 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -19,7 +18,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="540.0" prefWidth="959.0" style="-fx-background-color: #2e344b;" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.greenshelf.controllers.adminHomePageController">
    <top>
-      <BorderPane style="-fx-background-color: #2A6D72;" BorderPane.alignment="TOP_LEFT">
+      <BorderPane style="-fx-background-color: #2A6D72;" stylesheets="@../css/Style.css" BorderPane.alignment="TOP_LEFT">
          <left>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Merhaba, Admin" wrappingWidth="96.15967559814453" BorderPane.alignment="CENTER">
                <font>
@@ -84,20 +83,20 @@
       </BorderPane>
    </bottom>
    <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" style="-fx-border-color: #000000;" BorderPane.alignment="CENTER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" BorderPane.alignment="CENTER">
          <content>
-            <TilePane hgap="20.0" style="-fx-background-color: #2c344b;" vgap="20.0">
+            <TilePane fx:id="adminTilePane" hgap="20.0" style="-fx-background-color: #2c344b;" vgap="20.0">
                <children>
-                  <Group>
+                  <Group fx:id="group">
                      <children>
-                        <VBox id="productInfo" alignment="CENTER" prefHeight="400.0" prefWidth="200.0" spacing="15.0" stylesheets="@../css/Style.css">
+                        <VBox id="productInfo" alignment="CENTER" prefHeight="400.0" prefWidth="200.0" spacing="15.0">
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/domates.jpeg" />
                                  </image>
                               </ImageView>
-                              <VBox id="deneme" alignment="CENTER" spacing="5.0" stylesheets="@../css/Style.css">
+                              <VBox id="deneme" alignment="CENTER" spacing="5.0">
                                  <children>
                                     <TextField promptText="Product name" text="Domates" />
                                     <TextField text="25,00₺" />
@@ -110,66 +109,6 @@
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
-                        </VBox>
-                     </children>
-                  </Group>
-                  <Group>
-                     <children>
-                        <VBox id="productInfo" alignment="CENTER" prefHeight="400.0" prefWidth="200.0" spacing="15.0" stylesheets="@../css/Style.css">
-                           <children>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/domates.jpeg" />
-                                 </image>
-                              </ImageView>
-                              <VBox alignment="CENTER" spacing="5.0">
-                                 <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Domates" />
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="25,00₺" />
-                                 </children>
-                              </VBox>
-                              <Spinner fx:id="spinner71" editable="false" max="10" min="1" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </Group>
-                  <Group>
-                     <children>
-                        <VBox id="productInfo" alignment="CENTER" prefHeight="400.0" prefWidth="200.0" spacing="15.0" stylesheets="@../css/Style.css">
-                           <children>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/domates.jpeg" />
-                                 </image>
-                              </ImageView>
-                              <VBox alignment="CENTER" spacing="5.0">
-                                 <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Domates" />
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="25,00₺" />
-                                 </children>
-                              </VBox>
-                              <Spinner fx:id="spinner711" editable="false" max="10" min="1" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </Group>
-                  <Group>
-                     <children>
-                        <VBox id="productInfo" alignment="CENTER" prefHeight="400.0" prefWidth="200.0" spacing="15.0" stylesheets="@../css/Style.css">
-                           <children>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/domates.jpeg" />
-                                 </image>
-                              </ImageView>
-                              <VBox alignment="CENTER" spacing="5.0">
-                                 <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Domates" />
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="25,00₺" />
-                                 </children>
-                              </VBox>
-                              <Spinner fx:id="spinner7111" editable="false" max="10" min="1" />
-                           </children>
                         </VBox>
                      </children>
                   </Group>

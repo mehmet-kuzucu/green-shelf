@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -350,8 +351,21 @@ public class DatabaseAdapter {
         }
     }
     
-
-
-    
-    
+    public List<Product> getAllProducts(){
+        List<Product> products = new ArrayList<>();
+        try{
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "SELECT * FROM products";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                Product product = new Product(resultSet.getString("name"), resultSet.getDouble("stock"), resultSet.getString("image"), resultSet.getDouble("price"), resultSet.getDouble("threshold"), resultSet.getString("type"));
+                products.add(product);
+            }
+        } catch (SQLException e) {
+        }
+        return products;
+    }
 }

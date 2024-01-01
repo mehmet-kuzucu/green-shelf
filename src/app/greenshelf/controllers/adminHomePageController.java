@@ -1,29 +1,46 @@
 package app.greenshelf.controllers;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Base64;
+import java.util.List;
 
 import app.greenshelf.Admin;
 import app.greenshelf.Customer;
+import app.greenshelf.DatabaseAdapter;
+import app.greenshelf.Product;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class adminHomePageController {
-
+    private Parent root;
+    private Stage stage;
+    private Scene scene;
+    private DatabaseAdapter dbAdapter;
     @FXML
     private Button addToCartButton;
 
     @FXML
     private Button profilePhoto;
+
+    @FXML
+    private TilePane adminTilePane;
 
     @FXML
     private Button shoppingCartButton;
@@ -32,6 +49,8 @@ public class adminHomePageController {
     private Spinner<?> spinner71;
 
     @FXML
+    private Group group;
+    @FXML
     private Spinner<?> spinner711;
 
     @FXML
@@ -39,11 +58,36 @@ public class adminHomePageController {
 
     private Admin admin;
 
-    public void initData(Admin admin)
+    public void initData(Admin admin, Parent root)
     {
         this.admin = admin;
-        System.out.println(this.admin.getName());
+        this.root = root;
         
+        // Get the products from the database
+        DatabaseAdapter dbAdapter = new DatabaseAdapter();
+        List<Product> products = dbAdapter.getAllProducts();
+
+        // Add each product to the VBox
+        for (Product product : products) {
+            VBox group = createVboxGroup(product);
+            adminTilePane.getChildren().add(group);
+        }
+
+        // Add the VBox to the ScrollPane
+    
+        dbAdapter.closeConnection();
+        System.out.println(this.admin.getName());
+
+        /*dbAdapter = new DatabaseAdapter();
+        List<Product> products = dbAdapter.getAllProducts();
+        for (Product product : products) {
+            Group group = createVboxGroup(product);
+            tempRoot.getChildren().get(2).getChildrenUnmodifiable().add(group);
+        }
+
+        dbAdapter.closeConnection();
+        System.out.println(this.admin.getName());
+        */
     }
 
     @FXML
@@ -64,36 +108,52 @@ public class adminHomePageController {
 
     }
 
-    public void createVboxGroup(String cssID){
-        Group rootGroup = new Group();
+    public VBox createVboxGroup(Product product){
+
+        
 
         // Create the VBox with specified properties
         VBox outerVBox = new VBox();
+        outerVBox.setStyle("fx-background-color: #f5429b;");
         outerVBox.setPadding(new javafx.geometry.Insets(5));
         outerVBox.setSpacing(15);
         outerVBox.setPrefWidth(200);
         outerVBox.setPrefHeight(400);
-        outerVBox.setId(cssID);
+        outerVBox.setId("productInfo");
         // Create an ImageView
-        ImageView imageView = new ImageView(new Image("your_image_url.jpg"));
+        byte[] decodedBytes = Base64.getDecoder().decode(product.getImage());
+        ImageView imageView = new ImageView(new Image(new ByteArrayInputStream(decodedBytes)));
         imageView.setFitWidth(200);
         imageView.setFitHeight(150);
 
         // Create an inner VBox with two text fields
         VBox innerVBox1 = new VBox();
-        innerVBox1.getChildren().addAll(new TextField(), new TextField());
-
+        TextField nameField = new TextField();
+        nameField.setText(product.getName());
+        TextField priceField = new TextField();
+        priceField.setText(product.getPrice() + " TL");
+        innerVBox1.getChildren().addAll(nameField, priceField);
+        innerVBox1.getChildren().get(0);
         // Create two text fields and a button
-        TextField textField1 = new TextField();
-        TextField textField2 = new TextField();
+        TextField quantityField = new TextField();
+        quantityField.setText(Double.valueOf(product.getStock()).toString() + " kg");
+        TextField thresholField = new TextField();
+        thresholField.setText(product.getThreshold() + " kg");
         Button button = new Button("Click Me");
 
         // Create an inner VBox with text fields and button
         VBox innerVBox2 = new VBox();
-        innerVBox2.getChildren().addAll(textField1, textField2, button);
+        innerVBox2.getChildren().addAll(quantityField, thresholField, button);
 
         // Add components to the outer VBox
         outerVBox.getChildren().addAll(imageView, innerVBox1, innerVBox2);
+        return outerVBox;
+    }
 
+    public void refreshPage(){
+        stage = (Stage) addToCartButton.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
