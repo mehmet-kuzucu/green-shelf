@@ -37,31 +37,16 @@ public class adminHomePageController {
     private DatabaseAdapter dbAdapter;
     private adminHomePageController controller;
     @FXML
-    private Button addToCartButton;
-
-    @FXML
-    private ImageView profilePhoto;
+    private Button adminOrdersButton;
 
     @FXML
     private TilePane adminTilePane;
 
     @FXML
+    private ImageView profilePhoto;
+
+    @FXML
     private Button shoppingCartButton;
-
-    @FXML
-    private Spinner<?> spinner71;
-
-    @FXML
-    private Group group;
-
-    @FXML
-    private Button adminOrdersButton;
-
-    @FXML
-    private Spinner<?> spinner711;
-
-    @FXML
-    private Spinner<?> spinner7111;
 
     private Admin admin;
 
@@ -112,10 +97,23 @@ public class adminHomePageController {
         
         stage.setScene(new Scene(root));
         
-        stage.setTitle("User Information Example");
+        stage.setTitle("Add Product");
         stage.show();
         // stage.setScene(new Scene(root, 600, 400));
 
+    }
+
+    @FXML
+    void recruitCarrierMouseClicked(MouseEvent event) throws IOException {
+        FXMLLoader scene = new FXMLLoader(getClass().getResource("../fxml/employFireCarrierPage.fxml"));
+        Parent root = scene.load();
+        employFireCarrierPageController controller2 = scene.getController();
+        controller2.initData(this.admin); // Pass the User object to the controller
+        stage = (Stage) profilePhoto.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        
+        stage.setTitle("Employ / Fire Carrier");
+        stage.show();
     }
 
     public VBox createVboxGroup(Product product){
@@ -224,6 +222,8 @@ public class adminHomePageController {
         return outerVBox;
         
     }
+
+    
 
     public void refreshPage() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/adminHomePage.fxml"));

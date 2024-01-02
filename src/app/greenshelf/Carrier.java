@@ -1,29 +1,20 @@
 package app.greenshelf;
-public class Carrier {
-    private String name;
-    private String surname;
-    private String password;
-    private String email;
-    private String phone;
-    private String username;
-    private String userType;
-    private String carrierID;
+public class Carrier extends User {
+    private String profilePicture;
 
-    public String getCarrierID() {
-        return carrierID;
+
+    public Carrier(String name, String surname, String password, String email, String phone, String username, String address, String profilePicture) {
+        super(name, surname, password, email, phone, username, "carrier");
+        setProfilePicture(profilePicture);
+    }
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
-    public Carrier() {
-    }
 
-    public Carrier(String name, String surname, String password, String email, String phone, String username, String userType, String carrierID) {
-        this.name = name;
-        this.surname = surname;
-        this.password = password;
-        this.email = email;
-        this.phone = phone;
-        this.username = username;
-        this.userType = userType;
-        this.carrierID = carrierID;
+    public String getProfilePicture()
+    {
+        return this.profilePicture;
     }
-}
+     
+}   

@@ -95,6 +95,25 @@ public class DatabaseAdapter {
         }
     }
 
+    public void registerUserSql(Carrier carrier) {
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("USE javafxdb;");
+            String query = "INSERT INTO user (userid, username, email, phone, name, surname, password, profilePicture, userType) VALUES ('" +
+                            carrier.getUserID() + "', '" +
+                            carrier.getUsername() + "', '" +
+                            carrier.getEmail() + "', '" +
+                            carrier.getPhone() + "', '" +
+                            carrier.getName() + "', '" +
+                            carrier.getSurname() + "', '" +
+                            carrier.getPassword() + "', '" +
+                            carrier.getProfilePicture() + "', '" +
+                            carrier.getUserType() + "');";
+            statement.executeUpdate(query);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public List<String> loginUserSql(String username) {
         try {
             // Ensure that the connection is not null

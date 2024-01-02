@@ -103,7 +103,7 @@ public class loginPageController {
     //TODO: carrier classı oluşturulduğunda bu fonksiyonu da yaz
     Carrier createCarrier(List<String> r) throws SQLException
     {
-        Carrier c = new Carrier();
+        Carrier c = null;
         return c;
     }
     

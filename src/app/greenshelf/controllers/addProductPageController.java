@@ -110,8 +110,6 @@ public class addProductPageController {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            /*close the scene */
-
             Platform.runLater(() -> {
                 stage = (Stage) price.getScene().getWindow();
                 stage.close();
