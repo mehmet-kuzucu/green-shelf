@@ -2,6 +2,7 @@ package app.greenshelf.controllers;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.LinkedList;
 import java.util.List;
 
 import app.greenshelf.Customer;
@@ -54,7 +55,7 @@ public class customerHomeController {
     private Stage stage;
     private Scene scene;
     private Customer currentUser;
-    private List<Order> ordersArray;
+    private LinkedList <Order> ordersArray = new LinkedList<Order>();
     private int cartCount = 0;
     private double totalPrice = 0;
 
@@ -136,11 +137,16 @@ public class customerHomeController {
         addToCartButton.setId("addToCartButton");
         addToCartButton.setMnemonicParsing(false);
         addToCartButton.onMouseClickedProperty().set((MouseEvent event) -> {
-            System.out.println("addToCartButton clicked!");
             Order order = new Order(currentUser.getUserID(), product.getId(), spinner.getValue(), "", "inCart", product.getPrice());
             ordersArray.add(order);
             cartCount += 1;
-            totalPrice += (product.getThreshold() > product.getStock()) ? (product.getPrice() * spinner.getValue()) : (product.getPrice() * spinner.getValue() * 2);
+            totalPrice += (product.getThreshold() < product.getStock()) ? (product.getPrice() * spinner.getValue()) : (product.getPrice() * spinner.getValue() * 2);
+            try {
+                refreshPage();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             
 
         });
@@ -151,6 +157,18 @@ public class customerHomeController {
 
     
         
+    }
+
+    public void refreshPage() throws IOException{
+        System.out.println("you are ın the refresh page");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/customerHome.fxml"));
+        Parent root = loader.load();
+        customerHomeController controller = loader.getController();
+        controller.initData(currentUser, ordersArray, cartCount, totalPrice);
+        stage = (Stage) shoppingCartButton.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     
@@ -177,8 +195,7 @@ public class customerHomeController {
         dbAdapter.closeConnection();
     }
 
-    public void initData(Customer user, List<Order> ordersArray, int cartCount, double totalPrice) {
-        System.out.println("customerHomeController: initData called");
+    public void initData(Customer user, LinkedList <Order> ordersArray, int cartCount, double totalPrice) {
         this.currentUser = user;
         this.ordersArray = ordersArray;
         this.cartCount = cartCount;
