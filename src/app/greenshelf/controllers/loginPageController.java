@@ -46,6 +46,11 @@ public class loginPageController {
 
     @FXML
     void loginButtonOnMouseClicked(MouseEvent event) throws SQLException {
+        performLogin();
+    }
+
+    @FXML
+    private void performLogin() throws SQLException {
         usernameField.setStyle(style);
         passwordField.setStyle(style);
         errorText.setText("");
