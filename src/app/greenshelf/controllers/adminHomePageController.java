@@ -23,9 +23,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class adminHomePageController {
@@ -137,26 +139,60 @@ public class adminHomePageController {
         TextField nameField = new TextField();
         nameField.setText(product.getName());
         TextField priceField = new TextField();
-        priceField.setText(product.getPrice() + " TL");
-        innerVBox1.getChildren().addAll(nameField, priceField);
+        HBox priceHbox = new HBox();
+        HBox quantityHbox = new HBox();
+        HBox thresholdHbox = new HBox();
+        Text currencyText = new Text(" TL");
+        Text quantityText = new Text(product.getIsPiece() ? "Piece" : "Kg");
+        Text thresholdText = new Text(product.getIsPiece() ? "Piece" : "Kg");
+        quantityText.setStyle("-fx-fill: white;");
+        currencyText.setStyle("-fx-fill: white;");
+        thresholdText.setStyle("-fx-fill: white;");
+        priceHbox.getChildren().addAll(priceField, currencyText);
+        
+        
+        //hbox center
+        priceHbox.setSpacing(5);
+        quantityHbox.setSpacing(5);
+        thresholdHbox.setSpacing(5);
+        priceHbox.setStyle("-fx-alignment: center;");
+        priceField.setText(Double.valueOf(product.getPrice()).toString());
+        innerVBox1.getChildren().addAll(nameField, priceHbox);
         innerVBox1.getChildren().get(0);
         // Create two text fields and a button
         TextField quantityField = new TextField();
-        quantityField.setText((product.getIsPiece() ? Integer.valueOf((int)product.getStock()).toString() : Double.valueOf(product.getStock()).toString()) + (product.getIsPiece() ? " piece" : " kg"));
+        quantityHbox.getChildren().addAll(quantityField, quantityText);
+        quantityField.setText((product.getIsPiece() ? Integer.valueOf((int)product.getStock()).toString() : Double.valueOf(product.getStock()).toString()));
         TextField thresholdField = new TextField();
-        //thresholdField.setText((product.getIsPiece() ? product.getThreshold() : product.getThreshold()) + (product.getIsPiece() ? " piece" : " kg"));
-        thresholdField.setText((product.getIsPiece() ? Integer.valueOf((int)product.getThreshold()).toString() : Double.valueOf(product.getThreshold()).toString()) + (product.getIsPiece() ? " piece" : " kg"));
+        thresholdHbox.getChildren().addAll(thresholdField, thresholdText);
+        Text emptyPlaces = new Text();
+        emptyPlaces.setStyle("-fx-fill: red;");
+        thresholdField.setText((product.getIsPiece() ? Integer.valueOf((int)product.getThreshold()).toString() : Double.valueOf(product.getThreshold()).toString()));
         Button updateButton = new Button("Update");
         updateButton.setOnMouseClicked(e -> {
-            if(nameField.getText().isEmpty() || priceField.getText().isEmpty() || quantityField.getText().isEmpty() || thresholdField.getText().isEmpty()){
-                System.out.println("Please fill all the fields");
+            addProductPageController addProductPageController = new addProductPageController();
+
+            if (addProductPageController.checkIfEmpty(nameField.getText(), priceField.getText(), quantityField.getText(), thresholdField.getText(),"")) {
+                emptyPlaces.setText("Please fill all the places");
             }
+            else if (!addProductPageController.checkIfPriceNumber(priceField.getText())) {
+                emptyPlaces.setText("Please enter a number for price");
+            }
+            else if (!addProductPageController.checkIfStockNumber(quantityField.getText(), product.getIsPiece())) {
+                emptyPlaces.setText("Please enter a number for stock");
+            }
+            else if (!addProductPageController.checkIfThresholdNumber(thresholdField.getText(), product.getIsPiece())) {
+                emptyPlaces.setText("Please enter a number for threshold");
+            }
+            else if (!addProductPageController.checkIfStockInteger(quantityField.getText(), null)) {
+                emptyPlaces.setText("Please enter an integer for stock when piece is selected");
+            }
+            else if (!addProductPageController.checkIfThresholdDouble(thresholdField.getText(), null)) {
+                emptyPlaces.setText("Please enter an integer for threshold when piece is selected");
+            } 
             else{
                 DatabaseAdapter dbAdapter = new DatabaseAdapter();
-                String quantity = quantityField.getText().substring(0, quantityField.getText().length() - (product.getIsPiece() ? 6 : 3));
-                String threshold = thresholdField.getText().substring(0, thresholdField.getText().length() - (product.getIsPiece() ? 6 : 3));
-                String price = priceField.getText().substring(0, priceField.getText().length() - (product.getIsPiece() ? 6 : 3));
-                Product product2 = new Product(nameField.getText(),  Double.parseDouble(quantity.split(" ")[0]), Double.parseDouble(price), Double.parseDouble(threshold.split(" ")[0]), product.getType(), product.getId(), product.getIsPiece());
+                Product product2 = new Product(nameField.getText(),  Double.parseDouble(quantityField.getText()), Double.parseDouble(priceField.getText()), Double.parseDouble(thresholdField.getText()), product.getType(), product.getId(), product.getIsPiece());
                 dbAdapter.updateProduct(product2);
                 dbAdapter.closeConnection();
                 try {
@@ -181,7 +217,7 @@ public class adminHomePageController {
                 e1.printStackTrace();
             }
         });
-        innerVBox2.getChildren().addAll(quantityField, thresholdField, updateButton, removeButton);
+        innerVBox2.getChildren().addAll(quantityHbox, thresholdHbox, updateButton, removeButton, emptyPlaces);
 
         // Add components to the outer VBox
         outerVBox.getChildren().addAll(imageView, innerVBox1, innerVBox2);

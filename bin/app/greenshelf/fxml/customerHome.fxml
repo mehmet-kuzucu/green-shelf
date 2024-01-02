@@ -7,7 +7,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -52,14 +55,24 @@
    <bottom>
       <BorderPane>
          <left>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total price: 19.99₺" BorderPane.alignment="CENTER">
+            <Text fx:id="totalPriceText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total price: 19.99₺" BorderPane.alignment="CENTER">
                <font>
                   <Font size="31.0" />
                </font>
             </Text>
          </left>
          <right>
-            <Button fx:id="shoppingCartButton" mnemonicParsing="false" onMouseClicked="#shoppingCartButtonButtonOnMouseClicked" />
+            <HBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <StackPane>
+                     <children>
+                        <Circle fill="#abd1f5" radius="20.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER" />
+                        <Text fx:id="cartCountText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" StackPane.alignment="CENTER" />
+                     </children>
+                  </StackPane>
+                  <Button fx:id="shoppingCartButton" mnemonicParsing="false" onMouseClicked="#shoppingCartButtonButtonOnMouseClicked" />
+               </children>
+            </HBox>
          </right>
          <padding>
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />

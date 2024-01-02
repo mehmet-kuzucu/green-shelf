@@ -45,10 +45,18 @@ public class customerHomeController {
     @FXML
     private TilePane customerTilePane;
 
+    @FXML
+    private Text cartCountText;
+
+    @FXML
+    private Text totalPriceText;
+
     private Stage stage;
     private Scene scene;
     private Customer currentUser;
-    private DatabaseAdapter databaseAdapter;
+    private List<Order> ordersArray;
+    private int cartCount = 0;
+    private double totalPrice = 0;
 
     @FXML
     void shoppingCartButtonButtonOnMouseClicked(MouseEvent event) {
@@ -127,81 +135,25 @@ public class customerHomeController {
         Button addToCartButton = new Button();
         addToCartButton.setId("addToCartButton");
         addToCartButton.setMnemonicParsing(false);
+        addToCartButton.onMouseClickedProperty().set((MouseEvent event) -> {
+            System.out.println("addToCartButton clicked!");
+            Order order = new Order(currentUser.getUserID(), product.getId(), spinner.getValue(), "", "inCart", product.getPrice());
+            ordersArray.add(order);
+            cartCount += 1;
+            totalPrice += (product.getThreshold() > product.getStock()) ? (product.getPrice() * spinner.getValue()) : (product.getPrice() * spinner.getValue() * 2);
+            
+
+        });
 
         productInfo.getChildren().addAll(imageView, innerVBox, spinner, addToCartButton);
         return productInfo;
-        // Create the VBox with specified properties
-        /*
-        VBox outerVBox = new VBox();
         
-        outerVBox.setStyle("fx-background-color: #f5429b;");
-        outerVBox.setPadding(new javafx.geometry.Insets(5));
-        outerVBox.setSpacing(15);
-        outerVBox.setPrefWidth(200);
-        outerVBox.setPrefHeight(400);
-        outerVBox.setId("productInfo");
-        // Create an ImageView
-        byte[] decodedBytes = Base64.getDecoder().decode(product.getImage());
-        ImageView imageView = new ImageView(new Image(new ByteArrayInputStream(decodedBytes)));
-        imageView.setFitWidth(200);
-        imageView.setFitHeight(150);
 
-        // Create an inner VBox with two text fields
-        VBox innerVBox1 = new VBox();
-        Text productName = new Text();
-        productName.setText(product.getName());
-        Text productPrice = new Text();
-        productPrice.setText(product.getPrice() + " TL");
-        innerVBox1.getChildren().addAll(productName, productPrice);
-        innerVBox1.getChildren().get(0);
-        // Create two text fields and a button
-        //TextField quantityField = new TextField();
-        //quantityField.setText(Double.valueOf(product.getStock()).toString() + " kg");
-        //TextField thresholdField = new TextField();
-        //thresholdField.setText(product.getThreshold() + " kg");
-        Button addToCartButton = new Button("Update");
-        addToCartButton.setOnMouseClicked(e -> {
-            /* 
-                DatabaseAdapter dbAdapter = new DatabaseAdapter();
-                String quantity = quantityField.getText().substring(0, quantityField.getText().length() - 3);
-                String threshold = thresholdField.getText().substring(0, thresholdField.getText().length() - 3);
-                String price = priceField.getText().substring(0, priceField.getText().length() - 3);
-                Product product2 = new Product(nameField.getText(),  Double.parseDouble(quantity.split(" ")[0]), Double.parseDouble(price), Double.parseDouble(threshold.split(" ")[0]), product.getType(), product.getId());
-                dbAdapter.updateProduct(product2);
-                dbAdapter.closeConnection();
-                try {
-                    //refreshPage();
-                } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-            
-            
-        });
-        // Create an inner VBox with text fields and button
-        VBox innerVBox2 = new VBox();
-        Button removeButton = new Button("Remove");
-        removeButton.setOnMouseClicked(e -> {
-            /*
-            DatabaseAdapter dbAdapter = new DatabaseAdapter();
-            dbAdapter.removeProduct(product.getId());
-            dbAdapter.closeConnection();
-            try {
-                refreshPage();
-            } catch (IOException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-            
-        });
-        innerVBox2.getChildren().addAll(removeButton);
-
-        // Add components to the outer VBox
-        outerVBox.getChildren().addAll(imageView, innerVBox1, innerVBox2);
-        return outerVBox;
-        */
+    
         
     }
+
+    
     // This method receives the User object from the login controller
     public void initData(Customer user) {
         System.out.println("customerHomeController: initData called");
@@ -217,6 +169,33 @@ public class customerHomeController {
             VBox group = createVboxGroup(product);
             customerTilePane.getChildren().add(group);
         }
+        cartCountText.setText(String.valueOf(cartCount));
+        totalPriceText.setText(String.valueOf("Total price: " + totalPrice));
+
+        // Add the VBox to the ScrollPane
+    
+        dbAdapter.closeConnection();
+    }
+
+    public void initData(Customer user, List<Order> ordersArray, int cartCount, double totalPrice) {
+        System.out.println("customerHomeController: initData called");
+        this.currentUser = user;
+        this.ordersArray = ordersArray;
+        this.cartCount = cartCount;
+        this.totalPrice = totalPrice;
+        profilePhotoImage.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(currentUser.getProfilePicture()))));
+        welcomeText.setText("Welcome, " + currentUser.getName() + "!");
+
+        DatabaseAdapter dbAdapter = new DatabaseAdapter();
+        List<Product> products = dbAdapter.getAllProducts();
+
+        // Add each product to the VBox
+        for (Product product : products) {
+            VBox group = createVboxGroup(product);
+            customerTilePane.getChildren().add(group);
+        }
+        cartCountText.setText(String.valueOf(cartCount));
+        totalPriceText.setText(String.valueOf("Total price: " + totalPrice));
 
         // Add the VBox to the ScrollPane
     

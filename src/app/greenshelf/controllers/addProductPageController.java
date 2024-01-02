@@ -74,25 +74,25 @@ public class addProductPageController {
 
     @FXML
     void addToCartClicked(MouseEvent event) {
-        if (checkIfEmpty()) {
+        if (checkIfEmpty(name.getText(), price.getText(), stock.getText(), threshold.getText(), comboBox.getValue())) {
             emptyPlaces.setText("Please fill all the places");
         }
-        else if(doesNameExist()){
+        else if(doesNameExist(name.getText())){
             emptyPlaces.setText("This product name already exists");
         }
-        else if (!checkIfPriceNumber()) {
+        else if (!checkIfPriceNumber(price.getText())) {
             emptyPlaces.setText("Please enter a number for price");
         }
-        else if (!checkIfStockNumber()) {
+        else if (!checkIfStockNumber(stock.getText(), pieceToggleButton.isSelected())) {
             emptyPlaces.setText("Please enter a number for stock");
         }
-        else if (!checkIfThresholdNumber()) {
+        else if (!checkIfThresholdNumber(threshold.getText(), pieceToggleButton.isSelected())) {
             emptyPlaces.setText("Please enter a number for threshold");
         }
-        else if (!checkIfStockInteger()) {
+        else if (!checkIfStockInteger(stock.getText(), pieceToggleButton)) {
             emptyPlaces.setText("Please enter an integer for stock when piece is selected");
         }
-        else if (!checkIfThresholdDouble()) {
+        else if (!checkIfThresholdDouble(threshold.getText(), pieceToggleButton)) {
             emptyPlaces.setText("Please enter an integer for threshold when piece is selected");
         }
         else {
@@ -131,34 +131,37 @@ public class addProductPageController {
         kiloToggleButton.setSelected(true);
     }
 
-    private boolean checkIfEmpty() {
-        if (name.getText().isEmpty() || price.getText().isEmpty() || stock.getText().isEmpty()
-                || threshold.getText().isEmpty() || comboBox.getValue() == null) {
+    public boolean checkIfEmpty(String name, String price, String stock, String threshold, String type) {
+        if (name.isEmpty() || price.isEmpty() || stock.isEmpty()
+                || threshold.isEmpty() || type == null) {
             return true;
         }
         return false;
     }
 
-    private boolean doesNameExist(){
+    public boolean doesNameExist(String name){
         boolean result = false;
         dbAdapter = new DatabaseAdapter();
-        result = dbAdapter.checkProductName(name.getText());
+        result = dbAdapter.checkProductName(name);
         dbAdapter.closeConnection();
         return result;
     }
 
-    private boolean checkIfPriceNumber() {
+    public boolean checkIfPriceNumber(String price) {
         try {
-            Double.parseDouble(price.getText());
+            Double.parseDouble(price);
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
-    private boolean checkIfThresholdNumber() {
+    public boolean checkIfThresholdNumber(String threshold, Boolean isPiece) {
         try {
-            Double.parseDouble(threshold.getText());
+            if (isPiece && threshold.contains(".")) {
+                return false;
+            }
+            Double.parseDouble(threshold);
             return true;
         } catch (NumberFormatException e) {
             return false;
@@ -166,10 +169,14 @@ public class addProductPageController {
     } 
 
 
-    private boolean checkIfStockInteger() {
+    public boolean checkIfStockInteger(String stock, ToggleButton pieceToggleButton) {
         try {
+
+            if (pieceToggleButton == null) {
+                return true;
+            }
             if  (pieceToggleButton.isSelected()) {
-                Integer.parseInt(stock.getText());
+                Integer.parseInt(stock);
             }
             return true;
         } catch (NumberFormatException e) {
@@ -177,19 +184,27 @@ public class addProductPageController {
         }
     }
 
-    private boolean checkIfThresholdDouble() {
+    public boolean checkIfThresholdDouble(String threshold, ToggleButton pieceToggleButton) {
         try {
+
+            if (pieceToggleButton == null) {
+                return true;
+            }
             if  (pieceToggleButton.isSelected()) {
-                Integer.parseInt(threshold.getText());
+                Integer.parseInt(threshold);
             }
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
     }
-    private boolean checkIfStockNumber() {
+    public boolean checkIfStockNumber(String stock, Boolean isPiece) {
         try {
-            Double.parseDouble(stock.getText());
+
+            if (isPiece && stock.contains(".")) {
+                return false;
+            }
+            Double.parseDouble(stock);
             return true;
         } catch (NumberFormatException e) {
             return false;
