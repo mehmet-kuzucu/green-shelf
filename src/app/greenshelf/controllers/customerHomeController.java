@@ -123,7 +123,7 @@ public class customerHomeController {
 
         Text text1 = new Text(product.getName());
         text1.setFill(javafx.scene.paint.Color.WHITE);
-        Text text2 = new Text(product.getPrice()+"₺");
+        Text text2 = new Text((product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2)+"₺");
         text2.setFill(javafx.scene.paint.Color.WHITE);
 
         innerVBox.getChildren().addAll(text1, text2);
@@ -137,9 +137,19 @@ public class customerHomeController {
         addToCartButton.setId("addToCartButton");
         addToCartButton.setMnemonicParsing(false);
         addToCartButton.onMouseClickedProperty().set((MouseEvent event) -> {
-            Order order = new Order(currentUser.getUserID(), product.getId(), spinner.getValue(), "", "inCart", product.getPrice());
-            ordersArray.add(order);
-            cartCount += 1;
+
+            if (checkIfOrderExists(product.getId())){
+                for (Order order : ordersArray) {
+                    if (order.getProductID() == product.getId()) {
+                        order.setAmount(order.getAmount() + spinner.getValue());
+                    }
+                }
+            } else {
+                Order order = new Order(currentUser.getUserID(), product.getId(), spinner.getValue(), "", "inCart", product.getPrice());
+                ordersArray.add(order);
+                cartCount += 1;
+            }
+            
             totalPrice += (product.getThreshold() < product.getStock()) ? (product.getPrice() * spinner.getValue()) : (product.getPrice() * spinner.getValue() * 2);
             try {
                 refreshPage();
@@ -154,11 +164,17 @@ public class customerHomeController {
         productInfo.getChildren().addAll(imageView, innerVBox, spinner, addToCartButton);
         return productInfo;
         
-
-    
-        
     }
 
+
+    private boolean checkIfOrderExists(int productID) {
+        for (Order order : ordersArray) {
+            if (order.getProductID() == productID) {
+                return true;
+            }
+        }
+        return false;
+    }
     public void refreshPage() throws IOException{
         System.out.println("you are ın the refresh page");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/customerHome.fxml"));
