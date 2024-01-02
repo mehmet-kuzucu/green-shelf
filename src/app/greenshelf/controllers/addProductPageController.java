@@ -122,19 +122,13 @@ public class addProductPageController {
 
     @FXML
     private void pieceToggleButtonOnMouseClicked(MouseEvent event) {
-        if (pieceToggleButton.isSelected()) {
-            kiloToggleButton.setSelected(false);
-        }else {
-            kiloToggleButton.setSelected(true);
-        }
+        kiloToggleButton.setSelected(false);
+        pieceToggleButton.setSelected(true);
     }
     @FXML
     private void kiloToggleButtonOnMouseClicked(MouseEvent event) {
-        if (kiloToggleButton.isSelected()) {
-            pieceToggleButton.setSelected(false);
-        } else {
-            pieceToggleButton.setSelected(true);
-        }
+        pieceToggleButton.setSelected(false);
+        kiloToggleButton.setSelected(true);
     }
 
     private boolean checkIfEmpty() {
