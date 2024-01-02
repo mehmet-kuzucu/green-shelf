@@ -2,6 +2,7 @@ package app.greenshelf.controllers;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -58,10 +59,11 @@ public class customerHomeController {
     private LinkedList <Order> ordersArray = new LinkedList<Order>();
     private int cartCount = 0;
     private double totalPrice = 0;
+    private HashMap<Integer, Double> productStockMap = new HashMap<Integer, Double>();
 
     @FXML
     void shoppingCartButtonButtonOnMouseClicked(MouseEvent event) {
-        loadScene("../fxml/shoppingCartPage.fxml", currentUser);
+        loadScene("../fxml/shoppingCartPage.fxml", currentUser, ordersArray);
         /* 
         databaseAdapter = new DatabaseAdapter();
         Order order = new Order(currentUser.getUserID(), 1, 1, "2021-05-05", "pending", 1);
@@ -72,10 +74,10 @@ public class customerHomeController {
 
     @FXML
     void profilePhotoImageOnMouseClicked(MouseEvent event) {
-        loadScene("../fxml/profileInfoPage.fxml", currentUser);
+        loadScene("../fxml/profileInfoPage.fxml", currentUser,null);
     }
 
-    private void loadScene(String fxmlPath, Customer user) {
+    private void loadScene(String fxmlPath, Customer user, LinkedList <Order> order) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
@@ -90,7 +92,7 @@ public class customerHomeController {
             }
             else if (fxmlPath.equals("../fxml/shoppingCartPage.fxml")) {
                 shoppingCartPageController controller = loader.getController();
-                controller.initData(user); // Pass the User object to the controller
+                controller.initData(user, order); // Pass the User object to the controller
             }
             
             
@@ -138,6 +140,12 @@ public class customerHomeController {
         addToCartButton.setMnemonicParsing(false);
         addToCartButton.onMouseClickedProperty().set((MouseEvent event) -> {
 
+            if (productStockMap.get(product.getId()) < spinner.getValue()) {
+                System.out.println("Not enough stock");
+                // TODO: Show a popup saying that there is not enough stock
+                return;
+            }
+
             if (checkIfOrderExists(product.getId())){
                 for (Order order : ordersArray) {
                     if (order.getProductID() == product.getId()) {
@@ -149,12 +157,13 @@ public class customerHomeController {
                 ordersArray.add(order);
                 cartCount += 1;
             }
+            productStockMap.put(product.getId(), productStockMap.get(product.getId()) - spinner.getValue());
+
             
             totalPrice += (product.getThreshold() < product.getStock()) ? (product.getPrice() * spinner.getValue()) : (product.getPrice() * spinner.getValue() * 2);
             try {
                 refreshPage();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             
@@ -180,7 +189,7 @@ public class customerHomeController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/customerHome.fxml"));
         Parent root = loader.load();
         customerHomeController controller = loader.getController();
-        controller.initData(currentUser, ordersArray, cartCount, totalPrice);
+        controller.initData(currentUser, ordersArray, cartCount, totalPrice, productStockMap);
         stage = (Stage) shoppingCartButton.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -198,6 +207,10 @@ public class customerHomeController {
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
         List<Product> products = dbAdapter.getAllProducts();
 
+        for (Product product : products) {
+            productStockMap.put(product.getId(), product.getStock());
+        }
+
         // Add each product to the VBox
         for (Product product : products) {
             VBox group = createVboxGroup(product);
@@ -211,11 +224,12 @@ public class customerHomeController {
         dbAdapter.closeConnection();
     }
 
-    public void initData(Customer user, LinkedList <Order> ordersArray, int cartCount, double totalPrice) {
+    public void initData(Customer user, LinkedList <Order> ordersArray, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap) {
         this.currentUser = user;
         this.ordersArray = ordersArray;
         this.cartCount = cartCount;
         this.totalPrice = totalPrice;
+        this.productStockMap = productStockMap;
         profilePhotoImage.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(currentUser.getProfilePicture()))));
         welcomeText.setText("Welcome, " + currentUser.getName() + "!");
 

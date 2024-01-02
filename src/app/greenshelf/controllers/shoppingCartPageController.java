@@ -2,8 +2,10 @@ package app.greenshelf.controllers;
 
 import java.io.ByteArrayInputStream;
 import java.util.Base64;
+import java.util.LinkedList;
 
 import app.greenshelf.Customer;
+import app.greenshelf.Order;
 import app.greenshelf.Product;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,12 +29,18 @@ public class shoppingCartPageController {
     private Customer currentUser;
     private Stage stage;
     private Scene scene;
+    private LinkedList <Order> orderArray;
 
-    public void initData(Customer user) {
+    public void initData(Customer user, LinkedList <Order> orderArray) {
         currentUser = user;
+        this.orderArray = orderArray;
         //convert byte array back to Image
         profilePhotoImage.setImage( new Image(new ByteArrayInputStream(Base64.getDecoder().decode(currentUser.getProfilePicture()))));
         //get products from shopping cart
+
+        System.out.println("Size of the order array: " + this.orderArray.size());
+
+        
         
     }
 

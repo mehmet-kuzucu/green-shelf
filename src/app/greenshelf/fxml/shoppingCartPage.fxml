@@ -28,7 +28,7 @@
             <Insets left="25.0" right="25.0" />
          </padding>
          <center>
-            <ImageView fitHeight="75.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <ImageView fx:id="greenShelfLogo" fitHeight="75.0" fitWidth="81.0" onMouseClicked="#greenShelfLogoOnMouseClicked" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../images/logo-modified.png" />
                </image>
