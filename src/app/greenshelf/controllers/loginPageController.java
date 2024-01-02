@@ -1,6 +1,5 @@
 package app.greenshelf.controllers;
 import java.io.IOException;
-import java.lang.ScopedValue.Carrier;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -10,6 +9,7 @@ import app.greenshelf.Admin;
 import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.User;
+import app.greenshelf.Carrier;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -101,10 +101,10 @@ public class loginPageController {
     }
 
     //TODO: carrier classı oluşturulduğunda bu fonksiyonu da yaz
-    Carrier createCarrier(List<String> list) throws SQLException
+    Carrier createCarrier(List<String> r) throws SQLException
     {
-        //Carrier c = new Carrier(r.getString("name"), r.getString("surname"), r.getString("password"), r.getString("email"), r.getString("phone"), r.getString("username"), r.getString("userType"), r.getString("userID"));
-        return null;
+        Carrier c = new Carrier();
+        return c;
     }
     
     @FXML
