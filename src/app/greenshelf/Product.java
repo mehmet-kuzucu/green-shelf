@@ -7,8 +7,9 @@ public class Product {
     private double threshold;
     private String type;
     private String image;
+    private boolean isPiece;
 
-    public Product(String name, double stock, String image, double price, double threshold, String type, int id) {
+    public Product(String name, double stock, String image, double price, double threshold, String type, int id, boolean isPiece) {
         this.name = name;
         this.stock = stock;
         this.price = price;
@@ -16,17 +17,22 @@ public class Product {
         this.type = type;
         this.image = image;
         this.id = id;
+        this.isPiece = isPiece;
     }
 
-    public Product(String name, double stock, double price, double threshold, String type, int id) {
+    public Product(String name, double stock, double price, double threshold, String type, int id, boolean isPiece) {
         this.name = name;
         this.stock = stock;
         this.price = price;
         this.threshold = threshold;
         this.type = type;
         this.id = id;
+        this.isPiece = isPiece;
     }
-    
+
+    public boolean getIsPiece() {
+        return isPiece;
+    }
 
     public String getName() {
         return name;
@@ -80,5 +86,8 @@ public class Product {
         this.id = id;
     }
 
+     public void setIsPiece(boolean isPiece) {
+        this.isPiece = isPiece;
+    }
 
 }

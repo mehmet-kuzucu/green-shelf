@@ -142,9 +142,10 @@ public class adminHomePageController {
         innerVBox1.getChildren().get(0);
         // Create two text fields and a button
         TextField quantityField = new TextField();
-        quantityField.setText(Double.valueOf(product.getStock()).toString() + " kg");
+        quantityField.setText((product.getIsPiece() ? Integer.valueOf((int)product.getStock()).toString() : Double.valueOf(product.getStock()).toString()) + (product.getIsPiece() ? " piece" : " kg"));
         TextField thresholdField = new TextField();
-        thresholdField.setText(product.getThreshold() + " kg");
+        //thresholdField.setText((product.getIsPiece() ? product.getThreshold() : product.getThreshold()) + (product.getIsPiece() ? " piece" : " kg"));
+        thresholdField.setText((product.getIsPiece() ? Integer.valueOf((int)product.getThreshold()).toString() : Double.valueOf(product.getThreshold()).toString()) + (product.getIsPiece() ? " piece" : " kg"));
         Button updateButton = new Button("Update");
         updateButton.setOnMouseClicked(e -> {
             if(nameField.getText().isEmpty() || priceField.getText().isEmpty() || quantityField.getText().isEmpty() || thresholdField.getText().isEmpty()){
@@ -152,10 +153,10 @@ public class adminHomePageController {
             }
             else{
                 DatabaseAdapter dbAdapter = new DatabaseAdapter();
-                String quantity = quantityField.getText().substring(0, quantityField.getText().length() - 3);
-                String threshold = thresholdField.getText().substring(0, thresholdField.getText().length() - 3);
-                String price = priceField.getText().substring(0, priceField.getText().length() - 3);
-                Product product2 = new Product(nameField.getText(),  Double.parseDouble(quantity.split(" ")[0]), Double.parseDouble(price), Double.parseDouble(threshold.split(" ")[0]), product.getType(), product.getId());
+                String quantity = quantityField.getText().substring(0, quantityField.getText().length() - (product.getIsPiece() ? 6 : 3));
+                String threshold = thresholdField.getText().substring(0, thresholdField.getText().length() - (product.getIsPiece() ? 6 : 3));
+                String price = priceField.getText().substring(0, priceField.getText().length() - (product.getIsPiece() ? 6 : 3));
+                Product product2 = new Product(nameField.getText(),  Double.parseDouble(quantity.split(" ")[0]), Double.parseDouble(price), Double.parseDouble(threshold.split(" ")[0]), product.getType(), product.getId(), product.getIsPiece());
                 dbAdapter.updateProduct(product2);
                 dbAdapter.closeConnection();
                 try {

@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -42,6 +43,12 @@ public class addProductPageController {
 
     @FXML
     private Text emptyPlaces;
+
+    @FXML
+    private ToggleButton pieceToggleButton;
+
+    @FXML
+    private ToggleButton kiloToggleButton;
     
     private DatabaseAdapter dbAdapter;
 
@@ -51,6 +58,9 @@ public class addProductPageController {
 
     public void initData(adminHomePageController adminHomePageController) {
         this.adminHomePageController = adminHomePageController;
+        kiloToggleButton.setSelected(true);
+        //price is only numbers
+        
     }
     
     @FXML
@@ -76,9 +86,19 @@ public class addProductPageController {
         else if (!checkIfStockNumber()) {
             emptyPlaces.setText("Please enter a number for stock");
         }
+        else if (!checkIfThresholdNumber()) {
+            emptyPlaces.setText("Please enter a number for threshold");
+        }
+        else if (!checkIfStockInteger()) {
+            emptyPlaces.setText("Please enter an integer for stock when piece is selected");
+        }
+        else if (!checkIfThresholdDouble()) {
+            emptyPlaces.setText("Please enter an integer for threshold when piece is selected");
+        }
         else {
+            boolean isPiece = kiloToggleButton.isSelected() ? false : true;
             Product product = new Product(name.getText(), Double.parseDouble(stock.getText()),this.encodedImage,
-                    Double.parseDouble(price.getText()), Double.parseDouble(threshold.getText()), comboBox.getValue(), 0); // niye 0?
+                    Double.parseDouble(price.getText()), Double.parseDouble(threshold.getText()), comboBox.getValue(), 0, isPiece); // niye 0?
             dbAdapter = new DatabaseAdapter();
             dbAdapter.addProductToDb(product);
             dbAdapter.closeConnection();
@@ -91,11 +111,29 @@ public class addProductPageController {
                 e.printStackTrace();
             }
             /*close the scene */
+
             Platform.runLater(() -> {
                 stage = (Stage) price.getScene().getWindow();
                 stage.close();
             });
             
+        }
+    }
+
+    @FXML
+    private void pieceToggleButtonOnMouseClicked(MouseEvent event) {
+        if (pieceToggleButton.isSelected()) {
+            kiloToggleButton.setSelected(false);
+        }else {
+            kiloToggleButton.setSelected(true);
+        }
+    }
+    @FXML
+    private void kiloToggleButtonOnMouseClicked(MouseEvent event) {
+        if (kiloToggleButton.isSelected()) {
+            pieceToggleButton.setSelected(false);
+        } else {
+            pieceToggleButton.setSelected(true);
         }
     }
 
@@ -124,6 +162,37 @@ public class addProductPageController {
         }
     }
 
+    private boolean checkIfThresholdNumber() {
+        try {
+            Double.parseDouble(threshold.getText());
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    } 
+
+
+    private boolean checkIfStockInteger() {
+        try {
+            if  (pieceToggleButton.isSelected()) {
+                Integer.parseInt(stock.getText());
+            }
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private boolean checkIfThresholdDouble() {
+        try {
+            if  (pieceToggleButton.isSelected()) {
+                Integer.parseInt(threshold.getText());
+            }
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     private boolean checkIfStockNumber() {
         try {
             Double.parseDouble(stock.getText());
