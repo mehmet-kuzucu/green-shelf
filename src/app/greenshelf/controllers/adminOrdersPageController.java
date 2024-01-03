@@ -1,6 +1,7 @@
 package app.greenshelf.controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import app.greenshelf.Admin;
 import app.greenshelf.DatabaseAdapter;
@@ -79,8 +80,8 @@ public class adminOrdersPageController {
         orderDetails.setPrefWidth(100.0);
         orderDetails.setSpacing(5.0);
         orderDetails.setStyle("-fx-background-color: #beffbc;");
-
-        Text orderId = new Text(order.getOrderID());
+        //order.getId() kullan aşağıda!
+        Text id = new Text(order.getId() + "");
         Text productInfo = new Text("Hocam bu Product Info");
         Text customerInfo = new Text(order.getUserID());
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
@@ -90,18 +91,49 @@ public class adminOrdersPageController {
         Text totalPrice = new Text(order.getPrice() + "₺");
         Text deliveryDateTime = new Text(order.getDate());
 
-        Button cancelButton = new Button("Hocam bu da Cancel");
-        cancelButton.setMnemonicParsing(false);
-
-        orderDetails.getChildren().addAll(
-            orderId, 
+        if (order.getStatus().equals("waiting") || order.getStatus().equals("inDelivery")) {
+            //orderDetails.setStyle("-fx-background-color: #ffbebe;");
+            Button cancelButton = new Button("Cancel Order");
+            cancelButton.setMnemonicParsing(false);
+            orderDetails.getChildren().addAll(
+            id, 
             productInfo, 
             customerInfo, 
             address, 
             totalPrice, 
             deliveryDateTime, 
             cancelButton
-        );
+            );
+            cancelButton.setOnMouseClicked((event) -> {
+                DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+                try {
+                    databaseAdapter.deleteOrder(order.getId());
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                databaseAdapter.closeConnection();
+                orderDetails.setStyle("-fx-background-color: #ffbebe;");
+                orderDetails.getChildren().clear();;
+            });
+        
+            //orderDetails.setStyle("-fx-background-color: #ffffbe;");
+        } else if (order.getStatus().equals("completed") || order.getStatus().equals("cancelled")) {
+            //orderDetails.setStyle("-fx-background-color: #beffbc;");
+            orderDetails.getChildren().addAll(
+            id, 
+            productInfo, 
+            customerInfo, 
+            address, 
+            totalPrice, 
+            deliveryDateTime
+            );
+        }
+
+
+        
+
+        
         return orderDetails;
     }
 }

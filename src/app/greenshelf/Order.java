@@ -3,6 +3,7 @@ package app.greenshelf;
 import java.security.SecureRandom;
 
 public class Order {
+    private int id;
     private String orderID;
     private String userID;
     private int productID;
@@ -12,7 +13,18 @@ public class Order {
     private double price;
     
     public Order(String userID, int productID, double amount, String date, String status, double price) {
-        setOrderID();
+        //setOrderID();
+        this.userID = userID;
+        this.productID = productID;
+        this.amount = amount;
+        this.date = date;
+        this.status = status;
+        this.price = price;
+    }
+
+    public Order(int id, String userID, int productID, double amount, String date, String status, double price) {
+        //setOrderID();
+        this.id = id;
         this.userID = userID;
         this.productID = productID;
         this.amount = amount;
@@ -22,8 +34,9 @@ public class Order {
     }
 
 
+    /*
     public void setOrderID() {
-        /* bu 16 karakterlik string olusturuyo onu da UserID'ye atiyo */
+        //bu 16 karakterlik string olusturuyo onu da UserID'ye atiyo
 
         if (this.orderID == null){
             
@@ -41,6 +54,10 @@ public class Order {
         } else {
             System.out.println("Order ID already exists");
         } 
+    }
+     */
+    public int getId() {
+        return id;
     }
 
     public String getOrderID() {
@@ -72,6 +89,9 @@ public class Order {
     }
 
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setUserID(String userID) {
         this.userID = userID;

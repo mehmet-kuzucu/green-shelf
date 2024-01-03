@@ -443,6 +443,23 @@ public class DatabaseAdapter {
             e.printStackTrace();
         }
     }
+
+    public void deleteOrder(int id) throws SQLException{
+        /* delete carrier from database */
+        
+        String url = "jdbc:mysql://localhost:3306/javafxdb";
+        zorunlu user = new zorunlu();
+        Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+        String query = "DELETE FROM orders WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getAddress(String userid){
         String address = "";
         try{
@@ -471,7 +488,7 @@ public class DatabaseAdapter {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                Order order = new Order(resultSet.getString("userid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"));
+                Order order = new Order(resultSet.getInt("id"), resultSet.getString("userid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"));
                 orders.add(order);
             }
         } catch (SQLException e) {
