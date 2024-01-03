@@ -395,6 +395,25 @@ public class DatabaseAdapter {
         return products;
     }
 
+    public List<Carrier> getCarriers()
+    {
+        List<Carrier> carriers = new ArrayList<>();
+        try{
+            String url = "jdbc:mysql://localhost:3306";
+            zorunlu user = new zorunlu();
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "SELECT * FROM user WHERE userType = 'Carrier'";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                Carrier carrier = new Carrier(resultSet.getString("name"), resultSet.getString("surname"), resultSet.getString("password"), resultSet.getString("email"), resultSet.getString("phone"), resultSet.getString("username"), resultSet.getString("address"), resultSet.getString("profilePicture"));
+                carriers.add(carrier);
+            }
+        } catch (SQLException e) {
+        }
+        return carriers;
+    }
+
     public String getAddress(String userid){
         String address = "";
         try{
