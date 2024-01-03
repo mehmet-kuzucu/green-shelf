@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.regex.Pattern;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -62,17 +63,17 @@ public class addCarrierPageController {
     }
 
     @FXML
-    void addToCarrierClicked(MouseEvent event) {
-        if (!checkEmptyPlaces()) {
+    void addToCarrierClicked(MouseEvent event) throws IOException {
+        if (checkEmptyPlaces(name.getText(), surname.getText(), password.getText(), email.getText(), phone.getText(), username.getText())) {
             emptyPlaces.setText("Please fill all the places");
         }
-        else if (checkIfUsernameExists()) {
+        else if (checkIfUsernameExists(username.getText())) {
             emptyPlaces.setText("Username already exists");
         }
-        else if (!checkEmailisValid(email)) {
+        else if (!checkEmailisValid(email.getText())) {
             emptyPlaces.setText("Email is not valid");
         }
-        else if (!checkPhoneisValid(phone)) {
+        else if (!checkPhoneisValid(phone.getText())) {
             emptyPlaces.setText("Phone number is not valid");
         }
         else {
@@ -81,21 +82,37 @@ public class addCarrierPageController {
             dbAdapter.registerUserSql(carrier);
             dbAdapter.closeConnection();
             emptyPlaces.setText("Carrier added successfully");
+            emptyPlaces.setStyle("-fx-fill: green");
+            /* close the scene */
+            Platform.runLater(() -> {
+                Stage stage = (Stage) addToCartButton.getScene().getWindow();
+                stage.close();
+            });
+            employFireCarrierPageController.refreshPage();
         }
     }
 
-    private boolean checkEmptyPlaces() {
-        if (name.getText().isEmpty() || surname.getText().isEmpty() || username.getText().isEmpty()
-                || password.getText().isEmpty() || email.getText().isEmpty() || phone.getText().isEmpty()) {
+    public boolean checkEmptyPlaces(String name, String surname, String password, String email, String phone, String username) {
+        if (name.isEmpty() || surname.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty() || username.isEmpty()) {
             return false;
         } else {
             return true;
         }
+        
     }
 
-    private boolean checkIfUsernameExists() {
+    public boolean checkEmptyPlaces(String name, String surname, String password, String email, String phone) {
+        if (name.isEmpty() || surname.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+        
+    }
+
+    public boolean checkIfUsernameExists(String username) {
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
-        if (dbAdapter.checkUsernameSql(username.getText())) {
+        if (dbAdapter.checkUsernameSql(username)) {
             return true;
         } else {
             return false;
@@ -104,7 +121,7 @@ public class addCarrierPageController {
 
 
     @FXML
-    private Boolean checkUsername(TextField registerUsernameField) {
+    public Boolean checkUsername(TextField registerUsernameField) {
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
         if (databaseAdapter.checkUsernameSql(registerUsernameField.getText())) {
             return true;
@@ -113,8 +130,7 @@ public class addCarrierPageController {
         }
     }
     @FXML
-    public Boolean checkEmailisValid(TextField registerEmailField) {
-        String email= registerEmailField.getText();
+    public Boolean checkEmailisValid(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
                             "[a-zA-Z0-9_+&*-]+)*@" + 
                             "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
@@ -127,7 +143,7 @@ public class addCarrierPageController {
     }
 
     @FXML
-    private Boolean checkEmail(TextField registerEmailField) {
+    public Boolean checkEmail(TextField registerEmailField) {
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
         if (databaseAdapter.checkEmailSql(registerEmailField.getText())) {
             return true;
@@ -148,8 +164,7 @@ public class addCarrierPageController {
     }
 
     /* check valid phone number */
-    public Boolean checkPhoneisValid(TextField registerPhoneField) {
-        String phone= registerPhoneField.getText();
+    public Boolean checkPhoneisValid(String phone) {
         String phoneRegex = "^[0-9]{10}$"; 
                               
         Pattern pat = Pattern.compile(phoneRegex); 

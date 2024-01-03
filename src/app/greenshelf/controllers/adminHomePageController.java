@@ -96,7 +96,7 @@ public class adminHomePageController {
         FXMLLoader scene = new FXMLLoader(getClass().getResource("../fxml/employFireCarrierPage.fxml"));
         Parent root = scene.load();
         employFireCarrierPageController controller2 = scene.getController();
-        controller2.initData(this.admin); // Pass the User object to the controller
+        controller2.initData(this.admin,controller2); // Pass the User object to the controller
         stage = (Stage) profilePhoto.getScene().getWindow();
         stage.setScene(new Scene(root));
         

@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.Base64;
 import java.util.List;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -20,6 +22,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import app.greenshelf.Admin;
 import app.greenshelf.Carrier;
 import app.greenshelf.DatabaseAdapter;
@@ -41,7 +44,8 @@ public class employFireCarrierPageController {
     @FXML
     private TilePane tilePane;
 
-    public void initData(Admin admin){
+    public void initData(Admin admin, employFireCarrierPageController controller){
+        this.controller = controller;
         this.admin = admin;
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
         List<Carrier> carriers = databaseAdapter.getCarriers();
@@ -71,7 +75,7 @@ public class employFireCarrierPageController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/employFireCarrierPage.fxml"));
         Parent root = loader.load();
         controller = loader.getController();
-        this.controller.initData(admin); // Pass the User object to the controller
+        this.controller.initData(admin,controller); // Pass the User object to the controller
         stage = (Stage) profilePhoto.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -107,29 +111,47 @@ public class employFireCarrierPageController {
         PasswordField passwordField = new PasswordField();
         passwordField.setText(carrier.getPassword());
 
-        Text totalDeliveriesText = new Text("Total Deliveries");
-        totalDeliveriesText.setFill(javafx.scene.paint.Color.WHITE);
+        Text totalDeliveriesText = new Text("");
+        totalDeliveriesText.setFill(javafx.scene.paint.Color.RED);
 
-        Button addToCartButton = new Button("Update");
-
-        addToCartButton.setOnAction(e -> {
-            DatabaseAdapter databaseAdapter = new DatabaseAdapter();
-            Carrier carrier2 = new Carrier(nameTextField.getText(), surnameTextField.getText(), passwordField.getText(), emailTextField.getText(), phoneTextField.getText(), carrier.getUsername(), null, carrier.getProfilePicture());
-            try {
-                databaseAdapter.updateCarrier(carrier2);
-            } catch (SQLException e1) {
-                e1.printStackTrace();
+        Button updateButton = new Button("Update");
+        updateButton.setId("button");
+        updateButton.setOnAction(e -> {
+            addCarrierPageController addCarrierPageController = new addCarrierPageController();
+            if(!addCarrierPageController.checkEmptyPlaces(nameTextField.getText(), surnameTextField.getText(), passwordField.getText(), emailTextField.getText(), phoneTextField.getText())) {
+                totalDeliveriesText.setText("Please fill all the places");
             }
-            try {
-                
-                refreshPage();
-            } catch (IOException e1) {
-                e1.printStackTrace();
+            else if(!addCarrierPageController.checkEmailisValid(emailTextField.getText())) {
+                totalDeliveriesText.setText("Please enter a valid email");
             }
-            databaseAdapter.closeConnection();
+            else if(!addCarrierPageController.checkPhoneisValid(phoneTextField.getText())) {
+                totalDeliveriesText.setText("Please enter a valid phone number");
+            }
+            else {
+                DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+                Carrier carrier2 = new Carrier(nameTextField.getText(), surnameTextField.getText(), passwordField.getText(), emailTextField.getText(), phoneTextField.getText(), carrier.getUsername(), null, carrier.getProfilePicture());
+                try {
+                    databaseAdapter.updateCarrier(carrier2);
+                    totalDeliveriesText.setText("Updated successfully");
+                    totalDeliveriesText.setFill(javafx.scene.paint.Color.GREEN);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+                PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                pause.setOnFinished(event -> {
+                    try {
+                        refreshPage();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                });
+                pause.play();
+                databaseAdapter.closeConnection();
+            }
+            
         });
         Button removeButton = new Button("Remove");
-
+        removeButton.setId("button");
         removeButton.setOnAction(e -> {
             DatabaseAdapter databaseAdapter = new DatabaseAdapter();
             try {
@@ -148,7 +170,7 @@ public class employFireCarrierPageController {
         carrierInfo.getChildren().addAll(
                 imageView, nameTextField, surnameTextField,
                 phoneTextField, emailTextField, passwordField, totalDeliveriesText,
-                addToCartButton, removeButton
+                updateButton, removeButton
         );
 
         carrierInfo.setPadding(new Insets(5.0, 5.0, 5.0, 5.0));
