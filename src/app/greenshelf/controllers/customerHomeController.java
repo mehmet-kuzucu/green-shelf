@@ -123,14 +123,14 @@ public class customerHomeController {
 
         Text text1 = new Text(product.getName());
         text1.setFill(javafx.scene.paint.Color.WHITE);
-        Text text2 = new Text((product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2)+"₺");
+        Text text2 = new Text((product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2)+"₺" + " / " + (product.getIsPiece() ? "Piece" : "Kg"));
         text2.setFill(javafx.scene.paint.Color.WHITE);
 
         innerVBox.getChildren().addAll(text1, text2);
 
         Spinner<Double> spinner = new Spinner<>();
         spinner.setId("spinner");
-        spinner.setValueFactory(new javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, product.getStock(), 1.0, 0.1));
+        spinner.setValueFactory(new javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, product.getStock(), 1.0, product.getIsPiece() ? 1.0 : 0.1));
         spinner.setEditable(false);
 
         Button addToCartButton = new Button();

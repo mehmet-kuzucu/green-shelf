@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import app.greenshelf.Customer;
+import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Order;
 import app.greenshelf.Product;
 import javafx.fxml.FXML;
@@ -17,9 +18,13 @@ import javafx.scene.control.Spinner;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.paint.Color;
 
 public class shoppingCartPageController {
     @FXML
@@ -98,18 +103,49 @@ public class shoppingCartPageController {
         imageView.setPreserveRatio(true);
         imageView.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(product.getImage()))));
         */
-        VBox innerVBox = new VBox();
-        innerVBox.setId("deneme");
-        innerVBox.setAlignment(javafx.geometry.Pos.CENTER);
-        innerVBox.setSpacing(5.0);
-        innerVBox.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
+        BorderPane borderPane = new BorderPane();
+        HBox innerHBox = new HBox();
+        innerHBox.setId("deneme");
+        innerHBox.setAlignment(javafx.geometry.Pos.CENTER);
+        innerHBox.setSpacing(5.0);
+        innerHBox.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
+        DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+        Product product = databaseAdapter.getProductFromId(order.getProductID());
+        //getAmount to string
+        String amountString = String.valueOf(order.getAmount());
+        int indexOfDot = amountString.indexOf(".");
+        if (indexOfDot != -1) {
+            amountString = amountString.substring(0, indexOfDot);
+        }
+        Text amountXpriceTextEqualsTotalPrice = new Text((product.getIsPiece() ? amountString : order.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + "x " + (product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) + "₺" + " = " + order.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) + "₺");
+        amountXpriceTextEqualsTotalPrice.setFill(Color.WHITE);
+        amountXpriceTextEqualsTotalPrice.setFont(new Font(20));
+        Text productNameText = new Text(product.getName());
+        productNameText.setFill(Color.WHITE);
+        productNameText.setFont(new Font(20));
+        ImageView productImage = new ImageView();
+        productImage.setFitHeight(150.0);
+        productImage.setFitWidth(200.0);
+        productImage.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(product.getImage()))));
 
-        Text text1 = new Text(order.getAmount() + "x " + order.getPrice());
-        text1.setFill(javafx.scene.paint.Color.WHITE);
-        Text text2 = new Text(order.getAmount()*order.getPrice() + "₺");
-        text2.setFill(javafx.scene.paint.Color.WHITE);
-
-        innerVBox.getChildren().addAll(text1, text2);
+        //innerHBox.getChildren().addAll(productImage, productNameText, amountXpriceText, totalPriceText);
+        HBox HBoxLeft = new HBox();
+        Button deleteButton = new Button();
+        VBox rightVBox = new VBox();
+        rightVBox.setAlignment(javafx.geometry.Pos.CENTER);
+        rightVBox.getChildren().addAll(deleteButton);
+        rightVBox.setPadding(new javafx.geometry.Insets(13, 13, 13, 13));
+        
+        HBoxLeft.setSpacing(10);
+        HBoxLeft.setPadding(new javafx.geometry.Insets(13, 13, 13, 13));
+        HBoxLeft.getChildren().addAll(productImage, productNameText);
+        HBoxLeft.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+        
+        borderPane.setLeft(HBoxLeft);
+        borderPane.setCenter(amountXpriceTextEqualsTotalPrice);
+        borderPane.setRight(rightVBox);
+        
+        
         /* 
         Spinner<Double> spinner = new Spinner<>();
         spinner.setId("spinner");
@@ -118,7 +154,7 @@ public class shoppingCartPageController {
         */
         
 
-        productInfo.getChildren().addAll(/*imageView,*/ innerVBox);
+        productInfo.getChildren().addAll(borderPane);
         return productInfo;
         
     }

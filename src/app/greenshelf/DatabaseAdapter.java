@@ -659,4 +659,23 @@ public class DatabaseAdapter {
 
     }
 
+    public Product getProductFromId (int id)
+    {
+        try{
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "SELECT * FROM products WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                Product product = new Product(resultSet.getString("name"), resultSet.getDouble("stock"), resultSet.getString("image"), resultSet.getDouble("price"), resultSet.getDouble("threshold"), resultSet.getString("type"), resultSet.getInt("id"), resultSet.getBoolean("unit"));
+                return product;
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
+
 }

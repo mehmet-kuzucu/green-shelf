@@ -6,7 +6,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -43,66 +42,6 @@
       <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" style="-fx-border-color: #000000;" BorderPane.alignment="CENTER">
          <content>
             <VBox fx:id="productsVBox" prefHeight="200.0" prefWidth="100.0" spacing="20.0" style="-fx-background-color: #2A6D72;">
-               <children>
-                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="900.0" prefHeight="170.0" prefWidth="916.0" spacing="10.0" style="-fx-background-color: #BEFFBC;">
-                     <children>
-                        <BorderPane prefHeight="200.0" prefWidth="871.0" HBox.hgrow="ALWAYS">
-                           <left>
-                              <HBox alignment="CENTER_LEFT" spacing="10.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../images/domates.jpeg" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Domates">
-                                       <font>
-                                          <Font size="31.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </HBox>
-                           </left>
-                           <center>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Amount X Price">
-                                       <font>
-                                          <Font size="31.0" />
-                                       </font>
-                                    </Text>
-                                    <Text layoutX="134.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price">
-                                       <font>
-                                          <Font size="31.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                                 <padding>
-                                    <Insets left="10.0" right="10.0" />
-                                 </padding>
-                              </HBox>
-                           </center>
-                           <right>
-                              <HBox alignment="CENTER_RIGHT" spacing="20.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <Button fx:id="addToCartButton" mnemonicParsing="false" />
-                                    <Button fx:id="addToCartButton3" mnemonicParsing="false" />
-                                 </children>
-                                 <padding>
-                                    <Insets left="20.0" />
-                                 </padding>
-                              </HBox>
-                           </right>
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                           </padding>
-                        </BorderPane>
-                     </children>
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding>
-                  </HBox>
-               </children>
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
