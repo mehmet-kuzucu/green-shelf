@@ -1,6 +1,7 @@
 package app.greenshelf.controllers;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Base64;
 import java.util.List;
 
@@ -98,9 +99,6 @@ public class employFireCarrierPageController {
         TextField surnameTextField = new TextField();
         surnameTextField.setText(carrier.getSurname());
 
-        TextField usernameTextField = new TextField();
-        usernameTextField.setText(carrier.getUsername());
-
         TextField phoneTextField = new TextField();
         phoneTextField.setText(carrier.getPhone());
 
@@ -115,10 +113,28 @@ public class employFireCarrierPageController {
 
         Button addToCartButton = new Button("Update");
 
+        addToCartButton.setOnAction(e -> {
+            DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+            Carrier carrier2 = new Carrier(nameTextField.getText(), surnameTextField.getText(), passwordField.getText(), emailTextField.getText(), phoneTextField.getText(), carrier.getUsername(), null, carrier.getProfilePicture());
+            try {
+                databaseAdapter.updateCarrier(carrier2);
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            try {
+                
+                refreshPage();
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            databaseAdapter.closeConnection();
+        });
         Button removeButton = new Button("Remove");
 
         carrierInfo.getChildren().addAll(
-                imageView, nameTextField, surnameTextField, usernameTextField,
+                imageView, nameTextField, surnameTextField,
                 phoneTextField, emailTextField, passwordField, totalDeliveriesText,
                 addToCartButton, removeButton
         );

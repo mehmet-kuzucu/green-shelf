@@ -414,6 +414,33 @@ public class DatabaseAdapter {
         return carriers;
     }
 
+    public void updateCarrier(Carrier carrier) throws SQLException{
+        /* update carrier in database */
+        
+        System.out.println("update carrier");
+        String url = "jdbc:mysql://localhost:3306/javafxdb";
+        zorunlu user = new zorunlu();
+        Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+        String query = "UPDATE user SET name = ?, surname = ?, password = ?, email = ?, phone = ? WHERE username = ?";
+        //print the id
+        System.out.println("update carrier");
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            System.out.println("update carrier");
+            preparedStatement.setString(1, carrier.getName());
+            preparedStatement.setString(2, carrier.getSurname());
+            preparedStatement.setString(3, carrier.getPassword());
+            preparedStatement.setString(4, carrier.getEmail());
+            preparedStatement.setString(5, carrier.getPhone());
+            preparedStatement.setString(6, carrier.getUsername());
+            preparedStatement.executeUpdate();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Carrier updated successfully");
+    }
+
     public String getAddress(String userid){
         String address = "";
         try{
