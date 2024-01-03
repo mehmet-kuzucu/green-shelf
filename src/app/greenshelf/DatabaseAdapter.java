@@ -411,7 +411,6 @@ public class DatabaseAdapter {
             }
         } catch (SQLException e) {
         }
-        System.out.println(carriers.size() + " carriers found.");
         return carriers;
     }
 
