@@ -63,7 +63,7 @@ public class adminOrdersPageController {
             } else if (order.getStatus().equals("inDelivery")) {
                 VBox group = createVboxGroup(order);
                 inDeliveryColumn.getChildren().add(group);
-            } else if (order.getStatus().equals("completed")) {
+            } else if (order.getStatus().equals("completed") || order.getStatus().equals("cancelled")) {
                 VBox group = createVboxGroup(order);
                 completedColumn.getChildren().add(group);
             }
@@ -107,27 +107,49 @@ public class adminOrdersPageController {
             cancelButton.setOnMouseClicked((event) -> {
                 DatabaseAdapter databaseAdapter = new DatabaseAdapter();
                 try {
-                    databaseAdapter.deleteOrder(order.getId());
+                    databaseAdapter.changeOrderStatus(order.getId(), "cancelled");
                 } catch (SQLException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                 databaseAdapter.closeConnection();
-                orderDetails.setStyle("-fx-background-color: #ffbebe;");
-                orderDetails.getChildren().clear();;
+                refresh();
             });
         
             //orderDetails.setStyle("-fx-background-color: #ffffbe;");
         } else if (order.getStatus().equals("completed") || order.getStatus().equals("cancelled")) {
             //orderDetails.setStyle("-fx-background-color: #beffbc;");
-            orderDetails.getChildren().addAll(
-            id, 
-            productInfo, 
-            customerInfo, 
-            address, 
-            totalPrice, 
-            deliveryDateTime
-            );
+            if (order.getStatus().equals("completed"))
+            {
+                Text status = new Text("Successfully Delivered");
+                status.setStyle("-fx-font-weight: bold;");
+                status.setStyle("-fx-font-color: green;");
+                orderDetails.getChildren().addAll(
+                status,
+                id, 
+                productInfo, 
+                customerInfo, 
+                address, 
+                totalPrice, 
+                deliveryDateTime
+                );
+            }
+            else
+            {
+                Text status = new Text("Cancelled");
+                status.setStyle("-fx-font-weight: bold;");
+                status.setStyle("-fx-font-color: red;");
+                orderDetails.getChildren().addAll(
+                status,
+                id, 
+                productInfo, 
+                customerInfo, 
+                address, 
+                totalPrice, 
+                deliveryDateTime
+                );
+            }
+            
         }
 
 
@@ -135,5 +157,22 @@ public class adminOrdersPageController {
 
         
         return orderDetails;
+    }
+
+    private void refresh() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/adminOrdersPage.fxml"));
+        Parent root;
+        try {
+            root = loader.load();
+            stage = (Stage) greenShelfLogo.getScene().getWindow();
+            adminOrdersPageController controller = loader.getController();
+            controller.initData(currentUser);
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
