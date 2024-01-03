@@ -104,9 +104,9 @@ public class shoppingCartPageController {
         innerVBox.setSpacing(5.0);
         innerVBox.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
 
-        Text text1 = new Text(order.getOrderID());
+        Text text1 = new Text(order.getAmount() + "x " + order.getPrice());
         text1.setFill(javafx.scene.paint.Color.WHITE);
-        Text text2 = new Text(order.getAmount()+"₺");
+        Text text2 = new Text(order.getAmount()*order.getPrice() + "₺");
         text2.setFill(javafx.scene.paint.Color.WHITE);
 
         innerVBox.getChildren().addAll(text1, text2);

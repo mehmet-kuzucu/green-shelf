@@ -150,7 +150,7 @@ public class customerHomeController {
                     }
                 }
             } else {
-                Order order = new Order(0,currentUser.getUserID(), product.getId(), spinner.getValue(), "", "inCart", product.getPrice());
+                Order order = new Order(0,currentUser.getUserID(), product.getId(), spinner.getValue(), "", "inCart", product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2);
                 ordersArray.add(order);
                 cartCount += 1;
             }
