@@ -2,6 +2,7 @@ package app.greenshelf.controllers;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import app.greenshelf.Admin;
 import app.greenshelf.Carrier;
+import app.greenshelf.DatabaseAdapter;
 
 public class employFireCarrierPageController {
     employFireCarrierPageController controller;
@@ -40,7 +42,14 @@ public class employFireCarrierPageController {
 
     public void initData(Admin admin){
         this.admin = admin;
-
+        DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+        List<Carrier> carriers = databaseAdapter.getCarriers();
+        for(Carrier carrier : carriers){
+            System.out.println(carrier.getName());
+            VBox carrierInfo = createVBox(carrier);
+            tilePane.getChildren().add(carrierInfo);
+        }
+        databaseAdapter.closeConnection();
     }
 
     @FXML
@@ -105,7 +114,7 @@ public class employFireCarrierPageController {
         totalDeliveriesText.setFill(javafx.scene.paint.Color.WHITE);
 
         Button addToCartButton = new Button("Update");
-        
+
         Button removeButton = new Button("Remove");
 
         carrierInfo.getChildren().addAll(

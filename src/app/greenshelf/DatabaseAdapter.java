@@ -399,10 +399,10 @@ public class DatabaseAdapter {
     {
         List<Carrier> carriers = new ArrayList<>();
         try{
-            String url = "jdbc:mysql://localhost:3306";
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
             zorunlu user = new zorunlu();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
-            String query = "SELECT * FROM user WHERE userType = 'Carrier'";
+            String query = "SELECT * FROM user WHERE userType = 'carrier'";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
@@ -411,6 +411,7 @@ public class DatabaseAdapter {
             }
         } catch (SQLException e) {
         }
+        System.out.println(carriers.size() + " carriers found.");
         return carriers;
     }
 
