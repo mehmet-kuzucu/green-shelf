@@ -78,7 +78,18 @@ public class addCarrierPageController {
         }
         else {
             DatabaseAdapter dbAdapter = new DatabaseAdapter();
+            if(dbAdapter.checkUsernameSql(encodedImage)){
+                emptyPlaces.setText("Username already exists");
+                return;
+            }else if(dbAdapter.checkEmailSql(email.getText())){
+                emptyPlaces.setText("Email already exists");
+                return;
+            }else if(dbAdapter.checkPhoneSql(phone.getText())){
+                emptyPlaces.setText("Phone number already exists");
+                return;
+            }
             Carrier carrier = new Carrier(name.getText(), surname.getText(), password.getText(), email.getText(), phone.getText(), username.getText(), "carrier", encodedImage);
+            carrier.setAdress("Default");
             dbAdapter.registerUserSql(carrier);
             dbAdapter.closeConnection();
             emptyPlaces.setText("Carrier added successfully");

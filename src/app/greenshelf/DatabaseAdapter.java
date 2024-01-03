@@ -88,7 +88,7 @@ public class DatabaseAdapter {
     public void registerUserSql(Carrier carrier) {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate("USE javafxdb;");
-            String query = "INSERT INTO user (userid, username, email, phone, name, surname, password, profilePicture, userType) VALUES ('" +
+            String query = "INSERT INTO user (userid, username, email, phone, name, surname, password, profilePicture, userType, address) VALUES ('" +
                             carrier.getUserID() + "', '" +
                             carrier.getUsername() + "', '" +
                             carrier.getEmail() + "', '" +
@@ -97,7 +97,8 @@ public class DatabaseAdapter {
                             carrier.getSurname() + "', '" +
                             carrier.getPassword() + "', '" +
                             carrier.getProfilePicture() + "', '" +
-                            carrier.getUserType() + "');";
+                            carrier.getUserType() + "', '" +
+                            carrier.getAddress() + "');";
             statement.executeUpdate(query);
         } catch (Exception ex) {
             ex.printStackTrace();
