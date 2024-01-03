@@ -5,7 +5,6 @@ import java.util.List;
 import app.greenshelf.Admin;
 import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Order;
-import app.greenshelf.Product;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

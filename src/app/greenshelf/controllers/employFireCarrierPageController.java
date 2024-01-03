@@ -119,14 +119,12 @@ public class employFireCarrierPageController {
             try {
                 databaseAdapter.updateCarrier(carrier2);
             } catch (SQLException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             try {
                 
                 refreshPage();
             } catch (IOException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             databaseAdapter.closeConnection();
@@ -138,14 +136,12 @@ public class employFireCarrierPageController {
             try {
                 databaseAdapter.deleteCarrier(carrier.getUsername());
             } catch (SQLException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             try {
                 
                 refreshPage();
             } catch (IOException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             databaseAdapter.closeConnection();

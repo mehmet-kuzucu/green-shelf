@@ -10,7 +10,6 @@ import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Order;
 import app.greenshelf.Product;
-import app.greenshelf.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -18,7 +17,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -142,7 +140,6 @@ public class customerHomeController {
 
             if (productStockMap.get(product.getId()) < spinner.getValue()) {
                 System.out.println("Not enough stock");
-                // TODO: Show a popup saying that there is not enough stock
                 return;
             }
 

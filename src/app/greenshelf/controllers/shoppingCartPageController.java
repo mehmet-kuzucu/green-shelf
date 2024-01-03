@@ -6,7 +6,6 @@ import java.util.LinkedList;
 
 import app.greenshelf.Customer;
 import app.greenshelf.Order;
-import app.greenshelf.Product;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

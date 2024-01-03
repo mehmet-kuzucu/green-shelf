@@ -1,14 +1,10 @@
 package app.greenshelf.controllers;
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
-
 import app.greenshelf.Admin;
 import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
-import app.greenshelf.User;
 import app.greenshelf.Carrier;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -1,40 +1,30 @@
 package app.greenshelf.controllers;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Base64;
 import java.util.List;
 
 import app.greenshelf.Admin;
-import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Product;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class adminHomePageController {
-    private Parent root;
     private Stage stage;
     private Scene scene;
-    private DatabaseAdapter dbAdapter;
     private adminHomePageController controller;
     @FXML
     private Button adminOrdersButton;
@@ -54,7 +44,6 @@ public class adminHomePageController {
     public void initData(Admin admin, Parent root, adminHomePageController controller)
     {
         this.admin = admin;
-        this.root = root;
         this.controller = controller;
         // Get the products from the database
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
@@ -196,7 +185,6 @@ public class adminHomePageController {
                 try {
                     refreshPage();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }
@@ -211,7 +199,6 @@ public class adminHomePageController {
             try {
                 refreshPage();
             } catch (IOException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         });

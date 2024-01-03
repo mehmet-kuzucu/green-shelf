@@ -7,7 +7,6 @@ import java.util.Base64;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -26,7 +25,6 @@ public class addProductPageController {
     private String encodedImage;
     private adminHomePageController adminHomePageController;
     private Stage stage;
-    private FXMLLoader loader;
     @FXML
     private ComboBox<String> comboBox;
     @FXML
@@ -107,7 +105,6 @@ public class addProductPageController {
             try {
                 this.adminHomePageController.refreshPage();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             Platform.runLater(() -> {

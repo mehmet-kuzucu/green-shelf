@@ -8,10 +8,6 @@ import java.util.Base64;
 import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -27,7 +23,6 @@ import app.greenshelf.DatabaseAdapter;
 
 public class addCarrierPageController {
     private Stage stage;
-    private Scene scene;
     private String encodedImage;
     private employFireCarrierPageController employFireCarrierPageController;
     @FXML

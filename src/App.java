@@ -1,16 +1,12 @@
 import app.greenshelf.DatabaseAdapter;
-import app.greenshelf.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-//TODO:databaseAdapter.closeConnection(); // program kapatıldığında database bağlantısını kapatmayı unutma memory leak olmasın diye
-
 public class App extends Application {
 
-    private User currentUser;
     private DatabaseAdapter databaseAdapter;
     
     @Override
@@ -38,6 +34,7 @@ public class App extends Application {
             */
 
             databaseAdapter.generateSqlDatabase(); // db yoksa olusturuyor, varsa hicbir sey yapmıyor
+            databaseAdapter.closeConnection();
             // Set the primary stage
             primaryStage.setScene(new Scene(scene.load()));
             primaryStage.setTitle("User Information Example");
