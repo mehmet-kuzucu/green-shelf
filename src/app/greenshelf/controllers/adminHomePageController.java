@@ -219,7 +219,7 @@ public class adminHomePageController {
         adminHomePageController controller = loader.getController();
         controller.initData(admin,root,controller); // Pass the User object to the controller
         stage = (Stage) profilePhoto.getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root, profilePhoto.getScene().getWidth(), profilePhoto.getScene().getHeight());
         stage.setScene(scene);
         stage.show();
     }
