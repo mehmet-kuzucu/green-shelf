@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Base64;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -17,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Product;
 import app.greenshelf.controllers.adminHomePageController;
@@ -102,16 +104,17 @@ public class addProductPageController {
             dbAdapter.closeConnection();
             emptyPlaces.setText("Product added successfully"); 
             emptyPlaces.setStyle("-fx-fill: green");
-            try {
-                this.adminHomePageController.refreshPage();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Platform.runLater(() -> {
-                stage = (Stage) price.getScene().getWindow();
-                stage.close();
+            PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+            pause.setOnFinished(e -> {
+                try {
+                    this.adminHomePageController.refreshPage();
+                    Stage stage = (Stage) emptyPlaces.getScene().getWindow();
+                    stage.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             });
-            
+            pause.play();
         }
     }
 
