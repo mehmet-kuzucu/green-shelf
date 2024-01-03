@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.paint.Color;
 
 public class adminOrdersPageController {
 
@@ -79,17 +80,23 @@ public class adminOrdersPageController {
         orderDetails.setPrefHeight(200.0);
         orderDetails.setPrefWidth(100.0);
         orderDetails.setSpacing(5.0);
-        orderDetails.setStyle("-fx-background-color: #beffbc;");
-        //order.getId() kullan aşağıda!
+        orderDetails.setId("orderDetails");
+        orderDetails.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
         Text id = new Text(order.getId() + "");
+        id.setFill(Color.WHITE);
         Text productInfo = new Text("Hocam bu Product Info");
+        productInfo.setFill(Color.WHITE);
         Text customerInfo = new Text(order.getUserID());
+        customerInfo.setFill(Color.WHITE);
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
         String addressString = dbAdapter.getAddress(order.getUserID());
         Text address = new Text(addressString);
+        address.setFill(Color.WHITE);
         dbAdapter.closeConnection();
         Text totalPrice = new Text(order.getPrice() + "₺");
+        totalPrice.setFill(Color.WHITE);
         Text deliveryDateTime = new Text(order.getDate());
+        deliveryDateTime.setFill(Color.WHITE);
 
         if (order.getStatus().equals("waiting") || order.getStatus().equals("inDelivery")) {
             //orderDetails.setStyle("-fx-background-color: #ffbebe;");
@@ -122,8 +129,7 @@ public class adminOrdersPageController {
             if (order.getStatus().equals("completed"))
             {
                 Text status = new Text("Successfully Delivered");
-                status.setStyle("-fx-font-weight: bold;");
-                status.setStyle("-fx-font-color: green;");
+                status.setFill(Color.GREEN);
                 orderDetails.getChildren().addAll(
                 status,
                 id, 
@@ -137,8 +143,7 @@ public class adminOrdersPageController {
             else
             {
                 Text status = new Text("Cancelled");
-                status.setStyle("-fx-font-weight: bold;");
-                status.setStyle("-fx-font-color: red;");
+                status.setFill(Color.RED);
                 orderDetails.getChildren().addAll(
                 status,
                 id, 

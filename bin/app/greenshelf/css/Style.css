@@ -85,6 +85,15 @@
     -fx-background-color: #20373b;
 }
 
+#orderDetails {
+    /*make it circular */
+    -fx-background-radius: 10%;
+    -fx-border-width: 5px;
+    -fx-border-color: #d5dfe3;
+    -fx-border-radius: 10%;
+    -fx-background-color: #20373b;
+}
+
 #profilePhoto {
     /*make it circular */
     -fx-background-image: url("../images/defaultProfilePicture.png");

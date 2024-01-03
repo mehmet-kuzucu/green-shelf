@@ -61,7 +61,7 @@ public class customerHomeController {
 
     @FXML
     void shoppingCartButtonButtonOnMouseClicked(MouseEvent event) {
-        loadScene("../fxml/shoppingCartPage.fxml", currentUser, ordersArray);
+        loadScene("../fxml/shoppingCartPage.fxml", currentUser, ordersArray, cartCount, totalPrice, productStockMap);
         /* 
         databaseAdapter = new DatabaseAdapter();
         Order order = new Order(currentUser.getUserID(), 1, 1, "2021-05-05", "pending", 1);
@@ -72,10 +72,10 @@ public class customerHomeController {
 
     @FXML
     void profilePhotoImageOnMouseClicked(MouseEvent event) {
-        loadScene("../fxml/profileInfoPage.fxml", currentUser,null);
+        loadScene("../fxml/profileInfoPage.fxml", currentUser, ordersArray, cartCount, totalPrice, productStockMap);
     }
 
-    private void loadScene(String fxmlPath, Customer user, LinkedList <Order> order) {
+    private void loadScene(String fxmlPath, Customer user, LinkedList <Order> order, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
@@ -86,11 +86,11 @@ public class customerHomeController {
             
             if (fxmlPath.equals("../fxml/profileInfoPage.fxml")) {
                 profileInfoPageController controller = loader.getController();
-                controller.initData(user); // Pass the User object to the controller
+                controller.initData(user, order, cartCount, totalPrice, productStockMap); // Pass the User object to the controller
             }
             else if (fxmlPath.equals("../fxml/shoppingCartPage.fxml")) {
                 shoppingCartPageController controller = loader.getController();
-                controller.initData(user, order); // Pass the User object to the controller
+                controller.initData(user, order, cartCount, totalPrice, productStockMap); // Pass the User object to the controller
             }
             
             

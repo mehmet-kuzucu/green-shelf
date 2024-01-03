@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import javafx.fxml.FXML;
@@ -62,9 +64,18 @@ public class profileInfoPageController {
 
     String encodedImage;
 
+    private LinkedList <Order> orderArray;
+    private int cartCount;
+    private double totalPrice;
+    private HashMap<Integer, Double> productStockMap = new HashMap<Integer, Double>();
 
-    public void initData(Customer user) {
+
+    public void initData(Customer user, LinkedList <Order> orderArray, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap) {
         this.currentUser = user;
+        this.orderArray = orderArray;
+        this.cartCount = cartCount;
+        this.totalPrice = totalPrice;
+        this.productStockMap = productStockMap;
         nameDescription.setText(currentUser.getName() + " '" + currentUser.getUsername() + "' " + currentUser.getSurname());
         profilePhotoImage.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(currentUser.getProfilePicture()))));
         changeEmailField.setText(currentUser.getEmail());
@@ -77,17 +88,17 @@ public class profileInfoPageController {
 
     @FXML
     void greenShelfLogoOnMouseClicked(MouseEvent event) {
-        loadScene("../fxml/customerHome.fxml", currentUser,null,null);
+        loadScene("../fxml/customerHome.fxml", currentUser,null,null, orderArray, cartCount, totalPrice, productStockMap);
     }
 
-    private void loadScene(String fxmlPath, Customer user, Admin admin, Carrier carrier) {
+    private void loadScene(String fxmlPath, Customer user, Admin admin, Carrier carrier, LinkedList <Order> orderArray, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
             
             if (fxmlPath.equals("../fxml/customerHome.fxml")) {
                 customerHomeController controller = loader.getController();
-                controller.initData(user); // Pass the User object to the controller
+                controller.initData(user, orderArray, cartCount, totalPrice, productStockMap); // Pass the User object to the controller
             }
             if (fxmlPath.equals("../fxml/adminHomePage.fxml")) {
                 adminHomePageController controller = loader.getController();
@@ -180,7 +191,7 @@ public class profileInfoPageController {
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
         List<String> list = databaseAdapter.loginUserSql(currentUser.getUsername());
         currentUser = new Customer(list.get(5), list.get(6), list.get(7), list.get(2), list.get(3), list.get(1), list.get(4), list.get(8));
-        controller.initData(currentUser);
+        controller.initData(currentUser, orderArray, cartCount, totalPrice, productStockMap);
         stage = (Stage) greenShelfLogo.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

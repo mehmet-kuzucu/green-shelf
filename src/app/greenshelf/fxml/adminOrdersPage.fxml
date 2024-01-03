@@ -40,7 +40,7 @@
          <children>
             <ScrollPane fitToHeight="true" fitToWidth="true" pannable="true" HBox.hgrow="ALWAYS">
                <content>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #2c344b;">
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <center>
@@ -51,7 +51,7 @@
                               </VBox>
                            </center>
                            <top>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Completed" BorderPane.alignment="CENTER">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="31.0" />
                                  </font>
@@ -64,7 +64,7 @@
             </ScrollPane>
             <ScrollPane fitToHeight="true" fitToWidth="true" pannable="true" HBox.hgrow="ALWAYS">
                <content>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #2c344b;">
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <center>
@@ -75,7 +75,7 @@
                               </VBox>
                            </center>
                            <top>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting" BorderPane.alignment="CENTER">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="31.0" />
                                  </font>
@@ -88,7 +88,7 @@
             </ScrollPane>
             <ScrollPane fitToHeight="true" fitToWidth="true" pannable="true" HBox.hgrow="ALWAYS">
                <content>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #2c344b;">
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <center>
@@ -99,7 +99,7 @@
                               </VBox>
                            </center>
                            <top>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="In Delivery" BorderPane.alignment="CENTER">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="In Delivery" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="31.0" />
                                  </font>

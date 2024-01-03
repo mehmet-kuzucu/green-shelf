@@ -2,6 +2,7 @@ package app.greenshelf.controllers;
 
 import java.io.ByteArrayInputStream;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import app.greenshelf.Customer;
@@ -25,9 +26,6 @@ public class shoppingCartPageController {
     private Button buyButton;
 
     @FXML
-    private ImageView profilePhotoImage;
-
-    @FXML
     private ImageView greenShelfLogo;
 
     @FXML
@@ -37,17 +35,23 @@ public class shoppingCartPageController {
     private Stage stage;
     private Scene scene;
     private LinkedList <Order> orderArray;
+    private int cartCount;
+    private double totalPrice;
+    private HashMap<Integer, Double> productStockMap = new HashMap<Integer, Double>();
 
-    public void initData(Customer user, LinkedList <Order> orderArray) {
+
+    public void initData(Customer user, LinkedList <Order> orderArray, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap) {
         currentUser = user;
         this.orderArray = orderArray;
-        //convert byte array back to Image
-        profilePhotoImage.setImage( new Image(new ByteArrayInputStream(Base64.getDecoder().decode(currentUser.getProfilePicture()))));
         //get products from shopping cart
 
         System.out.println("Size of the order array: " + this.orderArray.size());
+        this.cartCount = cartCount;
+        this.totalPrice = totalPrice;
+        this.productStockMap = productStockMap;
+
         for (Order order : this.orderArray) {
-            VBox group = createVboxGroup(this.orderArray.getFirst());
+            VBox group = createVboxGroup(order);
             productsVBox.getChildren().add(group);
         }
 
@@ -57,16 +61,16 @@ public class shoppingCartPageController {
 
     @FXML
     void greenShelfLogoOnMouseClicked() {
-        loadScene("../fxml/customerHome.fxml", currentUser);
+        loadScene("../fxml/customerHome.fxml", currentUser, orderArray, cartCount, totalPrice, productStockMap);
     }
 
-    private void loadScene(String fxmlPath, Customer user) {
+    private void loadScene(String fxmlPath, Customer user, LinkedList <Order> orderArray, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
-            stage = (Stage) profilePhotoImage.getScene().getWindow();
+            stage = (Stage) greenShelfLogo.getScene().getWindow();
             customerHomeController controller = loader.getController();
-            controller.initData(user, orderArray, 0, 0, null);
+            controller.initData(user, orderArray, cartCount, totalPrice, productStockMap);
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
