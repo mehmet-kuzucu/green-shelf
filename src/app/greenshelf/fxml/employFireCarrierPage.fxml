@@ -29,7 +29,7 @@
             <Insets left="25.0" right="25.0" />
          </padding>
          <center>
-            <ImageView fitHeight="75.0" fitWidth="81.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" x="10.0" BorderPane.alignment="CENTER">
+            <ImageView fx:id="greenShelfLogo" fitHeight="75.0" fitWidth="81.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#greenShelfLogoOnMouseClicked" pickOnBounds="true" preserveRatio="true" x="10.0" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../images/logo-modified.png" />
                </image>
@@ -60,7 +60,7 @@
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
          </padding>
          <left>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Employees: 5" BorderPane.alignment="CENTER">
+            <Text fx:id="totalEmployeeText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Employees: 5" BorderPane.alignment="CENTER">
                <font>
                   <Font size="31.0" />
                </font>

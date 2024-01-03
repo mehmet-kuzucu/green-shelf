@@ -44,16 +44,39 @@ public class employFireCarrierPageController {
     @FXML
     private TilePane tilePane;
 
+    @FXML
+    private Text totalEmployeeText;
+
+    @FXML
+    private ImageView greenShelfLogo;
+
+    int employeeCount = 0;
+
     public void initData(Admin admin, employFireCarrierPageController controller){
         this.controller = controller;
         this.admin = admin;
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
         List<Carrier> carriers = databaseAdapter.getCarriers();
+        
         for(Carrier carrier : carriers){
             VBox carrierInfo = createVBox(carrier);
             tilePane.getChildren().add(carrierInfo);
+            employeeCount++;
         }
         databaseAdapter.closeConnection();
+        totalEmployeeText.setText(employeeCount + " Employees");
+    }
+
+    @FXML
+    void greenShelfLogoOnMouseClicked(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/adminHomePage.fxml"));
+        Parent root = loader.load();
+        stage = (Stage) greenShelfLogo.getScene().getWindow();
+        adminHomePageController controller = loader.getController();
+        controller.initData(admin,root,controller);
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

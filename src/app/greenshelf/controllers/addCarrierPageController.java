@@ -64,7 +64,7 @@ public class addCarrierPageController {
 
     @FXML
     void addToCarrierClicked(MouseEvent event) throws IOException {
-        if (checkEmptyPlaces(name.getText(), surname.getText(), password.getText(), email.getText(), phone.getText(), username.getText())) {
+        if (!checkEmptyPlaces(name.getText(), surname.getText(), password.getText(), email.getText(), phone.getText(), username.getText())) {
             emptyPlaces.setText("Please fill all the places");
         }
         else if (checkIfUsernameExists(username.getText())) {
