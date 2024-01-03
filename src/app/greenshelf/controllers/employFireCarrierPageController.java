@@ -133,6 +133,23 @@ public class employFireCarrierPageController {
         });
         Button removeButton = new Button("Remove");
 
+        removeButton.setOnAction(e -> {
+            DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+            try {
+                databaseAdapter.deleteCarrier(carrier.getUsername());
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            try {
+                
+                refreshPage();
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            databaseAdapter.closeConnection();
+        });
         carrierInfo.getChildren().addAll(
                 imageView, nameTextField, surnameTextField,
                 phoneTextField, emailTextField, passwordField, totalDeliveriesText,

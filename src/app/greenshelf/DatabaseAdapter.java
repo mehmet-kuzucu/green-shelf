@@ -441,6 +441,22 @@ public class DatabaseAdapter {
         System.out.println("Carrier updated successfully");
     }
 
+
+    public void deleteCarrier(String username) throws SQLException{
+        /* delete carrier from database */
+        
+        String url = "jdbc:mysql://localhost:3306/javafxdb";
+        zorunlu user = new zorunlu();
+        Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+        String query = "DELETE FROM user WHERE username = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, username);
+            preparedStatement.executeUpdate();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public String getAddress(String userid){
         String address = "";
         try{
