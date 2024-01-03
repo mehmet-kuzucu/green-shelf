@@ -58,7 +58,6 @@ public class adminHomePageController {
         // Add the VBox to the ScrollPane
     
         dbAdapter.closeConnection();
-        System.out.println("kasldnlkasnd");
     
     }
 

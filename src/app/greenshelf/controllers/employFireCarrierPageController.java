@@ -46,7 +46,6 @@ public class employFireCarrierPageController {
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
         List<Carrier> carriers = databaseAdapter.getCarriers();
         for(Carrier carrier : carriers){
-            System.out.println(carrier.getName());
             VBox carrierInfo = createVBox(carrier);
             tilePane.getChildren().add(carrierInfo);
         }

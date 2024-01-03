@@ -66,7 +66,6 @@ public class profileInfoPageController {
     public void initData(Customer user) {
         this.currentUser = user;
         nameDescription.setText(currentUser.getName() + " '" + currentUser.getUsername() + "' " + currentUser.getSurname());
-        System.out.println(currentUser.getName());
         profilePhotoImage.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(currentUser.getProfilePicture()))));
         changeEmailField.setText(currentUser.getEmail());
         changeAddressField.setText(currentUser.getAddress());
@@ -138,8 +137,6 @@ public class profileInfoPageController {
     @FXML
     void changeProfilePhotoButtonOnMouseClicked(MouseEvent event)
     {
-        System.out.println("changeProfilePhotoButtonOnMouseClicked");
-
         encodedImage = encodeImageToBase64();
         decodeBase64ToImage(encodedImage);
     }
@@ -158,14 +155,12 @@ public class profileInfoPageController {
 
         if(registerPageController.checkEmailisValid(changeEmailField) == false)
         {
-            System.out.println("Email is not valid");
             editErrorText.setText("Email is not valid");
             changeEmailField.setStyle("-fx-border-color: red");
             return;
         }
         if(registerPageController.checkPhoneisValid(changePhoneField) == false)
         {
-            System.out.println("Phone is not valid");
             editErrorText.setText("Phone is not valid");
             changePhoneField.setStyle("-fx-border-color: red");
             return;

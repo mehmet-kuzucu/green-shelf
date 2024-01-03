@@ -136,7 +136,6 @@ public class DatabaseAdapter {
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
                 ResultSet resultSet = preparedStatement.executeQuery();
-                System.out.println("ADMIN!");
                 // Check if there is a result
                 if (resultSet.next()) {
                     List<String> list = List.of(resultSet.getString("userid"), resultSet.getString("username"), resultSet.getString("email"), resultSet.getString("phone"), resultSet.getString("address"), resultSet.getString("name"), resultSet.getString("surname"), resultSet.getString("password"), resultSet.getString("profilePicture"), resultSet.getString("userType"));
@@ -412,10 +411,7 @@ public class DatabaseAdapter {
         zorunlu user = new zorunlu();
         Connection connection = DriverManager.getConnection(url, user.name, user.pass);
         String query = "UPDATE user SET name = ?, surname = ?, password = ?, email = ?, phone = ? WHERE username = ?";
-        //print the id
-        System.out.println("update carrier");
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            System.out.println("update carrier");
             preparedStatement.setString(1, carrier.getName());
             preparedStatement.setString(2, carrier.getSurname());
             preparedStatement.setString(3, carrier.getPassword());
@@ -509,9 +505,7 @@ public class DatabaseAdapter {
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "UPDATE products SET name = ?, stock = ?, price = ?, threshold = ?, type = ? WHERE id = ?";
             //print the id
-            System.out.println(product.getId());
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                System.out.println("hocam önemli");
                 preparedStatement.setString(1, product.getName());
                 preparedStatement.setDouble(2, product.getStock());
                 preparedStatement.setDouble(3, product.getPrice());
@@ -537,7 +531,6 @@ public class DatabaseAdapter {
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "DELETE FROM products WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                System.out.println("Siliniyor...");
                 preparedStatement.setInt(1, id);
                 preparedStatement.executeUpdate();
             }
