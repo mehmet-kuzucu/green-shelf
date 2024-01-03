@@ -152,7 +152,19 @@ public class employFireCarrierPageController {
             }
             else {
                 DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+                // TODO: CHECK PHONE NUMBER AND EMAIL
                 Carrier carrier2 = new Carrier(nameTextField.getText(), surnameTextField.getText(), passwordField.getText(), emailTextField.getText(), phoneTextField.getText(), carrier.getUsername(), null, carrier.getProfilePicture());
+                if  (databaseAdapter.checkEmailSql(carrier2.getUsername(), carrier2.getEmail()))
+                {
+                    totalDeliveriesText.setText("Email is already taken");
+                    totalDeliveriesText.setFill(javafx.scene.paint.Color.RED);
+                    return;
+                }else if (databaseAdapter.checkPhoneSql(carrier2.getUsername(), carrier2.getPhone()))
+                {
+                    totalDeliveriesText.setText("Phone number is already taken");
+                    totalDeliveriesText.setFill(javafx.scene.paint.Color.RED);
+                    return;
+                }
                 try {
                     databaseAdapter.updateCarrier(carrier2);
                     totalDeliveriesText.setText("Updated successfully");
