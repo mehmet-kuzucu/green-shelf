@@ -166,6 +166,7 @@
 }
 
 #button {
+    -fx-padding: 3;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
     -fx-border-color: linear-gradient(to right, #00fff2, #1900ff);

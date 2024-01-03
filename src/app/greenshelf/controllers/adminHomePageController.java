@@ -155,6 +155,7 @@ public class adminHomePageController {
         emptyPlaces.setStyle("-fx-fill: red;");
         thresholdField.setText((product.getIsPiece() ? Integer.valueOf((int)product.getThreshold()).toString() : Double.valueOf(product.getThreshold()).toString()));
         Button updateButton = new Button("Update");
+        updateButton.setId("button");
         updateButton.setOnMouseClicked(e -> {
             addProductPageController addProductPageController = new addProductPageController();
 
@@ -191,6 +192,7 @@ public class adminHomePageController {
         // Create an inner VBox with text fields and button
         VBox innerVBox2 = new VBox();
         Button removeButton = new Button("Remove");
+        removeButton.setId("button");
         removeButton.setOnMouseClicked(e -> {
             DatabaseAdapter dbAdapter = new DatabaseAdapter();
             dbAdapter.removeProduct(product.getId());
