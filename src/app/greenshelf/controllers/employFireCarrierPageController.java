@@ -93,22 +93,22 @@ public class employFireCarrierPageController {
         imageView.setPreserveRatio(true);
 
         TextField nameTextField = new TextField();
-        nameTextField.setPromptText(carrier.getName());
+        nameTextField.setText(carrier.getName());
 
         TextField surnameTextField = new TextField();
-        surnameTextField.setPromptText(carrier.getSurname());
+        surnameTextField.setText(carrier.getSurname());
 
         TextField usernameTextField = new TextField();
-        usernameTextField.setPromptText(carrier.getUsername());
+        usernameTextField.setText(carrier.getUsername());
 
         TextField phoneTextField = new TextField();
-        phoneTextField.setPromptText(carrier.getPhone());
+        phoneTextField.setText(carrier.getPhone());
 
         TextField emailTextField = new TextField();
-        emailTextField.setPromptText(carrier.getEmail());
+        emailTextField.setText(carrier.getEmail());
 
         PasswordField passwordField = new PasswordField();
-        passwordField.setPromptText(carrier.getPassword());
+        passwordField.setText(carrier.getPassword());
 
         Text totalDeliveriesText = new Text("Total Deliveries");
         totalDeliveriesText.setFill(javafx.scene.paint.Color.WHITE);
