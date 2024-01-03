@@ -76,9 +76,9 @@
          <left>
             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="15.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onMouseClicked="#recruitCarrierMouseClicked" text="Recruit/Fire Carrier" />
-                  <Button fx:id="adminOrdersButton" mnemonicParsing="false" onMouseClicked="#adminOrdersButtonOnMouseClicked" text="Orders" />
-                  <Button mnemonicParsing="false" text="Charts" />
+                  <Button id="button" mnemonicParsing="false" onMouseClicked="#recruitCarrierMouseClicked" text="Recruit/Fire Carrier" />
+                  <Button id="button" fx:id="adminOrdersButton" mnemonicParsing="false" onMouseClicked="#adminOrdersButtonOnMouseClicked" text="Orders" />
+                  <Button id="button" mnemonicParsing="false" text="Charts" />
                </children>
             </HBox>
          </left>
