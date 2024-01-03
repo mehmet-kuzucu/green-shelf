@@ -80,7 +80,7 @@ public class employFireCarrierPageController {
 
     public VBox createVBox(Carrier carrier){
         VBox carrierInfo = new VBox();
-        carrierInfo.setId("carrierInfo"); // Make sure to define the CSS styles accordingly
+        carrierInfo.setId("productInfo"); // Make sure to define the CSS styles accordingly
         carrierInfo.setAlignment(javafx.geometry.Pos.CENTER);
         carrierInfo.setPrefHeight(400.0);
         carrierInfo.setPrefWidth(200.0);
