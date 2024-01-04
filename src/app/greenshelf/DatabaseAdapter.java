@@ -529,16 +529,16 @@ public class DatabaseAdapter {
         }
     }
 
-    public void changeOrderStatus(int id, String status) throws SQLException{
+    public void changeOrderStatus(String orderID, String status) throws SQLException{
         /* delete carrier from database */
         
         String url = "jdbc:mysql://localhost:3306/javafxdb";
         zorunlu user = new zorunlu();
         Connection connection = DriverManager.getConnection(url, user.name, user.pass);
-        String query = "UPDATE orders SET status = ? WHERE id = ?";
+        String query = "UPDATE orders SET status = ? WHERE orderid = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, status);
-            preparedStatement.setInt(2, id);
+            preparedStatement.setString(2, orderID);
             preparedStatement.executeUpdate();
         }
         catch (Exception e) {

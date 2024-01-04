@@ -7,6 +7,7 @@ import app.greenshelf.Admin;
 import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Order;
+import app.greenshelf.Product;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -104,22 +105,30 @@ public class adminOrdersPageController {
         orderDetails.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
         Text id = new Text(order.getOrderID() + "");
         id.setFill(Color.WHITE);
-        Text productInfo = new Text("Hocam bu Product Info");
-        productInfo.setFill(Color.WHITE);
-        Text customerInfo = new Text(order.getId()+"");
-        customerInfo.setFill(Color.WHITE);
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
         Customer customer = dbAdapter.getUserFromId(order.getId());
+        Text productInfo = new Text();
+        productInfo.setFill(Color.WHITE);
+        Text customerInfo = new Text(customer.getName() + " " + customer.getSurname());
+        customerInfo.setFill(Color.WHITE);
         String addressString = customer.getAddress();
         Text address = new Text(addressString);
         address.setFill(Color.WHITE);
         dbAdapter.closeConnection();
         //TODO: burayı düzgünce parse edeceğiz
+        Double totalPrice = 0.0;
         for (Order order2 : orderMap.get(order.getOrderID())) {
-            productInfo.setText(productInfo.getText() + "\n" + order2.getProductID() + " " + order2.getAmount() + " " + order2.getPrice() + "₺");
+            Product product = dbAdapter.getProductFromId(order2.getProductID());
+            String amountString = String.valueOf(order.getAmount());
+            int indexOfDot = amountString.indexOf(".");
+            if (indexOfDot != -1) {
+                amountString = amountString.substring(0, indexOfDot);
+            }
+            productInfo.setText(productInfo.getText() + (product.getIsPiece() ? amountString : order2.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + product.getName() + (orderMap.get(order.getOrderID()).indexOf(order2) == orderMap.get(order.getOrderID()).size() - 1 ? "": "\n"));
+            totalPrice += order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2);
         }
-        Text totalPrice = new Text(order.getPrice() + "₺");
-        totalPrice.setFill(Color.WHITE);
+        Text totalPriceText = new Text(totalPrice + "₺");
+        totalPriceText.setFill(Color.WHITE);
         Text deliveryDateTime = new Text(order.getDate());
         deliveryDateTime.setFill(Color.WHITE);
 
@@ -132,14 +141,16 @@ public class adminOrdersPageController {
             productInfo, 
             customerInfo, 
             address, 
-            totalPrice, 
+            totalPriceText, 
             deliveryDateTime, 
             cancelButton
             );
             cancelButton.setOnMouseClicked((event) -> {
+                
                 DatabaseAdapter databaseAdapter = new DatabaseAdapter();
                 try {
-                    databaseAdapter.changeOrderStatus(order.getId(), "cancelled");
+                    System.out.println("Order cancelled");
+                    databaseAdapter.changeOrderStatus(order.getOrderID(), "cancelled");
                 } catch (SQLException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -161,7 +172,7 @@ public class adminOrdersPageController {
                 productInfo, 
                 customerInfo, 
                 address, 
-                totalPrice, 
+                totalPriceText, 
                 deliveryDateTime
                 );
             }
@@ -175,7 +186,7 @@ public class adminOrdersPageController {
                 productInfo, 
                 customerInfo, 
                 address, 
-                totalPrice, 
+                totalPriceText, 
                 deliveryDateTime
                 );
             }
