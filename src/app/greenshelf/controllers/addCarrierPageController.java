@@ -89,7 +89,7 @@ public class addCarrierPageController {
                 return;
             }
             Carrier carrier = new Carrier(name.getText(), surname.getText(), password.getText(), email.getText(), phone.getText(), username.getText(), "carrier", encodedImage);
-            carrier.setAdress("Default");
+            carrier.setAddress("Default");
             dbAdapter.registerUserSql(carrier);
             dbAdapter.closeConnection();
             emptyPlaces.setText("Carrier added successfully");
