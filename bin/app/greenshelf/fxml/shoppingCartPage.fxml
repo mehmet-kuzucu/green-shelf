@@ -52,7 +52,7 @@
    <bottom>
       <BorderPane BorderPane.alignment="CENTER">
          <left>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total price: 19.99₺ \n%20 VAT: 10,80 \n Total ınc. VAT: 64,80" BorderPane.alignment="CENTER">
+            <Text fx:id="totalPriceText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total price: 19.99₺ \n%20 VAT: 10,80 \n Total ınc. VAT: 64,80" BorderPane.alignment="CENTER">
                <font>
                   <Font size="31.0" />
                </font>

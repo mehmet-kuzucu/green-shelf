@@ -20,7 +20,6 @@ public class DatabaseAdapter {
             statement.executeUpdate("USE javafxdb;");
             // Create a table in the database
             String query = "CREATE TABLE IF NOT EXISTS user (id INT PRIMARY KEY AUTO_INCREMENT, " +
-                                                                        "userid VARCHAR(16), " +
                                                                         "username VARCHAR(50), " +
                                                                         "email VARCHAR(50), " +
                                                                         "phone VARCHAR(50), " +
@@ -30,7 +29,6 @@ public class DatabaseAdapter {
                                                                         "password VARCHAR(50), " +
                                                                         "profilePicture LONGBLOB, " +
                                                                         "userType VARCHAR(50), " +
-                                                                        "UNIQUE(userid), " +
                                                                         "UNIQUE(username), " +
                                                                         "UNIQUE(email), " +
                                                                         "UNIQUE(phone)" + 
@@ -156,7 +154,7 @@ public class DatabaseAdapter {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 // Check if there is a result
                 if (resultSet.next()) {
-                    List<String> list = List.of(resultSet.getString("userid"), resultSet.getString("username"), resultSet.getString("email"), resultSet.getString("phone"), resultSet.getString("address"), resultSet.getString("name"), resultSet.getString("surname"), resultSet.getString("password"), resultSet.getString("profilePicture"), resultSet.getString("userType"));
+                    List<String> list = List.of(resultSet.getString("username"), resultSet.getString("email"), resultSet.getString("phone"), resultSet.getString("address"), resultSet.getString("name"), resultSet.getString("surname"), resultSet.getString("password"), resultSet.getString("profilePicture"), resultSet.getString("userType"));
                     
                     return list;
                 }
@@ -548,15 +546,15 @@ public class DatabaseAdapter {
         }
     }
 
-    public String getAddress(String userid){
+    public String getAddress(int id){
         String address = "";
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
             zorunlu user = new zorunlu();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
-            String query = "SELECT address FROM user WHERE userid = ?";
+            String query = "SELECT address FROM user WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, userid);
+            preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 address = resultSet.getString("address");
@@ -626,7 +624,7 @@ public class DatabaseAdapter {
 
     public List<Order> isInCart(int userid)
     {
-        List<Order> orders = null;
+        List<Order> orders = new ArrayList<>();
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
             zorunlu user = new zorunlu();
@@ -650,6 +648,53 @@ public class DatabaseAdapter {
         }
         System.out.println("Size BU: "+ orders.size());
         return orders;
+    }
+
+    public void deleteFromCart(Order order)
+    {
+        try
+        {
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+
+            String query = "DELETE FROM orders WHERE orderid = ? AND productid = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, order.getOrderID());
+                preparedStatement.setInt(2, order.getProductID());
+                preparedStatement.executeUpdate();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public Order getOrderFromId(String orderID, int productID)
+    {
+        try
+        {
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "SELECT * FROM orders WHERE orderid = ? AND productid = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, orderID);
+            preparedStatement.setInt(2, productID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                Order order = new Order(resultSet.getInt("id"), resultSet.getString("orderid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"));
+                return order;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void updateProduct(Product product){

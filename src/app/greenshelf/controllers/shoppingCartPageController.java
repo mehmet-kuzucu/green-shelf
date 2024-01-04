@@ -1,6 +1,7 @@
 package app.greenshelf.controllers;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -37,6 +38,9 @@ public class shoppingCartPageController {
     @FXML
     private VBox productsVBox;
 
+    @FXML
+    private Text totalPriceText;
+
     private Customer currentUser;
     private Stage stage;
     private Scene scene;
@@ -46,6 +50,7 @@ public class shoppingCartPageController {
     private HashMap<Integer, Double> productStockMap = new HashMap<Integer, Double>();
     private List <Order> shoppingCart;
     private String orderID;
+    private double vat = 0.01;
 
 
     public void initData(Customer user, List <Order> shoppingCart, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap, String orderID) {
@@ -60,6 +65,8 @@ public class shoppingCartPageController {
         this.totalPrice = totalPrice;
         this.productStockMap = productStockMap;
 
+        totalPriceText.setText("Total Price: " + totalPrice + "₺" +"\n" + "Total Products: " + cartCount + " products" + "\n" + "VAT: " + Math.round(totalPrice*vat*100)/100.0 + "₺" + "\n" + "Total Price with VAT: " + (totalPrice + Math.round( + totalPrice*vat*100)/100.0) + "₺");
+        totalPriceText.setFont(new Font(13));
         for (Order order : this.shoppingCart) {
             VBox group = createVboxGroup(order);
             productsVBox.getChildren().add(group);
@@ -138,6 +145,28 @@ public class shoppingCartPageController {
         Button deleteButton = new Button();
         deleteButton.setId("deleteButton");
         deleteButton.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
+        deleteButton.setOnMouseClicked((MouseEvent event) -> {
+            System.out.println("Delete button clicked");
+            DatabaseAdapter dbAdapter = new DatabaseAdapter();
+            Order orderToDelete = dbAdapter.getOrderFromId(orderID, order.getProductID());
+            dbAdapter.deleteFromCart(orderToDelete);
+            totalPrice -= order.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2);
+            cartCount--;
+            for (int i = 0; i < shoppingCart.size(); i++) {
+                if (shoppingCart.get(i).getProductID() == order.getProductID()) {
+                    shoppingCart.remove(i);
+                    break;
+                }
+            }
+            System.out.println("Shopping cart size: " + shoppingCart.size());
+            productStockMap.put(orderToDelete.getProductID(), productStockMap.get(orderToDelete.getProductID()) + orderToDelete.getAmount());
+            try {
+                refreshPage();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        });
         VBox rightVBox = new VBox();
         rightVBox.setAlignment(javafx.geometry.Pos.CENTER);
         rightVBox.getChildren().addAll(deleteButton);
@@ -164,6 +193,17 @@ public class shoppingCartPageController {
         productInfo.getChildren().addAll(borderPane);
         return productInfo;
         
+    }
+
+    public void refreshPage() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/shoppingCartPage.fxml"));
+        Parent root = loader.load();
+        shoppingCartPageController controller = loader.getController();
+        controller.initData(currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
+        stage = (Stage) buyButton.getScene().getWindow();
+        scene = new Scene(root,buyButton.getScene().getWidth(),buyButton.getScene().getHeight());
+        stage.setScene(scene);
+        stage.show();
     }
 
 

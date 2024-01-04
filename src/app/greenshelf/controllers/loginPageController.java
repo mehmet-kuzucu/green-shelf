@@ -56,8 +56,8 @@ public class loginPageController {
         List<String> userInformation = databaseAdapter.loginUserSql(usernameField.getText());
     
         if (userInformation != null) {
-            String userType = userInformation.get(9);
-            String password = userInformation.get(7);
+            String userType = userInformation.get(8);
+            String password = userInformation.get(6);
             
     
             if ("customer".equals(userType) && password.equals(passwordField.getText())) {
@@ -90,21 +90,21 @@ public class loginPageController {
     //create customer object
     Customer createCustomer(List<String> list) throws SQLException
     {
-        Customer c = new Customer(list.get(5), list.get(6), list.get(7), list.get(2), list.get(3), list.get(1), list.get(4), list.get(8));
+        Customer c = new Customer(list.get(4), list.get(5), list.get(6), list.get(1), list.get(2), list.get(0), list.get(3), list.get(7));
         return c;
     }
 
     //create admin object
     Admin createAdmin(List<String> list) throws SQLException
     {
-        Admin a = new Admin(list.get(5), list.get(6), list.get(7), list.get(2), list.get(3), list.get(1));
+        Admin a = new Admin(list.get(4), list.get(5), list.get(6), list.get(1), list.get(2), list.get(0));
         return a;
     }
 
     //TODO: carrier classı oluşturulduğunda bu fonksiyonu da yaz
     Carrier createCarrier(List<String> list) throws SQLException
     {
-        Carrier c = new Carrier(list.get(5), list.get(6), list.get(7), list.get(2), list.get(3), list.get(1), list.get(4), list.get(8));
+        Carrier c = new Carrier(list.get(4), list.get(5), list.get(6), list.get(1), list.get(2), list.get(0), list.get(3), list.get(7));
         return c;
     }
     

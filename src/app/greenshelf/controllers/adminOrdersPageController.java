@@ -87,7 +87,7 @@ public class adminOrdersPageController {
         Text customerInfo = new Text(order.getId()+"");
         customerInfo.setFill(Color.WHITE);
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
-        String addressString = dbAdapter.getAddress(order.getId()+"");
+        String addressString = dbAdapter.getAddress(order.getId());
         Text address = new Text(addressString);
         address.setFill(Color.WHITE);
         dbAdapter.closeConnection();
