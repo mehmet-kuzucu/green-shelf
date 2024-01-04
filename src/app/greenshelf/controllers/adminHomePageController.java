@@ -9,6 +9,7 @@ import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Product;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -107,9 +108,9 @@ public class adminHomePageController {
     public VBox createVboxGroup(Product product){
         // Create the VBox with specified properties
         VBox outerVBox = new VBox();
-        
         outerVBox.setStyle("fx-background-color: #f5429b;");
         outerVBox.setPadding(new javafx.geometry.Insets(5));
+        outerVBox.setAlignment(Pos.CENTER);
         outerVBox.setSpacing(15);
         outerVBox.setPrefWidth(200);
         outerVBox.setPrefHeight(400);
@@ -122,6 +123,7 @@ public class adminHomePageController {
 
         // Create an inner VBox with two text fields
         VBox innerVBox1 = new VBox();
+        innerVBox1.setAlignment(Pos.CENTER);
         TextField nameField = new TextField();
         nameField.setText(product.getName());
         TextField priceField = new TextField();
@@ -155,7 +157,10 @@ public class adminHomePageController {
         emptyPlaces.setStyle("-fx-fill: red;");
         thresholdField.setText((product.getIsPiece() ? Integer.valueOf((int)product.getThreshold()).toString() : Double.valueOf(product.getThreshold()).toString()));
         Button updateButton = new Button("Update");
+        /* add space to the top of updateButton */
+        updateButton.setPadding(new javafx.geometry.Insets(5));
         updateButton.setId("button");
+        updateButton.setStyle("-fx-margin-top: 50;");
         updateButton.setOnMouseClicked(e -> {
             addProductPageController addProductPageController = new addProductPageController();
 
@@ -192,6 +197,7 @@ public class adminHomePageController {
         // Create an inner VBox with text fields and button
         VBox innerVBox2 = new VBox();
         Button removeButton = new Button("Remove");
+        removeButton.setPadding(new javafx.geometry.Insets(5));
         removeButton.setId("button");
         removeButton.setOnMouseClicked(e -> {
             DatabaseAdapter dbAdapter = new DatabaseAdapter();
@@ -204,7 +210,8 @@ public class adminHomePageController {
             }
         });
         innerVBox2.getChildren().addAll(quantityHbox, thresholdHbox, updateButton, removeButton, emptyPlaces);
-
+        innerVBox2.setAlignment(Pos.CENTER);
+        innerVBox1.setAlignment(Pos.CENTER);
         // Add components to the outer VBox
         outerVBox.getChildren().addAll(imageView, innerVBox1, innerVBox2);
         return outerVBox;
