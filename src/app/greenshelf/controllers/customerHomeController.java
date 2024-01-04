@@ -25,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 
 public class customerHomeController {
 
@@ -56,15 +57,15 @@ public class customerHomeController {
     private Scene scene;
     private Customer currentUser;
     //private LinkedList <Order> ordersArray = new LinkedList<Order>();
-    private int cartCount = 0;
-    private double totalPrice = 0;
+    private int cartCount;
+    private double totalPrice;
     private HashMap<Integer, Double> productStockMap = new HashMap<Integer, Double>();
     private String orderID;
-    List<Order> shoppingCart;
+    List <Order> shoppingCart = new ArrayList <Order>();
 
     @FXML
     void shoppingCartButtonButtonOnMouseClicked(MouseEvent event) {
-        loadScene("../fxml/shoppingCartPage.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap);
+        loadScene("../fxml/shoppingCartPage.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
         /* 
         databaseAdapter = new DatabaseAdapter();
         Order order = new Order(currentUser.getUserID(), 1, 1, "2021-05-05", "pending", 1);
@@ -75,10 +76,10 @@ public class customerHomeController {
 
     @FXML
     void profilePhotoImageOnMouseClicked(MouseEvent event) {
-        loadScene("../fxml/profileInfoPage.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap);
+        loadScene("../fxml/profileInfoPage.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
     }
 
-    private void loadScene(String fxmlPath, Customer user, List <Order> order, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap) {
+    private void loadScene(String fxmlPath, Customer user, List <Order> order, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap, String orderID) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
@@ -89,11 +90,11 @@ public class customerHomeController {
             
             if (fxmlPath.equals("../fxml/profileInfoPage.fxml")) {
                 profileInfoPageController controller = loader.getController();
-                controller.initData(user, order, cartCount, totalPrice, productStockMap); // Pass the User object to the controller
+                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
             }
             else if (fxmlPath.equals("../fxml/shoppingCartPage.fxml")) {
                 shoppingCartPageController controller = loader.getController();
-                controller.initData(user, order, cartCount, totalPrice, productStockMap); // Pass the User object to the controller
+                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
             }
             
             
@@ -102,7 +103,7 @@ public class customerHomeController {
         }
     }
 
-    private String getRandomOrderID()
+    public String getRandomOrderID()
     {
         String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         SecureRandom random = new SecureRandom();
@@ -170,6 +171,7 @@ public class customerHomeController {
                     }
                 }
             } else {
+                System.out.println(orderID);
                 Order order = new Order(dbAdapter.getUserIDFromUsername(currentUser.getUsername()), orderID, product.getId(), spinner.getValue(), "", "inCart", product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2);
                 
                 dbAdapter.addOrdersql(order);
@@ -198,6 +200,9 @@ public class customerHomeController {
 
 
     private boolean checkIfOrderExists(int productID) {
+        if (shoppingCart == null) {
+            return false;
+        }
         for (Order order : shoppingCart) {
             if (order.getProductID() == productID) {
                 return true;
@@ -210,7 +215,7 @@ public class customerHomeController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/customerHome.fxml"));
         Parent root = loader.load();
         customerHomeController controller = loader.getController();
-        controller.initData(currentUser, shoppingCart, cartCount, totalPrice, productStockMap);
+        controller.initData(currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
         stage = (Stage) shoppingCartButton.getScene().getWindow();
         scene = new Scene(root,shoppingCartButton.getScene().getWidth(),shoppingCartButton.getScene().getHeight());
         stage.setScene(scene);
@@ -243,15 +248,34 @@ public class customerHomeController {
         // Add the VBox to the ScrollPane
         
         shoppingCart = dbAdapter.isInCart(dbAdapter.getUserIDFromUsername(currentUser.getUsername()));
+        if (shoppingCart != null && shoppingCart.size() != 0)
+        {
+            System.out.println(shoppingCart.size());
+            orderID = shoppingCart.get(0).getOrderID();
+            cartCount = shoppingCart.size();
+            for (Order order : shoppingCart) {
+                totalPrice += order.getPrice() * order.getAmount();
+            }
+        } 
+        else 
+        {
+            orderID = getRandomOrderID();
+            cartCount = 0;
+            totalPrice = 0;
+            shoppingCart = new ArrayList<Order>();
+        }
+        cartCountText.setText(String.valueOf(cartCount));
+        totalPriceText.setText(String.valueOf("Total price: " + totalPrice));
         dbAdapter.closeConnection();
     }
 
-    public void initData(Customer user, List<Order> shoppingCart, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap) {
+    public void initData(Customer user, List<Order> shoppingCart, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap, String orderID) {
         this.currentUser = user;
         this.shoppingCart = shoppingCart;
         this.cartCount = cartCount;
         this.totalPrice = totalPrice;
         this.productStockMap = productStockMap;
+        this.orderID = orderID;
         profilePhotoImage.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(currentUser.getProfilePicture()))));
         welcomeText.setText("Welcome, " + currentUser.getName() + "!");
 

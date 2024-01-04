@@ -608,10 +608,11 @@ public class DatabaseAdapter {
             String url = "jdbc:mysql://localhost:3306/javafxdb";
             zorunlu user = new zorunlu();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
-            String query = "UPDATE orders SET amount = ? WHERE id = ?";
+            String query = "UPDATE orders SET amount = ? WHERE orderid = ? AND productid = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setDouble(1, order.getAmount());
-                preparedStatement.setInt(2, order.getId());
+                preparedStatement.setString(2, order.getOrderID());
+                preparedStatement.setInt(3, order.getProductID());
                 preparedStatement.executeUpdate();
             }
             catch (Exception e) {
@@ -625,7 +626,7 @@ public class DatabaseAdapter {
 
     public List<Order> isInCart(int userid)
     {
-        List<Order> orders = new ArrayList<>();
+        List<Order> orders = null;
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
             zorunlu user = new zorunlu();
@@ -637,11 +638,17 @@ public class DatabaseAdapter {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 Order order = new Order(resultSet.getInt("id"), resultSet.getString("orderid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"));
+                if (orders == null)
+                {
+                    orders = new ArrayList<>();
+                    
+                }
                 orders.add(order);
             }
         } catch (SQLException e) {
             e.getStackTrace();
         }
+        System.out.println("Size BU: "+ orders.size());
         return orders;
     }
 

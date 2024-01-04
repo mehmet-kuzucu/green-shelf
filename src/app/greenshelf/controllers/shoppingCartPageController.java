@@ -45,11 +45,14 @@ public class shoppingCartPageController {
     private double totalPrice;
     private HashMap<Integer, Double> productStockMap = new HashMap<Integer, Double>();
     private List <Order> shoppingCart;
+    private String orderID;
 
 
-    public void initData(Customer user, List <Order> shoppingCart, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap) {
+    public void initData(Customer user, List <Order> shoppingCart, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap, String orderID) {
         currentUser = user;
         this.shoppingCart = shoppingCart;
+        this.orderID = orderID;
+        System.out.println("Shopping cartta Order ID: " + orderID);
         //get products from shopping cart
 
         System.out.println("Size of the order array: " + this.shoppingCart.size());
@@ -68,16 +71,16 @@ public class shoppingCartPageController {
 
     @FXML
     void greenShelfLogoOnMouseClicked() {
-        loadScene("../fxml/customerHome.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap);
+        loadScene("../fxml/customerHome.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
     }
 
-    private void loadScene(String fxmlPath, Customer user, List <Order> orderArray, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap) {
+    private void loadScene(String fxmlPath, Customer user, List <Order> orderArray, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap, String orderID) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
             stage = (Stage) greenShelfLogo.getScene().getWindow();
             customerHomeController controller = loader.getController();
-            controller.initData(user, orderArray, cartCount, totalPrice, productStockMap);
+            controller.initData(user, orderArray, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
             scene = new Scene(root,greenShelfLogo.getScene().getWidth(),greenShelfLogo.getScene().getHeight());
             stage.setScene(scene);
             stage.show();
