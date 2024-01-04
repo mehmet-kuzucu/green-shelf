@@ -10,12 +10,14 @@ import app.greenshelf.Customer;
 import app.greenshelf.Order;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -23,6 +25,15 @@ public class carrierHomePageController {
     Carrier carrier;
     private Stage stage;
     private Scene scene;
+     @FXML
+    private VBox availableOrders;
+
+    @FXML
+    private VBox completedOrders;
+
+    @FXML
+    private VBox currentOrders;
+
     @FXML
     private ImageView profilePhoto;
 
@@ -69,5 +80,30 @@ public class carrierHomePageController {
         }
     
     }
+
+    private void createVBox(Order order)
+    {
+        VBox vbox = new VBox();
+        vbox.setId("productInfo"); // Make sure to define the CSS styles accordingly
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setMaxHeight(200.0);
+        vbox.setMinHeight(200.0);
+        vbox.setPrefHeight(200.0);
+        vbox.setPrefWidth(100.0);
+        vbox.setSpacing(5.0);
+        vbox.setStyle("-fx-background-color: #beffbc;");
+
+        // Create some Text nodes with the given text
+        Text orderId = new Text("#" + order.getId());
+        Text productNames = new Text("Product names");
+        Text customerInfo = new Text("Customer Info");
+        Text address = new Text("Address");
+        Text totalPrice = new Text("Total price");
+        Text deliveryDate = new Text("Delivery date and time");
+
+        // Add the Text nodes to the VBox as children
+        vbox.getChildren().addAll(orderId, productNames, customerInfo, address, totalPrice, deliveryDate);
+    }
+
 
 }

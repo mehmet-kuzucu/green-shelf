@@ -13,7 +13,7 @@
    <top>
       <BorderPane prefHeight="63.0" prefWidth="960.0" style="-fx-background-color: #2A6D72;" BorderPane.alignment="CENTER">
          <left>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile Information" BorderPane.alignment="CENTER_LEFT">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Statistics" BorderPane.alignment="CENTER_LEFT">
                <font>
                   <Font size="23.0" />
                </font>
