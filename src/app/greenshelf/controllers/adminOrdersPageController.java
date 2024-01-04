@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import app.greenshelf.Admin;
+import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Order;
 import javafx.fxml.FXML;
@@ -17,6 +18,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
+import java.util.HashMap;
+import java.util.ArrayList;
 
 public class adminOrdersPageController {
 
@@ -37,6 +40,8 @@ public class adminOrdersPageController {
     @FXML
     private VBox inDeliveryColumn;
 
+    private HashMap<String, List<Order>> orderMap = new HashMap<String, List<Order>>();
+
 
     @FXML
     void greenShelfLogoOnMouseClicked(MouseEvent event) throws IOException {
@@ -54,22 +59,39 @@ public class adminOrdersPageController {
         currentUser = user;
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
         List<Order> orders = dbAdapter.getAllOrders();
+        dbAdapter.closeConnection();
         for (Order order : orders) {
+            if (orderMap.containsKey(order.getOrderID())) {
+                List<Order> orderList = orderMap.get(order.getOrderID());
+                orderList.add(order);
+                orderMap.put(order.getOrderID(), orderList);
+            } else {
+                List<Order> orderList = new ArrayList<Order>();
+                orderList.add(order);
+                orderMap.put(order.getOrderID(), orderList);
+            }
+        }
+        //System.out.println(orderMap);
+        //check for unique order ids and add them to the map with the status as the key and the list of orders as the value
+        for (HashMap.Entry<String, List<Order>> order : orderMap.entrySet()) {
             //System.out.println(order.getOrderID());
-            if (order.getStatus().equals("waiting")) {
-                VBox group = createVboxGroup(order);
+            if (order.getValue().get(0).getStatus().equals("waiting")) {
+                VBox group = createVboxGroup(order.getValue().get(0), orderMap);
                 waitingColumn.getChildren().add(group);
-            } else if (order.getStatus().equals("inDelivery")) {
-                VBox group = createVboxGroup(order);
+            } else if (order.getValue().get(0).getStatus().equals("inDelivery")) {
+                VBox group = createVboxGroup(order.getValue().get(0), orderMap);
                 inDeliveryColumn.getChildren().add(group);
-            } else if (order.getStatus().equals("completed") || order.getStatus().equals("cancelled")) {
-                VBox group = createVboxGroup(order);
+            } else if (order.getValue().get(0).getStatus().equals("completed")) {
+                VBox group = createVboxGroup(order.getValue().get(0), orderMap);
+                completedColumn.getChildren().add(group);
+            } else if (order.getValue().get(0).getStatus().equals("cancelled")) {
+                VBox group = createVboxGroup(order.getValue().get(0), orderMap);
                 completedColumn.getChildren().add(group);
             }
         }
     }
 
-    public VBox createVboxGroup(Order order)
+    public VBox createVboxGroup(Order order, HashMap<String, List<Order>> orderMap)
     {
         VBox orderDetails = new VBox();
         orderDetails.setAlignment(javafx.geometry.Pos.CENTER);
@@ -80,17 +102,22 @@ public class adminOrdersPageController {
         orderDetails.setSpacing(5.0);
         orderDetails.setId("orderDetails");
         orderDetails.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
-        Text id = new Text(order.getId() + "");
+        Text id = new Text(order.getOrderID() + "");
         id.setFill(Color.WHITE);
         Text productInfo = new Text("Hocam bu Product Info");
         productInfo.setFill(Color.WHITE);
         Text customerInfo = new Text(order.getId()+"");
         customerInfo.setFill(Color.WHITE);
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
-        String addressString = dbAdapter.getAddress(order.getId());
+        Customer customer = dbAdapter.getUserFromId(order.getId());
+        String addressString = customer.getAddress();
         Text address = new Text(addressString);
         address.setFill(Color.WHITE);
         dbAdapter.closeConnection();
+        //TODO: burayı düzgünce parse edeceğiz
+        for (Order order2 : orderMap.get(order.getOrderID())) {
+            productInfo.setText(productInfo.getText() + "\n" + order2.getProductID() + " " + order2.getAmount() + " " + order2.getPrice() + "₺");
+        }
         Text totalPrice = new Text(order.getPrice() + "₺");
         totalPrice.setFill(Color.WHITE);
         Text deliveryDateTime = new Text(order.getDate());

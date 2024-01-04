@@ -574,7 +574,7 @@ public class DatabaseAdapter {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                Order order = new Order(resultSet.getInt("id"), resultSet.getString("orderid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"));
+                Order order = new Order(resultSet.getInt("userid"), resultSet.getString("orderid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"));
                 orders.add(order);
             }
         } catch (SQLException e) {
@@ -611,6 +611,29 @@ public class DatabaseAdapter {
                 preparedStatement.setDouble(1, order.getAmount());
                 preparedStatement.setString(2, order.getOrderID());
                 preparedStatement.setInt(3, order.getProductID());
+                preparedStatement.executeUpdate();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("Order updated successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void changeOrderStatusAndDate(Order order)
+    {
+        try{
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "UPDATE orders SET status = ?, date = ? WHERE orderid = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, order.getStatus());
+                preparedStatement.setString(2, order.getDate());
+                preparedStatement.setString(3, order.getOrderID());
                 preparedStatement.executeUpdate();
             }
             catch (Exception e) {
@@ -690,6 +713,28 @@ public class DatabaseAdapter {
             while(resultSet.next()){
                 Order order = new Order(resultSet.getInt("id"), resultSet.getString("orderid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"));
                 return order;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Customer getUserFromId(int id)
+    {
+        try
+        {
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "SELECT * FROM user WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                Customer customer = new Customer(resultSet.getString("name"), resultSet.getString("surname"), resultSet.getString("password"), resultSet.getString("email"), resultSet.getString("phone"), resultSet.getString("username"), resultSet.getString("address"), resultSet.getString("profilePicture"));
+                return customer;
             }
         } catch (SQLException e) {
             e.printStackTrace();

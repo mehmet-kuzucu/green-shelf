@@ -71,6 +71,7 @@ public class shoppingCartPageController {
             VBox group = createVboxGroup(order);
             productsVBox.getChildren().add(group);
         }
+        
 
         
         
