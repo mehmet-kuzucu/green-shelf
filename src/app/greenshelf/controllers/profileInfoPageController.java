@@ -58,7 +58,7 @@ public class profileInfoPageController {
     private Text editErrorText;
 
     private Customer currentUser;
-
+    private Carrier currentCarrier;
     @FXML
     private Button changeProfilePhotoButton;
 
@@ -86,9 +86,24 @@ public class profileInfoPageController {
 
     }
 
+    public void initData(Carrier user) {
+        this.currentCarrier = user;
+        nameDescription.setText(currentCarrier.getName() + " '" + currentCarrier.getUsername() + "' " + currentCarrier.getSurname());
+        profilePhotoImage.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(currentCarrier.getProfilePicture()))));
+        changeEmailField.setText(currentCarrier.getEmail());
+        changeAddressField.setText(currentCarrier.getAddress());
+        changePhoneField.setText(currentCarrier.getPhone());
+        changePasswordField.setText(currentCarrier.getPassword());
+        encodedImage = currentCarrier.getProfilePicture();
+
+    }
+
     @FXML
     void greenShelfLogoOnMouseClicked(MouseEvent event) {
-        loadScene("../fxml/customerHome.fxml", currentUser,null,null, orderArray, cartCount, totalPrice, productStockMap);
+        if (currentUser != null)
+            loadScene("../fxml/customerHome.fxml", currentUser,null,null, orderArray, cartCount, totalPrice, productStockMap);
+        else if (currentCarrier != null)
+            loadScene("../fxml/carrierHomePage.fxml",null,null,currentCarrier, orderArray, cartCount, totalPrice, productStockMap);
     }
 
     private void loadScene(String fxmlPath, Customer user, Admin admin, Carrier carrier, LinkedList <Order> orderArray, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap) {
@@ -103,6 +118,10 @@ public class profileInfoPageController {
             if (fxmlPath.equals("../fxml/adminHomePage.fxml")) {
                 adminHomePageController controller = loader.getController();
                 controller.initData(admin,root,controller); // Pass the User object to the controller
+            }
+            if (fxmlPath.equals("../fxml/carrierHomePage.fxml")) {
+                carrierHomePageController controller = loader.getController();
+                controller.initData(carrier); // Pass the User object to the controller
             }
             
             stage = (Stage) greenShelfLogo.getScene().getWindow();
@@ -156,36 +175,105 @@ public class profileInfoPageController {
     @FXML
     void saveButtonOnMouseClicked(MouseEvent event)
     {
-        DatabaseAdapter databaseAdapter = new DatabaseAdapter();
-        registerPageController registerPageController = new registerPageController();
-
-        String new_password = changePasswordField.getText();
-        String new_email = changeEmailField.getText();
-        String new_address = changeAddressField.getText();
-        String new_phone = changePhoneField.getText();
-
-        if(registerPageController.checkEmailisValid(changeEmailField) == false)
+        if(this.currentUser != null)
         {
-            editErrorText.setText("Email is not valid");
-            changeEmailField.setStyle("-fx-border-color: red");
-            return;
+            DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+            registerPageController registerPageController = new registerPageController();
+
+            String new_password = changePasswordField.getText();
+            String new_email = changeEmailField.getText();
+            String new_address = changeAddressField.getText();
+            String new_phone = changePhoneField.getText();
+            if(new_password.equals("") || new_email.equals("") || new_address.equals("") || new_phone.equals(""))
+            {
+                editErrorText.setText("Please fill all the fields");
+                return;
+            }
+            if(registerPageController.checkEmailisValid(changeEmailField) == false)
+            {
+                editErrorText.setText("Email is not valid");
+                changeEmailField.setStyle("-fx-border-color: red");
+                return;
+            }
+            if(registerPageController.checkPhoneisValid(changePhoneField) == false)
+            {
+                editErrorText.setText("Phone is not valid");
+                changePhoneField.setStyle("-fx-border-color: red");
+                return;
+            }
+            databaseAdapter.updateInfo(new_password, new_email, new_address, new_phone, encodedImage, currentUser.getUsername());
+            try {
+                this.refreshPage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        if(registerPageController.checkPhoneisValid(changePhoneField) == false)
+        else if(this.currentCarrier != null)
         {
-            editErrorText.setText("Phone is not valid");
-            changePhoneField.setStyle("-fx-border-color: red");
-            return;
-        }
-        databaseAdapter.updateInfo(new_password, new_email, new_address, new_phone, encodedImage, currentUser.getUsername());
-        try {
-            this.refreshPage();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+            registerPageController registerPageController = new registerPageController();
+
+            String new_password = changePasswordField.getText();
+            String new_email = changeEmailField.getText();
+            String new_address = changeAddressField.getText();
+            String new_phone = changePhoneField.getText();
+            if(changeAddressField.getText().equals("") || changeEmailField.getText().equals("") || changePhoneField.getText().equals("") || changePasswordField.getText().equals(""))
+            {
+                editErrorText.setText("Please fill all the fields");
+                System.out.println("Please fill all the fields");
+                return;
+            }
+            if(registerPageController.checkEmailisValid(changeEmailField) == false)
+            {
+                editErrorText.setText("Email is not valid");
+                changeEmailField.setStyle("-fx-border-color: red");
+                return;
+            }
+            if(registerPageController.checkPhoneisValid(changePhoneField) == false)
+            {
+                editErrorText.setText("Phone is not valid");
+                changePhoneField.setStyle("-fx-border-color: red");
+                return;
+            }
+            databaseAdapter.updateInfo(new_password, new_email, new_address, new_phone, encodedImage, this.currentCarrier.getUsername());
+            try {
+                System.out.println("carrier refreshing page");
+                this.refreshPage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            }
+        
     }
 
     public void refreshPage() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/profileInfoPage.fxml"));
+        if (this.currentUser != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/profileInfoPage.fxml"));
+            Parent root = loader.load();
+            profileInfoPageController controller = loader.getController();
+            DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+            List<String> list = databaseAdapter.loginUserSql(currentUser.getUsername());
+            currentUser = new Customer(list.get(5), list.get(6), list.get(7), list.get(2), list.get(3), list.get(1), list.get(4), list.get(8));
+            controller.initData(currentUser, orderArray, cartCount, totalPrice, productStockMap);
+            stage = (Stage) greenShelfLogo.getScene().getWindow();
+            scene = new Scene(root, greenShelfLogo.getScene().getWidth(), greenShelfLogo.getScene().getHeight());
+            stage.setScene(scene);
+            stage.show();
+        }
+        else if (this.currentCarrier != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/profileInfoPage.fxml"));
+            Parent root = loader.load();
+            profileInfoPageController controller = loader.getController();
+            DatabaseAdapter databaseAdapter = new DatabaseAdapter();
+            List<String> list = databaseAdapter.loginUserSql(currentCarrier.getUsername());
+            currentCarrier = new Carrier(list.get(5), list.get(6), list.get(7), list.get(2), list.get(3), list.get(1), list.get(4), list.get(8));
+            controller.initData(currentCarrier);
+            stage = (Stage) greenShelfLogo.getScene().getWindow();
+            scene = new Scene(root, greenShelfLogo.getScene().getWidth(), greenShelfLogo.getScene().getHeight());
+            stage.setScene(scene);
+            stage.show();
+        }
+        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/profileInfoPage.fxml"));
         Parent root = loader.load();
         profileInfoPageController controller = loader.getController();
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
@@ -195,7 +283,7 @@ public class profileInfoPageController {
         stage = (Stage) greenShelfLogo.getScene().getWindow();
         scene = new Scene(root, greenShelfLogo.getScene().getWidth(), greenShelfLogo.getScene().getHeight());
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
 
     }
 }

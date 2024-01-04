@@ -73,8 +73,8 @@ public class loginPageController {
             } else if ("carrier".equals(userType) && password.equals(passwordField.getText())) {
                 System.out.println("Carrier login successful!");
                 //promote user to carrier
-                //Carrier c = createCarrier(userInformation);
-                loadScene("../fxml/carrierHomePage.fxml",null,null,null);
+                Carrier c = createCarrier(userInformation);
+                loadScene("../fxml/carrierHomePage.fxml",null,null,c);
             } else {
                 System.out.println("Invalid username, password, or user type.");
                 passwordField.setStyle("-fx-border-color: red;");
@@ -102,9 +102,9 @@ public class loginPageController {
     }
 
     //TODO: carrier classı oluşturulduğunda bu fonksiyonu da yaz
-    Carrier createCarrier(List<String> r) throws SQLException
+    Carrier createCarrier(List<String> list) throws SQLException
     {
-        Carrier c = null;
+        Carrier c = new Carrier(list.get(5), list.get(6), list.get(7), list.get(2), list.get(3), list.get(1), list.get(4), list.get(8));
         return c;
     }
     
@@ -135,6 +135,10 @@ public class loginPageController {
             if (fxmlPath.equals("../fxml/adminHomePage.fxml")) {
                 adminHomePageController controller = loader.getController();
                 controller.initData(admin,root,controller); // Pass the User object to the controller
+            }
+            if (fxmlPath.equals("../fxml/carrierHomePage.fxml")) {
+                carrierHomePageController controller = loader.getController();
+                controller.initData(carrier); // Pass the User object to the controller
             }
             
             stage = (Stage) loginButton.getScene().getWindow();
