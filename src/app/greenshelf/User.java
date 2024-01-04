@@ -2,7 +2,7 @@ package app.greenshelf;
 import java.security.SecureRandom;
 
 public class User {
-    private String UserID;
+    //private String UserID;
     private String name;
     private String surname;
     private String password;
@@ -21,7 +21,7 @@ public class User {
         setEmail(email);
         setPhone(phone);
         setUsername(username);
-        setUserID();
+        //setUserID();
         setUserType(userType);
     }
 
@@ -40,9 +40,10 @@ public class User {
 
 
     // Setters
+    /*
     public void setUserID() {
 
-        /* bu 16 karakterlik string olusturuyo onu da UserID'ye atiyo */
+        // bu 16 karakterlik string olusturuyo onu da UserID'ye atiyo
 
         if (this.UserID == null){
             
@@ -62,6 +63,7 @@ public class User {
         } 
 
     }
+    */
     public void setName(String name) {
         this.name = name;
     }
@@ -84,9 +86,11 @@ public class User {
         this.userType= userType;
     }
     // Getters
+    /*
     public String getUserID() {
         return this.UserID;
     }
+    */
     public String getName() {
         return this.name;
     }

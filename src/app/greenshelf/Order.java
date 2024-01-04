@@ -5,27 +5,17 @@ import java.security.SecureRandom;
 public class Order {
     private int id;
     private String orderID;
-    private String userID;
     private int productID;
     private double amount;
     private String date;
     private String status;
     private double price;
     
-    public Order(String userID, int productID, double amount, String date, String status, double price) {
-        //setOrderID();
-        this.userID = userID;
-        this.productID = productID;
-        this.amount = amount;
-        this.date = date;
-        this.status = status;
-        this.price = price;
-    }
 
-    public Order(int id, String userID, int productID, double amount, String date, String status, double price) {
+    public Order(int id, String orderID, int productID, double amount, String date, String status, double price) {
         //setOrderID();
         this.id = id;
-        this.userID = userID;
+        this.orderID = orderID;
         this.productID = productID;
         this.amount = amount;
         this.date = date;
@@ -64,10 +54,6 @@ public class Order {
         return orderID;
     }
 
-    public String getUserID() {
-        return userID;
-    }
-
     public int getProductID() {
         return productID;
     }
@@ -91,10 +77,6 @@ public class Order {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
     }
 
     public void setProductID(int productID) {

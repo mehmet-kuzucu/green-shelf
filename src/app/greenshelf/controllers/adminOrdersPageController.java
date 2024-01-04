@@ -84,10 +84,10 @@ public class adminOrdersPageController {
         id.setFill(Color.WHITE);
         Text productInfo = new Text("Hocam bu Product Info");
         productInfo.setFill(Color.WHITE);
-        Text customerInfo = new Text(order.getUserID());
+        Text customerInfo = new Text(order.getId()+"");
         customerInfo.setFill(Color.WHITE);
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
-        String addressString = dbAdapter.getAddress(order.getUserID());
+        String addressString = dbAdapter.getAddress(order.getId()+"");
         Text address = new Text(addressString);
         address.setFill(Color.WHITE);
         dbAdapter.closeConnection();

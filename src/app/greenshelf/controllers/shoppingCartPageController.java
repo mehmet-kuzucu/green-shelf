@@ -25,6 +25,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
+import java.util.List;
 
 public class shoppingCartPageController {
     @FXML
@@ -39,23 +40,24 @@ public class shoppingCartPageController {
     private Customer currentUser;
     private Stage stage;
     private Scene scene;
-    private LinkedList <Order> orderArray;
+    //private LinkedList <Order> orderArray;
     private int cartCount;
     private double totalPrice;
     private HashMap<Integer, Double> productStockMap = new HashMap<Integer, Double>();
+    private List <Order> shoppingCart;
 
 
-    public void initData(Customer user, LinkedList <Order> orderArray, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap) {
+    public void initData(Customer user, List <Order> shoppingCart, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap) {
         currentUser = user;
-        this.orderArray = orderArray;
+        this.shoppingCart = shoppingCart;
         //get products from shopping cart
 
-        System.out.println("Size of the order array: " + this.orderArray.size());
+        System.out.println("Size of the order array: " + this.shoppingCart.size());
         this.cartCount = cartCount;
         this.totalPrice = totalPrice;
         this.productStockMap = productStockMap;
 
-        for (Order order : this.orderArray) {
+        for (Order order : this.shoppingCart) {
             VBox group = createVboxGroup(order);
             productsVBox.getChildren().add(group);
         }
@@ -66,10 +68,10 @@ public class shoppingCartPageController {
 
     @FXML
     void greenShelfLogoOnMouseClicked() {
-        loadScene("../fxml/customerHome.fxml", currentUser, orderArray, cartCount, totalPrice, productStockMap);
+        loadScene("../fxml/customerHome.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap);
     }
 
-    private void loadScene(String fxmlPath, Customer user, LinkedList <Order> orderArray, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap) {
+    private void loadScene(String fxmlPath, Customer user, List <Order> orderArray, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
@@ -131,6 +133,8 @@ public class shoppingCartPageController {
         //innerHBox.getChildren().addAll(productImage, productNameText, amountXpriceText, totalPriceText);
         HBox HBoxLeft = new HBox();
         Button deleteButton = new Button();
+        deleteButton.setId("deleteButton");
+        deleteButton.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
         VBox rightVBox = new VBox();
         rightVBox.setAlignment(javafx.geometry.Pos.CENTER);
         rightVBox.getChildren().addAll(deleteButton);

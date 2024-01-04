@@ -181,3 +181,21 @@
     -fx-border-color: linear-gradient(to right, #00fff2, #1900ff);
     -fx-background-color: linear-gradient(to right, #e6e6e6, #ffffff);
 }
+
+#deleteButton {
+    -fx-background-image: url("../images/removeFromCart.png");
+    -fx-background-size: 65% 65%;
+    
+    -fx-background-radius: 50%;
+    /* size */
+    -fx-min-width: 40;
+    -fx-min-height: 40;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
+    -fx-max-width: 40;
+    -fx-max-height: 40;
+    
+    -fx-background-repeat: no-repeat;
+    /* center the image */
+    -fx-background-position: center;
+}
