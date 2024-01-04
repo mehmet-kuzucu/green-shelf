@@ -30,7 +30,7 @@ import java.util.List;
 
 public class shoppingCartPageController {
     @FXML
-    private Button buyButton;
+    private Button checkoutButton;
 
     @FXML
     private ImageView greenShelfLogo;
@@ -65,7 +65,7 @@ public class shoppingCartPageController {
         this.totalPrice = totalPrice;
         this.productStockMap = productStockMap;
 
-        totalPriceText.setText("Total Price: " + totalPrice + "₺" +"\n" + "Total Products: " + cartCount + " products" + "\n" + "VAT: " + Math.round(totalPrice*vat*100)/100.0 + "₺" + "\n" + "Total Price with VAT: " + (totalPrice + Math.round( + totalPrice*vat*100)/100.0) + "₺");
+        totalPriceText.setText("Total Price: " + totalPrice + "₺" +"\n" + "Total Products: " + cartCount + " products" + "\n" + "VAT: " + Math.round(totalPrice*vat*100)/100.0 + "₺" + "\n" + "Total Price with VAT: " + (totalPrice + Math.round(totalPrice*vat*100)/100.0) + "₺");
         totalPriceText.setFont(new Font(13));
         for (Order order : this.shoppingCart) {
             VBox group = createVboxGroup(order);
@@ -81,13 +81,20 @@ public class shoppingCartPageController {
         loadScene("../fxml/customerHome.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
     }
 
+
     private void loadScene(String fxmlPath, Customer user, List <Order> orderArray, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap, String orderID) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
             stage = (Stage) greenShelfLogo.getScene().getWindow();
-            customerHomeController controller = loader.getController();
-            controller.initData(user, orderArray, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
+            if (fxmlPath.equals("../fxml/customerHome.fxml")) {
+                customerHomeController controller = loader.getController();
+                controller.initData(user, orderArray, cartCount, totalPrice, productStockMap, orderID);
+            }
+            else if (fxmlPath.equals("../fxml/checkoutPage.fxml")) {
+                checkoutPageController controller = loader.getController();
+                controller.initData(user, orderArray, cartCount, totalPrice, productStockMap, orderID);
+            }
             scene = new Scene(root,greenShelfLogo.getScene().getWidth(),greenShelfLogo.getScene().getHeight());
             stage.setScene(scene);
             stage.show();
@@ -195,13 +202,19 @@ public class shoppingCartPageController {
         
     }
 
+    @FXML
+    void checkoutButtonOnMouseClicked(MouseEvent event) {
+        loadScene("../fxml/checkoutPage.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
+
+    }
+
     public void refreshPage() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/shoppingCartPage.fxml"));
         Parent root = loader.load();
         shoppingCartPageController controller = loader.getController();
         controller.initData(currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
-        stage = (Stage) buyButton.getScene().getWindow();
-        scene = new Scene(root,buyButton.getScene().getWidth(),buyButton.getScene().getHeight());
+        stage = (Stage) checkoutButton.getScene().getWindow();
+        scene = new Scene(root,checkoutButton.getScene().getWidth(),checkoutButton.getScene().getHeight());
         stage.setScene(scene);
         stage.show();
     }

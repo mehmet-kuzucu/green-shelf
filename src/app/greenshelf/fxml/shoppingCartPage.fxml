@@ -59,7 +59,7 @@
             </Text>
          </left>
          <right>
-            <Button fx:id="buyButton" mnemonicParsing="false" BorderPane.alignment="CENTER" />
+            <Button fx:id="checkoutButton" mnemonicParsing="false" onMouseClicked="#checkoutButtonOnMouseClicked" BorderPane.alignment="CENTER" />
          </right>
          <padding>
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
