@@ -74,7 +74,7 @@ public class employFireCarrierPageController {
         stage = (Stage) greenShelfLogo.getScene().getWindow();
         adminHomePageController controller = loader.getController();
         controller.initData(admin,root,controller);
-        scene = new Scene(root);
+        scene = new Scene(root,greenShelfLogo.getScene().getWidth(),greenShelfLogo.getScene().getHeight());
         stage.setScene(scene);
         stage.show();
     }
@@ -100,7 +100,7 @@ public class employFireCarrierPageController {
         controller = loader.getController();
         this.controller.initData(admin,controller); // Pass the User object to the controller
         stage = (Stage) profilePhoto.getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root,profilePhoto.getScene().getWidth(),profilePhoto.getScene().getHeight());
         stage.setScene(scene);
         stage.show();
     }

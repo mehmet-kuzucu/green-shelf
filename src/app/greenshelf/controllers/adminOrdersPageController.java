@@ -45,9 +45,7 @@ public class adminOrdersPageController {
         stage = (Stage) greenShelfLogo.getScene().getWindow();
         adminHomePageController controller = loader.getController();
         controller.initData(currentUser,root,controller);
-
-
-        scene = new Scene(root);
+        scene = new Scene(root, greenShelfLogo.getScene().getWidth(), greenShelfLogo.getScene().getHeight());
         stage.setScene(scene);
         stage.show();
     }
@@ -172,7 +170,7 @@ public class adminOrdersPageController {
             stage = (Stage) greenShelfLogo.getScene().getWindow();
             adminOrdersPageController controller = loader.getController();
             controller.initData(currentUser);
-            scene = new Scene(root);
+            scene = new Scene(root, greenShelfLogo.getScene().getWidth(), greenShelfLogo.getScene().getHeight());
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

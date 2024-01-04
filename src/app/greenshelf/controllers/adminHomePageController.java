@@ -68,7 +68,7 @@ public class adminHomePageController {
         adminOrdersPageController controller = loader.getController();
         controller.initData(admin);
         stage = (Stage) adminOrdersButton.getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root, adminOrdersButton.getScene().getWidth(), adminOrdersButton.getScene().getHeight());
         stage.setScene(scene);
         stage.show();
     }
@@ -98,7 +98,7 @@ public class adminHomePageController {
         employFireCarrierPageController controller2 = scene.getController();
         controller2.initData(this.admin,controller2); // Pass the User object to the controller
         stage = (Stage) profilePhoto.getScene().getWindow();
-        stage.setScene(new Scene(root));
+        stage.setScene(new Scene(root, profilePhoto.getScene().getWidth(), profilePhoto.getScene().getHeight()));
         
         stage.setTitle("Employ / Fire Carrier");
         stage.show();

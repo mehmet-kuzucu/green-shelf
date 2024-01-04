@@ -80,7 +80,7 @@ public class registerPageController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("../fxml/loginPage.fxml"));
             Stage stage = (Stage) existedAccount.getScene().getWindow();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, existedAccount.getScene().getWidth(), existedAccount.getScene().getHeight());
             stage.setScene(scene);
 
         } catch (IOException e) {

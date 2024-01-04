@@ -80,7 +80,7 @@ public class customerHomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
             stage = (Stage) profilePhotoImage.getScene().getWindow();
-            scene = new Scene(root);
+            scene = new Scene(root,profilePhotoImage.getScene().getWidth(),profilePhotoImage.getScene().getHeight());
             stage.setScene(scene);
             stage.show();
             
@@ -188,7 +188,7 @@ public class customerHomeController {
         customerHomeController controller = loader.getController();
         controller.initData(currentUser, ordersArray, cartCount, totalPrice, productStockMap);
         stage = (Stage) shoppingCartButton.getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root,shoppingCartButton.getScene().getWidth(),shoppingCartButton.getScene().getHeight());
         stage.setScene(scene);
         stage.show();
     }

@@ -114,7 +114,7 @@ public class loginPageController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("../fxml/registerPage.fxml"));
             stage = (Stage) registerLink.getScene().getWindow();
-            scene = new Scene(root);
+            scene = new Scene(root, registerLink.getScene().getWidth(), registerLink.getScene().getHeight());
             stage.setScene(scene);
             stage.show();
 
@@ -138,7 +138,7 @@ public class loginPageController {
             }
             
             stage = (Stage) loginButton.getScene().getWindow();
-            scene = new Scene(root);
+            scene = new Scene(root,loginButton.getScene().getWidth(),loginButton.getScene().getHeight());
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

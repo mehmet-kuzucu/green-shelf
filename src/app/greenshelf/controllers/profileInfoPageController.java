@@ -106,7 +106,7 @@ public class profileInfoPageController {
             }
             
             stage = (Stage) greenShelfLogo.getScene().getWindow();
-            scene = new Scene(root);
+            scene = new Scene(root, greenShelfLogo.getScene().getWidth(), greenShelfLogo.getScene().getHeight());
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -193,7 +193,7 @@ public class profileInfoPageController {
         currentUser = new Customer(list.get(5), list.get(6), list.get(7), list.get(2), list.get(3), list.get(1), list.get(4), list.get(8));
         controller.initData(currentUser, orderArray, cartCount, totalPrice, productStockMap);
         stage = (Stage) greenShelfLogo.getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root, greenShelfLogo.getScene().getWidth(), greenShelfLogo.getScene().getHeight());
         stage.setScene(scene);
         stage.show();
 

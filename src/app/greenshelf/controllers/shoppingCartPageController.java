@@ -76,7 +76,7 @@ public class shoppingCartPageController {
             stage = (Stage) greenShelfLogo.getScene().getWindow();
             customerHomeController controller = loader.getController();
             controller.initData(user, orderArray, cartCount, totalPrice, productStockMap);
-            scene = new Scene(root);
+            scene = new Scene(root,greenShelfLogo.getScene().getWidth(),greenShelfLogo.getScene().getHeight());
             stage.setScene(scene);
             stage.show();
             
