@@ -642,6 +642,26 @@ public class DatabaseAdapter {
             e.printStackTrace();
         }
     }
+    public void updateOrderStatus(Order order)
+    {
+        try{
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "UPDATE orders SET status = ? WHERE orderid = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, order.getStatus());	
+                preparedStatement.setString(2, order.getOrderID());
+                preparedStatement.executeUpdate();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("Order updated successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void changeOrderStatusAndDate(Order order)
     {

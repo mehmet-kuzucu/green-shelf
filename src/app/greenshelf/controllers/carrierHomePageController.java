@@ -21,13 +21,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import java.util.HashMap;	
+
 
 public class carrierHomePageController {
     Carrier carrier;
     private Stage stage;
     private Scene scene;
+    HashMap<String, List<Order>> orderMap = new HashMap<String, List<Order>>();
      @FXML
     private VBox availableOrders;
 
@@ -56,13 +60,29 @@ public class carrierHomePageController {
         DatabaseAdapter db = new DatabaseAdapter();
         List<Order> orders = db.getAllOrders();
         for (Order order : orders) {
-            if (order.getStatus().equals("waiting")) {
-                availableOrders.getChildren().add(createVBoxWaiting(order));
-            } else if (order.getStatus().equals("In transition")) {
-                currentOrders.getChildren().add(createVBoxCurrent(order));
-            } else if (order.getStatus().equals("Completed")) {
-                completedOrders.getChildren().add(createVBoxCompleted(order));
+            if(orderMap.containsKey(order.getOrderID()))
+            {
+                orderMap.get(order.getOrderID()).add(order);
             }
+            else
+            {
+                List<Order> orderList = new LinkedList<Order>();
+                orderList.add(order);
+                orderMap.put(order.getOrderID(), orderList);
+            }
+        }
+
+        for (String key : orderMap.keySet()) {
+            List<Order> orderList = orderMap.get(key);
+            
+            if (orderList.get(0).getStatus().equals("Waiting")) {
+                availableOrders.getChildren().add(createVBoxWaiting(orderList.get(0)));
+            } else if (orderList.get(0).getStatus().equals("In transition")) {
+                currentOrders.getChildren().add(createVBoxCurrent(orderList.get(0)));
+            } else if (orderList.get(0).getStatus().equals("Completed")) {
+                completedOrders.getChildren().add(createVBoxCompleted(orderList.get(0)));
+            }
+            
         }
         db.closeConnection();
     }
@@ -107,11 +127,12 @@ public class carrierHomePageController {
         vBox.setPrefHeight(200);
         Customer customer = db.getUserFromId(order.getId());
         Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + order.getPrice() + " TL");
+        text.setFill(Color.WHITE);
         Button button = new Button("Accept");
         button.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 1px;");
         button.setOnMouseClicked(e -> {
             order.setStatus("In transition");
-            db.updateOrder(order);
+            db.updateOrderStatus(order);
             availableOrders.getChildren().remove(vBox);
             currentOrders.getChildren().add(createVBoxCurrent(order));
         });
@@ -130,11 +151,12 @@ public class carrierHomePageController {
         vBox.setPrefHeight(200);
         Customer customer = db.getUserFromId(order.getId());
         Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + order.getPrice() + " TL");
+        text.setFill(javafx.scene.paint.Color.WHITE);
         Button button = new Button("Complete");
         button.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 1px;");
         button.setOnMouseClicked(e -> {
             order.setStatus("Completed");
-            db.updateOrder(order);
+            db.updateOrderStatus(order);
             currentOrders.getChildren().remove(vBox);
             completedOrders.getChildren().add(createVBoxCompleted(order));
         });
@@ -150,9 +172,9 @@ public class carrierHomePageController {
         vBox.setSpacing(10);
         vBox.setPrefWidth(200);
         vBox.setPrefHeight(200);
-        vBox.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 1px;");
         Customer customer = db.getUserFromId(order.getId());
         Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + order.getPrice() + " TL");
+        text.setFill(javafx.scene.paint.Color.WHITE);
         vBox.getChildren().addAll(text);
         return vBox;
 
