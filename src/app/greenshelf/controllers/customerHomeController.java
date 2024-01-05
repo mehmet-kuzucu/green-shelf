@@ -3,7 +3,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 import app.greenshelf.Customer;
@@ -102,6 +101,10 @@ public class customerHomeController {
             }
             else if (fxmlPath.equals("../fxml/shoppingCartPage.fxml")) {
                 shoppingCartPageController controller = loader.getController();
+                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
+            }
+            else if (fxmlPath.equals("../fxml/myOrdersPage.fxml")) {
+                myOrdersPageController controller = loader.getController();
                 controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
             }
             
