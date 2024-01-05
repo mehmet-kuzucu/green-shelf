@@ -210,6 +210,11 @@ public class checkoutPageController {
             order.setDate(deliveryTimeChoiceBox.getValue());
             dbAdapter.changeOrderStatusAndDate(order);
         }
+        
+        for (Order order : shoppingCart) 
+        {
+            dbAdapter.updateProductStock(order.getProductID(), order.getAmount());
+        }
         shoppingCart.clear();
         cartCount = 0;
         totalPrice = 0;

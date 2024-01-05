@@ -822,8 +822,8 @@ public class DatabaseAdapter {
             }
     
             // Check if the username exists
-            String queryUsernameExists = "UPDATE products SET stock = stock - ? WHERE id = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(queryUsernameExists)) {
+            String query = "UPDATE products SET stock = stock - ? WHERE id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setDouble(1, amount);
                 preparedStatement.setInt(2, productId);
                 preparedStatement.executeUpdate();

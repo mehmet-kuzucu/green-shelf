@@ -255,7 +255,7 @@ public class profileInfoPageController {
             profileInfoPageController controller = loader.getController();
             DatabaseAdapter databaseAdapter = new DatabaseAdapter();
             List<String> list = databaseAdapter.loginUserSql(currentUser.getUsername());
-            currentUser = new Customer(list.get(5), list.get(6), list.get(7), list.get(2), list.get(3), list.get(1), list.get(4), list.get(8));
+            currentUser = new Customer(list.get(4), list.get(5), list.get(6), list.get(1), list.get(2), list.get(0), list.get(3), list.get(7));
             controller.initData(currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
             stage = (Stage) greenShelfLogo.getScene().getWindow();
             scene = new Scene(root, greenShelfLogo.getScene().getWidth(), greenShelfLogo.getScene().getHeight());
@@ -268,7 +268,7 @@ public class profileInfoPageController {
             profileInfoPageController controller = loader.getController();
             DatabaseAdapter databaseAdapter = new DatabaseAdapter();
             List<String> list = databaseAdapter.loginUserSql(currentCarrier.getUsername());
-            currentCarrier = new Carrier(list.get(5), list.get(6), list.get(7), list.get(2), list.get(3), list.get(1), list.get(4), list.get(8));
+            currentCarrier = new Carrier(list.get(4), list.get(5), list.get(6), list.get(1), list.get(2), list.get(0), list.get(3), list.get(7));
             controller.initData(currentCarrier);
             stage = (Stage) greenShelfLogo.getScene().getWindow();
             scene = new Scene(root, greenShelfLogo.getScene().getWidth(), greenShelfLogo.getScene().getHeight());

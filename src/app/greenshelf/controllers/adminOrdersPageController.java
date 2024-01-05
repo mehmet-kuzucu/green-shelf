@@ -97,13 +97,23 @@ public class adminOrdersPageController {
     {
         VBox orderDetails = new VBox();
         orderDetails.setAlignment(javafx.geometry.Pos.CENTER);
+<<<<<<< Updated upstream
         orderDetails.setPrefHeight(200.0);
         orderDetails.setPrefWidth(100.0);
         orderDetails.setSpacing(5.0);
         VBox.setVgrow(orderDetails, Priority.ALWAYS);
+=======
+        //computed size
+        
+        orderDetails.setMinHeight(200.0);
+        orderDetails.setPrefHeight(200.0);
+        orderDetails.setPrefWidth(100.0);
+        orderDetails.setSpacing(5.0);
+        orderDetails.setPadding(new javafx.geometry.Insets(200.0, 200.0, 200.0, 200.0)); //sağ ve sol padding
+>>>>>>> Stashed changes
         orderDetails.setId("orderDetails");
         orderDetails.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
-        Text id = new Text(order.getOrderID() + "");
+        Text id = new Text("#"+order.getOrderID());
         id.setFill(Color.WHITE);
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
         Customer customer = dbAdapter.getUserFromId(order.getId());
@@ -112,11 +122,12 @@ public class adminOrdersPageController {
         Text customerInfo = new Text(customer.getName() + " " + customer.getSurname());
         customerInfo.setFill(Color.WHITE);
         String addressString = customer.getAddress();
-        Text address = new Text(addressString);
+        Text address = new Text("Address: " + addressString);
         address.setFill(Color.WHITE);
         dbAdapter.closeConnection();
         //TODO: burayı düzgünce parse edeceğiz
         Double totalPrice = 0.0;
+        Double vat = 0.01;
         for (Order order2 : orderMap.get(order.getOrderID())) {
             Product product = dbAdapter.getProductFromId(order2.getProductID());
             String amountString = String.valueOf(order.getAmount());
@@ -124,10 +135,10 @@ public class adminOrdersPageController {
             if (indexOfDot != -1) {
                 amountString = amountString.substring(0, indexOfDot);
             }
-            productInfo.setText(productInfo.getText() + (product.getIsPiece() ? amountString : order2.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + product.getName() + (orderMap.get(order.getOrderID()).indexOf(order2) == orderMap.get(order.getOrderID()).size() - 1 ? "": "\n"));
-            totalPrice += order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2);
+            productInfo.setText(productInfo.getText() + (product.getIsPiece() ? amountString : order2.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + product.getName() + (orderMap.get(order.getOrderID()).indexOf(order2) == orderMap.get(order.getOrderID()).size() - 1 ? "": "\n")); 
+            totalPrice += (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2)) + (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) * vat);
         }
-        Text totalPriceText = new Text(totalPrice + "₺");
+        Text totalPriceText = new Text((Math.round(totalPrice * 100) / 100.0) + "₺");
         totalPriceText.setFill(Color.WHITE);
         Text deliveryDateTime = new Text(order.getDate());
         deliveryDateTime.setFill(Color.WHITE);
@@ -151,8 +162,8 @@ public class adminOrdersPageController {
                 try {
                     System.out.println("Order cancelled");
                     databaseAdapter.changeOrderStatus(order.getOrderID(), "cancelled");
+                    //TODO: burada stokları arttırma işlemi yapılacak
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                 databaseAdapter.closeConnection();
