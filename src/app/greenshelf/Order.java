@@ -25,6 +25,16 @@ public class Order {
         this.carrierUsername = carrierUsername;
     }
 
+    public Order(int id, String orderID, int productID, double amount, String date, String status, double price) {
+        //setOrderID();
+        this.id = id;
+        this.orderID = orderID;
+        this.productID = productID;
+        this.amount = amount;
+        this.date = date;
+        this.status = status;
+        this.price = price;
+    }
 
     /*
     public void setOrderID() {
