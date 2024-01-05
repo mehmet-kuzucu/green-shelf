@@ -71,6 +71,7 @@
                      </children>
                   </StackPane>
                   <Button fx:id="shoppingCartButton" mnemonicParsing="false" onMouseClicked="#shoppingCartButtonButtonOnMouseClicked" />
+                  <Button fx:id="myOrdersButton" mnemonicParsing="false" onMouseClicked="#myOrdersButtonOnMouseClicked" text="My Orders" />
                </children>
             </HBox>
          </right>
