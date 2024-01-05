@@ -75,7 +75,7 @@ public class carrierHomePageController {
         for (String key : orderMap.keySet()) {
             List<Order> orderList = orderMap.get(key);
             
-            if (orderList.get(0).getStatus().equals("Waiting")) {
+            if (orderList.get(0).getStatus().equals("waiting")) {
                 availableOrders.getChildren().add(createVBoxWaiting(orderList.get(0)));
             } else if (orderList.get(0).getStatus().equals("In transition")) {
                 currentOrders.getChildren().add(createVBoxCurrent(orderList.get(0)));
