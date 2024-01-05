@@ -77,9 +77,9 @@ public class carrierHomePageController {
             
             if (orderList.get(0).getStatus().equals("waiting")) {
                 availableOrders.getChildren().add(createVBoxWaiting(orderList.get(0)));
-            } else if (orderList.get(0).getStatus().equals("In transition")) {
+            } else if (orderList.get(0).getStatus().equals("inDelivery")) {
                 currentOrders.getChildren().add(createVBoxCurrent(orderList.get(0)));
-            } else if (orderList.get(0).getStatus().equals("Completed")) {
+            } else if (orderList.get(0).getStatus().equals("completed")) {
                 completedOrders.getChildren().add(createVBoxCompleted(orderList.get(0)));
             }
             
@@ -131,7 +131,7 @@ public class carrierHomePageController {
         Button button = new Button("Accept");
         button.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 1px;");
         button.setOnMouseClicked(e -> {
-            order.setStatus("In transition");
+            order.setStatus("inDelivery");
             db.updateOrderStatus(order);
             availableOrders.getChildren().remove(vBox);
             currentOrders.getChildren().add(createVBoxCurrent(order));
@@ -155,7 +155,7 @@ public class carrierHomePageController {
         Button button = new Button("Complete");
         button.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 1px;");
         button.setOnMouseClicked(e -> {
-            order.setStatus("Completed");
+            order.setStatus("completed");
             db.updateOrderStatus(order);
             currentOrders.getChildren().remove(vBox);
             completedOrders.getChildren().add(createVBoxCompleted(order));
