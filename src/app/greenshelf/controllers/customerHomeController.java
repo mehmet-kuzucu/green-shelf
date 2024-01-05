@@ -53,6 +53,9 @@ public class customerHomeController {
     @FXML
     private Text totalPriceText;
 
+    @FXML
+    private Button myOrdersButton;
+
     private Stage stage;
     private Scene scene;
     private Customer currentUser;
@@ -72,6 +75,11 @@ public class customerHomeController {
         databaseAdapter.addOrdersql(order);
         databaseAdapter.closeConnection();
         */
+    }
+
+    @FXML
+    void myOrdersButtonOnMouseClicked(MouseEvent event) {
+        loadScene("../fxml/myOrdersPage.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
     }
 
     @FXML
@@ -156,7 +164,6 @@ public class customerHomeController {
         }
         else
         {
-
             spinner.setId("spinner");
             spinner.setValueFactory(new javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, product.getStock(), 1.0, product.getIsPiece() ? 1.0 : 0.1));
             spinner.setEditable(false);

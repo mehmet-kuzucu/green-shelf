@@ -153,6 +153,11 @@ public class adminOrdersPageController {
                     System.out.println("Order cancelled");
                     databaseAdapter.changeOrderStatus(order.getOrderID(), "cancelled");
                     //TODO: burada stokları arttırma işlemi yapılacak
+                    for (Order order2 : orderMap.get(order.getOrderID())) {
+                        Product product = databaseAdapter.getProductFromId(order2.getProductID());
+                        product.setStock(product.getStock() + order2.getAmount());
+                        databaseAdapter.updateProductStock(product.getId(), -1 * order2.getAmount());
+                    }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
