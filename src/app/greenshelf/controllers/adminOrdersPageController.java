@@ -97,20 +97,10 @@ public class adminOrdersPageController {
     {
         VBox orderDetails = new VBox();
         orderDetails.setAlignment(javafx.geometry.Pos.CENTER);
-<<<<<<< Updated upstream
         orderDetails.setPrefHeight(200.0);
         orderDetails.setPrefWidth(100.0);
         orderDetails.setSpacing(5.0);
         VBox.setVgrow(orderDetails, Priority.ALWAYS);
-=======
-        //computed size
-        
-        orderDetails.setMinHeight(200.0);
-        orderDetails.setPrefHeight(200.0);
-        orderDetails.setPrefWidth(100.0);
-        orderDetails.setSpacing(5.0);
-        orderDetails.setPadding(new javafx.geometry.Insets(200.0, 200.0, 200.0, 200.0)); //sağ ve sol padding
->>>>>>> Stashed changes
         orderDetails.setId("orderDetails");
         orderDetails.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
         Text id = new Text("#"+order.getOrderID());
