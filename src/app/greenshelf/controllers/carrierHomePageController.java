@@ -1,10 +1,14 @@
 package app.greenshelf.controllers;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 import app.greenshelf.Carrier;
 import app.greenshelf.Customer;
@@ -126,7 +130,7 @@ public class carrierHomePageController {
         vBox.setPrefWidth(200);
         vBox.setPrefHeight(200);
         Customer customer = db.getUserFromId(order.getId());
-        Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + order.getPrice() + " TL");
+        Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + (order.getPrice()*0.01 + order.getPrice())  + " TL");
         text.setFill(Color.WHITE);
         Button button = new Button("Accept");
         button.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 1px;");
@@ -142,6 +146,7 @@ public class carrierHomePageController {
     }
 
     private VBox createVBoxCurrent(Order order) {
+        
         DatabaseAdapter db = new DatabaseAdapter();
         VBox vBox = new VBox();
         vBox.setId("productInfo");
@@ -150,13 +155,19 @@ public class carrierHomePageController {
         vBox.setPrefWidth(200);
         vBox.setPrefHeight(200);
         Customer customer = db.getUserFromId(order.getId());
-        Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + order.getPrice() + " TL");
+        Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + (order.getPrice()*0.01 + order.getPrice()) + " TL");
         text.setFill(javafx.scene.paint.Color.WHITE);
         Button button = new Button("Complete");
         button.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 1px;");
         button.setOnMouseClicked(e -> {
+            Locale.setDefault(Locale.ENGLISH);
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm");
+            String formattedDateTime = currentDateTime.format(formatter);
+            
             order.setStatus("completed");
-            db.updateOrderStatus(order);
+            order.setDeliveryDate(formattedDateTime);
+            db.updateOrderStatusandDeliveryDate(order);
             currentOrders.getChildren().remove(vBox);
             completedOrders.getChildren().add(createVBoxCompleted(order));
         });
@@ -173,7 +184,7 @@ public class carrierHomePageController {
         vBox.setPrefWidth(200);
         vBox.setPrefHeight(200);
         Customer customer = db.getUserFromId(order.getId());
-        Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + order.getPrice() + " TL");
+        Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + (order.getPrice()*0.01 + order.getPrice()) + " TL" + "\n" + order.getDeliveryDate());
         text.setFill(javafx.scene.paint.Color.WHITE);
         vBox.getChildren().addAll(text);
         return vBox;

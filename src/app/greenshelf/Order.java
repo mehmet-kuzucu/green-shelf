@@ -10,7 +10,7 @@ public class Order {
     private String date;
     private String status;
     private double price;
-    
+    private String deliveryDate;
 
     public Order(int id, String orderID, int productID, double amount, String date, String status, double price) {
         //setOrderID();
@@ -74,6 +74,9 @@ public class Order {
         return price;
     }
 
+    public String getDeliveryDate() {
+        return deliveryDate;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -97,5 +100,9 @@ public class Order {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public void setDeliveryDate(String deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 }

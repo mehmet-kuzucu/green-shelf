@@ -53,7 +53,8 @@ public class DatabaseAdapter {
                                                                         "amount DOUBLE, " +
                                                                         "date VARCHAR(50), " +
                                                                         "price DOUBLE, " +
-                                                                        "status VARCHAR(50) " +
+                                                                        "status VARCHAR(50), " + 
+                                                                        "deliveryDate VARCHAR(50) " +
                                                                         ");";
             statement.executeUpdate(queryOrders);
 
@@ -652,6 +653,29 @@ public class DatabaseAdapter {
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, order.getStatus());	
                 preparedStatement.setString(2, order.getOrderID());
+                preparedStatement.executeUpdate();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("Order updated successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateOrderStatusandDeliveryDate(Order order)
+    {
+        try{
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "UPDATE orders SET status = ?, deliveryDate = ? WHERE orderid = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, order.getStatus());
+                preparedStatement.setString(2, order.getDeliveryDate());
+                preparedStatement.setString(3, order.getOrderID());
                 preparedStatement.executeUpdate();
             }
             catch (Exception e) {
