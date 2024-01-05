@@ -117,13 +117,27 @@
     
 }
 
-#removeOrder {
+#removeOrderButton {
     -fx-background-image: url("../images/removeOrder.png");
+    -fx-background-size: 65% 65%;
+    
+    -fx-background-radius: 50%;
+    /* size */
+    -fx-min-width: 62px;
+    -fx-min-height: 62px;
+    -fx-pref-width: 62px;
+    -fx-pref-height: 62px;
+    -fx-max-width: 62px;
+    -fx-max-height: 62px;
+    
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 75% 75%;
     /* center the image */
     -fx-background-position: center;
-    -fx-background-color:  transparent;
+    -fx-background-color: transparent;
+}
+
+#removeOrderButton:hover {
+    -fx-background-color: #DF3A5C;
 }
 
 #addProductButton {

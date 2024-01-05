@@ -100,10 +100,21 @@ public class adminOrdersPageController {
         orderDetails.setPrefHeight(200.0);
         orderDetails.setPrefWidth(100.0);
         orderDetails.setSpacing(5.0);
-        VBox.setVgrow(orderDetails, Priority.ALWAYS);
+        //VBox.setVgrow(orderDetails, Priority.ALWAYS);
+        orderDetails.setPadding(new javafx.geometry.Insets(10.0));
         orderDetails.setId("orderDetails");
         orderDetails.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
-        Text id = new Text("#"+order.getOrderID());
+        Text id = new Text();
+        System.out.println(order.getStatus());
+        if (order.getStatus().equals("completed") || order.getStatus().equals("inDelivery"))
+        {
+            //TODO: burada kurye ismi de yazacak
+            id.setText("#"+order.getOrderID() + "\n" + order.getCarrierUsername());
+        }
+        else
+        {
+            id.setText("#"+order.getOrderID());
+        }
         id.setFill(Color.WHITE);
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
         Customer customer = dbAdapter.getUserFromId(order.getId());
