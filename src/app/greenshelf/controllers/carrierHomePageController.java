@@ -50,13 +50,13 @@ public class carrierHomePageController {
     
     public void initData(Carrier carrier) {
         this.carrier = carrier;
-    
+        System.out.println(carrier.getName());
         profilePhoto.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(carrier.getProfilePicture()))));
         welcomeText.setText("Welcome, " + carrier.getName());
         DatabaseAdapter db = new DatabaseAdapter();
         List<Order> orders = db.getAllOrders();
         for (Order order : orders) {
-            if (order.getStatus().equals("Waiting")) {
+            if (order.getStatus().equals("waiting")) {
                 availableOrders.getChildren().add(createVBoxWaiting(order));
             } else if (order.getStatus().equals("In transition")) {
                 currentOrders.getChildren().add(createVBoxCurrent(order));
@@ -105,7 +105,6 @@ public class carrierHomePageController {
         vBox.setSpacing(10);
         vBox.setPrefWidth(200);
         vBox.setPrefHeight(200);
-        vBox.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 1px;");
         Customer customer = db.getUserFromId(order.getId());
         Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + order.getPrice() + " TL");
         Button button = new Button("Accept");
@@ -129,7 +128,6 @@ public class carrierHomePageController {
         vBox.setSpacing(10);
         vBox.setPrefWidth(200);
         vBox.setPrefHeight(200);
-        vBox.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 1px;");
         Customer customer = db.getUserFromId(order.getId());
         Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + order.getPrice() + " TL");
         Button button = new Button("Complete");
