@@ -11,8 +11,8 @@ public class Order {
     private String status;
     private double price;
     private String deliveryDate;
-
-    public Order(int id, String orderID, int productID, double amount, String date, String status, double price) {
+    private String carrierUsername;
+    public Order(int id, String orderID, int productID, double amount, String date, String status, double price, String deliveryDate, String carrierUsername) {
         //setOrderID();
         this.id = id;
         this.orderID = orderID;
@@ -21,6 +21,8 @@ public class Order {
         this.date = date;
         this.status = status;
         this.price = price;
+        this.deliveryDate = deliveryDate;
+        this.carrierUsername = carrierUsername;
     }
 
 
@@ -78,6 +80,9 @@ public class Order {
         return deliveryDate;
     }
 
+    public String getCarrierUsername() {
+        return carrierUsername;
+    }
     public void setId(int id) {
         this.id = id;
     }
@@ -104,5 +109,9 @@ public class Order {
 
     public void setDeliveryDate(String deliveryDate) {
         this.deliveryDate = deliveryDate;
+    }
+
+    public void setCarrierUsername(String carrierUsername) {
+        this.carrierUsername = carrierUsername;
     }
 }
