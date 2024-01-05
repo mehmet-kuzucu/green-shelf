@@ -582,6 +582,27 @@ public class DatabaseAdapter {
         }
         return orders;
     }
+    
+    public List<Order> getAllOrdersWaiting()
+    {
+        List<Order> orders = new ArrayList<>();
+        try{
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "SELECT * FROM orders WHERE status = 'waiting'";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                Order order = new Order(resultSet.getInt("userid"), resultSet.getString("orderid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"));
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
 
     public void addOrdersql(Order order){
         try (Statement statement = connection.createStatement()) {
