@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -96,11 +97,10 @@ public class adminOrdersPageController {
     {
         VBox orderDetails = new VBox();
         orderDetails.setAlignment(javafx.geometry.Pos.CENTER);
-        orderDetails.setMaxHeight(200.0);
-        orderDetails.setMinHeight(200.0);
         orderDetails.setPrefHeight(200.0);
         orderDetails.setPrefWidth(100.0);
         orderDetails.setSpacing(5.0);
+        VBox.setVgrow(orderDetails, Priority.ALWAYS);
         orderDetails.setId("orderDetails");
         orderDetails.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
         Text id = new Text(order.getOrderID() + "");
