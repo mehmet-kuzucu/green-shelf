@@ -54,7 +54,8 @@ public class DatabaseAdapter {
                                                                         "date VARCHAR(50), " +
                                                                         "price DOUBLE, " +
                                                                         "status VARCHAR(50), " + 
-                                                                        "deliveryDate VARCHAR(50) " +
+                                                                        "deliveryDate VARCHAR(50), " +
+                                                                        "carrierUsername VARCHAR(50) " +
                                                                         ");";
             statement.executeUpdate(queryOrders);
 
@@ -575,7 +576,7 @@ public class DatabaseAdapter {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                Order order = new Order(resultSet.getInt("userid"), resultSet.getString("orderid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"));
+                Order order = new Order(resultSet.getInt("userid"), resultSet.getString("orderid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"),resultSet.getString("deliveryDate"),resultSet.getString("carrierUsername"));
                 orders.add(order);
             }
         } catch (SQLException e) {
@@ -596,7 +597,7 @@ public class DatabaseAdapter {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                Order order = new Order(resultSet.getInt("userid"), resultSet.getString("orderid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"));
+                Order order = new Order(resultSet.getInt("userid"), resultSet.getString("orderid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"),resultSet.getString("deliveryDate"),resultSet.getString("carrierUsername"));
                 orders.add(order);
             }
         } catch (SQLException e) {
@@ -649,10 +650,11 @@ public class DatabaseAdapter {
             String url = "jdbc:mysql://localhost:3306/javafxdb";
             zorunlu user = new zorunlu();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
-            String query = "UPDATE orders SET status = ? WHERE orderid = ?";
+            String query = "UPDATE orders SET status = ?, carrierUsername = ? WHERE orderid = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, order.getStatus());	
-                preparedStatement.setString(2, order.getOrderID());
+                preparedStatement.setString(2, order.getCarrierUsername());
+                preparedStatement.setString(3, order.getOrderID());
                 preparedStatement.executeUpdate();
             }
             catch (Exception e) {
@@ -723,7 +725,7 @@ public class DatabaseAdapter {
             preparedStatement.setInt(1, userid);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                Order order = new Order(resultSet.getInt("id"), resultSet.getString("orderid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"));
+                Order order = new Order(resultSet.getInt("id"), resultSet.getString("orderid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"),resultSet.getString("deliveryDate"),resultSet.getString("carrierUsername"));
                 if (orders == null)
                 {
                     orders = new ArrayList<>();
@@ -776,7 +778,7 @@ public class DatabaseAdapter {
             preparedStatement.setInt(2, productID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                Order order = new Order(resultSet.getInt("id"), resultSet.getString("orderid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"));
+                Order order = new Order(resultSet.getInt("id"), resultSet.getString("orderid"), resultSet.getInt("productid"), resultSet.getDouble("amount"), resultSet.getString("date"), resultSet.getString("status"), resultSet.getDouble("price"),resultSet.getString("deliveryDate"),resultSet.getString("carrierUsername"));
                 return order;
             }
         } catch (SQLException e) {

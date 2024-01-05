@@ -81,9 +81,9 @@ public class carrierHomePageController {
             
             if (orderList.get(0).getStatus().equals("waiting")) {
                 availableOrders.getChildren().add(createVBoxWaiting(orderList.get(0)));
-            } else if (orderList.get(0).getStatus().equals("inDelivery")) {
+            } else if (orderList.get(0).getStatus().equals("inDelivery") && orderList.get(0).getCarrierUsername() != null && orderList.get(0).getCarrierUsername().equals(carrier.getUsername())) {
                 currentOrders.getChildren().add(createVBoxCurrent(orderList.get(0)));
-            } else if (orderList.get(0).getStatus().equals("completed")) {
+            } else if (orderList.get(0).getStatus().equals("completed") && orderList.get(0).getCarrierUsername() != null && orderList.get(0).getCarrierUsername().equals(carrier.getUsername())) {
                 completedOrders.getChildren().add(createVBoxCompleted(orderList.get(0)));
             }
             
@@ -136,6 +136,7 @@ public class carrierHomePageController {
         button.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 1px;");
         button.setOnMouseClicked(e -> {
             order.setStatus("inDelivery");
+            order.setCarrierUsername(carrier.getUsername());
             db.updateOrderStatus(order);
             availableOrders.getChildren().remove(vBox);
             currentOrders.getChildren().add(createVBoxCurrent(order));
