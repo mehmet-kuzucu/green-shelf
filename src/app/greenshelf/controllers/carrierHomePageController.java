@@ -42,7 +42,7 @@ public class carrierHomePageController {
 
     @FXML
     private Text welcomeText;
-    
+    //TODO: add new column to database for order and carrier match
     @FXML
     void profilePhotoOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/profileInfoPage.fxml", carrier);
