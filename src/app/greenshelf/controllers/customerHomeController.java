@@ -119,6 +119,7 @@ public class customerHomeController {
     }
     
     public VBox createVboxGroup(Product product){
+        
         VBox productInfo = new VBox();
         productInfo.setId("productInfo");
         productInfo.setAlignment(javafx.geometry.Pos.CENTER);
@@ -146,19 +147,31 @@ public class customerHomeController {
         text2.setFill(javafx.scene.paint.Color.WHITE);
 
         innerVBox.getChildren().addAll(text1, text2);
-
         Spinner<Double> spinner = new Spinner<>();
-        spinner.setId("spinner");
-        spinner.setValueFactory(new javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, product.getStock(), 1.0, product.getIsPiece() ? 1.0 : 0.1));
-        spinner.setEditable(false);
+
+        if (product.getStock() == 0) {
+            text1.setText(product.getName());
+            text2.setText("Out of stock");
+            text2.setFill(javafx.scene.paint.Color.RED);
+        }
+        else
+        {
+
+            spinner.setId("spinner");
+            spinner.setValueFactory(new javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, product.getStock(), 1.0, product.getIsPiece() ? 1.0 : 0.1));
+            spinner.setEditable(false);
+        }
+        
 
         Button addToCartButton = new Button();
         addToCartButton.setId("addToCartButton");
         addToCartButton.setMnemonicParsing(false);
         addToCartButton.onMouseClickedProperty().set((MouseEvent event) -> {
+
             DatabaseAdapter dbAdapter = new DatabaseAdapter();
             if (productStockMap.get(product.getId()) < spinner.getValue()) {
-                System.out.println("Not enough stock");
+                text2.setText("Not enough stock");
+                text2.setFill(javafx.scene.paint.Color.RED);
                 return;
             }
 
@@ -193,7 +206,14 @@ public class customerHomeController {
 
         });
 
-        productInfo.getChildren().addAll(imageView, innerVBox, spinner, addToCartButton);
+        
+        if (product.getStock() == 0) {
+            productInfo.getChildren().addAll(imageView, innerVBox);
+        }
+        else
+        {
+            productInfo.getChildren().addAll(imageView, innerVBox, spinner, addToCartButton);
+        }
         return productInfo;
         
     }
