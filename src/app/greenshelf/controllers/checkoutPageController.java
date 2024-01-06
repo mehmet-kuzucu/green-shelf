@@ -210,13 +210,14 @@ public class checkoutPageController {
             order.setDate(deliveryTimeChoiceBox.getValue());
             Product product = dbAdapter.getProductFromId(order.getProductID());
             if (product.getStock() < order.getAmount()) {
-                shoppingCart.remove(order);
-                totalPriceText.setText("NO way bro");
+                totalPriceText.setStyle("-fx-font-size: 20px;");
+                totalPriceText.setText(product.getName() + " is out of stock, your shopping cart has been cleared. There is only " + product.getStock() + " left." );
                 totalPriceText.setFill(Color.RED);
                 totalPrice = 0;
                 cartCount = 0;
                 shoppingCart.clear();
                 productStockMap.replace(order.getProductID(), product.getStock());
+                dbAdapter.deleteFromCart(order);
                 return;
             }
             dbAdapter.changeOrderStatusAndDate(order);
