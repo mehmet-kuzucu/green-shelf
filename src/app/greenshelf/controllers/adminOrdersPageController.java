@@ -143,6 +143,8 @@ public class adminOrdersPageController {
         totalPriceText.setFill(Color.WHITE);
         Text deliveryDateTime = new Text(order.getDate());
         deliveryDateTime.setFill(Color.WHITE);
+        Text deliveredDate = new Text(order.getDeliveryDate());
+        deliveredDate.setFill(Color.WHITE);
 
         if (order.getStatus().equals("waiting") || order.getStatus().equals("inDelivery")) {
             //orderDetails.setStyle("-fx-background-color: #ffbebe;");
@@ -190,7 +192,8 @@ public class adminOrdersPageController {
                 customerInfo, 
                 address, 
                 totalPriceText, 
-                deliveryDateTime
+                deliveryDateTime,
+                deliveredDate
                 );
             }
             else

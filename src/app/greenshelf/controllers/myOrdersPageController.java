@@ -156,12 +156,21 @@ public class myOrdersPageController {
         text3.setStrokeType(StrokeType.OUTSIDE);
         text3.setStrokeWidth(0.0);
 
+        Text deliveredTimeText = new Text("Delivered Date: " + order4.getDeliveryDate());
+        deliveredTimeText.setStrokeType(StrokeType.OUTSIDE);
+        deliveredTimeText.setStrokeWidth(0.0);
+
         Line line = new Line(-100.0, 0, 100.0, 0);
         String products = "";
         
         
-
-        centerVBox.getChildren().addAll(expectedDeliveryDateText, totalPrice, text3, line, text4);
+        if(order4.getDeliveryDate() != null) {
+            centerVBox.getChildren().addAll(expectedDeliveryDateText, totalPrice, text3, deliveredTimeText, line, text4);
+        }
+        else {
+            centerVBox.getChildren().addAll(expectedDeliveryDateText, totalPrice, text3, line, text4);
+        }
+        
 
         borderPane.setCenter(centerVBox);
         Text leftText = new Text(order4.getOrderID());
@@ -189,6 +198,13 @@ public class myOrdersPageController {
             DatabaseAdapter dbAdapter2 = new DatabaseAdapter();
             try {
                 dbAdapter2.changeOrderStatus(order4.getOrderID(), "cancelled");
+                dbAdapter2.updateProductStock(order4.getProductID(), -1 * order4.getAmount());
+                productStockMap.clear();
+                List<Product> products2 = dbAdapter.getAllProducts();
+
+                for (Product product : products2) {
+                    productStockMap.put(product.getId(), product.getStock());
+                }
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

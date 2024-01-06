@@ -14,6 +14,7 @@ import app.greenshelf.Carrier;
 import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Order;
+import app.greenshelf.Product;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -26,6 +27,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.util.HashMap;	
@@ -50,6 +52,7 @@ public class carrierHomePageController {
 
     @FXML
     private Text welcomeText;
+
     //TODO: add new column to database for order and carrier match
     @FXML
     void profilePhotoOnMouseClicked(MouseEvent event) {
@@ -129,9 +132,35 @@ public class carrierHomePageController {
         vBox.setSpacing(10);
         vBox.setPrefWidth(200);
         vBox.setPrefHeight(200);
+
+        Text productsText = new Text();
         Customer customer = db.getUserFromId(order.getId());
-        Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + (order.getPrice()*0.01 + order.getPrice())  + " TL");
-        text.setFill(Color.WHITE);
+
+        Double totalPriceDouble = 0.0;
+        Double vat = 0.01;
+       
+        for (Order order2 : orderMap.get(order.getOrderID())) {
+
+            Product product = db.getProductFromId(order2.getProductID());
+            String amountString = String.valueOf(order.getAmount());
+            int indexOfDot = amountString.indexOf(".");
+            if (indexOfDot != -1) {
+                amountString = amountString.substring(0, indexOfDot);
+            }
+
+            productsText.setText(productsText.getText() + (product.getIsPiece() ? amountString : order2.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + product.getName() + (orderMap.get(order.getOrderID()).indexOf(order2) == orderMap.get(order.getOrderID()).size() - 1 ? "": "\n")); 
+            totalPriceDouble += (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2)) + (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) * vat);
+        }
+
+        Text totalPrice = new Text("Total Price: " + (Math.round(totalPriceDouble * 100) / 100.0) + "₺");
+        totalPrice.setStrokeType(StrokeType.OUTSIDE);
+        totalPrice.setStrokeWidth(0.0);
+        
+
+        //Text customerInfo = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + (order.getPrice()*0.01 + order.getPrice())  + " TL");
+        Text customerInfo = new Text(customer.getName() + customer.getSurname());
+        Text customerAddress = new Text(customer.getAddress());
+        Text customerDate = new Text(order.getDate());
         Button button = new Button("Accept");
         button.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 1px;");
         button.setOnMouseClicked(e -> {
@@ -141,7 +170,7 @@ public class carrierHomePageController {
             availableOrders.getChildren().remove(vBox);
             currentOrders.getChildren().add(createVBoxCurrent(order));
         });
-        vBox.getChildren().addAll(text, button);
+        vBox.getChildren().addAll(customerInfo, customerAddress, customerDate, productsText, totalPrice, button);
         db.closeConnection();
         return vBox;    
     }
@@ -155,9 +184,34 @@ public class carrierHomePageController {
         vBox.setSpacing(10);
         vBox.setPrefWidth(200);
         vBox.setPrefHeight(200);
+        Text productsText = new Text();
         Customer customer = db.getUserFromId(order.getId());
-        Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + (order.getPrice()*0.01 + order.getPrice()) + " TL");
-        text.setFill(javafx.scene.paint.Color.WHITE);
+
+        Double totalPriceDouble = 0.0;
+        Double vat = 0.01;
+       
+        for (Order order2 : orderMap.get(order.getOrderID())) {
+
+            Product product = db.getProductFromId(order2.getProductID());
+            String amountString = String.valueOf(order.getAmount());
+            int indexOfDot = amountString.indexOf(".");
+            if (indexOfDot != -1) {
+                amountString = amountString.substring(0, indexOfDot);
+            }
+
+            productsText.setText(productsText.getText() + (product.getIsPiece() ? amountString : order2.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + product.getName() + (orderMap.get(order.getOrderID()).indexOf(order2) == orderMap.get(order.getOrderID()).size() - 1 ? "": "\n")); 
+            totalPriceDouble += (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2)) + (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) * vat);
+        }
+
+        Text totalPrice = new Text("Total Price: " + (Math.round(totalPriceDouble * 100) / 100.0) + "₺");
+        totalPrice.setStrokeType(StrokeType.OUTSIDE);
+        totalPrice.setStrokeWidth(0.0);
+
+        //Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + (order.getPrice()*0.01 + order.getPrice()) + " TL");
+        Text customerInfo = new Text(customer.getName() + customer.getSurname());
+        Text customerAddress = new Text(customer.getAddress());
+        Text customerDate = new Text(order.getDate());
+
         Button button = new Button("Complete");
         button.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 1px;");
         button.setOnMouseClicked(e -> {
@@ -172,7 +226,7 @@ public class carrierHomePageController {
             currentOrders.getChildren().remove(vBox);
             completedOrders.getChildren().add(createVBoxCompleted(order));
         });
-        vBox.getChildren().addAll(text, button);
+        vBox.getChildren().addAll(customerInfo, customerAddress, customerDate, productsText, totalPrice, button);
         return vBox;    
     }
 
@@ -184,10 +238,35 @@ public class carrierHomePageController {
         vBox.setSpacing(10);
         vBox.setPrefWidth(200);
         vBox.setPrefHeight(200);
+        Text productsText = new Text();
         Customer customer = db.getUserFromId(order.getId());
-        Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + (order.getPrice()*0.01 + order.getPrice()) + " TL" + "\n" + order.getDeliveryDate());
-        text.setFill(javafx.scene.paint.Color.WHITE);
-        vBox.getChildren().addAll(text);
+
+        Double totalPriceDouble = 0.0;
+        Double vat = 0.01;
+       
+        for (Order order2 : orderMap.get(order.getOrderID())) {
+
+            Product product = db.getProductFromId(order2.getProductID());
+            String amountString = String.valueOf(order.getAmount());
+            int indexOfDot = amountString.indexOf(".");
+            if (indexOfDot != -1) {
+                amountString = amountString.substring(0, indexOfDot);
+            }
+
+            productsText.setText(productsText.getText() + (product.getIsPiece() ? amountString : order2.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + product.getName() + (orderMap.get(order.getOrderID()).indexOf(order2) == orderMap.get(order.getOrderID()).size() - 1 ? "": "\n")); 
+            totalPriceDouble += (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2)) + (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) * vat);
+        }
+
+        Text totalPrice = new Text("Total Price: " + (Math.round(totalPriceDouble * 100) / 100.0) + "₺");
+        totalPrice.setStrokeType(StrokeType.OUTSIDE);
+        totalPrice.setStrokeWidth(0.0);
+
+        //Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + (order.getPrice()*0.01 + order.getPrice()) + " TL");
+        Text customerInfo = new Text(customer.getName() + customer.getSurname());
+        Text customerAddress = new Text(customer.getAddress());
+        Text customerDate = new Text(order.getDate());
+
+        vBox.getChildren().addAll(customerInfo, customerAddress, customerDate, productsText, totalPrice);
         return vBox;
 
     }
