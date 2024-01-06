@@ -168,8 +168,8 @@ public class customerHomeController {
         else
         {
             spinner.setId("spinner");
-            spinner.setValueFactory(new javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, product.getStock(), 1.0, product.getIsPiece() ? 1.0 : 0.1));
-            spinner.setEditable(false);
+            spinner.setValueFactory(new javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, productStockMap.get(product.getId()), 1.0, product.getIsPiece() ? 1.0 : 0.1));
+            spinner.setEditable(true);
         }
         
 
@@ -184,6 +184,8 @@ public class customerHomeController {
                 text2.setFill(javafx.scene.paint.Color.RED);
                 return;
             }
+
+            dbAdapter.updateProductStock(product.getId(), spinner.getValue());
 
             if (checkIfOrderExists(product.getId())){
                 for (Order order : shoppingCart) {
@@ -205,7 +207,8 @@ public class customerHomeController {
             }
             productStockMap.put(product.getId(), productStockMap.get(product.getId()) - spinner.getValue());
 
-            
+            product.setIsLowerThanThreshold(product.getThreshold() > product.getStock());
+
             totalPrice += (product.getThreshold() < product.getStock()) ? (product.getPrice() * spinner.getValue()) : (product.getPrice() * spinner.getValue() * 2);
             try {
                 refreshPage();

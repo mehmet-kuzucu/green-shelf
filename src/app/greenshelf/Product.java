@@ -8,6 +8,7 @@ public class Product {
     private String type;
     private String image;
     private boolean isPiece;
+    private boolean isLowerThanThreshold;
 
     public Product(String name, double stock, String image, double price, double threshold, String type, int id, boolean isPiece) {
         this.name = name;
@@ -32,6 +33,10 @@ public class Product {
 
     public boolean getIsPiece() {
         return isPiece;
+    }
+
+    public boolean getIsLowerThanThreshold() {
+        return isLowerThanThreshold;
     }
 
     public String getName() {
@@ -88,6 +93,10 @@ public class Product {
 
      public void setIsPiece(boolean isPiece) {
         this.isPiece = isPiece;
+    }
+
+    public void setIsLowerThanThreshold(boolean isLowerThanThreshold) {
+        this.isLowerThanThreshold = isLowerThanThreshold;
     }
 
 }

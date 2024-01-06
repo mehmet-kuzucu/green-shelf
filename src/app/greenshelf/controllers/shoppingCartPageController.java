@@ -156,9 +156,11 @@ public class shoppingCartPageController {
         deleteButton.setOnMouseClicked((MouseEvent event) -> {
             System.out.println("Delete button clicked");
             DatabaseAdapter dbAdapter = new DatabaseAdapter();
+            dbAdapter.updateProductStock(product.getId(), -1 * order.getAmount());
             Order orderToDelete = dbAdapter.getOrderFromId(orderID, order.getProductID());
             dbAdapter.deleteFromCart(orderToDelete);
-            totalPrice -= order.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2);
+            //totalPrice -= order.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2);
+            totalPrice -= order.getAmount()*(product.getIsLowerThanThreshold() ? product.getPrice() * 2 : product.getPrice());
             cartCount--;
             for (int i = 0; i < shoppingCart.size(); i++) {
                 if (shoppingCart.get(i).getProductID() == order.getProductID()) {
@@ -174,6 +176,7 @@ public class shoppingCartPageController {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+
         });
         VBox rightVBox = new VBox();
         rightVBox.setAlignment(javafx.geometry.Pos.CENTER);
