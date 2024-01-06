@@ -261,7 +261,7 @@ public class customerHomeController {
 
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
         List<Product> products = dbAdapter.getAllProducts();
-
+        products.sort((Product p1, Product p2) -> p1.getName().compareTo(p2.getName()));
         for (Product product : products) {
             productStockMap.put(product.getId(), product.getStock());
         }

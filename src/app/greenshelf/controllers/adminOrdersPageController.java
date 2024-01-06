@@ -3,6 +3,9 @@ package app.greenshelf.controllers;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import app.greenshelf.Admin;
 import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
@@ -22,6 +25,7 @@ import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class adminOrdersPageController {
 
@@ -42,7 +46,7 @@ public class adminOrdersPageController {
     @FXML
     private VBox inDeliveryColumn;
 
-    private HashMap<String, List<Order>> orderMap = new HashMap<String, List<Order>>();
+    private Map<String, List<Order>> orderMap = new TreeMap<String, List<Order>>(Comparator.naturalOrder());
 
 
     @FXML
@@ -93,7 +97,7 @@ public class adminOrdersPageController {
         }
     }
 
-    public VBox createVboxGroup(Order order, HashMap<String, List<Order>> orderMap)
+    public VBox createVboxGroup(Order order, Map<String, List<Order>> orderMap)
     {
         VBox orderDetails = new VBox();
         orderDetails.setAlignment(javafx.geometry.Pos.CENTER);
