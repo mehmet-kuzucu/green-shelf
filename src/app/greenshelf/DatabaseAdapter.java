@@ -66,40 +66,49 @@ public class DatabaseAdapter {
     }
 
     public void registerUserSql(Customer customer) {
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("USE javafxdb;");
-            String query = "INSERT INTO user (username, email, phone, address, name, surname, password, profilePicture, userType) VALUES ('" +
-                            customer.getUsername() + "', '" +
-                            customer.getEmail() + "', '" +
-                            customer.getPhone() + "', '" +
-                            customer.getAddress() + "', '" +
-                            customer.getName() + "', '" +
-                            customer.getSurname() + "', '" +
-                            customer.getPassword() + "', '" +
-                            customer.getProfilePicture() + "', '" +
-                            customer.getUserType() + "');";
-            statement.executeUpdate(query);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        try{
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "INSERT INTO user (username, email, phone, name, surname, password, profilePicture, userType, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, customer.getUsername());
+            preparedStatement.setString(2, customer.getEmail());
+            preparedStatement.setString(3, customer.getPhone());
+            preparedStatement.setString(4, customer.getName());
+            preparedStatement.setString(5, customer.getSurname());
+            preparedStatement.setString(6, customer.getPassword());
+            preparedStatement.setBytes(7, customer.getProfilePicture().getBytes());
+            preparedStatement.setString(8, customer.getUserType());
+            preparedStatement.setString(9, customer.getAddress());
+            preparedStatement.executeUpdate();
+            System.out.println("Customer added successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        
     }
 
     public void registerUserSql(Carrier carrier) {
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("USE javafxdb;");
-            String query = "INSERT INTO user (username, email, phone, name, surname, password, profilePicture, userType, address) VALUES ('" +
-                            carrier.getUsername() + "', '" +
-                            carrier.getEmail() + "', '" +
-                            carrier.getPhone() + "', '" +
-                            carrier.getName() + "', '" +
-                            carrier.getSurname() + "', '" +
-                            carrier.getPassword() + "', '" +
-                            carrier.getProfilePicture() + "', '" +
-                            carrier.getUserType() + "', '" +
-                            carrier.getAddress() + "');";
-            statement.executeUpdate(query);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        try{
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "INSERT INTO user (username, email, phone, name, surname, password, profilePicture, userType, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, carrier.getUsername());
+            preparedStatement.setString(2, carrier.getEmail());
+            preparedStatement.setString(3, carrier.getPhone());
+            preparedStatement.setString(4, carrier.getName());
+            preparedStatement.setString(5, carrier.getSurname());
+            preparedStatement.setString(6, carrier.getPassword());
+            preparedStatement.setBytes(7, carrier.getProfilePicture().getBytes());
+            preparedStatement.setString(8, carrier.getUserType());
+            preparedStatement.setString(9, carrier.getAddress());
+            preparedStatement.executeUpdate();
+            System.out.println("Carrier added successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -881,6 +890,48 @@ public class DatabaseAdapter {
             ex.printStackTrace();
         }
 
+    }
+
+    public void updateProductPrice(int productId, double amount)
+    {
+        try{
+            String urlString = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+            Connection connection = DriverManager.getConnection(urlString, user.name, user.pass);
+            String query = "Update products set price = IF((stock > threshold) AND (stock - ? < threshold), price * 2, price) where id = ?;";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setDouble(1, amount);
+                preparedStatement.setInt(2, productId);
+                preparedStatement.executeUpdate();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("Product updated successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateProductPriceWhenCancel(int productId, double amount)
+    {
+        try{
+            String urlString = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+            Connection connection = DriverManager.getConnection(urlString, user.name, user.pass);
+            String query = "Update products set price = IF((stock < threshold) AND (stock + ? > threshold), price / 2, price) where id = ?;";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setDouble(1, amount);
+                preparedStatement.setInt(2, productId);
+                preparedStatement.executeUpdate();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("Product updated successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Product getProductFromId (int id)

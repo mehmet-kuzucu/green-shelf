@@ -198,6 +198,7 @@ public class myOrdersPageController {
             DatabaseAdapter dbAdapter2 = new DatabaseAdapter();
             try {
                 dbAdapter2.changeOrderStatus(order4.getOrderID(), "cancelled");
+                dbAdapter2.updateProductPriceWhenCancel(order4.getProductID(), order4.getAmount());
                 dbAdapter2.updateProductStock(order4.getProductID(), -1 * order4.getAmount());
                 productStockMap.clear();
                 List<Product> products2 = dbAdapter.getAllProducts();

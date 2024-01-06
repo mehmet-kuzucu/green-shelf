@@ -76,6 +76,10 @@ public class addCarrierPageController {
         else if (!checkPhoneisValid(phone.getText())) {
             emptyPlaces.setText("Phone number is not valid");
         }
+        else if (encodedImage == null)
+        {
+            emptyPlaces.setText("Please add a photo");
+        }
         else {
             DatabaseAdapter dbAdapter = new DatabaseAdapter();
             if(dbAdapter.checkUsernameSql(encodedImage)){

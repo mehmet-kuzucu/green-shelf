@@ -208,15 +208,23 @@ public class checkoutPageController {
         {
             order.setStatus("waiting");
             order.setDate(deliveryTimeChoiceBox.getValue());
+            Product product = dbAdapter.getProductFromId(order.getProductID());
+            if (product.getStock() < order.getAmount()) {
+                shoppingCart.remove(order);
+                totalPriceText.setText("NO way bro");
+                totalPriceText.setFill(Color.RED);
+                totalPrice = 0;
+                cartCount = 0;
+                shoppingCart.clear();
+                productStockMap.replace(order.getProductID(), product.getStock());
+                return;
+            }
             dbAdapter.changeOrderStatusAndDate(order);
-        }
-        
-        /*
-        for (Order order : shoppingCart) 
-        {
+            dbAdapter.updateProductPrice(order.getProductID(), order.getAmount());
             dbAdapter.updateProductStock(order.getProductID(), order.getAmount());
         }
-        */
+        
+        
         shoppingCart.clear();
         cartCount = 0;
         totalPrice = 0;

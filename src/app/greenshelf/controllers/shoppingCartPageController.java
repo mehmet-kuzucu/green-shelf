@@ -159,8 +159,7 @@ public class shoppingCartPageController {
             dbAdapter.updateProductStock(product.getId(), -1 * order.getAmount());
             Order orderToDelete = dbAdapter.getOrderFromId(orderID, order.getProductID());
             dbAdapter.deleteFromCart(orderToDelete);
-            //totalPrice -= order.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2);
-            totalPrice -= order.getAmount()*(product.getIsLowerThanThreshold() ? product.getPrice() * 2 : product.getPrice());
+            totalPrice -= dbAdapter.getProductFromId(order.getProductID()).getPrice() * order.getAmount();
             cartCount--;
             for (int i = 0; i < shoppingCart.size(); i++) {
                 if (shoppingCart.get(i).getProductID() == order.getProductID()) {

@@ -35,7 +35,6 @@ public class registerPageController {
 
     @FXML
     private TextField registerNameField;
-
     @FXML
     private TextField registerSurnameField;
 
@@ -140,6 +139,62 @@ public class registerPageController {
             System.out.println("Phone is not valid!");
             errorTextRegister.setText("Phone is not valid!");
             registerPhoneField.setStyle("-fx-border-color: red;");
+            return;
+        }
+        if (registerNameField.getText().length() > 50)
+        {
+            System.out.println("Name is too long!");
+            errorTextRegister.setText("Name is too long!");
+            registerNameField.setStyle("-fx-border-color: red;");
+            return;
+        }
+        else if (registerSurnameField.getText().length() > 50)
+        {
+            System.out.println("Surname is too long!");
+            errorTextRegister.setText("Surname is too long!");
+            registerSurnameField.setStyle("-fx-border-color: red;");
+            return;
+        }
+        else if (registerAddressField.getText().length() > 50)
+        {
+            System.out.println("Address is too long!");
+            errorTextRegister.setText("Address is too long!");
+            registerAddressField.setStyle("-fx-border-color: red;");
+            return;
+        }
+        else if (registerUsernameField.getText().length() > 50)
+        {
+            System.out.println("Username is too long!");
+            errorTextRegister.setText("Username is too long!");
+            registerUsernameField.setStyle("-fx-border-color: red;");
+            return;
+        }
+        else if (registerEmailField.getText().length() > 50)
+        {
+            System.out.println("Email is too long!");
+            errorTextRegister.setText("Email is too long!");
+            registerEmailField.setStyle("-fx-border-color: red;");
+            return;
+        }
+        else if (registerPhoneField.getText().length() > 50)
+        {
+            System.out.println("Phone is too long!");
+            errorTextRegister.setText("Phone is too long!");
+            registerPhoneField.setStyle("-fx-border-color: red;");
+            return;
+        }
+        else if (registerPasswordField.getText().length() > 50)
+        {
+            System.out.println("Password is too long!");
+            errorTextRegister.setText("Password is too long!");
+            registerPasswordField.setStyle("-fx-border-color: red;");
+            return;
+        }
+        else if (registerConfirmPasswordField.getText().length() > 50)
+        {
+            System.out.println("Password is too long!");
+            errorTextRegister.setText("Password is too long!");
+            registerConfirmPasswordField.setStyle("-fx-border-color: red;");
             return;
         }
         else {
