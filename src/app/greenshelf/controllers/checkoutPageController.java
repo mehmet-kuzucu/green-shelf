@@ -222,7 +222,8 @@ public class checkoutPageController {
             }
             dbAdapter.changeOrderStatusAndDate(order);
             dbAdapter.updateProductPrice(order.getProductID(), order.getAmount());
-            dbAdapter.updateProductStock(order.getProductID(), order.getAmount());
+            dbAdapter.updateProductStock(order.getProductID(), Math.round((product.getStock() - order.getAmount())*100)/100.0);
+            System.out.println("Order amount: " + order.getAmount());   
         }
         
         
