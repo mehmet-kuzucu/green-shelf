@@ -161,7 +161,6 @@ public class myOrdersPageController {
         deliveredTimeText.setStrokeWidth(0.0);
 
         Line line = new Line(-100.0, 0, 100.0, 0);
-        String products = "";
         
         
         if(order4.getDeliveryDate() != null) {
@@ -197,9 +196,11 @@ public class myOrdersPageController {
         removeOrderButton.onMouseClickedProperty().set((event) -> {
             DatabaseAdapter dbAdapter2 = new DatabaseAdapter();
             try {
-                dbAdapter2.changeOrderStatus(order4.getOrderID(), "cancelled");
-                dbAdapter2.updateProductPriceWhenCancel(order4.getProductID(), order4.getAmount());
-                dbAdapter2.updateProductStock(order4.getProductID(), -1 * order4.getAmount());
+                for (Order order2 : orderMap.get(order4.getOrderID())) {
+                    dbAdapter2.changeOrderStatus(order2.getOrderID(), "cancelled");
+                    dbAdapter2.updateProductPriceWhenCancel(order2.getProductID(), order2.getAmount());
+                    dbAdapter2.updateProductStock(order2.getProductID(), -1 * order2.getAmount());
+                }
                 productStockMap.clear();
                 List<Product> products2 = dbAdapter.getAllProducts();
 
