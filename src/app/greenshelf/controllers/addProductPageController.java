@@ -81,19 +81,23 @@ public class addProductPageController {
             emptyPlaces.setText("This product name already exists");
         }
         else if (!checkIfPriceNumber(price.getText())) {
-            emptyPlaces.setText("Please enter a number for price");
+            emptyPlaces.setText("Please enter a valid number for price");
         }
         else if (!checkIfStockNumber(stock.getText(), pieceToggleButton.isSelected())) {
-            emptyPlaces.setText("Please enter a number for stock");
+            emptyPlaces.setText("Please enter a valid number for stock");
         }
         else if (!checkIfThresholdNumber(threshold.getText(), pieceToggleButton.isSelected())) {
-            emptyPlaces.setText("Please enter a number for threshold");
+            emptyPlaces.setText("Please enter a valid number for threshold");
         }
         else if (!checkIfStockInteger(stock.getText(), pieceToggleButton)) {
-            emptyPlaces.setText("Please enter an integer for stock when piece is selected");
+            emptyPlaces.setText("Please enter an valid integer for stock when piece is selected");
         }
         else if (!checkIfThresholdDouble(threshold.getText(), pieceToggleButton)) {
-            emptyPlaces.setText("Please enter an integer for threshold when piece is selected");
+            emptyPlaces.setText("Please enter an valid integer for threshold when piece is selected");
+        } 
+        else if (encodedImage == null)
+        {
+            emptyPlaces.setText("Please add a photo");
         }
         else {
             boolean isPiece = kiloToggleButton.isSelected() ? false : true;
@@ -147,6 +151,12 @@ public class addProductPageController {
 
     public boolean checkIfPriceNumber(String price) {
         try {
+            if (price.contains(",")) {
+                return false;
+            }
+            if(Double.parseDouble(price) <= 0){
+                return false;
+            }
             Double.parseDouble(price);
             return true;
         } catch (NumberFormatException e) {
@@ -156,7 +166,10 @@ public class addProductPageController {
 
     public boolean checkIfThresholdNumber(String threshold, Boolean isPiece) {
         try {
-            if (isPiece && threshold.contains(".")) {
+            if (isPiece && threshold.contains(",")) {
+                return false;
+            }
+            if(Double.parseDouble(threshold) <= 0){
                 return false;
             }
             Double.parseDouble(threshold);
@@ -176,6 +189,9 @@ public class addProductPageController {
             if  (pieceToggleButton.isSelected()) {
                 Integer.parseInt(stock);
             }
+            if(Double.parseDouble(stock) <= 0){
+                return false;
+            }
             return true;
         } catch (NumberFormatException e) {
             return false;
@@ -191,6 +207,9 @@ public class addProductPageController {
             if  (pieceToggleButton.isSelected()) {
                 Integer.parseInt(threshold);
             }
+            if(Double.parseDouble(threshold) <= 0){
+                return false;
+            }
             return true;
         } catch (NumberFormatException e) {
             return false;
@@ -198,11 +217,13 @@ public class addProductPageController {
     }
     public boolean checkIfStockNumber(String stock, Boolean isPiece) {
         try {
-
-            if (isPiece && stock.contains(".")) {
+            if (isPiece && stock.contains(",")) {
                 return false;
             }
             Double.parseDouble(stock);
+            if(Double.parseDouble(stock) <= 0){
+                return false;
+            }
             return true;
         } catch (NumberFormatException e) {
             return false;

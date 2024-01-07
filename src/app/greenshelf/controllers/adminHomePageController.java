@@ -168,20 +168,30 @@ public class adminHomePageController {
                 emptyPlaces.setText("Please fill all the places");
             }
             else if (!addProductPageController.checkIfPriceNumber(priceField.getText())) {
-                emptyPlaces.setText("Please enter a number for price");
+                emptyPlaces.setText("Please enter a valid number for price");
             }
             else if (!addProductPageController.checkIfStockNumber(quantityField.getText(), product.getIsPiece())) {
-                emptyPlaces.setText("Please enter a number for stock");
+                emptyPlaces.setText("Please enter a valid number for stock");
             }
             else if (!addProductPageController.checkIfThresholdNumber(thresholdField.getText(), product.getIsPiece())) {
-                emptyPlaces.setText("Please enter a number for threshold");
+                emptyPlaces.setText("Please enter a valid number for threshold");
             }
             else if (!addProductPageController.checkIfStockInteger(quantityField.getText(), null)) {
-                emptyPlaces.setText("Please enter an integer for stock when piece is selected");
+                emptyPlaces.setText("Please enter an valid integer for stock when piece is selected");
             }
             else if (!addProductPageController.checkIfThresholdDouble(thresholdField.getText(), null)) {
-                emptyPlaces.setText("Please enter an integer for threshold when piece is selected");
+                emptyPlaces.setText("Please enter an valid integer for threshold when piece is selected");
             } 
+            else if(product.getIsPiece() && thresholdField.getText().contains(".") || product.getIsPiece() && thresholdField.getText().contains(","))
+            {
+                try{
+                    Integer.parseInt(thresholdField.getText());
+                }catch(Exception e1){
+                    emptyPlaces.setText("Please enter an valid integer for threshold\nwhen piece is selected");
+                    return;
+                }
+                
+            }
             else{
                 DatabaseAdapter dbAdapter = new DatabaseAdapter();
                 Product product2 = new Product(nameField.getText(),  Double.parseDouble(quantityField.getText()), Double.parseDouble(priceField.getText()), Double.parseDouble(thresholdField.getText()), product.getType(), product.getId(), product.getIsPiece());

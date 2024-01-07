@@ -1,3 +1,5 @@
+import java.util.Locale;
+
 import app.greenshelf.DatabaseAdapter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +15,7 @@ public class App extends Application {
     public void start(Stage primaryStage) {
         try {
             databaseAdapter = new DatabaseAdapter(); // database kurulumu
-
+            Locale.setDefault(Locale.ENGLISH); // dil ayarı (ingilizce
             // Load FXML files
             FXMLLoader scene = new FXMLLoader(getClass().getResource("app/greenshelf/fxml/loginPage.fxml"));
             /*
