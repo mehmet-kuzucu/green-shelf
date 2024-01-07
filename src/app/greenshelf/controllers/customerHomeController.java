@@ -310,7 +310,7 @@ public class customerHomeController {
 
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
         List<Product> products = dbAdapter.getAllProducts();
-
+        products.sort((Product p1, Product p2) -> p1.getName().compareTo(p2.getName()));
         // Add each product to the VBox
         for (Product product : products) {
             VBox group = createVboxGroup(product);
