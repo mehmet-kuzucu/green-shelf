@@ -156,7 +156,6 @@ public class shoppingCartPageController {
         deleteButton.setOnMouseClicked((MouseEvent event) -> {
             System.out.println("Delete button clicked");
             DatabaseAdapter dbAdapter = new DatabaseAdapter();
-            dbAdapter.updateProductStock(product.getId(), -1 * order.getAmount());
             Order orderToDelete = dbAdapter.getOrderFromId(orderID, order.getProductID());
             dbAdapter.deleteFromCart(orderToDelete);
             totalPrice -= dbAdapter.getProductFromId(order.getProductID()).getPrice() * order.getAmount();
