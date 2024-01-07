@@ -168,7 +168,7 @@ public class customerHomeController {
         else
         {
             spinner.setId("spinner");
-            spinner.setValueFactory(new javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory(0.1, product.getStock(), 1.0, product.getIsPiece() ? 1.0 : 0.1));
+            spinner.setValueFactory(new javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory((product.getIsPiece() ? 1.0 : 0.5), product.getStock(), 1.0, product.getIsPiece() ? 1.0 : 0.5));
             spinner.setEditable(false);
         }
         

@@ -134,6 +134,7 @@ public class carrierHomePageController {
         vBox.setPrefHeight(200);
 
         Text productsText = new Text();
+        productsText.setFill(Color.WHITE);
         Customer customer = db.getUserFromId(order.getId());
 
         Double totalPriceDouble = 0.0;
@@ -153,6 +154,7 @@ public class carrierHomePageController {
         }
 
         Text totalPrice = new Text("Total Price: " + (Math.round(totalPriceDouble * 100) / 100.0) + "₺");
+        totalPrice.setFill(Color.WHITE);
         totalPrice.setStrokeType(StrokeType.OUTSIDE);
         totalPrice.setStrokeWidth(0.0);
         
@@ -161,6 +163,9 @@ public class carrierHomePageController {
         Text customerInfo = new Text(customer.getName() + customer.getSurname());
         Text customerAddress = new Text(customer.getAddress());
         Text customerDate = new Text(order.getDate());
+        customerInfo.setFill(Color.WHITE);
+        customerAddress.setFill(Color.WHITE);
+        customerDate.setFill(Color.WHITE);
         Button button = new Button("Accept");
         button.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 1px;");
         button.setOnMouseClicked(e -> {
@@ -185,6 +190,7 @@ public class carrierHomePageController {
         vBox.setPrefWidth(200);
         vBox.setPrefHeight(200);
         Text productsText = new Text();
+        productsText.setFill(Color.WHITE);
         Customer customer = db.getUserFromId(order.getId());
 
         Double totalPriceDouble = 0.0;
@@ -204,6 +210,7 @@ public class carrierHomePageController {
         }
 
         Text totalPrice = new Text("Total Price: " + (Math.round(totalPriceDouble * 100) / 100.0) + "₺");
+        totalPrice.setFill(Color.WHITE);
         totalPrice.setStrokeType(StrokeType.OUTSIDE);
         totalPrice.setStrokeWidth(0.0);
 
@@ -211,6 +218,9 @@ public class carrierHomePageController {
         Text customerInfo = new Text(customer.getName() + customer.getSurname());
         Text customerAddress = new Text(customer.getAddress());
         Text customerDate = new Text(order.getDate());
+        customerInfo.setFill(Color.WHITE);
+        customerAddress.setFill(Color.WHITE);
+        customerDate.setFill(Color.WHITE);
 
         Button button = new Button("Complete");
         button.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 1px;");
@@ -239,6 +249,7 @@ public class carrierHomePageController {
         vBox.setPrefWidth(200);
         vBox.setPrefHeight(200);
         Text productsText = new Text();
+        productsText.setFill(Color.WHITE);
         Customer customer = db.getUserFromId(order.getId());
 
         Double totalPriceDouble = 0.0;
@@ -258,6 +269,7 @@ public class carrierHomePageController {
         }
 
         Text totalPrice = new Text("Total Price: " + (Math.round(totalPriceDouble * 100) / 100.0) + "₺");
+        totalPrice.setFill(Color.WHITE);
         totalPrice.setStrokeType(StrokeType.OUTSIDE);
         totalPrice.setStrokeWidth(0.0);
 
@@ -265,6 +277,9 @@ public class carrierHomePageController {
         Text customerInfo = new Text(customer.getName() + customer.getSurname());
         Text customerAddress = new Text(customer.getAddress());
         Text customerDate = new Text(order.getDate());
+        customerInfo.setFill(Color.WHITE);
+        customerAddress.setFill(Color.WHITE);
+        customerDate.setFill(Color.WHITE);
 
         vBox.getChildren().addAll(customerInfo, customerAddress, customerDate, productsText, totalPrice);
         return vBox;
