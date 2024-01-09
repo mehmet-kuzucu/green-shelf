@@ -295,7 +295,14 @@ public class customerHomeController {
             customerTilePane.getChildren().add(group);
         }
         cartCountText.setText(String.valueOf(cartCount));
-        totalPriceText.setText(String.valueOf("Total price: " + totalPrice));
+
+        String totalPriceString = String.valueOf(totalPrice);
+        //TODO: fix this total price 179.989999999923 gibi bir şey olabiliyor
+        int indexOfDot = totalPriceString.indexOf(".");
+        if (indexOfDot != -1) {
+            totalPriceString = totalPriceString.substring(0, indexOfDot) +totalPriceString.substring(indexOfDot, indexOfDot+2);
+        }
+        totalPriceText.setText(String.valueOf("Total price: " + totalPriceString));
 
         // Add the VBox to the ScrollPane
         

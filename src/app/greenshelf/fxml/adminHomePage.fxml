@@ -83,7 +83,7 @@
                <children>
                   <Button id="button" mnemonicParsing="false" onMouseClicked="#recruitCarrierMouseClicked" text="Recruit/Fire Carrier" />
                   <Button id="button" fx:id="adminOrdersButton" mnemonicParsing="false" onMouseClicked="#adminOrdersButtonOnMouseClicked" text="Orders" />
-                  <Button id="button" mnemonicParsing="false" text="Charts" />
+                  <Button id="button" fx:id="chartsButton" mnemonicParsing="false" onMouseClicked="#chartsButtonOnMouseClicked" text="Charts" />
                </children>
             </HBox>
          </left>

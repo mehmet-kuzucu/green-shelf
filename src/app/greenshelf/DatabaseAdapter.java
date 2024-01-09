@@ -2,6 +2,7 @@ package app.greenshelf;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -952,5 +953,83 @@ public class DatabaseAdapter {
         }
         return null;
     }
+
+    public Double getAllOrdersRevenue()
+    {
+        Double revenue = 0.0;
+        try{
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "SELECT price, amount FROM orders WHERE status = 'completed'";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                System.out.println("Price: " + resultSet.getDouble("price") + " Amount: " + resultSet.getDouble("amount"));
+                revenue += resultSet.getDouble("price") * resultSet.getDouble("amount");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return revenue;
+    }
+
+    public int getAllOrdersDifferentCount(String status)
+    {
+        int count = 0;
+        try{
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "SELECT COUNT(DISTINCT orderid) FROM orders WHERE status = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, status);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                count = resultSet.getInt("COUNT(DISTINCT orderid)");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public HashMap<String, Integer> getOrdersRevenueByDate()
+    {
+        HashMap<String, Integer> revenueByDate = new HashMap<>();
+        try
+        {
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "SELECT deliveryDate, price, amount FROM orders WHERE status = 'completed'";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                String date = resultSet.getString("deliveryDate");
+                Double price = resultSet.getDouble("price");
+                Double amount = resultSet.getDouble("amount");
+                //parse deliveryDate to get only date from back
+                date = date.substring(0, date.indexOf(' '));
+                if (revenueByDate.containsKey(date))
+                {
+                    revenueByDate.put(date, revenueByDate.get(date) + (int)(price * amount));
+                }
+                else
+                {
+                    revenueByDate.put(date, (int)(price * amount));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return revenueByDate;
+
+    }
+
+    
 
 }

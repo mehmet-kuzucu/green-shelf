@@ -42,6 +42,9 @@ public class adminHomePageController {
     @FXML
     private Button logoutButton;
 
+    @FXML
+    private Button chartsButton;
+
     private Admin admin;
 
 
@@ -63,6 +66,18 @@ public class adminHomePageController {
     
         dbAdapter.closeConnection();
     
+    }
+
+    @FXML
+    void chartsButtonOnMouseClicked(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/adminStatisticsPage.fxml"));
+        Parent root = loader.load();
+        adminStatisticsPageController controller = loader.getController();
+        controller.initData(admin); // Pass the User object to the controller
+        stage = (Stage) chartsButton.getScene().getWindow();
+        scene = new Scene(root, chartsButton.getScene().getWidth(), chartsButton.getScene().getHeight());
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
