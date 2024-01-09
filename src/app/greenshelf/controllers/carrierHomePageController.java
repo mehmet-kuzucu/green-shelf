@@ -53,10 +53,18 @@ public class carrierHomePageController {
     @FXML
     private Text welcomeText;
 
+    @FXML
+    private Button logoutButton;
+
     //TODO: add new column to database for order and carrier match
     @FXML
     void profilePhotoOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/profileInfoPage.fxml", carrier);
+    }
+
+    @FXML
+    void logoutButtonOnMouseClicked(MouseEvent event) {
+        loadScene("../fxml/loginPage.fxml");
     }
     
     public void initData(Carrier carrier) {
@@ -160,7 +168,7 @@ public class carrierHomePageController {
         
 
         //Text customerInfo = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + (order.getPrice()*0.01 + order.getPrice())  + " TL");
-        Text customerInfo = new Text(customer.getName() + customer.getSurname());
+        Text customerInfo = new Text(customer.getName() + " " + customer.getSurname());
         Text customerAddress = new Text(customer.getAddress());
         Text customerDate = new Text(order.getDate());
         customerInfo.setFill(Color.WHITE);
@@ -284,6 +292,21 @@ public class carrierHomePageController {
         vBox.getChildren().addAll(customerInfo, customerAddress, customerDate, productsText, totalPrice);
         return vBox;
 
+    }
+
+    private void loadScene(String fxmlPath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            stage = (Stage) logoutButton.getScene().getWindow();
+            scene = new Scene(root,logoutButton.getScene().getWidth(),logoutButton.getScene().getHeight());
+            stage.setScene(scene);
+            stage.show();
+            
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

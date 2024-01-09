@@ -55,6 +55,9 @@ public class customerHomeController {
     @FXML
     private Button myOrdersButton;
 
+    @FXML
+    private Button logoutButton;
+
     private Stage stage;
     private Scene scene;
     private Customer currentUser;
@@ -64,6 +67,11 @@ public class customerHomeController {
     private HashMap<Integer, Double> productStockMap = new HashMap<Integer, Double>();
     private String orderID;
     List <Order> shoppingCart = new ArrayList <Order>();
+
+    @FXML
+    void logoutButtonOnMouseClicked(MouseEvent event) {
+        loadScene("../fxml/loginPage.fxml");
+    }
 
     @FXML
     void shoppingCartButtonButtonOnMouseClicked(MouseEvent event) {
@@ -107,6 +115,21 @@ public class customerHomeController {
                 myOrdersPageController controller = loader.getController();
                 controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
             }
+            
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadScene(String fxmlPath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            stage = (Stage) profilePhotoImage.getScene().getWindow();
+            scene = new Scene(root,profilePhotoImage.getScene().getWidth(),profilePhotoImage.getScene().getHeight());
+            stage.setScene(scene);
+            stage.show();
             
             
         } catch (IOException e) {

@@ -39,6 +39,9 @@ public class adminHomePageController {
     @FXML
     private Button shoppingCartButton;
 
+    @FXML
+    private Button logoutButton;
+
     private Admin admin;
 
 
@@ -60,6 +63,11 @@ public class adminHomePageController {
     
         dbAdapter.closeConnection();
     
+    }
+
+    @FXML
+    void logoutButtonOnMouseClicked(MouseEvent event) {
+        loadScene("../fxml/loginPage.fxml");
     }
 
     @FXML
@@ -239,6 +247,21 @@ public class adminHomePageController {
         scene = new Scene(root, profilePhoto.getScene().getWidth(), profilePhoto.getScene().getHeight());
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void loadScene(String fxmlPath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            stage = (Stage) logoutButton.getScene().getWindow();
+            scene = new Scene(root,logoutButton.getScene().getWidth(),logoutButton.getScene().getHeight());
+            stage.setScene(scene);
+            stage.show();
+            
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     
