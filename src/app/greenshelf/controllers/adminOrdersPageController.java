@@ -77,10 +77,7 @@ public class adminOrdersPageController {
                 orderMap.put(order.getOrderID(), orderList);
             }
         }
-        //System.out.println(orderMap);
-        //check for unique order ids and add them to the map with the status as the key and the list of orders as the value
         for (HashMap.Entry<String, List<Order>> order : orderMap.entrySet()) {
-            //System.out.println(order.getOrderID());
             if (order.getValue().get(0).getStatus().equals("waiting")) {
                 VBox group = createVboxGroup(order.getValue().get(0), orderMap);
                 waitingColumn.getChildren().add(group);
@@ -104,7 +101,6 @@ public class adminOrdersPageController {
         orderDetails.setPrefHeight(200.0);
         orderDetails.setPrefWidth(100.0);
         orderDetails.setSpacing(5.0);
-        //VBox.setVgrow(orderDetails, Priority.ALWAYS);
         orderDetails.setPadding(new javafx.geometry.Insets(10.0));
         orderDetails.setId("orderDetails");
         orderDetails.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
@@ -112,7 +108,6 @@ public class adminOrdersPageController {
         System.out.println(order.getStatus());
         if (order.getStatus().equals("completed") || order.getStatus().equals("inDelivery"))
         {
-            //TODO: burada kurye ismi de yazacak
             id.setText("#"+order.getOrderID() + "\n" + order.getCarrierUsername());
         }
         else
@@ -130,7 +125,6 @@ public class adminOrdersPageController {
         Text address = new Text("Address: " + addressString);
         address.setFill(Color.WHITE);
         dbAdapter.closeConnection();
-        //TODO: burayı düzgünce parse edeceğiz
         Double totalPrice = 0.0;
         Double vat = 0.01;
         for (Order order2 : orderMap.get(order.getOrderID())) {
@@ -151,7 +145,6 @@ public class adminOrdersPageController {
         deliveredDate.setFill(Color.WHITE);
 
         if (order.getStatus().equals("waiting") || order.getStatus().equals("inDelivery")) {
-            //orderDetails.setStyle("-fx-background-color: #ffbebe;");
             Button cancelButton = new Button("Cancel Order");
             cancelButton.setMnemonicParsing(false);
             orderDetails.getChildren().addAll(
@@ -169,10 +162,8 @@ public class adminOrdersPageController {
                 try {
                     System.out.println("Order cancelled");
                     databaseAdapter.changeOrderStatus(order.getOrderID(), "cancelled");
-                    //TODO: burada stokları arttırma işlemi yapılacak
                     for (Order order2 : orderMap.get(order.getOrderID())) {
                         Product product = databaseAdapter.getProductFromId(order2.getProductID());
-                        //product.setStock(product.getStock() + order2.getAmount());
                         databaseAdapter.updateProductStock(product.getId(), Math.round((product.getStock() + order2.getAmount())*100)/100.0);
                         
                     }
@@ -183,9 +174,7 @@ public class adminOrdersPageController {
                 refresh();
             });
         
-            //orderDetails.setStyle("-fx-background-color: #ffffbe;");
         } else if (order.getStatus().equals("completed") || order.getStatus().equals("cancelled")) {
-            //orderDetails.setStyle("-fx-background-color: #beffbc;");
             if (order.getStatus().equals("completed"))
             {
                 Text status = new Text("Successfully Delivered");
@@ -217,10 +206,6 @@ public class adminOrdersPageController {
             }
             
         }
-
-
-        
-
         
         return orderDetails;
     }
@@ -237,7 +222,6 @@ public class adminOrdersPageController {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

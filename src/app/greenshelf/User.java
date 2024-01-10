@@ -1,8 +1,6 @@
 package app.greenshelf;
-import java.security.SecureRandom;
 
 public class User {
-    //private String UserID;
     private String name;
     private String surname;
     private String password;
@@ -13,7 +11,6 @@ public class User {
 
 
 
-    // Constructor
     public User(String name, String surname, String password, String email, String phone, String username, String userType) {
         setName(name);
         setSurname(surname);
@@ -21,15 +18,9 @@ public class User {
         setEmail(email);
         setPhone(phone);
         setUsername(username);
-        //setUserID();
         setUserType(userType);
     }
 
-    /* bu olmayacak, simdilik program calissin diye var */
-    public User(String username, String password){
-        setUsername(username);
-        setPassword(password);
-    }
 
     public User(String name, String surname, String username, String password){
         setName(name);
@@ -38,32 +29,6 @@ public class User {
         setPassword(password);
     }
 
-
-    // Setters
-    /*
-    public void setUserID() {
-
-        // bu 16 karakterlik string olusturuyo onu da UserID'ye atiyo
-
-        if (this.UserID == null){
-            
-            String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            SecureRandom random = new SecureRandom();
-            StringBuilder sb = new StringBuilder(16);
-
-            for (int i = 0; i < 16; i++) {
-                int randomIndex = random.nextInt(CHARACTERS.length());
-                char randomChar = CHARACTERS.charAt(randomIndex);
-                sb.append(randomChar);
-            }
-
-            this.UserID =  sb.toString();
-        } else {
-            System.out.println("User ID already exists");
-        } 
-
-    }
-    */
     public void setName(String name) {
         this.name = name;
     }
@@ -85,12 +50,8 @@ public class User {
     public void setUserType(String userType) {
         this.userType= userType;
     }
-    // Getters
-    /*
-    public String getUserID() {
-        return this.UserID;
-    }
-    */
+    
+
     public String getName() {
         return this.name;
     }
@@ -112,5 +73,4 @@ public class User {
     public String getUserType() {
         return this.userType;
     }
-
 }

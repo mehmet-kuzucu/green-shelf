@@ -70,31 +70,26 @@ public class checkoutPageController {
         this.totalPrice = totalPrice;
         this.productStockMap = productStockMap;
         this.orderID = orderID;
-        //convert from base 64
         profilePhotoImage.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(currentUser.getProfilePicture()))));
-        totalPriceText.setText("Total Price: " + (totalPrice + Math.round(totalPrice*vat*100)/100.0) + " TL (VAT included)");
+        totalPriceText.setText("Total Price: " + Math.round(((totalPrice) + (totalPrice*vat))*100)/100.0 + " ₺ (VAT included)");
         System.out.println(getCurrentTime());
-        //deliveryTimeChoiceBox.getItems().addAll("hocam", "hocam2");
         
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
         for (Order order : shoppingCart) 
         {
             HBox orderHBox = new HBox();
-            //Text amountXpriceTextEqualsTotalPrice = new Text((product.getIsPiece() ? amountString : order.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + "x " + (product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) + "₺" + " = " + order.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) + "₺");
             String amountString = String.valueOf(order.getAmount());
             int indexOfDot = amountString.indexOf(".");
             if (indexOfDot != -1) {
                 amountString = amountString.substring(0, indexOfDot);
             }
             Text orderText = new Text(dbAdapter.getProductFromId(order.getProductID()).getName() + " (" + order.getPrice() +"₺) x " + ((dbAdapter.getProductFromId(order.getProductID()).getIsPiece() ? amountString : order.getAmount())) + ((dbAdapter.getProductFromId(order.getProductID()).getIsPiece() ? " piece " : " kg ")) + "= " + order.getPrice() * order.getAmount() +"₺");
-            //background color
             orderHBox.setStyle("-fx-background-color: #4B787C;");
             ImageView orderImage = new ImageView(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(dbAdapter.getProductFromId(order.getProductID()).getImage()))));
             orderImage.setFitHeight(31);
             orderImage.setFitWidth(31);
             orderHBox.getChildren().addAll(orderImage, orderText);
             orderHBox.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
-            //center the image
             orderHBox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
             orderHBox.setSpacing(13);
             orderText.setStyle("-fx-font-size: 31px;");
@@ -112,7 +107,6 @@ public class checkoutPageController {
         
     }
 
-    //returns a list of possible delivery times within 48 hours
     public List<String> possibleDeliveryTimesWithin48Hours()
     {
         String currentTime = getCurrentTime();
@@ -203,6 +197,12 @@ public class checkoutPageController {
 
     @FXML
     void buyButtonOnMouseClicked(MouseEvent event) {
+        if (shoppingCart.size() == 0) {
+            totalPriceText.setStyle("-fx-font-size: 20px;");
+            totalPriceText.setText("Your shopping cart is empty.");
+            totalPriceText.setFill(Color.RED);
+            return;
+        }
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
         for (Order order : shoppingCart) 
         {
@@ -269,16 +269,16 @@ public class checkoutPageController {
             
             if (fxmlPath.equals("../fxml/profileInfoPage.fxml")) {
                 profileInfoPageController controller = loader.getController();
-                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
+                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); 
             }
             else if (fxmlPath.equals("../fxml/shoppingCartPage.fxml")) {
                 shoppingCartPageController controller = loader.getController();
-                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
+                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); 
             }
             else if (fxmlPath.equals("../fxml/customerHome.fxml")) {
                 customerHomeController controller = loader.getController();
                 String newOrderID = getRandomOrderID();
-                controller.initData(user, order, cartCount, totalPrice, productStockMap, newOrderID); // Pass the User object to the controller
+                controller.initData(user, order, cartCount, totalPrice, productStockMap, newOrderID); 
             }
             
             

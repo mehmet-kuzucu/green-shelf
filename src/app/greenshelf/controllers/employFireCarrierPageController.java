@@ -85,20 +85,19 @@ public class employFireCarrierPageController {
         FXMLLoader scene = new FXMLLoader(getClass().getResource("../fxml/addCarrierPage.fxml"));
         Parent root = scene.load();
         addCarrierPageController controller2 = scene.getController();
-        controller2.initData(controller); // Pass the User object to the controller
+        controller2.initData(controller);
         
         stage.setScene(new Scene(root));
         
         stage.setTitle("Add Carrier");
         stage.show();
-        // stage.setScene(new Scene(root, 600, 400));
     }
 
     public void refreshPage() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/employFireCarrierPage.fxml"));
         Parent root = loader.load();
         controller = loader.getController();
-        this.controller.initData(admin,controller); // Pass the User object to the controller
+        this.controller.initData(admin,controller); 
         stage = (Stage) profilePhoto.getScene().getWindow();
         scene = new Scene(root,profilePhoto.getScene().getWidth(),profilePhoto.getScene().getHeight());
         stage.setScene(scene);
@@ -107,7 +106,7 @@ public class employFireCarrierPageController {
 
     public VBox createVBox(Carrier carrier){
         VBox carrierInfo = new VBox();
-        carrierInfo.setId("productInfo"); // Make sure to define the CSS styles accordingly
+        carrierInfo.setId("productInfo"); 
         carrierInfo.setAlignment(javafx.geometry.Pos.CENTER);
         carrierInfo.setPrefHeight(400.0);
         carrierInfo.setPrefWidth(200.0);
@@ -152,7 +151,6 @@ public class employFireCarrierPageController {
             }
             else {
                 DatabaseAdapter databaseAdapter = new DatabaseAdapter();
-                // TODO: CHECK PHONE NUMBER AND EMAIL
                 Carrier carrier2 = new Carrier(nameTextField.getText(), surnameTextField.getText(), passwordField.getText(), emailTextField.getText(), phoneTextField.getText(), carrier.getUsername(), null, carrier.getProfilePicture());
                 if  (databaseAdapter.checkEmailSql(carrier2.getUsername(), carrier2.getEmail()))
                 {

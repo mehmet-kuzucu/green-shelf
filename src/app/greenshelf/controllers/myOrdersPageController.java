@@ -93,7 +93,6 @@ public class myOrdersPageController {
         }
 
         
-        //Customer customer = dbAdapter.getUserFromId(order.get(0).getId());
         int userID = dbAdapter.getUserIDFromUsername(user.getUsername());
         System.out.println(userID);
         
@@ -208,7 +207,6 @@ public class myOrdersPageController {
                     productStockMap.put(product.getId(), product.getStock());
                 }
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             refresh();
@@ -237,11 +235,11 @@ public class myOrdersPageController {
             
             if (fxmlPath.equals("../fxml/profileInfoPage.fxml")) {
                 profileInfoPageController controller = loader.getController();
-                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
+                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); 
             }
             else if (fxmlPath.equals("../fxml/customerHome.fxml")) {
                 customerHomeController controller = loader.getController();
-                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
+                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); 
             }
             
             
@@ -262,7 +260,6 @@ public class myOrdersPageController {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

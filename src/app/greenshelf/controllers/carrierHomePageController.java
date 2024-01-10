@@ -56,7 +56,6 @@ public class carrierHomePageController {
     @FXML
     private Button logoutButton;
 
-    //TODO: add new column to database for order and carrier match
     @FXML
     void profilePhotoOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/profileInfoPage.fxml", carrier);
@@ -101,13 +100,6 @@ public class carrierHomePageController {
         }
         db.closeConnection();
     }
-    /*@FXML
-    void silinecekOnMouseClicked(MouseEvent event) {
-        // when button clicked, make the button unvisible
-        silinecek.setVisible(false);
-        System.out.println("silinecek button clicked!");
-
-    }*/
 
     private void loadScene(String fxmlPath, Carrier carrier) {
         try {
@@ -120,7 +112,7 @@ public class carrierHomePageController {
             
             if (fxmlPath.equals("../fxml/profileInfoPage.fxml")) {
                 profileInfoPageController controller = loader.getController();
-                controller.initData(carrier); // Pass the User object to the controller
+                controller.initData(carrier); 
             }
             
             
@@ -167,7 +159,6 @@ public class carrierHomePageController {
         totalPrice.setStrokeWidth(0.0);
         
 
-        //Text customerInfo = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + (order.getPrice()*0.01 + order.getPrice())  + " TL");
         Text customerInfo = new Text(customer.getName() + " " + customer.getSurname());
         Text customerAddress = new Text(customer.getAddress());
         Text customerDate = new Text(order.getDate());
@@ -222,7 +213,6 @@ public class carrierHomePageController {
         totalPrice.setStrokeType(StrokeType.OUTSIDE);
         totalPrice.setStrokeWidth(0.0);
 
-        //Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + (order.getPrice()*0.01 + order.getPrice()) + " TL");
         Text customerInfo = new Text(customer.getName() + customer.getSurname());
         Text customerAddress = new Text(customer.getAddress());
         Text customerDate = new Text(order.getDate());
@@ -281,7 +271,6 @@ public class carrierHomePageController {
         totalPrice.setStrokeType(StrokeType.OUTSIDE);
         totalPrice.setStrokeWidth(0.0);
 
-        //Text text = new Text(customer.getName() + "\n" + order.getDate() + "\n" + customer.getAddress() + "\n" + (order.getPrice()*0.01 + order.getPrice()) + " TL");
         Text customerInfo = new Text(customer.getName() + customer.getSurname());
         Text customerAddress = new Text(customer.getAddress());
         Text customerDate = new Text(order.getDate());

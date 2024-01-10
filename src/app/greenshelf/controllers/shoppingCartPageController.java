@@ -44,7 +44,6 @@ public class shoppingCartPageController {
     private Customer currentUser;
     private Stage stage;
     private Scene scene;
-    //private LinkedList <Order> orderArray;
     private int cartCount;
     private double totalPrice;
     private HashMap<Integer, Double> productStockMap = new HashMap<Integer, Double>();
@@ -58,14 +57,13 @@ public class shoppingCartPageController {
         this.shoppingCart = shoppingCart;
         this.orderID = orderID;
         System.out.println("Shopping cartta Order ID: " + orderID);
-        //get products from shopping cart
 
         System.out.println("Size of the order array: " + this.shoppingCart.size());
         this.cartCount = cartCount;
         this.totalPrice = totalPrice;
         this.productStockMap = productStockMap;
 
-        totalPriceText.setText("Total Price: " + totalPrice + "₺" +"\n" + "Total Products: " + cartCount + " products" + "\n" + "VAT: " + Math.round(totalPrice*vat*100)/100.0 + "₺" + "\n" + "Total Price with VAT: " + (totalPrice + Math.round(totalPrice*vat*100)/100.0) + "₺");
+        totalPriceText.setText("Total Price: " + Math.round(totalPrice*100)/100.0 + "₺" +"\n" + "Total Products: " + cartCount + " products" + "\n" + "VAT: " + Math.round(totalPrice*vat*100)/100.0 + "₺" + "\n" + "Total Price with VAT: " + Math.round(((totalPrice) + (totalPrice*vat))*100)/100.0 + "₺");
         totalPriceText.setFont(new Font(13));
         for (Order order : this.shoppingCart) {
             VBox group = createVboxGroup(order);
@@ -110,19 +108,10 @@ public class shoppingCartPageController {
         VBox productInfo = new VBox();
         productInfo.setId("productInfo");
         productInfo.setAlignment(javafx.geometry.Pos.CENTER);
-        //productInfo.setPrefHeight(400.0);
-        //productInfo.setPrefWidth(200.0);
+
         productInfo.setSpacing(15.0);
         productInfo.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
 
-        /*
-        ImageView imageView = new ImageView();
-        imageView.setFitHeight(150.0);
-        imageView.setFitWidth(200.0);
-        imageView.setPickOnBounds(true);
-        imageView.setPreserveRatio(true);
-        imageView.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(product.getImage()))));
-        */
         BorderPane borderPane = new BorderPane();
         HBox innerHBox = new HBox();
         innerHBox.setId("deneme");
@@ -131,7 +120,6 @@ public class shoppingCartPageController {
         innerHBox.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
         Product product = databaseAdapter.getProductFromId(order.getProductID());
-        //getAmount to string
         String amountString = String.valueOf(order.getAmount());
         int indexOfDot = amountString.indexOf(".");
         if (indexOfDot != -1) {
@@ -148,7 +136,6 @@ public class shoppingCartPageController {
         productImage.setFitWidth(200.0);
         productImage.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(product.getImage()))));
 
-        //innerHBox.getChildren().addAll(productImage, productNameText, amountXpriceText, totalPriceText);
         HBox HBoxLeft = new HBox();
         Button deleteButton = new Button();
         deleteButton.setId("deleteButton");
@@ -171,7 +158,6 @@ public class shoppingCartPageController {
             try {
                 refreshPage();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
@@ -190,14 +176,6 @@ public class shoppingCartPageController {
         borderPane.setCenter(amountXpriceTextEqualsTotalPrice);
         borderPane.setRight(rightVBox);
         
-        
-        /* 
-        Spinner<Double> spinner = new Spinner<>();
-        spinner.setId("spinner");
-        spinner.setValueFactory(new javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, product.getStock(), 1.0, 0.1));
-        spinner.setEditable(false);
-        */
-        
 
         productInfo.getChildren().addAll(borderPane);
         return productInfo;
@@ -214,7 +192,7 @@ public class shoppingCartPageController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/shoppingCartPage.fxml"));
         Parent root = loader.load();
         shoppingCartPageController controller = loader.getController();
-        controller.initData(currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
+        controller.initData(currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID); 
         stage = (Stage) checkoutButton.getScene().getWindow();
         scene = new Scene(root,checkoutButton.getScene().getWidth(),checkoutButton.getScene().getHeight());
         stage.setScene(scene);

@@ -52,17 +52,14 @@ public class adminHomePageController {
     {
         this.admin = admin;
         this.controller = controller;
-        // Get the products from the database
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
         List<Product> products = dbAdapter.getAllProducts();
 
-        // Add each product to the VBox
         for (Product product : products) {
             VBox group = createVboxGroup(product);
             adminTilePane.getChildren().add(group);
         }
 
-        // Add the VBox to the ScrollPane
     
         dbAdapter.closeConnection();
     
@@ -73,7 +70,7 @@ public class adminHomePageController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/adminStatisticsPage.fxml"));
         Parent root = loader.load();
         adminStatisticsPageController controller = loader.getController();
-        controller.initData(admin); // Pass the User object to the controller
+        controller.initData(admin); 
         stage = (Stage) chartsButton.getScene().getWindow();
         scene = new Scene(root, chartsButton.getScene().getWidth(), chartsButton.getScene().getHeight());
         stage.setScene(scene);
@@ -99,8 +96,6 @@ public class adminHomePageController {
 
     @FXML
     void shoppingCartButtonOnMouseClicked(MouseEvent event) throws IOException {
-        // when button clicked, make the button unvisible
-        /* open a new stage which new product will be added */
         Stage stage = new Stage();
         FXMLLoader scene = new FXMLLoader(getClass().getResource("../fxml/addProductPage.fxml"));
         Parent root = scene.load();
@@ -111,7 +106,6 @@ public class adminHomePageController {
         
         stage.setTitle("Add Product");
         stage.show();
-        // stage.setScene(new Scene(root, 600, 400));
 
     }
 
@@ -120,7 +114,7 @@ public class adminHomePageController {
         FXMLLoader scene = new FXMLLoader(getClass().getResource("../fxml/employFireCarrierPage.fxml"));
         Parent root = scene.load();
         employFireCarrierPageController controller2 = scene.getController();
-        controller2.initData(this.admin,controller2); // Pass the User object to the controller
+        controller2.initData(this.admin,controller2); 
         stage = (Stage) profilePhoto.getScene().getWindow();
         stage.setScene(new Scene(root, profilePhoto.getScene().getWidth(), profilePhoto.getScene().getHeight()));
         
@@ -129,7 +123,6 @@ public class adminHomePageController {
     }
 
     public VBox createVboxGroup(Product product){
-        // Create the VBox with specified properties
         VBox outerVBox = new VBox();
         outerVBox.setStyle("fx-background-color: #f5429b;");
         outerVBox.setPadding(new javafx.geometry.Insets(5));
@@ -138,13 +131,10 @@ public class adminHomePageController {
         outerVBox.setPrefWidth(200);
         outerVBox.setPrefHeight(400);
         outerVBox.setId("productInfo");
-        // Create an ImageView
         byte[] decodedBytes = Base64.getDecoder().decode(product.getImage());
         ImageView imageView = new ImageView(new Image(new ByteArrayInputStream(decodedBytes)));
         imageView.setFitWidth(200);
         imageView.setFitHeight(150);
-
-        // Create an inner VBox with two text fields
         VBox innerVBox1 = new VBox();
         innerVBox1.setAlignment(Pos.CENTER);
         TextField nameField = new TextField();
@@ -160,9 +150,6 @@ public class adminHomePageController {
         currencyText.setStyle("-fx-fill: white;");
         thresholdText.setStyle("-fx-fill: white;");
         priceHbox.getChildren().addAll(priceField, currencyText);
-        
-        
-        //hbox center
         priceHbox.setSpacing(5);
         quantityHbox.setSpacing(5);
         thresholdHbox.setSpacing(5);
@@ -170,7 +157,6 @@ public class adminHomePageController {
         priceField.setText(Double.valueOf(product.getPrice()).toString());
         innerVBox1.getChildren().addAll(nameField, priceHbox);
         innerVBox1.getChildren().get(0);
-        // Create two text fields and a button
         TextField quantityField = new TextField();
         quantityHbox.getChildren().addAll(quantityField, quantityText);
         quantityField.setText((product.getIsPiece() ? Integer.valueOf((int)product.getStock()).toString() : Double.valueOf(product.getStock()).toString()));
@@ -180,7 +166,6 @@ public class adminHomePageController {
         emptyPlaces.setStyle("-fx-fill: red;");
         thresholdField.setText((product.getIsPiece() ? Integer.valueOf((int)product.getThreshold()).toString() : Double.valueOf(product.getThreshold()).toString()));
         Button updateButton = new Button("Update");
-        /* add space to the top of updateButton */
         updateButton.setPadding(new javafx.geometry.Insets(5));
         updateButton.setId("button");
         updateButton.setStyle("-fx-margin-top: 50;");
@@ -227,7 +212,6 @@ public class adminHomePageController {
                 }
             }
         });
-        // Create an inner VBox with text fields and button
         VBox innerVBox2 = new VBox();
         Button removeButton = new Button("Remove");
         removeButton.setPadding(new javafx.geometry.Insets(5));
@@ -245,7 +229,6 @@ public class adminHomePageController {
         innerVBox2.getChildren().addAll(quantityHbox, thresholdHbox, updateButton, removeButton, emptyPlaces);
         innerVBox2.setAlignment(Pos.CENTER);
         innerVBox1.setAlignment(Pos.CENTER);
-        // Add components to the outer VBox
         outerVBox.getChildren().addAll(imageView, innerVBox1, innerVBox2);
         return outerVBox;
         
@@ -257,7 +240,7 @@ public class adminHomePageController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/adminHomePage.fxml"));
         Parent root = loader.load();
         adminHomePageController controller = loader.getController();
-        controller.initData(admin,root,controller); // Pass the User object to the controller
+        controller.initData(admin,root,controller); 
         stage = (Stage) profilePhoto.getScene().getWindow();
         scene = new Scene(root, profilePhoto.getScene().getWidth(), profilePhoto.getScene().getHeight());
         stage.setScene(scene);

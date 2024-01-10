@@ -8,6 +8,7 @@ public class Product {
     private String type;
     private String image;
     private boolean isPiece;
+    
     public Product(String name, double stock, String image, double price, double threshold, String type, int id, boolean isPiece) {
         this.name = name;
         this.stock = stock;

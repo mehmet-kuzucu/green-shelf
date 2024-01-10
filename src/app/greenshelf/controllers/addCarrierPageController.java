@@ -98,7 +98,6 @@ public class addCarrierPageController {
             dbAdapter.closeConnection();
             emptyPlaces.setText("Carrier added successfully");
             emptyPlaces.setStyle("-fx-fill: green");
-            /* close the scene */
             Platform.runLater(() -> {
                 Stage stage = (Stage) addToCartButton.getScene().getWindow();
                 stage.close();
@@ -178,7 +177,6 @@ public class addCarrierPageController {
         }
     }
 
-    /* check valid phone number */
     public Boolean checkPhoneisValid(String phone) {
         String phoneRegex = "^[0-9]{10}$"; 
                               

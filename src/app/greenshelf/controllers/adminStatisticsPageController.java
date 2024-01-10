@@ -64,8 +64,6 @@ public class adminStatisticsPageController {
         pieChart.getData().add(new Data("Cancelled Orders", db.getAllOrdersDifferentCount("cancelled")));
         pieChart.setLabelsVisible(false);
         
-        //change piechart info color
-        
         
         HashMap<String, Integer> orderHmap = db.getOrdersRevenueByDate();
         for (String key : orderHmap.keySet()) {

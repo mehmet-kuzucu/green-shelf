@@ -115,15 +115,15 @@ public class profileInfoPageController {
             
             if (fxmlPath.equals("../fxml/customerHome.fxml")) {
                 customerHomeController controller = loader.getController();
-                controller.initData(user, orderArray, cartCount, totalPrice, productStockMap,orderID); // Pass the User object to the controller
+                controller.initData(user, orderArray, cartCount, totalPrice, productStockMap,orderID); 
             }
             if (fxmlPath.equals("../fxml/adminHomePage.fxml")) {
                 adminHomePageController controller = loader.getController();
-                controller.initData(admin,root,controller); // Pass the User object to the controller
+                controller.initData(admin,root,controller); 
             }
             if (fxmlPath.equals("../fxml/carrierHomePage.fxml")) {
                 carrierHomePageController controller = loader.getController();
-                controller.initData(carrier); // Pass the User object to the controller
+                controller.initData(carrier); 
             }
             
             stage = (Stage) greenShelfLogo.getScene().getWindow();
@@ -275,17 +275,7 @@ public class profileInfoPageController {
             stage.setScene(scene);
             stage.show();
         }
-        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/profileInfoPage.fxml"));
-        Parent root = loader.load();
-        profileInfoPageController controller = loader.getController();
-        DatabaseAdapter databaseAdapter = new DatabaseAdapter();
-        List<String> list = databaseAdapter.loginUserSql(currentUser.getUsername());
-        currentUser = new Customer(list.get(5), list.get(6), list.get(7), list.get(2), list.get(3), list.get(1), list.get(4), list.get(8));
-        controller.initData(currentUser, orderArray, cartCount, totalPrice, productStockMap);
-        stage = (Stage) greenShelfLogo.getScene().getWindow();
-        scene = new Scene(root, greenShelfLogo.getScene().getWidth(), greenShelfLogo.getScene().getHeight());
-        stage.setScene(scene);
-        stage.show();*/
+ 
 
     }
 }

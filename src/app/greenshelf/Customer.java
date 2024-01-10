@@ -5,7 +5,6 @@ public class Customer extends User {
     private String address;
     private String profilePicture;
         
-    // Constructor
     public Customer(String name, String surname, String password, String email, String phone, String username, String address, String profilePicture) {
         super(name, surname, password, email, phone, username, "customer");
         setAddress(address);

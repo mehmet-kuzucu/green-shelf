@@ -62,17 +62,14 @@ public class loginPageController {
     
             if ("customer".equals(userType) && password.equals(passwordField.getText())) {
                 System.out.println("Customer login successful!");
-                //promote user to customer
                 Customer c = createCustomer(userInformation);
                 loadScene("../fxml/customerHome.fxml",c,null,null);
             } else if ("admin".equals(userType) && password.equals(passwordField.getText())) {
                 System.out.println("Admin login successful!");
-                //promote user to admin
                 Admin a = createAdmin(userInformation);
                 loadScene("../fxml/adminHomePage.fxml",null,a,null);
             } else if ("carrier".equals(userType) && password.equals(passwordField.getText())) {
                 System.out.println("Carrier login successful!");
-                //promote user to carrier
                 Carrier c = createCarrier(userInformation);
                 loadScene("../fxml/carrierHomePage.fxml",null,null,c);
             } else {
@@ -87,21 +84,18 @@ public class loginPageController {
         }
     }
 
-    //create customer object
     Customer createCustomer(List<String> list) throws SQLException
     {
         Customer c = new Customer(list.get(4), list.get(5), list.get(6), list.get(1), list.get(2), list.get(0), list.get(3), list.get(7));
         return c;
     }
 
-    //create admin object
     Admin createAdmin(List<String> list) throws SQLException
     {
         Admin a = new Admin(list.get(4), list.get(5), list.get(6), list.get(1), list.get(2), list.get(0));
         return a;
     }
 
-    //TODO: carrier classı oluşturulduğunda bu fonksiyonu da yaz
     Carrier createCarrier(List<String> list) throws SQLException
     {
         Carrier c = new Carrier(list.get(4), list.get(5), list.get(6), list.get(1), list.get(2), list.get(0), list.get(3), list.get(7));
@@ -130,15 +124,15 @@ public class loginPageController {
             
             if (fxmlPath.equals("../fxml/customerHome.fxml")) {
                 customerHomeController controller = loader.getController();
-                controller.initData(user); // Pass the User object to the controller
+                controller.initData(user); 
             }
             if (fxmlPath.equals("../fxml/adminHomePage.fxml")) {
                 adminHomePageController controller = loader.getController();
-                controller.initData(admin,root,controller); // Pass the User object to the controller
+                controller.initData(admin,root,controller); 
             }
             if (fxmlPath.equals("../fxml/carrierHomePage.fxml")) {
                 carrierHomePageController controller = loader.getController();
-                controller.initData(carrier); // Pass the User object to the controller
+                controller.initData(carrier); 
             }
             
             stage = (Stage) loginButton.getScene().getWindow();

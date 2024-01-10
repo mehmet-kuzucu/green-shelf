@@ -16,10 +16,8 @@ public class DatabaseAdapter {
     
     public void generateSqlDatabase() {
         try (Statement statement = connection.createStatement()) {
-            // Create the database
             statement.executeUpdate("CREATE DATABASE IF NOT EXISTS javafxdb;");
             statement.executeUpdate("USE javafxdb;");
-            // Create a table in the database
             String query = "CREATE TABLE IF NOT EXISTS user (id INT PRIMARY KEY AUTO_INCREMENT, " +
                                                                         "username VARCHAR(50), " +
                                                                         "email VARCHAR(50), " +
@@ -134,23 +132,19 @@ public class DatabaseAdapter {
 
     public List<String> loginUserSql(String username) {
         try {
-            // Ensure that the connection is not null
             if (connection == null) {
                 throw new SQLException("Connection not established.");
             }
     
-            // Select the database
             try (PreparedStatement useStatement = connection.prepareStatement("USE javafxdb;")) {
                 useStatement.execute();
             }
     
-            // Check if the username exists
             String queryUsernameExists = "SELECT COUNT(*) FROM user WHERE username = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(queryUsernameExists)) {
                 preparedStatement.setString(1, username);
                 ResultSet resultSet2 = preparedStatement.executeQuery();
     
-                // Check if there is a result
                 if (resultSet2.next()) {
                     if (resultSet2.getInt(1) == 0) {
                         System.out.println("Username does not exist!");
@@ -159,12 +153,10 @@ public class DatabaseAdapter {
                 }
             }
     
-            // Your main query to retrieve the password and userType
             String query = "SELECT * FROM user WHERE username = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
                 ResultSet resultSet = preparedStatement.executeQuery();
-                // Check if there is a result
                 if (resultSet.next()) {
                     List<String> list = List.of(resultSet.getString("username"), resultSet.getString("email"), resultSet.getString("phone"), resultSet.getString("address"), resultSet.getString("name"), resultSet.getString("surname"), resultSet.getString("password"), resultSet.getString("profilePicture"), resultSet.getString("userType"));
                     
@@ -185,26 +177,21 @@ public class DatabaseAdapter {
     public Boolean checkUsernameSql(String username) {
         
         try {
-            // Ensure that the connection is not null
             if (connection == null) {
                 throw new SQLException("Connection not established.");
             }
     
-            // Select the database
             try (PreparedStatement useStatement = connection.prepareStatement("USE javafxdb;")) {
                 useStatement.execute();
             }
     
-            // Check if the username exists
             String queryUsernameExists = "SELECT COUNT(*) FROM user WHERE username = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(queryUsernameExists)) {
                 preparedStatement.setString(1, username);
                 ResultSet resultSet2 = preparedStatement.executeQuery();
     
-                // Check if there is a result
                 if (resultSet2.next()) {
                     if (resultSet2.getInt(1) == 0) {
-                        /*username doesn't exists */
                         return false;
                     }
                 }
@@ -219,23 +206,19 @@ public class DatabaseAdapter {
     public Boolean checkEmailSql(String email) {
         
         try {
-            // Ensure that the connection is not null
             if (connection == null) {
                 throw new SQLException("Connection not established.");
             }
     
-            // Select the database
             try (PreparedStatement useStatement = connection.prepareStatement("USE javafxdb;")) {
                 useStatement.execute();
             }
     
-            // Check if the username exists
             String queryUsernameExists = "SELECT COUNT(*) FROM user WHERE email = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(queryUsernameExists)) {
                 preparedStatement.setString(1, email);
                 ResultSet resultSet2 = preparedStatement.executeQuery();
     
-                // Check if there is a result
                 if (resultSet2.next()) {
                     if (resultSet2.getInt(1) == 0) {
                         /*email doesn't exists */
@@ -253,24 +236,20 @@ public class DatabaseAdapter {
     public Boolean checkPhoneSql(String username,String phone)
     {
         try{
-            // Ensure that the connection is not null
             if (connection == null) {
                 throw new SQLException("Connection not established.");
             }
 
-            // Select the database
             try (PreparedStatement useStatement = connection.prepareStatement("USE javafxdb;")) {
                 useStatement.execute();
             }
 
-            // Check if the username exists
             String queryUsernameExists = "SELECT COUNT(*) FROM user WHERE username != ? and phone = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(queryUsernameExists)) {
                 preparedStatement.setString(1, username);
                 preparedStatement.setString(2, phone);
                 ResultSet resultSet2 = preparedStatement.executeQuery();
 
-                // Check if there is a result
                 if (resultSet2.next()) {
                     if (resultSet2.getInt(1) == 0) {
                         /*phone doesn't exists */
@@ -287,24 +266,20 @@ public class DatabaseAdapter {
     public Boolean checkEmailSql(String username,String email) {
         
         try {
-            // Ensure that the connection is not null
             if (connection == null) {
                 throw new SQLException("Connection not established.");
             }
     
-            // Select the database
             try (PreparedStatement useStatement = connection.prepareStatement("USE javafxdb;")) {
                 useStatement.execute();
             }
     
-            // Check if the username exists
             String queryUsernameExists = "SELECT COUNT(*) FROM user WHERE username != ? and email = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(queryUsernameExists)) {
                 preparedStatement.setString(1, username);
                 preparedStatement.setString(2, email);
                 ResultSet resultSet2 = preparedStatement.executeQuery();
     
-                // Check if there is a result
                 if (resultSet2.next()) {
                     if (resultSet2.getInt(1) == 0) {
                         /*email doesn't exists */
@@ -322,23 +297,19 @@ public class DatabaseAdapter {
     public Boolean checkPhoneSql(String phone) {
         
         try {
-            // Ensure that the connection is not null
             if (connection == null) {
                 throw new SQLException("Connection not established.");
             }
     
-            // Select the database
             try (PreparedStatement useStatement = connection.prepareStatement("USE javafxdb;")) {
                 useStatement.execute();
             }
     
-            // Check if the username exists
             String queryUsernameExists = "SELECT COUNT(*) FROM user WHERE phone = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(queryUsernameExists)) {
                 preparedStatement.setString(1, phone);
                 ResultSet resultSet2 = preparedStatement.executeQuery();
     
-                // Check if there is a result
                 if (resultSet2.next()) {
                     if (resultSet2.getInt(1) == 0) {
                         /*phone doesn't exists */
@@ -355,26 +326,22 @@ public class DatabaseAdapter {
 
     public boolean checkProductName(String productName){
         try {
-            // Ensure that the connection is not null
             if (connection == null) {
                 throw new SQLException("Connection not established.");
             }
     
-            // Select the database
             try (PreparedStatement useStatement = connection.prepareStatement("USE javafxdb;")) {
                 useStatement.execute();
             }
     
-            // Check if the username exists
             String queryUsernameExists = "SELECT COUNT(*) FROM products WHERE name = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(queryUsernameExists)) {
                 preparedStatement.setString(1, productName);
                 ResultSet resultSet2 = preparedStatement.executeQuery();
     
-                // Check if there is a result
                 if (resultSet2.next()) {
                     if (resultSet2.getInt(1) == 0) {
-                        /*phone doesn't exists */
+                        /*product doesn't exists */
                         return false;
                     }
                 }
@@ -421,8 +388,6 @@ public class DatabaseAdapter {
         try (Connection connection = DriverManager.getConnection(url, user.name, user.pass)) 
         {
             String updateQuery = "UPDATE user SET password = ?, email = ?, address = ?, phone = ?, profilePicture = ? WHERE username = ?";
-            //String updateQuery = "UPDATE user SET password = ?, email = ?, address = ?, phone = ? WHERE username = ?";
-
         try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) 
         {
             preparedStatement.setString(1, password);
@@ -442,7 +407,6 @@ public class DatabaseAdapter {
     }
 
     public void addProductToDb(Product product){
-        /* add product to database */
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
             zorunlu user = new zorunlu();
@@ -500,9 +464,7 @@ public class DatabaseAdapter {
         return carriers;
     }
 
-    public void updateCarrier(Carrier carrier) throws SQLException{
-        /* update carrier in database */
-        
+    public void updateCarrier(Carrier carrier) throws SQLException{        
         System.out.println("update carrier");
         String url = "jdbc:mysql://localhost:3306/javafxdb";
         zorunlu user = new zorunlu();
@@ -525,9 +487,7 @@ public class DatabaseAdapter {
     }
 
 
-    public void deleteCarrier(String username) throws SQLException{
-        /* delete carrier from database */
-        
+    public void deleteCarrier(String username) throws SQLException{        
         String url = "jdbc:mysql://localhost:3306/javafxdb";
         zorunlu user = new zorunlu();
         Connection connection = DriverManager.getConnection(url, user.name, user.pass);
@@ -541,9 +501,7 @@ public class DatabaseAdapter {
         }
     }
 
-    public void changeOrderStatus(String orderID, String status) throws SQLException{
-        /* delete carrier from database */
-        
+    public void changeOrderStatus(String orderID, String status) throws SQLException{        
         String url = "jdbc:mysql://localhost:3306/javafxdb";
         zorunlu user = new zorunlu();
         Connection connection = DriverManager.getConnection(url, user.name, user.pass);
@@ -820,7 +778,6 @@ public class DatabaseAdapter {
     }
 
     public void updateProduct(Product product){
-        /* update product in database */
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
             zorunlu user = new zorunlu();
@@ -867,17 +824,14 @@ public class DatabaseAdapter {
 
     public void updateProductStock(int productId, double amount){
         try {
-            // Ensure that the connection is not null
             if (connection == null) {
                 throw new SQLException("Connection not established.");
             }
     
-            // Select the database
             try (PreparedStatement useStatement = connection.prepareStatement("USE javafxdb;")) {
                 useStatement.execute();
             }
     
-            // Check if the username exists
             String query = "UPDATE products SET stock = ? WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setDouble(1, amount);
@@ -1012,7 +966,6 @@ public class DatabaseAdapter {
                 String date = resultSet.getString("deliveryDate");
                 Double price = resultSet.getDouble("price");
                 Double amount = resultSet.getDouble("amount");
-                //parse deliveryDate to get only date from back
                 date = date.substring(0, date.indexOf(' '));
                 if (revenueByDate.containsKey(date))
                 {
@@ -1027,9 +980,5 @@ public class DatabaseAdapter {
             e.printStackTrace();
         }
         return revenueByDate;
-
     }
-
-    
-
 }

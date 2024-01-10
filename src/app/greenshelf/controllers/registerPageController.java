@@ -24,7 +24,6 @@ import java.io.FileInputStream;
 import java.io.ByteArrayInputStream;
 import java.util.regex.Pattern;
 
-//import from parent directory
 
 
 
@@ -99,7 +98,6 @@ public class registerPageController {
         
 
 
-        /* DO THE CHECKERS */
         if (areFieldsEmpty())
         {
             return;
@@ -207,7 +205,6 @@ public class registerPageController {
             encodedImage = encodeImageToBase64(currentDirectory + "/src/app/greenshelf/images/defaultProfilePicture.png");
         }
 
-        //password check
         Customer newCustomer = new Customer(registerNameField.getText(), registerSurnameField.getText(), registerPasswordField.getText(), registerEmailField.getText(), registerPhoneField.getText(), registerUsernameField.getText(),  registerAddressField.getText(), encodedImage);
         DatabaseAdapter databaseAdapter = new DatabaseAdapter();
         databaseAdapter.registerUserSql(newCustomer);
@@ -279,7 +276,6 @@ public class registerPageController {
         }
     }
 
-    /* check valid phone number */
     public Boolean checkPhoneisValid(TextField registerPhoneField) {
         String phone= registerPhoneField.getText();
         String phoneRegex = "^[0-9]{10}$"; 
@@ -359,7 +355,6 @@ public class registerPageController {
         decodeBase64ToImage(encodedImage);
     }
     
-    //calisiyor
     @FXML
     public String encodeImageToBase64() {
         FileChooser fileChooser = new FileChooser();
@@ -391,7 +386,6 @@ public class registerPageController {
     }
 
 
-    //bunu test etmedim
     @FXML
     public void decodeBase64ToImage(String encodedImage) {
         byte[] decodedBytes = Base64.getDecoder().decode(encodedImage);
@@ -399,7 +393,6 @@ public class registerPageController {
         if (profilePhotoImage == null) {
             profilePhotoImage = new ImageView(image);
             profilePhotoImage.setImage(image);
-            //profilePhotoImage.getImage();
             
         } else {
             profilePhotoImage.setImage(image);

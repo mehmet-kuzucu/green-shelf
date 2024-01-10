@@ -13,3 +13,5 @@
 - [ ] ADMIN VIEW ORDERS page
 - [ ] ADMIN REPORTS page
 - [x] CARRIER SEE ORDERS page
+
+https://drive.google.com/file/d/10UM-PJ-zhP4RtURcqNgf-B2bwTHy-o5Q/view?usp=sharing 

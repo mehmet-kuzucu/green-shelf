@@ -61,7 +61,6 @@ public class customerHomeController {
     private Stage stage;
     private Scene scene;
     private Customer currentUser;
-    //private LinkedList <Order> ordersArray = new LinkedList<Order>();
     private int cartCount;
     private double totalPrice;
     private HashMap<Integer, Double> productStockMap = new HashMap<Integer, Double>();
@@ -76,12 +75,7 @@ public class customerHomeController {
     @FXML
     void shoppingCartButtonButtonOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/shoppingCartPage.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
-        /* 
-        databaseAdapter = new DatabaseAdapter();
-        Order order = new Order(currentUser.getUserID(), 1, 1, "2021-05-05", "pending", 1);
-        databaseAdapter.addOrdersql(order);
-        databaseAdapter.closeConnection();
-        */
+
     }
 
     @FXML
@@ -105,15 +99,15 @@ public class customerHomeController {
             
             if (fxmlPath.equals("../fxml/profileInfoPage.fxml")) {
                 profileInfoPageController controller = loader.getController();
-                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
+                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); 
             }
             else if (fxmlPath.equals("../fxml/shoppingCartPage.fxml")) {
                 shoppingCartPageController controller = loader.getController();
-                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
+                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); 
             }
             else if (fxmlPath.equals("../fxml/myOrdersPage.fxml")) {
                 myOrdersPageController controller = loader.getController();
-                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID); // Pass the User object to the controller
+                controller.initData(user, order, cartCount, totalPrice, productStockMap, orderID);
             }
             
             
@@ -212,7 +206,6 @@ public class customerHomeController {
                 for (Order order : shoppingCart) {
                     if (order.getProductID() == product.getId()) {
                         order.setAmount(order.getAmount() + spinner.getValue());
-                        //TODO: edit the price
                         dbAdapter.updateOrder(order);
                     }
                 }
@@ -229,6 +222,9 @@ public class customerHomeController {
             productStockMap.put(product.getId(), productStockMap.get(product.getId()) - spinner.getValue());
 
             totalPrice += product.getPrice() * spinner.getValue();
+            totalPrice = Math.round(totalPrice * 100) / 100.0;
+            
+            
             try {
                 refreshPage();
             } catch (IOException e) {
@@ -275,7 +271,6 @@ public class customerHomeController {
     }
 
     
-    // This method receives the User object from the login controller
     public void initData(Customer user) {
         System.out.println("customerHomeController: initData called");
         this.currentUser = user;
@@ -289,22 +284,15 @@ public class customerHomeController {
             productStockMap.put(product.getId(), product.getStock());
         }
 
-        // Add each product to the VBox
         for (Product product : products) {
             VBox group = createVboxGroup(product);
             customerTilePane.getChildren().add(group);
         }
         cartCountText.setText(String.valueOf(cartCount));
 
-        String totalPriceString = String.valueOf(totalPrice);
-        //TODO: fix this total price 179.989999999923 gibi bir şey olabiliyor
-        int indexOfDot = totalPriceString.indexOf(".");
-        if (indexOfDot != -1) {
-            totalPriceString = totalPriceString.substring(0, indexOfDot) +totalPriceString.substring(indexOfDot, indexOfDot+2);
-        }
-        totalPriceText.setText(String.valueOf("Total price: " + totalPriceString));
+        
+        totalPriceText.setText(String.valueOf("Total price: " + (Math.round(totalPrice * 100) / 100.0)) + " ₺");
 
-        // Add the VBox to the ScrollPane
         
         shoppingCart = dbAdapter.isInCart(dbAdapter.getUserIDFromUsername(currentUser.getUsername()));
         if (shoppingCart != null && shoppingCart.size() != 0)
@@ -324,7 +312,7 @@ public class customerHomeController {
             shoppingCart = new ArrayList<Order>();
         }
         cartCountText.setText(String.valueOf(cartCount));
-        totalPriceText.setText(String.valueOf("Total price: " + totalPrice));
+        totalPriceText.setText(String.valueOf("Total price: " + (Math.round(totalPrice * 100) / 100.0)) + " ₺");
         dbAdapter.closeConnection();
     }
 
@@ -341,15 +329,13 @@ public class customerHomeController {
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
         List<Product> products = dbAdapter.getAllProducts();
         products.sort((Product p1, Product p2) -> p1.getName().compareTo(p2.getName()));
-        // Add each product to the VBox
         for (Product product : products) {
             VBox group = createVboxGroup(product);
             customerTilePane.getChildren().add(group);
         }
         cartCountText.setText(String.valueOf(cartCount));
-        totalPriceText.setText(String.valueOf("Total price: " + totalPrice));
+        totalPriceText.setText(String.valueOf("Total price: " + (Math.round(totalPrice * 100) / 100.0)) + " ₺");
 
-        // Add the VBox to the ScrollPane
     
         dbAdapter.closeConnection();
     }

@@ -59,7 +59,6 @@ public class addProductPageController {
     public void initData(adminHomePageController adminHomePageController) {
         this.adminHomePageController = adminHomePageController;
         kiloToggleButton.setSelected(true);
-        //price is only numbers
         
     }
     
