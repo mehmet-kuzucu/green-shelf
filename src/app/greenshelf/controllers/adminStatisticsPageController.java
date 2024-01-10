@@ -57,14 +57,22 @@ public class adminStatisticsPageController {
         waitingOrderCountText.setText("Total Waiting Orders: " + orderCount);
         orderCount = db.getAllOrdersDifferentCount("cancelled");
         cancelledOrderCountText.setText("Total Cancelled Orders: " + orderCount);
+        //piechart title
+        pieChart.setTitle("Order Status");
         pieChart.getData().add(new Data("Completed Orders", db.getAllOrdersDifferentCount("completed")));
         pieChart.getData().add(new Data("Waiting Orders", db.getAllOrdersDifferentCount("waiting")));
         pieChart.getData().add(new Data("Cancelled Orders", db.getAllOrdersDifferentCount("cancelled")));
+        pieChart.setLabelsVisible(false);
+        
+        //change piechart info color
+        
+        
         HashMap<String, Integer> orderHmap = db.getOrdersRevenueByDate();
         for (String key : orderHmap.keySet()) {
             XYChart.Series series = new XYChart.Series();
             series.getData().add(new XYChart.Data(key, orderHmap.get(key)));
             lineChart.getData().add(series);
+            lineChart.setLegendVisible(false);
         }
     }
     @FXML
