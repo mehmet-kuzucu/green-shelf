@@ -56,6 +56,8 @@ public class adminHomePageController {
         List<Product> products = dbAdapter.getAllProducts();
 
         for (Product product : products) {
+            if(product.getIsRemoved())
+                continue;
             VBox group = createVboxGroup(product);
             adminTilePane.getChildren().add(group);
         }

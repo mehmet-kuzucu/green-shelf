@@ -8,8 +8,8 @@ public class Product {
     private String type;
     private String image;
     private boolean isPiece;
-    
-    public Product(String name, double stock, String image, double price, double threshold, String type, int id, boolean isPiece) {
+    private boolean isRemoved;
+    public Product(String name, double stock, String image, double price, double threshold, String type, int id, boolean isPiece, boolean isRemoved) {
         this.name = name;
         this.stock = stock;
         this.price = price;
@@ -18,6 +18,7 @@ public class Product {
         this.image = image;
         this.id = id;
         this.isPiece = isPiece;
+        this.isRemoved = isRemoved;
     }
 
     public Product(String name, double stock, double price, double threshold, String type, int id, boolean isPiece) {
@@ -63,6 +64,10 @@ public class Product {
         return id;
     }  
 
+    public boolean getIsRemoved() {
+        return isRemoved;
+    }
+
     public void setStock(double stock) {
         this.stock = stock;
     }
@@ -85,6 +90,10 @@ public class Product {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setIsRemoved(boolean isRemoved) {
+        this.isRemoved = isRemoved;
     }
 
      public void setIsPiece(boolean isPiece) {

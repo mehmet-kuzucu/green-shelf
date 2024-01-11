@@ -76,9 +76,6 @@ public class addProductPageController {
         if (checkIfEmpty(name.getText(), price.getText(), stock.getText(), threshold.getText(), comboBox.getValue())) {
             emptyPlaces.setText("Please fill all the places");
         }
-        else if(doesNameExist(name.getText())){
-            emptyPlaces.setText("This product name already exists");
-        }
         else if (!checkIfPriceNumber(price.getText())) {
             emptyPlaces.setText("Please enter a valid number for price");
         }
@@ -98,10 +95,31 @@ public class addProductPageController {
         {
             emptyPlaces.setText("Please add a photo");
         }
+        else if(doesNameExist(name.getText())){
+            boolean isPiece = kiloToggleButton.isSelected() ? false : true;
+            Product product = new Product(name.getText(), Double.parseDouble(stock.getText()),this.encodedImage,
+                    Double.parseDouble(price.getText()), Double.parseDouble(threshold.getText()), comboBox.getValue(), 0, isPiece, false); // niye 0?
+            dbAdapter = new DatabaseAdapter();
+            dbAdapter.updateProductFromName(product);
+            dbAdapter.closeConnection();
+            emptyPlaces.setText("This product name already exists, the product is updated.");
+            emptyPlaces.setStyle("-fx-fill: green");
+            PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+            pause.setOnFinished(e -> {
+                try {
+                    this.adminHomePageController.refreshPage();
+                    Stage stage = (Stage) emptyPlaces.getScene().getWindow();
+                    stage.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
+            pause.play();
+        }
         else {
             boolean isPiece = kiloToggleButton.isSelected() ? false : true;
             Product product = new Product(name.getText(), Double.parseDouble(stock.getText()),this.encodedImage,
-                    Double.parseDouble(price.getText()), Double.parseDouble(threshold.getText()), comboBox.getValue(), 0, isPiece); // niye 0?
+                    Double.parseDouble(price.getText()), Double.parseDouble(threshold.getText()), comboBox.getValue(), 0, isPiece, false); // niye 0?
             dbAdapter = new DatabaseAdapter();
             dbAdapter.addProductToDb(product);
             dbAdapter.closeConnection();

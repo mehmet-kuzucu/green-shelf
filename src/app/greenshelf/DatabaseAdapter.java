@@ -41,7 +41,8 @@ public class DatabaseAdapter {
                                                                         "price DOUBLE, " +
                                                                         "threshold DOUBLE, " +
                                                                         "type VARCHAR(50), " +
-                                                                        "unit BOOLEAN " +
+                                                                        "unit BOOLEAN " + 
+                                                                        "isRemoved BOOLEAN " +
                                                                         ");";
             statement.executeUpdate(queryProducts);
 
@@ -411,7 +412,7 @@ public class DatabaseAdapter {
             String url = "jdbc:mysql://localhost:3306/javafxdb";
             zorunlu user = new zorunlu();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
-            String query = "INSERT INTO products (name, stock, image, price, threshold, type, unit) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO products (name, stock, image, price, threshold, type, unit,isRemoved) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, product.getName());
             preparedStatement.setDouble(2, product.getStock());
@@ -420,6 +421,7 @@ public class DatabaseAdapter {
             preparedStatement.setDouble(5, product.getThreshold());
             preparedStatement.setString(6, product.getType());
             preparedStatement.setBoolean(7, product.getIsPiece());
+            preparedStatement.setBoolean(8, product.getIsRemoved());
             preparedStatement.executeUpdate();
             System.out.println("Product added successfully");
         } catch (SQLException e) {
@@ -437,7 +439,7 @@ public class DatabaseAdapter {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                Product product = new Product(resultSet.getString("name"), resultSet.getDouble("stock"), resultSet.getString("image"), resultSet.getDouble("price"), resultSet.getDouble("threshold"), resultSet.getString("type"), resultSet.getInt("id"), resultSet.getBoolean("unit"));
+                Product product = new Product(resultSet.getString("name"), resultSet.getDouble("stock"), resultSet.getString("image"), resultSet.getDouble("price"), resultSet.getDouble("threshold"), resultSet.getString("type"), resultSet.getInt("id"), resultSet.getBoolean("unit"),resultSet.getBoolean("isRemoved"));
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -802,13 +804,37 @@ public class DatabaseAdapter {
         }
     }
 
+    public void updateProductFromName(Product product){
+        try{
+            String url = "jdbc:mysql://localhost:3306/javafxdb";
+            zorunlu user = new zorunlu();
+            Connection connection = DriverManager.getConnection(url, user.name, user.pass);
+            String query = "UPDATE products SET stock = ?, price = ?, threshold = ?, isRemoved = ? WHERE name = ?";
+            //print the id
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setDouble(1, product.getStock());
+                preparedStatement.setDouble(2, product.getPrice());
+                preparedStatement.setDouble(3, product.getThreshold());
+                preparedStatement.setBoolean(4, product.getIsRemoved());
+                preparedStatement.setString(5, product.getName());
+                preparedStatement.executeUpdate();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("Product updated successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void removeProduct(int id)
     {
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
             zorunlu user = new zorunlu();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
-            String query = "DELETE FROM products WHERE id = ?";
+            String query = "UPDATE products SET isRemoved = 1 WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setInt(1, id);
                 preparedStatement.executeUpdate();
@@ -900,7 +926,7 @@ public class DatabaseAdapter {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                Product product = new Product(resultSet.getString("name"), resultSet.getDouble("stock"), resultSet.getString("image"), resultSet.getDouble("price"), resultSet.getDouble("threshold"), resultSet.getString("type"), resultSet.getInt("id"), resultSet.getBoolean("unit"));
+                Product product = new Product(resultSet.getString("name"), resultSet.getDouble("stock"), resultSet.getString("image"), resultSet.getDouble("price"), resultSet.getDouble("threshold"), resultSet.getString("type"), resultSet.getInt("id"), resultSet.getBoolean("unit"),resultSet.getBoolean("isRemoved"));
                 System.out.println("tutu6tu6t6utProduct name: " + product.getName() + " Product stock: " + product.getStock() + " Product price: " + product.getPrice() + " Product threshold: " + product.getThreshold() + " Product type: " + product.getType() + " Product id: " + product.getId() + " Product unit: " + product.getIsPiece());
 
                 return product;

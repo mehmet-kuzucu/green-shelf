@@ -328,10 +328,16 @@ public class customerHomeController {
         List<Product> products = dbAdapter.getAllProducts();
         products.sort((Product p1, Product p2) -> p1.getName().compareTo(p2.getName()));
         for (Product product : products) {
+            if (product.getIsRemoved()) {
+                continue;
+            }
             productStockMap.put(product.getId(), product.getStock());
         }
 
         for (Product product : products) {
+            if (product.getIsRemoved()) {
+                continue;
+            }
             VBox group = createVboxGroup(product);
             customerTilePane.getChildren().add(group);
         }
@@ -377,6 +383,9 @@ public class customerHomeController {
         List<Product> products = dbAdapter.getAllProducts();
         products.sort((Product p1, Product p2) -> p1.getName().compareTo(p2.getName()));
         for (Product product : products) {
+            if (product.getIsRemoved()) {
+                continue;
+            }
             VBox group = createVboxGroup(product);
             customerTilePane.getChildren().add(group);
         }
