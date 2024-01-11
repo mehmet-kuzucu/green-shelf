@@ -41,7 +41,7 @@ public class loginPageController {
     private Text errorText;
 
     @FXML
-    void loginButtonOnMouseClicked(MouseEvent event) throws SQLException {
+    private void loginButtonOnMouseClicked(MouseEvent event) throws SQLException {
         performLogin();
     }
 
@@ -84,26 +84,26 @@ public class loginPageController {
         }
     }
 
-    Customer createCustomer(List<String> list) throws SQLException
+    private Customer createCustomer(List<String> list) throws SQLException
     {
         Customer c = new Customer(list.get(4), list.get(5), list.get(6), list.get(1), list.get(2), list.get(0), list.get(3), list.get(7));
         return c;
     }
 
-    Admin createAdmin(List<String> list) throws SQLException
+    private Admin createAdmin(List<String> list) throws SQLException
     {
         Admin a = new Admin(list.get(4), list.get(5), list.get(6), list.get(1), list.get(2), list.get(0));
         return a;
     }
 
-    Carrier createCarrier(List<String> list) throws SQLException
+    private Carrier createCarrier(List<String> list) throws SQLException
     {
         Carrier c = new Carrier(list.get(4), list.get(5), list.get(6), list.get(1), list.get(2), list.get(0), list.get(3), list.get(7));
         return c;
     }
     
     @FXML
-    void registerLinkOnMouseClicked(MouseEvent event) {
+    private void registerLinkOnMouseClicked(MouseEvent event) {
         System.out.println("Register link clicked!");
         try {
             Parent root = FXMLLoader.load(getClass().getResource("../fxml/registerPage.fxml"));

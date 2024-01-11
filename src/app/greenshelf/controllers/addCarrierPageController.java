@@ -57,13 +57,13 @@ public class addCarrierPageController {
         this.employFireCarrierPageController = controller;
     }
     @FXML
-    void addImageButtonOnMouseClicked(MouseEvent event) {
+    private void addImageButtonOnMouseClicked(MouseEvent event) {
         this.encodedImage = encodeImageToBase64();
         decodeBase64ToImage(encodedImage);
     }
 
     @FXML
-    void addToCarrierClicked(MouseEvent event) throws IOException {
+    private void addToCarrierClicked(MouseEvent event) throws IOException {
         if (!checkEmptyPlaces(name.getText(), surname.getText(), password.getText(), email.getText(), phone.getText(), username.getText())) {
             emptyPlaces.setText("Please fill all the places");
         }

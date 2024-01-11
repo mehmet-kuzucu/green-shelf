@@ -58,12 +58,12 @@ public class myOrdersPageController {
 
 
     @FXML
-    void greenShelfLogoOnMouseClicked(MouseEvent event) {
+    private void greenShelfLogoOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/customerHome.fxml", user, order, cartCount, totalPrice, productStockMap, orderID);
     }
 
     @FXML
-    void profilePhotoImageOnMouseClicked(MouseEvent event) {
+    private void profilePhotoImageOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/profileInfoPage.fxml", user, order, cartCount, totalPrice, productStockMap, orderID);
     }
 
@@ -143,8 +143,8 @@ public class myOrdersPageController {
                 amountString = amountString.substring(0, indexOfDot);
             }
             text4.setText(text4.getText() + (product.getIsPiece() ? amountString : order2.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + product.getName() + (orderMap.get(order4.getOrderID()).indexOf(order2) == orderMap.get(order4.getOrderID()).size() - 1 ? "": "\n")); 
-            totalPriceDouble += (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2)) + (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) * vat);
-            
+            //totalPriceDouble += (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2)) + (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) * vat);
+            totalPriceDouble += (order2.getAmount()*order2.getPrice())*(1+vat);
         }
         Text totalPrice = new Text("Total Price: " + (Math.round(totalPriceDouble * 100) / 100.0) + "₺");
         totalPrice.setStrokeType(StrokeType.OUTSIDE);

@@ -66,7 +66,7 @@ public class adminHomePageController {
     }
 
     @FXML
-    void chartsButtonOnMouseClicked(MouseEvent event) throws IOException {
+    private void chartsButtonOnMouseClicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/adminStatisticsPage.fxml"));
         Parent root = loader.load();
         adminStatisticsPageController controller = loader.getController();
@@ -78,12 +78,12 @@ public class adminHomePageController {
     }
 
     @FXML
-    void logoutButtonOnMouseClicked(MouseEvent event) {
+    private void logoutButtonOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/loginPage.fxml");
     }
 
     @FXML
-    void adminOrdersButtonOnMouseClicked(MouseEvent event) throws IOException {
+    private void adminOrdersButtonOnMouseClicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/adminOrdersPage.fxml"));
         Parent root = loader.load();
         adminOrdersPageController controller = loader.getController();
@@ -95,7 +95,7 @@ public class adminHomePageController {
     }
 
     @FXML
-    void shoppingCartButtonOnMouseClicked(MouseEvent event) throws IOException {
+    private void shoppingCartButtonOnMouseClicked(MouseEvent event) throws IOException {
         Stage stage = new Stage();
         FXMLLoader scene = new FXMLLoader(getClass().getResource("../fxml/addProductPage.fxml"));
         Parent root = scene.load();
@@ -110,7 +110,7 @@ public class adminHomePageController {
     }
 
     @FXML
-    void recruitCarrierMouseClicked(MouseEvent event) throws IOException {
+    private void recruitCarrierMouseClicked(MouseEvent event) throws IOException {
         FXMLLoader scene = new FXMLLoader(getClass().getResource("../fxml/employFireCarrierPage.fxml"));
         Parent root = scene.load();
         employFireCarrierPageController controller2 = scene.getController();
@@ -143,9 +143,9 @@ public class adminHomePageController {
         HBox priceHbox = new HBox();
         HBox quantityHbox = new HBox();
         HBox thresholdHbox = new HBox();
-        Text currencyText = new Text(" TL");
-        Text quantityText = new Text(product.getIsPiece() ? "Piece" : "Kg");
-        Text thresholdText = new Text(product.getIsPiece() ? "Piece" : "Kg");
+        Text currencyText = new Text(" ₺");
+        Text quantityText = new Text(product.getIsPiece() ? "Piece (Stock)" : "Kg (Stock)");
+        Text thresholdText = new Text(product.getIsPiece() ? "Piece (threshold)" : "Kg (threshold)");
         quantityText.setStyle("-fx-fill: white;");
         currencyText.setStyle("-fx-fill: white;");
         thresholdText.setStyle("-fx-fill: white;");
@@ -203,6 +203,18 @@ public class adminHomePageController {
             else{
                 DatabaseAdapter dbAdapter = new DatabaseAdapter();
                 Product product2 = new Product(nameField.getText(),  Double.parseDouble(quantityField.getText()), Double.parseDouble(priceField.getText()), Double.parseDouble(thresholdField.getText()), product.getType(), product.getId(), product.getIsPiece());
+                System.out.println("Product: " + product.getStock());
+                System.out.println("Product2: " + product2.getStock());
+                System.out.println("ProductTH: " + product.getThreshold());
+                System.out.println("Product2TH: " + product2.getThreshold());
+
+
+                if (product.getStock() <= product.getThreshold() && product2.getStock() > product2.getThreshold()) {
+                    product2.setPrice(product2.getPrice() / 2);
+                }
+                else if (product.getStock() > product.getThreshold() && product2.getStock() <= product2.getThreshold()) {
+                    product2.setPrice(product2.getPrice() * 2);
+                }
                 dbAdapter.updateProduct(product2);
                 dbAdapter.closeConnection();
                 try {
@@ -229,6 +241,8 @@ public class adminHomePageController {
         innerVBox2.getChildren().addAll(quantityHbox, thresholdHbox, updateButton, removeButton, emptyPlaces);
         innerVBox2.setAlignment(Pos.CENTER);
         innerVBox1.setAlignment(Pos.CENTER);
+        innerVBox1.setSpacing(5);
+        innerVBox2.setSpacing(5);
         outerVBox.getChildren().addAll(imageView, innerVBox1, innerVBox2);
         return outerVBox;
         

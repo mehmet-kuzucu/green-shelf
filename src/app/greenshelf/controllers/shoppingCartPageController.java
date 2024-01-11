@@ -76,7 +76,7 @@ public class shoppingCartPageController {
     }
 
     @FXML
-    void greenShelfLogoOnMouseClicked() {
+    private void greenShelfLogoOnMouseClicked() {
         loadScene("../fxml/customerHome.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
     }
 
@@ -183,7 +183,7 @@ public class shoppingCartPageController {
     }
 
     @FXML
-    void checkoutButtonOnMouseClicked(MouseEvent event) {
+    private void checkoutButtonOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/checkoutPage.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
 
     }

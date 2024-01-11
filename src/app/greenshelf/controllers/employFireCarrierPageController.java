@@ -28,7 +28,7 @@ import app.greenshelf.Carrier;
 import app.greenshelf.DatabaseAdapter;
 
 public class employFireCarrierPageController {
-    employFireCarrierPageController controller;
+    private employFireCarrierPageController controller;
     private Stage stage;
     private Scene scene;
     private Admin admin;
@@ -50,7 +50,7 @@ public class employFireCarrierPageController {
     @FXML
     private ImageView greenShelfLogo;
 
-    int employeeCount = 0;
+    private int employeeCount = 0;
 
     public void initData(Admin admin, employFireCarrierPageController controller){
         this.controller = controller;
@@ -68,7 +68,7 @@ public class employFireCarrierPageController {
     }
 
     @FXML
-    void greenShelfLogoOnMouseClicked(MouseEvent event) throws IOException {
+    private void greenShelfLogoOnMouseClicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/adminHomePage.fxml"));
         Parent root = loader.load();
         stage = (Stage) greenShelfLogo.getScene().getWindow();
@@ -80,7 +80,7 @@ public class employFireCarrierPageController {
     }
 
     @FXML
-    void addEmployeeClicked(MouseEvent event) throws IOException {
+    private void addEmployeeClicked(MouseEvent event) throws IOException {
         Stage stage = new Stage();
         FXMLLoader scene = new FXMLLoader(getClass().getResource("../fxml/addCarrierPage.fxml"));
         Parent root = scene.load();

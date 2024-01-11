@@ -76,6 +76,25 @@
 
 }
 
+#removeFromCartButton {
+    -fx-background-image: url("../images/removeFromCart.png");
+    -fx-background-size: 65% 65%;
+    
+    -fx-background-radius: 50%;
+    /* size */
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-pref-width: 50px;
+    -fx-pref-height: 50px;
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
+    
+    -fx-background-repeat: no-repeat;
+    /* center the image */
+    -fx-background-position: center;
+
+}
+
 #productInfo {
     /*make it circular */
     -fx-background-radius: 10%;

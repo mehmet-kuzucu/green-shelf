@@ -55,13 +55,13 @@ public class checkoutPageController {
     private Stage stage;
     private Scene scene;
 
-    Customer currentUser;
-    List<Order> shoppingCart;
-    int cartCount;
-    double totalPrice;
-    HashMap<Integer, Double> productStockMap;
-    String orderID;
-    double vat = 0.01;
+    private Customer currentUser;
+    private List<Order> shoppingCart;
+    private int cartCount;
+    private double totalPrice;
+    private HashMap<Integer, Double> productStockMap;
+    private String orderID;
+    private double vat = 0.01;
 
     public void initData (Customer currentUser, List<Order> shoppingCart, int cartCount, double totalPrice, HashMap<Integer, Double> productStockMap, String orderID) {
         this.currentUser = currentUser;
@@ -178,17 +178,17 @@ public class checkoutPageController {
     }
 
     @FXML
-    void greenShelfLogoOnMouseClicked(MouseEvent event) {
+    private void greenShelfLogoOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/shoppingCartPage.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
 
     }
 
     @FXML
-    void profilePhotoImageOnMouseClicked(MouseEvent event) {
+    private void profilePhotoImageOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/profileInfoPage.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
     }
 
-    String getCurrentTime() {
+    private String getCurrentTime() {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String currentTime = sdf.format(date);
@@ -196,7 +196,7 @@ public class checkoutPageController {
     }
 
     @FXML
-    void buyButtonOnMouseClicked(MouseEvent event) {
+    private void buyButtonOnMouseClicked(MouseEvent event) {
         if (shoppingCart.size() == 0) {
             totalPriceText.setStyle("-fx-font-size: 20px;");
             totalPriceText.setText("Your shopping cart is empty.");
@@ -221,8 +221,15 @@ public class checkoutPageController {
                 return;
             }
             dbAdapter.changeOrderStatusAndDate(order);
-            dbAdapter.updateProductPrice(order.getProductID(), order.getAmount());
+            //dbAdapter.updateProductPrice(order.getProductID(), order.getAmount());
             dbAdapter.updateProductStock(order.getProductID(), Math.round((product.getStock() - order.getAmount())*100)/100.0);
+
+            
+
+            if (product.getThreshold() >= product.getStock() - order.getAmount()) {
+                dbAdapter.updateProductPrice(order.getProductID(), product.getPrice() * 2);
+            }
+
             System.out.println("Order amount: " + order.getAmount());   
         }
         

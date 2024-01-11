@@ -19,6 +19,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -65,26 +66,26 @@ public class customerHomeController {
     private double totalPrice;
     private HashMap<Integer, Double> productStockMap = new HashMap<Integer, Double>();
     private String orderID;
-    List <Order> shoppingCart = new ArrayList <Order>();
+    private List <Order> shoppingCart = new ArrayList <Order>();
 
     @FXML
-    void logoutButtonOnMouseClicked(MouseEvent event) {
+    private void logoutButtonOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/loginPage.fxml");
     }
 
     @FXML
-    void shoppingCartButtonButtonOnMouseClicked(MouseEvent event) {
+    private void shoppingCartButtonButtonOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/shoppingCartPage.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
 
     }
 
     @FXML
-    void myOrdersButtonOnMouseClicked(MouseEvent event) {
+    private void myOrdersButtonOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/myOrdersPage.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
     }
 
     @FXML
-    void profilePhotoImageOnMouseClicked(MouseEvent event) {
+    private void profilePhotoImageOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/profileInfoPage.fxml", currentUser, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
     }
 
@@ -185,14 +186,60 @@ public class customerHomeController {
         else
         {
             spinner.setId("spinner");
-            spinner.setValueFactory(new javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory((product.getIsPiece() ? 1.0 : 0.5), product.getStock(), 1.0, product.getIsPiece() ? 1.0 : 0.5));
+            spinner.setValueFactory(new javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory((product.getIsPiece() ? 1.0 : 0.25), product.getStock(), 1.0, product.getIsPiece() ? 1.0 : 0.25));
             spinner.setEditable(false);
         }
+        Button removeFromCartButton = new Button();
+        removeFromCartButton.setId("removeFromCartButton");
+        removeFromCartButton.setMnemonicParsing(false);
+        removeFromCartButton.onMouseClickedProperty().set((MouseEvent event) -> {
+            System.out.println(product.getName() + " remove from cart button clicked");
+            DatabaseAdapter dbAdapter = new DatabaseAdapter();
+            if (checkIfOrderExists(product.getId())){
+                System.out.println(product.getName() + " checkiforderexist");
+                for (Order order : shoppingCart) {
+                    System.out.println(order.getProductID() + "-----" + product.getId());
+                    if (order.getProductID() == product.getId() ) {
+                        System.out.println(product.getName() + " 2");
+                        if (order.getAmount() - spinner.getValue() < 0) {
+                            text2.setText("You can't remove from cart");
+                            text2.setFill(javafx.scene.paint.Color.RED);
+                            return;
+                        }
+                        order.setAmount(order.getAmount() - spinner.getValue());
+                        dbAdapter.updateOrder(order);
+                        if (order.getAmount() == 0) {
+                            dbAdapter.deleteFromCart(order);
+                            shoppingCart.remove(order);
+                            cartCount--;
+                        }
+                        productStockMap.put(product.getId(), productStockMap.get(product.getId()) + spinner.getValue());
+                        totalPrice -= product.getPrice() * spinner.getValue();
+                        totalPrice = Math.round(totalPrice * 100) / 100.0;
+                        try {
+                            refreshPage();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    }
+                    
+                }
+            }
+            else {
+                text2.setText("You can't remove from cart");
+                text2.setFill(javafx.scene.paint.Color.RED);
+                return;
+            }
+        });
+        HBox HBoxButtons = new HBox();
         
-
         Button addToCartButton = new Button();
         addToCartButton.setId("addToCartButton");
         addToCartButton.setMnemonicParsing(false);
+        HBoxButtons.getChildren().addAll(addToCartButton,removeFromCartButton);
+        HBoxButtons.setSpacing(10.0);
+        HBoxButtons.setAlignment(javafx.geometry.Pos.CENTER);
         addToCartButton.onMouseClickedProperty().set((MouseEvent event) -> {
 
             DatabaseAdapter dbAdapter = new DatabaseAdapter();
@@ -240,7 +287,7 @@ public class customerHomeController {
         }
         else
         {
-            productInfo.getChildren().addAll(imageView, innerVBox, spinner, addToCartButton);
+            productInfo.getChildren().addAll(imageView, innerVBox, spinner, HBoxButtons);
         }
         return productInfo;
         

@@ -62,7 +62,7 @@ public class profileInfoPageController {
     @FXML
     private Button changeProfilePhotoButton;
 
-    String encodedImage;
+    private String encodedImage;
 
     private List <Order> shoppingCart;
     private String orderID;
@@ -101,7 +101,7 @@ public class profileInfoPageController {
     }
 
     @FXML
-    void greenShelfLogoOnMouseClicked(MouseEvent event) {
+    private void greenShelfLogoOnMouseClicked(MouseEvent event) {
         if (currentUser != null)
             loadScene("../fxml/customerHome.fxml", currentUser,null,null, shoppingCart, cartCount, totalPrice, productStockMap, orderID);
         else if (currentCarrier != null)
@@ -167,7 +167,7 @@ public class profileInfoPageController {
     }
 
     @FXML
-    void changeProfilePhotoButtonOnMouseClicked(MouseEvent event)
+    private void changeProfilePhotoButtonOnMouseClicked(MouseEvent event)
     {
         encodedImage = encodeImageToBase64();
         decodeBase64ToImage(encodedImage);
@@ -175,7 +175,7 @@ public class profileInfoPageController {
 
 
     @FXML
-    void saveButtonOnMouseClicked(MouseEvent event)
+    private void saveButtonOnMouseClicked(MouseEvent event)
     {
         if(this.currentUser != null)
         {

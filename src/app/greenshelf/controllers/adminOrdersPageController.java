@@ -50,7 +50,7 @@ public class adminOrdersPageController {
 
 
     @FXML
-    void greenShelfLogoOnMouseClicked(MouseEvent event) throws IOException {
+    private void greenShelfLogoOnMouseClicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/adminHomePage.fxml"));
         Parent root = loader.load();
         stage = (Stage) greenShelfLogo.getScene().getWindow();

@@ -66,13 +66,13 @@ public class addProductPageController {
     private ImageView productImage;
 
     @FXML
-    void addImageButtonOnMouseClicked(MouseEvent event) {
+    private void addImageButtonOnMouseClicked(MouseEvent event) {
         this.encodedImage = encodeImageToBase64();
         decodeBase64ToImage(encodedImage);
     }
 
     @FXML
-    void addToCartClicked(MouseEvent event) {
+    private void addToCartClicked(MouseEvent event) {
         if (checkIfEmpty(name.getText(), price.getText(), stock.getText(), threshold.getText(), comboBox.getValue())) {
             emptyPlaces.setText("Please fill all the places");
         }

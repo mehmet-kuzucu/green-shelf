@@ -38,7 +38,7 @@ public class carrierHomePageController {
     private Stage stage;
     private Scene scene;
     HashMap<String, List<Order>> orderMap = new HashMap<String, List<Order>>();
-     @FXML
+    @FXML
     private VBox availableOrders;
 
     @FXML
@@ -57,12 +57,12 @@ public class carrierHomePageController {
     private Button logoutButton;
 
     @FXML
-    void profilePhotoOnMouseClicked(MouseEvent event) {
+    private void profilePhotoOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/profileInfoPage.fxml", carrier);
     }
 
     @FXML
-    void logoutButtonOnMouseClicked(MouseEvent event) {
+    private void logoutButtonOnMouseClicked(MouseEvent event) {
         loadScene("../fxml/loginPage.fxml");
     }
     
@@ -139,10 +139,13 @@ public class carrierHomePageController {
 
         Double totalPriceDouble = 0.0;
         Double vat = 0.01;
-       
+        System.out.println("BABBAAAA");
         for (Order order2 : orderMap.get(order.getOrderID())) {
 
             Product product = db.getProductFromId(order2.getProductID());
+            //System.out.println("AAAAAAAAAAAAAAAAA");
+            //System.out.println(product.getName());
+            //System.out.println("Product name: " + product.getName() + " Product stock: " + product.getStock() + " Product price: " + product.getPrice() + " Product threshold: " + product.getThreshold() + " Product type: " + product.getType() + " Product id: " + product.getId() + " Product unit: " + product.getIsPiece());
             String amountString = String.valueOf(order.getAmount());
             int indexOfDot = amountString.indexOf(".");
             if (indexOfDot != -1) {

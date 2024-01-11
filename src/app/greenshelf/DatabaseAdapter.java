@@ -847,15 +847,15 @@ public class DatabaseAdapter {
 
     }
 
-    public void updateProductPrice(int productId, double amount)
+    public void updateProductPrice(int productId, double price)
     {
         try{
             String urlString = "jdbc:mysql://localhost:3306/javafxdb";
             zorunlu user = new zorunlu();
             Connection connection = DriverManager.getConnection(urlString, user.name, user.pass);
-            String query = "Update products set price = IF((stock > threshold) AND (stock - ? < threshold), price * 2, price) where id = ?;";
+            String query = "Update products set price = ? where id = ?;";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setDouble(1, amount);
+                preparedStatement.setDouble(1, price);
                 preparedStatement.setInt(2, productId);
                 preparedStatement.executeUpdate();
             }
@@ -901,10 +901,14 @@ public class DatabaseAdapter {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 Product product = new Product(resultSet.getString("name"), resultSet.getDouble("stock"), resultSet.getString("image"), resultSet.getDouble("price"), resultSet.getDouble("threshold"), resultSet.getString("type"), resultSet.getInt("id"), resultSet.getBoolean("unit"));
+                System.out.println("tutu6tu6t6utProduct name: " + product.getName() + " Product stock: " + product.getStock() + " Product price: " + product.getPrice() + " Product threshold: " + product.getThreshold() + " Product type: " + product.getType() + " Product id: " + product.getId() + " Product unit: " + product.getIsPiece());
+
                 return product;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
+        System.out.println("Product not found");
         return null;
     }
 

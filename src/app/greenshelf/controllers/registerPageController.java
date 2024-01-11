@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 public class registerPageController {
 
     private Stage stage;
-    String encodedImage;
+    private String encodedImage;
 
     @FXML
     private TextField registerNameField;
@@ -73,7 +73,7 @@ public class registerPageController {
     private String style = "-fx-background-radius: 20; -fx-border-radius: 20;-fx-padding: 8;-fx-font-size: 14px; -fx-border-color: linear-gradient(to right, #00fff2, #1900ff); -fx-background-color: linear-gradient(to right, #e6e6e6, #ffffff);";
 
     @FXML
-    void existedAccountOnMouseClicked(MouseEvent event) {
+    private void existedAccountOnMouseClicked(MouseEvent event) {
         System.out.println("Existed account clicked!");
         try {
             Parent root = FXMLLoader.load(getClass().getResource("../fxml/loginPage.fxml"));
@@ -87,8 +87,7 @@ public class registerPageController {
     }
 
     @FXML
-    void nextStepButtonOnMouseClicked(MouseEvent event) {
-        System.out.println("Next step clicked!");
+    private void nextStepButtonOnMouseClicked(MouseEvent event) {
         errorTextRegister.setText("");
         registerPasswordField.setStyle(style);
         registerConfirmPasswordField.setStyle(style);
