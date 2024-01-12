@@ -135,7 +135,7 @@ public class adminOrdersPageController {
                 amountString = amountString.substring(0, indexOfDot);
             }
             productInfo.setText(productInfo.getText() + (product.getIsPiece() ? amountString : order2.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + product.getName() + (orderMap.get(order.getOrderID()).indexOf(order2) == orderMap.get(order.getOrderID()).size() - 1 ? "": "\n")); 
-            totalPrice += (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2)) + (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) * vat);
+            totalPrice += (order2.getAmount()*order2.getPrice())*(1+vat);
         }
         Text totalPriceText = new Text((Math.round(totalPrice * 100) / 100.0) + "₺");
         totalPriceText.setFill(Color.WHITE);

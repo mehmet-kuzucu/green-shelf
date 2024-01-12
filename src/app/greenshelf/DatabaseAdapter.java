@@ -900,7 +900,7 @@ public class DatabaseAdapter {
             String urlString = "jdbc:mysql://localhost:3306/javafxdb";
             zorunlu user = new zorunlu();
             Connection connection = DriverManager.getConnection(urlString, user.name, user.pass);
-            String query = "Update products set price = IF((stock < threshold) AND (stock + ? > threshold), price / 2, price) where id = ?;";
+            String query = "Update products set price = IF((stock <= threshold) AND (stock + ? > threshold), price / 2, price) where id = ?;";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setDouble(1, amount);
                 preparedStatement.setInt(2, productId);

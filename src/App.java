@@ -39,7 +39,7 @@ public class App extends Application {
             databaseAdapter.closeConnection();
             // Set the primary stage
             primaryStage.setScene(new Scene(scene.load()));
-            primaryStage.setTitle("User Information Example");
+            primaryStage.setTitle("Group12 GreenShelf");
             primaryStage.show();
         
         } catch (Exception e) {

@@ -153,8 +153,7 @@ public class carrierHomePageController {
             }
 
             productsText.setText(productsText.getText() + (product.getIsPiece() ? amountString : order2.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + product.getName() + (orderMap.get(order.getOrderID()).indexOf(order2) == orderMap.get(order.getOrderID()).size() - 1 ? "": "\n")); 
-            totalPriceDouble += (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2)) + (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) * vat);
-        }
+            totalPriceDouble += (order2.getAmount()*order2.getPrice())*(1+vat);        }
 
         Text totalPrice = new Text("Total Price: " + (Math.round(totalPriceDouble * 100) / 100.0) + "₺");
         totalPrice.setFill(Color.WHITE);
@@ -208,7 +207,7 @@ public class carrierHomePageController {
             }
 
             productsText.setText(productsText.getText() + (product.getIsPiece() ? amountString : order2.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + product.getName() + (orderMap.get(order.getOrderID()).indexOf(order2) == orderMap.get(order.getOrderID()).size() - 1 ? "": "\n")); 
-            totalPriceDouble += (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2)) + (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) * vat);
+            totalPriceDouble += (order2.getAmount()*order2.getPrice())*(1+vat); 
         }
 
         Text totalPrice = new Text("Total Price: " + (Math.round(totalPriceDouble * 100) / 100.0) + "₺");
@@ -266,7 +265,7 @@ public class carrierHomePageController {
             }
 
             productsText.setText(productsText.getText() + (product.getIsPiece() ? amountString : order2.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + product.getName() + (orderMap.get(order.getOrderID()).indexOf(order2) == orderMap.get(order.getOrderID()).size() - 1 ? "": "\n")); 
-            totalPriceDouble += (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2)) + (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) * vat);
+            totalPriceDouble += (order2.getAmount()*order2.getPrice())*(1+vat); 
         }
 
         Text totalPrice = new Text("Total Price: " + (Math.round(totalPriceDouble * 100) / 100.0) + "₺");

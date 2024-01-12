@@ -119,8 +119,6 @@ public class adminHomePageController {
         controller2.initData(this.admin,controller2); 
         stage = (Stage) profilePhoto.getScene().getWindow();
         stage.setScene(new Scene(root, profilePhoto.getScene().getWidth(), profilePhoto.getScene().getHeight()));
-        
-        stage.setTitle("Employ / Fire Carrier");
         stage.show();
     }
 
