@@ -160,6 +160,7 @@ public class adminOrdersPageController {
                     databaseAdapter.changeOrderStatus(order.getOrderID(), "cancelled");
                     for (Order order2 : orderMap.get(order.getOrderID())) {
                         Product product = databaseAdapter.getProductFromId(order2.getProductID());
+                        databaseAdapter.updateProductPriceWhenCancel(order2.getProductID(), order2.getAmount());
                         databaseAdapter.updateProductStock(product.getId(), Math.round((product.getStock() + order2.getAmount())*100)/100.0);
                         
                     }
