@@ -80,7 +80,7 @@ public class checkoutPageController {
             if (indexOfDot != -1) {
                 amountString = amountString.substring(0, indexOfDot);
             }
-            Text orderText = new Text(dbAdapter.getProductFromId(order.getProductID()).getName() + " (" + order.getPrice() +"₺) x " + ((dbAdapter.getProductFromId(order.getProductID()).getIsPiece() ? amountString : order.getAmount())) + ((dbAdapter.getProductFromId(order.getProductID()).getIsPiece() ? " piece " : " kg ")) + "= " + order.getPrice() * order.getAmount() +"₺");
+            Text orderText = new Text(dbAdapter.getProductFromId(order.getProductID()).getName() + " (" + order.getPrice() +"₺) x " + ((dbAdapter.getProductFromId(order.getProductID()).getIsPiece() ? amountString : order.getAmount())) + ((dbAdapter.getProductFromId(order.getProductID()).getIsPiece() ? " piece " : " kg ")) + "= " + Math.round(order.getPrice() * order.getAmount()*100)/100.0 +"₺");
             orderHBox.setStyle("-fx-background-color: #4B787C;");
             ImageView orderImage = new ImageView(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(dbAdapter.getProductFromId(order.getProductID()).getImage()))));
             orderImage.setFitHeight(31);
