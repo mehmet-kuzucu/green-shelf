@@ -108,7 +108,7 @@ public class adminOrdersPageController {
         System.out.println(order.getStatus());
         if (order.getStatus().equals("completed") || order.getStatus().equals("inDelivery"))
         {
-            id.setText("#"+order.getOrderID() + "\n" + order.getCarrierUsername());
+            id.setText("#"+order.getOrderID() + "\nCarrier: " + order.getCarrierUsername());
         }
         else
         {

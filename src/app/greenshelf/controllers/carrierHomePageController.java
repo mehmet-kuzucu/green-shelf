@@ -139,7 +139,6 @@ public class carrierHomePageController {
 
         Double totalPriceDouble = 0.0;
         Double vat = 0.01;
-        System.out.println("BABBAAAA");
         for (Order order2 : orderMap.get(order.getOrderID())) {
 
             Product product = db.getProductFromId(order2.getProductID());
@@ -215,7 +214,7 @@ public class carrierHomePageController {
         totalPrice.setStrokeType(StrokeType.OUTSIDE);
         totalPrice.setStrokeWidth(0.0);
 
-        Text customerInfo = new Text(customer.getName() + customer.getSurname());
+        Text customerInfo = new Text(customer.getName() + " " + customer.getSurname());
         Text customerAddress = new Text(customer.getAddress());
         Text customerDate = new Text(order.getDate());
         customerInfo.setFill(Color.WHITE);
@@ -273,7 +272,7 @@ public class carrierHomePageController {
         totalPrice.setStrokeType(StrokeType.OUTSIDE);
         totalPrice.setStrokeWidth(0.0);
 
-        Text customerInfo = new Text(customer.getName() + customer.getSurname());
+        Text customerInfo = new Text(customer.getName() + " " + customer.getSurname());
         Text customerAddress = new Text(customer.getAddress());
         Text customerDate = new Text(order.getDate());
         customerInfo.setFill(Color.WHITE);
