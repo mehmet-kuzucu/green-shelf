@@ -125,7 +125,7 @@ public class shoppingCartPageController {
         if (indexOfDot != -1) {
             amountString = amountString.substring(0, indexOfDot);
         }
-        Text amountXpriceTextEqualsTotalPrice = new Text((product.getIsPiece() ? amountString : order.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + "x " + (product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) + "₺" + " = " + order.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) + "₺");
+        Text amountXpriceTextEqualsTotalPrice = new Text((product.getIsPiece() ? amountString : order.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + "x " + (product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) + "₺" + " = " + order.getAmount()*Math.round((product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2)*100)/100.0 + "₺");
         amountXpriceTextEqualsTotalPrice.setFill(Color.WHITE);
         amountXpriceTextEqualsTotalPrice.setFont(new Font(20));
         Text productNameText = new Text(product.getName());
