@@ -41,7 +41,7 @@ public class DatabaseAdapter {
                                                                         "price DOUBLE, " +
                                                                         "threshold DOUBLE, " +
                                                                         "type VARCHAR(50), " +
-                                                                        "unit BOOLEAN " + 
+                                                                        "unit BOOLEAN, " + 
                                                                         "isRemoved BOOLEAN " +
                                                                         ");";
             statement.executeUpdate(queryProducts);
