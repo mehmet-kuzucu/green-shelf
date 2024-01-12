@@ -94,25 +94,12 @@ public class addProductPageController {
             emptyPlaces.setText("Please add a photo");
         }
         else if(doesNameExist(name.getText())){
-            boolean isPiece = kiloToggleButton.isSelected() ? false : true;
-            Product product = new Product(name.getText(), Double.parseDouble(stock.getText()),this.encodedImage,
-                    Double.parseDouble(price.getText()), Double.parseDouble(threshold.getText()), comboBox.getValue(), 0, isPiece, false); // niye 0?
-            dbAdapter = new DatabaseAdapter();
-            dbAdapter.updateProductFromName(product);
             dbAdapter.closeConnection();
-            emptyPlaces.setText("This product name already exists, the product is updated.");
-            emptyPlaces.setStyle("-fx-fill: green");
+            emptyPlaces.setText("This product name already exists.");
+            emptyPlaces.setStyle("-fx-fill: red");
             PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
-            pause.setOnFinished(e -> {
-                try {
-                    this.adminHomePageController.refreshPage();
-                    Stage stage = (Stage) emptyPlaces.getScene().getWindow();
-                    stage.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            });
             pause.play();
+            return;
         }
         else {
             boolean isPiece = kiloToggleButton.isSelected() ? false : true;

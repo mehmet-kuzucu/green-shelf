@@ -200,6 +200,10 @@ public class adminHomePageController {
                 }
                 
             }
+            else if(addProductPageController.doesNameExist(nameField.getText()))
+            {
+                emptyPlaces.setText("Product with this name already exists");
+            }
             else{
                 DatabaseAdapter dbAdapter = new DatabaseAdapter();
                 Product product2 = new Product(nameField.getText(),  Double.parseDouble(quantityField.getText()), Double.parseDouble(priceField.getText()), Double.parseDouble(thresholdField.getText()), product.getType(), product.getId(), product.getIsPiece());
