@@ -9,8 +9,6 @@ public class User {
     private String username;
     private String userType;
 
-
-
     public User(String name, String surname, String password, String email, String phone, String username, String userType) {
         setName(name);
         setSurname(surname);
@@ -20,7 +18,6 @@ public class User {
         setUsername(username);
         setUserType(userType);
     }
-
 
     public User(String name, String surname, String username, String password){
         setName(name);

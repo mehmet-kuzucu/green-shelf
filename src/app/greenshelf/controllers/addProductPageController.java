@@ -1,12 +1,11 @@
 package app.greenshelf.controllers;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Base64;
-
 import javafx.animation.PauseTransition;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -21,7 +20,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Product;
-import app.greenshelf.controllers.adminHomePageController;
 public class addProductPageController {
     
     private String encodedImage;

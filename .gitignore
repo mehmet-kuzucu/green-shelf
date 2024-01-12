@@ -1,21 +1,15 @@
 # .gitignore
 .vscode/
 lib/
-src/zorunlu.java
 .DS_Store
 bin/out
 bin/output
 bin/Admin.class
 bin/Customer.class
 bin/DatabaseAdapter.class
-bin/newfile.class
 bin/User.class
 src/DatabaseAdapter.java
 bin/DatabaseAdapter.class
 src/DatabaseAdapter.java
 bin/App.class
-src/app/greenshelf/zorunlu.java
-src/app/greenshelf/zorunlu.java
-bin/zorunlu.class
-bin/app/greenshelf/zorunlu.class
 

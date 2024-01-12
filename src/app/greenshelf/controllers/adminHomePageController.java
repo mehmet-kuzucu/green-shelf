@@ -1,9 +1,9 @@
 package app.greenshelf.controllers;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
-
 import app.greenshelf.Admin;
 import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Product;
@@ -102,7 +102,7 @@ public class adminHomePageController {
         FXMLLoader scene = new FXMLLoader(getClass().getResource("../fxml/addProductPage.fxml"));
         Parent root = scene.load();
         addProductPageController controller2 = scene.getController();
-        controller2.initData(controller); // Pass the User object to the controller
+        controller2.initData(controller);
         
         stage.setScene(new Scene(root));
         
@@ -203,11 +203,6 @@ public class adminHomePageController {
             else{
                 DatabaseAdapter dbAdapter = new DatabaseAdapter();
                 Product product2 = new Product(nameField.getText(),  Double.parseDouble(quantityField.getText()), Double.parseDouble(priceField.getText()), Double.parseDouble(thresholdField.getText()), product.getType(), product.getId(), product.getIsPiece());
-                System.out.println("Product: " + product.getStock());
-                System.out.println("Product2: " + product2.getStock());
-                System.out.println("ProductTH: " + product.getThreshold());
-                System.out.println("Product2TH: " + product2.getThreshold());
-
 
                 if (product.getStock() <= product.getThreshold() && product2.getStock() > product2.getThreshold()) {
                     product2.setPrice(product2.getPrice() / 2);

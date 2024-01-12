@@ -4,8 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.HashMap;
-import java.util.LinkedList;
-
 import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Order;
@@ -15,7 +13,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Spinner;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -56,9 +53,6 @@ public class shoppingCartPageController {
         currentUser = user;
         this.shoppingCart = shoppingCart;
         this.orderID = orderID;
-        System.out.println("Shopping cartta Order ID: " + orderID);
-
-        System.out.println("Size of the order array: " + this.shoppingCart.size());
         this.cartCount = cartCount;
         this.totalPrice = totalPrice;
         this.productStockMap = productStockMap;
@@ -69,10 +63,6 @@ public class shoppingCartPageController {
             VBox group = createVboxGroup(order);
             productsVBox.getChildren().add(group);
         }
-        
-
-        
-        
     }
 
     @FXML
@@ -141,7 +131,6 @@ public class shoppingCartPageController {
         deleteButton.setId("deleteButton");
         deleteButton.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
         deleteButton.setOnMouseClicked((MouseEvent event) -> {
-            System.out.println("Delete button clicked");
             DatabaseAdapter dbAdapter = new DatabaseAdapter();
             Order orderToDelete = dbAdapter.getOrderFromId(orderID, order.getProductID());
             dbAdapter.deleteFromCart(orderToDelete);
@@ -153,7 +142,6 @@ public class shoppingCartPageController {
                     break;
                 }
             }
-            System.out.println("Shopping cart size: " + shoppingCart.size());
             productStockMap.put(orderToDelete.getProductID(), productStockMap.get(orderToDelete.getProductID()) + orderToDelete.getAmount());
             try {
                 refreshPage();
@@ -175,11 +163,8 @@ public class shoppingCartPageController {
         borderPane.setLeft(HBoxLeft);
         borderPane.setCenter(amountXpriceTextEqualsTotalPrice);
         borderPane.setRight(rightVBox);
-        
-
         productInfo.getChildren().addAll(borderPane);
         return productInfo;
-        
     }
 
     @FXML
@@ -198,8 +183,4 @@ public class shoppingCartPageController {
         stage.setScene(scene);
         stage.show();
     }
-
-
-
-
 }

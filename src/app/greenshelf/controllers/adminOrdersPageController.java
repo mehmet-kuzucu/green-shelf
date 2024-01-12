@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
 import app.greenshelf.Admin;
 import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
@@ -18,7 +17,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -105,7 +103,6 @@ public class adminOrdersPageController {
         orderDetails.setId("orderDetails");
         orderDetails.getStylesheets().add(getClass().getResource("../css/Style.css").toExternalForm());
         Text id = new Text();
-        System.out.println(order.getStatus());
         if (order.getStatus().equals("completed") || order.getStatus().equals("inDelivery"))
         {
             id.setText("#"+order.getOrderID() + "\nCarrier: " + order.getCarrierUsername());
@@ -160,7 +157,6 @@ public class adminOrdersPageController {
                 
                 DatabaseAdapter databaseAdapter = new DatabaseAdapter();
                 try {
-                    System.out.println("Order cancelled");
                     databaseAdapter.changeOrderStatus(order.getOrderID(), "cancelled");
                     for (Order order2 : orderMap.get(order.getOrderID())) {
                         Product product = databaseAdapter.getProductFromId(order2.getProductID());

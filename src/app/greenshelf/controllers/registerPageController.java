@@ -1,7 +1,7 @@
 package app.greenshelf.controllers;
+
 import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
-
 import java.io.File;
 import java.io.IOException;
 import javafx.fxml.FXML;
@@ -23,9 +23,6 @@ import java.util.Base64;
 import java.io.FileInputStream;
 import java.io.ByteArrayInputStream;
 import java.util.regex.Pattern;
-
-
-
 
 public class registerPageController {
 
@@ -74,7 +71,6 @@ public class registerPageController {
 
     @FXML
     private void existedAccountOnMouseClicked(MouseEvent event) {
-        System.out.println("Existed account clicked!");
         try {
             Parent root = FXMLLoader.load(getClass().getResource("../fxml/loginPage.fxml"));
             Stage stage = (Stage) existedAccount.getScene().getWindow();
@@ -102,101 +98,83 @@ public class registerPageController {
             return;
         }
         if (!checkPassword(registerPasswordField, registerConfirmPasswordField)) {
-            System.out.println("Passwords do not match!");
             errorTextRegister.setText("Passwords do not match!");
             registerPasswordField.setStyle("-fx-border-color: red;");
             registerConfirmPasswordField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (checkUsername(registerUsernameField)) {
-            System.out.println("Username already exists!");
             errorTextRegister.setText("Username already exists!");
             registerUsernameField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (!checkEmailisValid(registerEmailField)) {
-            System.out.println("Email is not valid!");
             errorTextRegister.setText("Email is not valid!");
             registerEmailField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (checkEmail(registerEmailField)) {
-            System.out.println("Email already exists!");
             errorTextRegister.setText("Email already exists!");
             registerEmailField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (checkPhone(registerPhoneField)) {
-            System.out.println("Phone already exists!");
             errorTextRegister.setText("Phone already exists!");
             registerPhoneField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (!checkPhoneisValid(registerPhoneField)) {
-            System.out.println("Phone is not valid!");
             errorTextRegister.setText("Phone is not valid!");
             registerPhoneField.setStyle("-fx-border-color: red;");
             return;
         }
         if (registerNameField.getText().length() > 50)
         {
-            System.out.println("Name is too long!");
             errorTextRegister.setText("Name is too long!");
             registerNameField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (registerSurnameField.getText().length() > 50)
         {
-            System.out.println("Surname is too long!");
             errorTextRegister.setText("Surname is too long!");
             registerSurnameField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (registerAddressField.getText().length() > 50)
         {
-            System.out.println("Address is too long!");
             errorTextRegister.setText("Address is too long!");
             registerAddressField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (registerUsernameField.getText().length() > 50)
         {
-            System.out.println("Username is too long!");
             errorTextRegister.setText("Username is too long!");
             registerUsernameField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (registerEmailField.getText().length() > 50)
         {
-            System.out.println("Email is too long!");
             errorTextRegister.setText("Email is too long!");
             registerEmailField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (registerPhoneField.getText().length() > 50)
         {
-            System.out.println("Phone is too long!");
             errorTextRegister.setText("Phone is too long!");
             registerPhoneField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (registerPasswordField.getText().length() > 50)
         {
-            System.out.println("Password is too long!");
             errorTextRegister.setText("Password is too long!");
             registerPasswordField.setStyle("-fx-border-color: red;");
             return;
         }
         else if (registerConfirmPasswordField.getText().length() > 50)
         {
-            System.out.println("Password is too long!");
             errorTextRegister.setText("Password is too long!");
             registerConfirmPasswordField.setStyle("-fx-border-color: red;");
             return;
-        }
-        else {
-            System.out.println("Everything is okay!");
-            
         }
 
         if (encodedImage == null) {
@@ -345,11 +323,8 @@ public class registerPageController {
         
     }
 
-
-
     @FXML
     public void chooseProfilePhotoButtonOnMouseClicked(MouseEvent event) {
-        System.out.println("Choose profile photo clicked!");
         encodedImage = encodeImageToBase64();
         decodeBase64ToImage(encodedImage);
     }
@@ -397,5 +372,4 @@ public class registerPageController {
             profilePhotoImage.setImage(image);
         }
     }
-
 }

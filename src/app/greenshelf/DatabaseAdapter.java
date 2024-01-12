@@ -1,4 +1,5 @@
 package app.greenshelf;
+
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -8,7 +9,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 
 public class DatabaseAdapter {
     private String url;
@@ -82,7 +82,6 @@ public class DatabaseAdapter {
             preparedStatement.setString(8, customer.getUserType());
             preparedStatement.setString(9, customer.getAddress());
             preparedStatement.executeUpdate();
-            System.out.println("Customer added successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -106,7 +105,6 @@ public class DatabaseAdapter {
             preparedStatement.setString(8, carrier.getUserType());
             preparedStatement.setString(9, carrier.getAddress());
             preparedStatement.executeUpdate();
-            System.out.println("Carrier added successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -148,7 +146,6 @@ public class DatabaseAdapter {
     
                 if (resultSet2.next()) {
                     if (resultSet2.getInt(1) == 0) {
-                        System.out.println("Username does not exist!");
                         return null;
                     }
                 }
@@ -222,7 +219,6 @@ public class DatabaseAdapter {
     
                 if (resultSet2.next()) {
                     if (resultSet2.getInt(1) == 0) {
-                        /*email doesn't exists */
                         return false;
                     }
                 }
@@ -253,7 +249,6 @@ public class DatabaseAdapter {
 
                 if (resultSet2.next()) {
                     if (resultSet2.getInt(1) == 0) {
-                        /*phone doesn't exists */
                         return false;
                     }
                 }
@@ -283,7 +278,6 @@ public class DatabaseAdapter {
     
                 if (resultSet2.next()) {
                     if (resultSet2.getInt(1) == 0) {
-                        /*email doesn't exists */
                         return false;
                     }
                 }
@@ -313,7 +307,6 @@ public class DatabaseAdapter {
     
                 if (resultSet2.next()) {
                     if (resultSet2.getInt(1) == 0) {
-                        /*phone doesn't exists */
                         return false;
                     }
                 }
@@ -342,7 +335,6 @@ public class DatabaseAdapter {
     
                 if (resultSet2.next()) {
                     if (resultSet2.getInt(1) == 0) {
-                        /*product doesn't exists */
                         return false;
                     }
                 }
@@ -362,7 +354,6 @@ public class DatabaseAdapter {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
-                System.out.println("Connection closed.");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -389,17 +380,20 @@ public class DatabaseAdapter {
         try (Connection connection = DriverManager.getConnection(url, user.name, user.pass)) 
         {
             String updateQuery = "UPDATE user SET password = ?, email = ?, address = ?, phone = ?, profilePicture = ? WHERE username = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) 
-        {
-            preparedStatement.setString(1, password);
-            preparedStatement.setString(2, email);
-            preparedStatement.setString(3, address);
-            preparedStatement.setString(4, phone);
-            preparedStatement.setBytes(5, profilePhoto.getBytes()); 
-            preparedStatement.setString(6, username);
-            preparedStatement.executeUpdate();
-        }
-            System.out.println("Data updated successfully!");
+            try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) 
+            {
+                preparedStatement.setString(1, password);
+                preparedStatement.setString(2, email);
+                preparedStatement.setString(3, address);
+                preparedStatement.setString(4, phone);
+                preparedStatement.setBytes(5, profilePhoto.getBytes()); 
+                preparedStatement.setString(6, username);
+                preparedStatement.executeUpdate();
+            }
+            catch (Exception e) 
+            {
+                e.printStackTrace();
+            }
         } catch (SQLException e) 
         {
             e.printStackTrace();
@@ -423,7 +417,6 @@ public class DatabaseAdapter {
             preparedStatement.setBoolean(7, product.getIsPiece());
             preparedStatement.setBoolean(8, product.getIsRemoved());
             preparedStatement.executeUpdate();
-            System.out.println("Product added successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -443,6 +436,7 @@ public class DatabaseAdapter {
                 products.add(product);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return products;
     }
@@ -467,7 +461,6 @@ public class DatabaseAdapter {
     }
 
     public void updateCarrier(Carrier carrier) throws SQLException{        
-        System.out.println("update carrier");
         String url = "jdbc:mysql://localhost:3306/Group12";
         dbCredentials user = new dbCredentials();
         Connection connection = DriverManager.getConnection(url, user.name, user.pass);
@@ -484,8 +477,6 @@ public class DatabaseAdapter {
         catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println("Carrier updated successfully");
     }
 
 
@@ -532,6 +523,7 @@ public class DatabaseAdapter {
                 address = resultSet.getString("address");
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return address;
     }
@@ -609,7 +601,6 @@ public class DatabaseAdapter {
             catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println("Order updated successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -630,7 +621,6 @@ public class DatabaseAdapter {
             catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println("Order updated successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -653,7 +643,6 @@ public class DatabaseAdapter {
             catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println("Order updated successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -676,7 +665,6 @@ public class DatabaseAdapter {
             catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println("Order updated successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -706,7 +694,6 @@ public class DatabaseAdapter {
         } catch (SQLException e) {
             e.getStackTrace();
         }
-        System.out.println("Size BU: "+ orders.size());
         return orders;
     }
 
@@ -785,7 +772,6 @@ public class DatabaseAdapter {
             dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "UPDATE products SET name = ?, stock = ?, price = ?, threshold = ?, type = ? WHERE id = ?";
-            //print the id
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, product.getName());
                 preparedStatement.setDouble(2, product.getStock());
@@ -798,7 +784,6 @@ public class DatabaseAdapter {
             catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println("Product updated successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -810,7 +795,6 @@ public class DatabaseAdapter {
             dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "UPDATE products SET stock = ?, price = ?, threshold = ?, isRemoved = ? WHERE name = ?";
-            //print the id
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setDouble(1, product.getStock());
                 preparedStatement.setDouble(2, product.getPrice());
@@ -822,7 +806,6 @@ public class DatabaseAdapter {
             catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println("Product updated successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -842,7 +825,6 @@ public class DatabaseAdapter {
             catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println("Product deleted successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -864,9 +846,9 @@ public class DatabaseAdapter {
                 preparedStatement.setInt(2, productId);
                 preparedStatement.executeUpdate();
             }
-
-            
-
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -888,7 +870,6 @@ public class DatabaseAdapter {
             catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println("Product updated successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -909,7 +890,6 @@ public class DatabaseAdapter {
             catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println("Product updated successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -927,14 +907,11 @@ public class DatabaseAdapter {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 Product product = new Product(resultSet.getString("name"), resultSet.getDouble("stock"), resultSet.getString("image"), resultSet.getDouble("price"), resultSet.getDouble("threshold"), resultSet.getString("type"), resultSet.getInt("id"), resultSet.getBoolean("unit"),resultSet.getBoolean("isRemoved"));
-                System.out.println("tutu6tu6t6utProduct name: " + product.getName() + " Product stock: " + product.getStock() + " Product price: " + product.getPrice() + " Product threshold: " + product.getThreshold() + " Product type: " + product.getType() + " Product id: " + product.getId() + " Product unit: " + product.getIsPiece());
-
                 return product;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("Product not found");
         return null;
     }
 
@@ -950,7 +927,6 @@ public class DatabaseAdapter {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                System.out.println("Price: " + resultSet.getDouble("price") + " Amount: " + resultSet.getDouble("amount"));
                 revenue += resultSet.getDouble("price") * resultSet.getDouble("amount");
             }
         } catch (SQLException e) {

@@ -1,17 +1,13 @@
 package app.greenshelf.controllers;
 
 import java.io.IOException;
-import java.util.HashMap;
-
 import app.greenshelf.Admin;
 import app.greenshelf.DatabaseAdapter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.chart.PieChart.Data;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;

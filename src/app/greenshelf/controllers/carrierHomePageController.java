@@ -1,7 +1,7 @@
 package app.greenshelf.controllers;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-
 import app.greenshelf.Carrier;
 import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
@@ -18,7 +17,6 @@ import app.greenshelf.Product;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,8 +27,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import java.util.HashMap;	
+import javafx.stage.Stage;	
 
 
 public class carrierHomePageController {
@@ -68,7 +65,6 @@ public class carrierHomePageController {
     
     public void initData(Carrier carrier) {
         this.carrier = carrier;
-        System.out.println(carrier.getName());
         profilePhoto.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(carrier.getProfilePicture()))));
         welcomeText.setText("Welcome, " + carrier.getName());
         DatabaseAdapter db = new DatabaseAdapter();
@@ -142,9 +138,6 @@ public class carrierHomePageController {
         for (Order order2 : orderMap.get(order.getOrderID())) {
 
             Product product = db.getProductFromId(order2.getProductID());
-            //System.out.println("AAAAAAAAAAAAAAAAA");
-            //System.out.println(product.getName());
-            //System.out.println("Product name: " + product.getName() + " Product stock: " + product.getStock() + " Product price: " + product.getPrice() + " Product threshold: " + product.getThreshold() + " Product type: " + product.getType() + " Product id: " + product.getId() + " Product unit: " + product.getIsPiece());
             String amountString = String.valueOf(order.getAmount());
             int indexOfDot = amountString.indexOf(".");
             if (indexOfDot != -1) {
@@ -298,6 +291,4 @@ public class carrierHomePageController {
             e.printStackTrace();
         }
     }
-
-
 }

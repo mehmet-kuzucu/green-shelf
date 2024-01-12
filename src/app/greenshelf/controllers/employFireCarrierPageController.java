@@ -1,12 +1,11 @@
 package app.greenshelf.controllers;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Base64;
 import java.util.List;
-
 import javafx.animation.PauseTransition;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -209,6 +208,4 @@ public class employFireCarrierPageController {
         carrierInfo.setPadding(new Insets(5.0, 5.0, 5.0, 5.0));
         return carrierInfo;
     }
-    
-
 }

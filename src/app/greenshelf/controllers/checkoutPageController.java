@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
-
 import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Order;
@@ -15,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
@@ -72,7 +70,6 @@ public class checkoutPageController {
         this.orderID = orderID;
         profilePhotoImage.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(currentUser.getProfilePicture()))));
         totalPriceText.setText("Total Price: " + Math.round(((totalPrice) + (totalPrice*vat))*100)/100.0 + " ₺ (VAT included)");
-        System.out.println(getCurrentTime());
         
         DatabaseAdapter dbAdapter = new DatabaseAdapter();
         for (Order order : shoppingCart) 
@@ -99,7 +96,6 @@ public class checkoutPageController {
             ordersVBox.setAlignment(javafx.geometry.Pos.CENTER);
 
         }
-        System.out.println(getCurrentTime());
         for (String possibleDeliveryTime : possibleDeliveryTimesWithin48Hours()) {
             deliveryTimeChoiceBox.getItems().add(possibleDeliveryTime);
         }
@@ -123,8 +119,6 @@ public class checkoutPageController {
         List<String> possibleDeliveryTimes = new ArrayList<String>();
         LocalDate currentDate = LocalDate.of(currentYear, currentMonth, currentDay);
         Locale.setDefault(Locale.ENGLISH);
-        //currentDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        //if it is 18:00 or later, then the earliest possible delivery time is tomorrow morning and the latest possible delivery time is the day after tomorrow evening (48 hours)
         if (currentHour >= 15)
         {
             
@@ -137,7 +131,6 @@ public class checkoutPageController {
         }
         else
         {
-            //if it is 15:00 or later, then the earliest possible delivery time is tomorrow morning and the latest possible delivery time is tomorrow evening (24 hours)
             if (currentHour >= 12)
             {
                 possibleDeliveryTimes.add((currentDate.format(DateTimeFormatter.ofPattern("dd-MMMM-yyyy"))) + " " + eveningSession);
@@ -150,7 +143,6 @@ public class checkoutPageController {
             }
             else
             {
-                //if it is 9:00 or later, then the earliest possible delivery time is tomorrow morning and the latest possible delivery time is tomorrow morning (3 hours)
                 if (currentHour >= 9)
                 {
                     possibleDeliveryTimes.add((currentDate.format(DateTimeFormatter.ofPattern("dd-MMMM-yyyy"))) + " " + afternoonSession);
@@ -163,7 +155,6 @@ public class checkoutPageController {
                 }
                 else
                 {
-                    //if it is 9:00 or earlier, then the earliest possible delivery time is today morning and the latest possible delivery time is today morning (3 hours)
                     possibleDeliveryTimes.add((currentDate.format(DateTimeFormatter.ofPattern("dd-MMMM-yyyy"))) + " " + morningSession);
                     possibleDeliveryTimes.add((currentDate.format(DateTimeFormatter.ofPattern("dd-MMMM-yyyy"))) + " " + afternoonSession);
                     possibleDeliveryTimes.add((currentDate.format(DateTimeFormatter.ofPattern("dd-MMMM-yyyy"))) + " " + eveningSession);
@@ -221,7 +212,6 @@ public class checkoutPageController {
                 return;
             }
             dbAdapter.changeOrderStatusAndDate(order);
-            //dbAdapter.updateProductPrice(order.getProductID(), order.getAmount());
             dbAdapter.updateProductStock(order.getProductID(), Math.round((product.getStock() - order.getAmount())*100)/100.0);
 
             
@@ -229,8 +219,6 @@ public class checkoutPageController {
             if (product.getThreshold() >= product.getStock() - order.getAmount()) {
                 dbAdapter.updateProductPrice(order.getProductID(), product.getPrice() * 2);
             }
-
-            System.out.println("Order amount: " + order.getAmount());   
         }
         
         

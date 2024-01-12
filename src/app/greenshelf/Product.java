@@ -9,6 +9,7 @@ public class Product {
     private String image;
     private boolean isPiece;
     private boolean isRemoved;
+
     public Product(String name, double stock, String image, double price, double threshold, String type, int id, boolean isPiece, boolean isRemoved) {
         this.name = name;
         this.stock = stock;
@@ -99,6 +100,4 @@ public class Product {
      public void setIsPiece(boolean isPiece) {
         this.isPiece = isPiece;
     }
-
-
 }

@@ -1,4 +1,5 @@
 package app.greenshelf.controllers;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -6,12 +7,10 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
-
 import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Order;
 import app.greenshelf.Product;
-import app.greenshelf.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -28,7 +27,6 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import java.util.HashMap;
 
 public class myOrdersPageController {
 
@@ -45,8 +43,6 @@ public class myOrdersPageController {
     private Button removeOrder;
     private Stage stage;
     private Scene scene;
-
-
     private Customer user;
     private List <Order> order;
     private int cartCount;
@@ -54,8 +50,6 @@ public class myOrdersPageController {
     private HashMap<Integer, Double> productStockMap;
     private String orderID;
     private HashMap<String, List<Order>> orderMap = new HashMap<String, List<Order>>();
-
-
 
     @FXML
     private void greenShelfLogoOnMouseClicked(MouseEvent event) {
@@ -93,9 +87,7 @@ public class myOrdersPageController {
         }
 
         
-        int userID = dbAdapter.getUserIDFromUsername(user.getUsername());
-        System.out.println(userID);
-        
+        int userID = dbAdapter.getUserIDFromUsername(user.getUsername());        
         for (HashMap.Entry<String, List<Order>> order3 : orderMap.entrySet()) {
             if (order3.getValue().get(0).getId() != userID || order3.getValue().get(0).getStatus().equals("inCart")) {
                 continue;
@@ -143,7 +135,6 @@ public class myOrdersPageController {
                 amountString = amountString.substring(0, indexOfDot);
             }
             text4.setText(text4.getText() + (product.getIsPiece() ? amountString : order2.getAmount()) + (product.getIsPiece() ? " piece " : " kg ") + product.getName() + (orderMap.get(order4.getOrderID()).indexOf(order2) == orderMap.get(order4.getOrderID()).size() - 1 ? "": "\n")); 
-            //totalPriceDouble += (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2)) + (order2.getAmount()*(product.getThreshold() < product.getStock() ? product.getPrice() : product.getPrice() * 2) * vat);
             totalPriceDouble += (order2.getAmount()*order2.getPrice())*(1+vat);
         }
         Text totalPrice = new Text("Total Price: " + (Math.round(totalPriceDouble * 100) / 100.0) + "₺");
@@ -264,6 +255,4 @@ public class myOrdersPageController {
             e.printStackTrace();
         }
     }
-
-
 }

@@ -1,10 +1,10 @@
 package app.greenshelf.controllers;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
-
 import app.greenshelf.Customer;
 import app.greenshelf.DatabaseAdapter;
 import app.greenshelf.Order;
@@ -193,14 +193,10 @@ public class customerHomeController {
         removeFromCartButton.setId("removeFromCartButton");
         removeFromCartButton.setMnemonicParsing(false);
         removeFromCartButton.onMouseClickedProperty().set((MouseEvent event) -> {
-            System.out.println(product.getName() + " remove from cart button clicked");
             DatabaseAdapter dbAdapter = new DatabaseAdapter();
             if (checkIfOrderExists(product.getId())){
-                System.out.println(product.getName() + " checkiforderexist");
                 for (Order order : shoppingCart) {
-                    System.out.println(order.getProductID() + "-----" + product.getId());
                     if (order.getProductID() == product.getId() ) {
-                        System.out.println(product.getName() + " 2");
                         if (order.getAmount() - spinner.getValue() < 0) {
                             text2.setText("You can't remove from cart");
                             text2.setFill(javafx.scene.paint.Color.RED);
@@ -257,12 +253,8 @@ public class customerHomeController {
                     }
                 }
             } else {
-                System.out.println(orderID);
                 Order order = new Order(dbAdapter.getUserIDFromUsername(currentUser.getUsername()), orderID, product.getId(), spinner.getValue(), "", "inCart", product.getPrice());
-                
                 dbAdapter.addOrdersql(order);
-                
-                
                 shoppingCart.add(order);
                 cartCount += 1;
             }
@@ -306,7 +298,6 @@ public class customerHomeController {
         return false;
     }
     public void refreshPage() throws IOException{
-        System.out.println("you are ın the refresh page");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/customerHome.fxml"));
         Parent root = loader.load();
         customerHomeController controller = loader.getController();
@@ -319,7 +310,6 @@ public class customerHomeController {
 
     
     public void initData(Customer user) {
-        System.out.println("customerHomeController: initData called");
         this.currentUser = user;
         profilePhotoImage.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(currentUser.getProfilePicture()))));
         welcomeText.setText("Welcome, " + currentUser.getName() + "!");
@@ -350,7 +340,6 @@ public class customerHomeController {
         shoppingCart = dbAdapter.isInCart(dbAdapter.getUserIDFromUsername(currentUser.getUsername()));
         if (shoppingCart != null && shoppingCart.size() != 0)
         {
-            System.out.println(shoppingCart.size());
             orderID = shoppingCart.get(0).getOrderID();
             cartCount = shoppingCart.size();
             for (Order order : shoppingCart) {
@@ -391,9 +380,6 @@ public class customerHomeController {
         }
         cartCountText.setText(String.valueOf(cartCount));
         totalPriceText.setText(String.valueOf("Total price: " + (Math.round(totalPrice * 100) / 100.0)) + " ₺");
-
-    
         dbAdapter.closeConnection();
     }
-    
 }

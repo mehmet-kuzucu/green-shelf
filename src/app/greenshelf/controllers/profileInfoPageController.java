@@ -1,13 +1,12 @@
 package app.greenshelf.controllers;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -158,9 +157,7 @@ public class profileInfoPageController {
         Image image = new Image(new ByteArrayInputStream(decodedBytes));
         if (profilePhotoImage == null) {
             profilePhotoImage = new ImageView(image);
-            profilePhotoImage.setImage(image);
-            //profilePhotoImage.getImage();
-            
+            profilePhotoImage.setImage(image);            
         } else {
             profilePhotoImage.setImage(image);
         }
@@ -222,7 +219,6 @@ public class profileInfoPageController {
             if(changeAddressField.getText().equals("") || changeEmailField.getText().equals("") || changePhoneField.getText().equals("") || changePasswordField.getText().equals(""))
             {
                 editErrorText.setText("Please fill all the fields");
-                System.out.println("Please fill all the fields");
                 return;
             }
             if(registerPageController.checkEmailisValid(changeEmailField) == false)
@@ -239,7 +235,6 @@ public class profileInfoPageController {
             }
             databaseAdapter.updateInfo(new_password, new_email, new_address, new_phone, encodedImage, this.currentCarrier.getUsername());
             try {
-                System.out.println("carrier refreshing page");
                 this.refreshPage();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -275,7 +270,5 @@ public class profileInfoPageController {
             stage.setScene(scene);
             stage.show();
         }
- 
-
     }
 }
