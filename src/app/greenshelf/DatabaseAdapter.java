@@ -68,7 +68,7 @@ public class DatabaseAdapter {
     public void registerUserSql(Customer customer) {
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "INSERT INTO user (username, email, phone, name, surname, password, profilePicture, userType, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -92,7 +92,7 @@ public class DatabaseAdapter {
     public void registerUserSql(Carrier carrier) {
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "INSERT INTO user (username, email, phone, name, surname, password, profilePicture, userType, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -116,7 +116,7 @@ public class DatabaseAdapter {
         int id = 0;
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "SELECT id FROM user WHERE username = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -371,7 +371,7 @@ public class DatabaseAdapter {
 
     public DatabaseAdapter() {
         url = "jdbc:mysql://localhost:3306";
-        zorunlu user = new zorunlu();
+        dbCredentials user = new dbCredentials();
 
         try {
             connection = DriverManager.getConnection(url, user.name, user.pass);
@@ -384,7 +384,7 @@ public class DatabaseAdapter {
     public void updateInfo(String password, String email, String address, String phone, String profilePhoto, String username)
     {
         String url = "jdbc:mysql://localhost:3306/javafxdb";
-        zorunlu user = new zorunlu();
+        dbCredentials user = new dbCredentials();
         
         try (Connection connection = DriverManager.getConnection(url, user.name, user.pass)) 
         {
@@ -410,7 +410,7 @@ public class DatabaseAdapter {
     public void addProductToDb(Product product){
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "INSERT INTO products (name, stock, image, price, threshold, type, unit,isRemoved) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -433,7 +433,7 @@ public class DatabaseAdapter {
         List<Product> products = new ArrayList<>();
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "SELECT * FROM products";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -452,7 +452,7 @@ public class DatabaseAdapter {
         List<Carrier> carriers = new ArrayList<>();
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "SELECT * FROM user WHERE userType = 'carrier'";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -469,7 +469,7 @@ public class DatabaseAdapter {
     public void updateCarrier(Carrier carrier) throws SQLException{        
         System.out.println("update carrier");
         String url = "jdbc:mysql://localhost:3306/javafxdb";
-        zorunlu user = new zorunlu();
+        dbCredentials user = new dbCredentials();
         Connection connection = DriverManager.getConnection(url, user.name, user.pass);
         String query = "UPDATE user SET name = ?, surname = ?, password = ?, email = ?, phone = ? WHERE username = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -491,7 +491,7 @@ public class DatabaseAdapter {
 
     public void deleteCarrier(String username) throws SQLException{        
         String url = "jdbc:mysql://localhost:3306/javafxdb";
-        zorunlu user = new zorunlu();
+        dbCredentials user = new dbCredentials();
         Connection connection = DriverManager.getConnection(url, user.name, user.pass);
         String query = "DELETE FROM user WHERE username = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -505,7 +505,7 @@ public class DatabaseAdapter {
 
     public void changeOrderStatus(String orderID, String status) throws SQLException{        
         String url = "jdbc:mysql://localhost:3306/javafxdb";
-        zorunlu user = new zorunlu();
+        dbCredentials user = new dbCredentials();
         Connection connection = DriverManager.getConnection(url, user.name, user.pass);
         String query = "UPDATE orders SET status = ? WHERE orderid = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -522,7 +522,7 @@ public class DatabaseAdapter {
         String address = "";
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "SELECT address FROM user WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -540,7 +540,7 @@ public class DatabaseAdapter {
         List<Order> orders = new ArrayList<>();
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "SELECT * FROM orders";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -560,7 +560,7 @@ public class DatabaseAdapter {
         List<Order> orders = new ArrayList<>();
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
 
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "SELECT * FROM orders WHERE status = 'waiting'";
@@ -597,7 +597,7 @@ public class DatabaseAdapter {
     {
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "UPDATE orders SET amount = ? WHERE orderid = ? AND productid = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -618,7 +618,7 @@ public class DatabaseAdapter {
     {
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "UPDATE orders SET status = ?, carrierUsername = ? WHERE orderid = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -640,7 +640,7 @@ public class DatabaseAdapter {
     {
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
 
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "UPDATE orders SET status = ?, deliveryDate = ? WHERE orderid = ?";
@@ -663,7 +663,7 @@ public class DatabaseAdapter {
     {
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
 
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "UPDATE orders SET status = ?, date = ? WHERE orderid = ?";
@@ -687,7 +687,7 @@ public class DatabaseAdapter {
         List<Order> orders = new ArrayList<>();
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
 
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "SELECT * FROM orders WHERE userid = ? AND status = 'inCart'";
@@ -715,7 +715,7 @@ public class DatabaseAdapter {
         try
         {
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
 
             String query = "DELETE FROM orders WHERE orderid = ? AND productid = ?";
@@ -739,7 +739,7 @@ public class DatabaseAdapter {
         try
         {
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
 
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "SELECT * FROM orders WHERE orderid = ? AND productid = ?";
@@ -762,7 +762,7 @@ public class DatabaseAdapter {
         try
         {
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
 
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "SELECT * FROM user WHERE id = ?";
@@ -782,7 +782,7 @@ public class DatabaseAdapter {
     public void updateProduct(Product product){
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "UPDATE products SET name = ?, stock = ?, price = ?, threshold = ?, type = ? WHERE id = ?";
             //print the id
@@ -807,7 +807,7 @@ public class DatabaseAdapter {
     public void updateProductFromName(Product product){
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "UPDATE products SET stock = ?, price = ?, threshold = ?, isRemoved = ? WHERE name = ?";
             //print the id
@@ -832,7 +832,7 @@ public class DatabaseAdapter {
     {
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "UPDATE products SET isRemoved = 1 WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -877,7 +877,7 @@ public class DatabaseAdapter {
     {
         try{
             String urlString = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(urlString, user.name, user.pass);
             String query = "Update products set price = ? where id = ?;";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -898,7 +898,7 @@ public class DatabaseAdapter {
     {
         try{
             String urlString = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(urlString, user.name, user.pass);
             String query = "Update products set price = IF((stock <= threshold) AND (stock + ? > threshold), price / 2, price) where id = ?;";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -919,7 +919,7 @@ public class DatabaseAdapter {
     {
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "SELECT * FROM products WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -943,7 +943,7 @@ public class DatabaseAdapter {
         Double revenue = 0.0;
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
 
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "SELECT price, amount FROM orders WHERE status = 'completed'";
@@ -964,7 +964,7 @@ public class DatabaseAdapter {
         int count = 0;
         try{
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
 
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "SELECT COUNT(DISTINCT orderid) FROM orders WHERE status = ?";
@@ -986,7 +986,7 @@ public class DatabaseAdapter {
         try
         {
             String url = "jdbc:mysql://localhost:3306/javafxdb";
-            zorunlu user = new zorunlu();
+            dbCredentials user = new dbCredentials();
 
             Connection connection = DriverManager.getConnection(url, user.name, user.pass);
             String query = "SELECT deliveryDate, price, amount FROM orders WHERE status = 'completed'";

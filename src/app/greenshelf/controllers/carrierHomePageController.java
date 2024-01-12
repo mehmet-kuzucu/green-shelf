@@ -34,10 +34,10 @@ import java.util.HashMap;
 
 
 public class carrierHomePageController {
-    Carrier carrier;
+    private Carrier carrier;
     private Stage stage;
     private Scene scene;
-    HashMap<String, List<Order>> orderMap = new HashMap<String, List<Order>>();
+    private HashMap<String, List<Order>> orderMap = new HashMap<String, List<Order>>();
     @FXML
     private VBox availableOrders;
 
