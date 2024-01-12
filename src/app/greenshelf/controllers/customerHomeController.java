@@ -159,7 +159,7 @@ public class customerHomeController {
 
         ImageView imageView = new ImageView();
         imageView.setFitHeight(150.0);
-        imageView.setFitWidth(200.0);
+        imageView.setFitWidth(180.0);
         imageView.setPickOnBounds(true);
         imageView.setPreserveRatio(true);
         imageView.setImage(new Image(new ByteArrayInputStream(Base64.getDecoder().decode(product.getImage()))));
