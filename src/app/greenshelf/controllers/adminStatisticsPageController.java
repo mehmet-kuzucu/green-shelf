@@ -43,7 +43,7 @@ public class adminStatisticsPageController {
         currentUser = user;
         DatabaseAdapter db = new DatabaseAdapter();
         double totalRevenue = db.getAllOrdersRevenue();
-        totalRevenueText.setText("Total Revenue: " + totalRevenue + " ₺");
+        totalRevenueText.setText("Total Revenue: " + Math.round(totalRevenue*100)/100.0 + " ₺");
         int orderCount = db.getAllOrdersDifferentCount("completed");
         completedOrderCountText.setText("Total Completed Orders: " + orderCount);
         orderCount = db.getAllOrdersDifferentCount("waiting");
